@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Domains\Governo;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,4 +16,5 @@ use Illuminate\Database\Eloquent\Model;
 class Governo extends Model
 {
     protected $table = 'governo';
+    public $timestamps = false;
 }

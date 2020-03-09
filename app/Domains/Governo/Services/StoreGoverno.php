@@ -2,12 +2,10 @@
 
 namespace App\Domains\Governo\Services;
 
+use App\Domains\Governo\Governo;
 use App\Domains\Governo\GovernoRepository;
 use App\Domains\Governo\Validators\StoreGovernoValidator;
-use App\Governo;
-use App\Support\Exceptions\ValidationException;
 use App\Support\Service;
-use Illuminate\Http\Request;
 
 class StoreGoverno extends Service
 {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Domains\Governo\Governo;
 use App\Domains\Governo\Services\StoreGoverno;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class GovernoController extends Controller
      */
     public function index()
     {
-        //
+        /** TODO only for tests */
+        return Governo::all();
     }
 
     /**

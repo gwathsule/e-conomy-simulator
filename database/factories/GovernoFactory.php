@@ -1,6 +1,6 @@
 <?php
 
-use App\Governo;
+use App\Domains\Governo\Governo;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 

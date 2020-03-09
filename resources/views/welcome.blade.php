@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="shortcut icon" href="{{asset('img/icon.ico')}}" />
 
         <!-- Styles -->
         <style>
@@ -94,6 +95,8 @@
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+                
+                <img src="{{asset('img/test.png')}}">
             </div>
         </div>
     </body>
