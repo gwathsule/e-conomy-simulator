@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "e-conomy-simulator": {
@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "e-conomy-simulator"
+    }
+  },
+  "defaultProject": "e-conomy-simulator",
+  "cli": {
+    "analytics": "54b2d752-9f4d-4c94-ae9d-e3b77666fe4d"
+  }
 }
