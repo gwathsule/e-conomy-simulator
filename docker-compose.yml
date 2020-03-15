@@ -35,3 +35,12 @@ services:
     environment:
       - XDEBUG_ENABLED=true
       - PHP_IDE_CONFIG=serverName=ambientum
+
+    # PHP (with Nginx)
+    # you can change from nginx to apache, just change session 'image'
+  angular:
+    image: teracy/angular-cli
+    container_name: angular-cli
+    volumes:
+      - .:/var/www/app
+    command: tail -F anything

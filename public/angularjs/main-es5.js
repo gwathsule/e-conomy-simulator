@@ -301,7 +301,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "p");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](24, "Here are some links to help you get started:");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](24, "Here are some links to help you get started mas o que e isso aqui?:");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -1059,7 +1059,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! /home/rafael/Projects/e-conomy-simulator/resources/angular/e-conomy-simulator/src/main.ts */
+    /*! /var/www/app/resources/angular/e-conomy-simulator/src/main.ts */
     "./src/main.ts");
     /***/
   }
