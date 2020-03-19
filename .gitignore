@@ -116,3 +116,5 @@ simulador/bootstrap
 simulador/storage
 simulador/vendor
 simulador/.env
+
+public/angularjs/*
