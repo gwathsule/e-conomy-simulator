@@ -1,0 +1,42 @@
+#!/bin/bash
+
+######################################################
+#                Command utils                       #
+######################################################
+
+SERVICE_NAME=app #Replace for your service name.
+
+if [[ $1 = "artisan" ]]
+then
+    docker-compose exec ${SERVICE_NAME} php $@; exit;
+fi
+
+if [[ $1 = "composer" ]]
+then
+    docker-compose exec ${SERVICE_NAME} $@; exit;
+fi
+
+if [[ $1 = "up" ]]
+then
+    docker-compose $@; exit;
+fi
+
+if [[ $1 = "down" ]]
+then
+    docker-compose $@; exit;
+fi
+
+if [[ $1 = "fbuild" ]]
+then
+    docker-compose run angular bash -c "pushd /var/www/app/resources/angular/e-conomy-simulator/ && ng build --prod --output-path=./../../../public/angularjs"
+fi
+
+if [[ $1 = "restart" ]]
+then
+    docker-compose down;
+    docker-compose up -d;
+    exit;
+fi
+
+# Run anything in container.
+docker-compose exec ${SERVICE_NAME} $@
