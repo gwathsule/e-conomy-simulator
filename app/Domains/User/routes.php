@@ -20,13 +20,13 @@ Route::post('login', LoginController::class . '@login')->name('login');
 /** @see LoginController::showLoginForm() */
 Route::get('login', LoginController::class . '@showLoginForm')->name('login');
 /** @see LoginController::logout() */
-Route::post('logout', LoginController::class . '@logout')->name('logout');
+Route::get('logout', LoginController::class . '@logout')->name('logout');
 
-/** @see ForgotPasswordController::sendResetLinkEmail() */
-Route::post('password/email', ForgotPasswordController::class . '@sendResetLinkEmail')->name('password.email');
-/** @see ForgotPasswordController::showLinkRequestForm() */
-Route::get('password/reset', ForgotPasswordController::class . '@showLinkRequestForm')->name('password.request');
-/** @see ResetPasswordController::reset() */
-Route::post('password/reset', ResetPasswordController::class . '@reset')->name('password.update');
-/** @see ResetPasswordController::showResetForm() */
-Route::get('password/reset/{token}', ResetPasswordController::class . '@showResetForm')->name('password.reset');
+///** @see ForgotPasswordController::sendResetLinkEmail() */
+//Route::post('password/email', ForgotPasswordController::class . '@sendResetLinkEmail')->name('password.email');
+///** @see ForgotPasswordController::showLinkRequestForm() */
+//Route::get('password/reset', ForgotPasswordController::class . '@showLinkRequestForm')->name('password.request');
+///** @see ResetPasswordController::reset() */
+//Route::post('password/reset', ResetPasswordController::class . '@reset')->name('password.update');
+///** @see ResetPasswordController::showResetForm() */
+//Route::get('password/reset/{token}', ResetPasswordController::class . '@showResetForm')->name('password.reset');

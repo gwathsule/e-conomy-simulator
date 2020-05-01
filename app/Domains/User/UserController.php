@@ -18,7 +18,7 @@ class UserController extends Controller
             /** @var User $newUser */
             $newUser = $service->handle($request->toArray());
             Auth::login($newUser);
-            return view('home');
+            return redirect('/');
         }catch (ValidationException $ex){
             dd($ex);
         }
