@@ -20,7 +20,7 @@ class Controller extends BaseController
         return back()->with([
             'response' => [
                 'type' => self::TYPE_ERROR_RETURN,
-                'message' => $exception->getMessage(),
+                'message' => $exception->getUserMessage(),
                 'errors' => $exception->getErrors(),
                 'error_code' => $exception->getErrorCode(),
                 'error_category' => $exception->getCategory(),
