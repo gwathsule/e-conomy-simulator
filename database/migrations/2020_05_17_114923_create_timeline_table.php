@@ -17,7 +17,7 @@ class CreateTimelineTable extends Migration
             $table->id();
 
             $table->unsignedInteger('round');
-            $table->decimal('PIB');
+            $table->decimal('pib');
             $table->decimal('unemployment_tax');
             $table->decimal('inflation');
             $table->string('measure_code')->nullable();

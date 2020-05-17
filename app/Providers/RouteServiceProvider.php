@@ -44,5 +44,10 @@ class RouteServiceProvider extends ServiceProvider
         $pathDomains = 'app/Domains/';
         $defaultRouteFile = '/routes.php';
         Route::middleware('web')->group(base_path($pathDomains . 'User' . $defaultRouteFile));
+        Route::middleware('web')->group(base_path($pathDomains . 'Crisis' . $defaultRouteFile));
+        Route::middleware('web')->group(base_path($pathDomains . 'Decision' . $defaultRouteFile));
+        Route::middleware('web')->group(base_path($pathDomains . 'Game' . $defaultRouteFile));
+        Route::middleware('web')->group(base_path($pathDomains . 'News' . $defaultRouteFile));
+        Route::middleware('web')->group(base_path($pathDomains . 'Timeline' . $defaultRouteFile));
     }
 }
