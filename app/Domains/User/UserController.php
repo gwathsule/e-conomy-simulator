@@ -4,7 +4,9 @@ namespace App\Domains\User;
 
 use App\Domains\User\Services\RegisterUser;
 use App\Http\Controllers\Controller;
+use App\Support\Exceptions\InternalErrorException;
 use App\Support\Exceptions\ValidationException;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,9 +22,12 @@ class UserController extends Controller
             Auth::login($newUser);
             return redirect('/');
         }catch (ValidationException $ex){
-            dd($ex);
+            return $this->returnWithException($ex)->withInput();
+        }catch (Exception $ex){
+            return $this->returnWithException(new InternalErrorException(__('internal-error')));
         }
     }
+
     public function registerPage()
     {
         return view('auth.register');

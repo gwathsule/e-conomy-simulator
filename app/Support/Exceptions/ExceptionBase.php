@@ -4,29 +4,36 @@ namespace App\Support\Exceptions;
 
 use Exception;
 
-class ExceptionBase extends Exception
+abstract class ExceptionBase extends Exception
 {
-    public const CATEGORY = 'user_error';
-
     /**
      * @var string
      */
-    private $userMessage;
+    protected $userMessage;
 
     public function __construct($userMessage = "", $internalMessage = "", Throwable $previous = null)
     {
         $this->userMessage = $userMessage;
         $internalMessage = $internalMessage ?: $userMessage;
-        parent::__construct($internalMessage, $this->getCodeIdentifier(), $previous);
+        parent::__construct($internalMessage, $this->getErrorCode(), $previous);
     }
 
-    protected function getUserMessage(): string
+    public function getUserMessage(): string
     {
         return $this->userMessage;
     }
 
-    protected function getCategory(): string
-    {
-        return self::CATEGORY;
-    }
+    abstract function getErrorCode(): int;
+
+    /**
+     * get error category
+     * @return string
+     */
+    abstract function getCategory(): string;
+
+    /**
+     * get errors separated in array
+     * @return array
+     */
+    abstract function getErrors(): array;
 }

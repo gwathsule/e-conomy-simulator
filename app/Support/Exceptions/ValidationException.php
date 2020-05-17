@@ -4,10 +4,9 @@ namespace App\Support\Exceptions;
 
 class ValidationException extends ExceptionBase
 {
-    public const CODE = 422;
+    private const CODE = 422;
+    private const CATEGORY = 'validation_error';
     /**
-     * The validation errors.
-     *
      * @var array
      */
     private $errors;
@@ -18,13 +17,20 @@ class ValidationException extends ExceptionBase
         $this->errors = $errors;
     }
 
-    public function getErrors()
-    {
-        return $this->errors;
-    }
-
-    public function getCodeIdentifier()
+    function getErrorCode(): int
     {
         return self::CODE;
+    }
+
+    function getCategory(): string
+    {
+        return self::CATEGORY;
+    }
+
+    function getErrors(): array
+    {
+        return collect($this->errors)->map(function ($item, $key) {
+            return $item[0];
+        })->toArray();
     }
 }
