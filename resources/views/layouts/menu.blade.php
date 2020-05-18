@@ -1,30 +1,19 @@
-<nav class="navbar navbar-expand navbar-light bg-gray-900 topbar mb-4 static-top shadow">
-    <!-- Topbar Search -->
-    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-        E-CONOMY SIMULATOR
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand">E-CONOMY SIMULATOR</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">GAME <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">MEU PERFIL</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('logout')}}" tabindex="-1">LOGOUT</a>
+            </li>
+        </ul>
     </div>
-    <ul class="navbar-nav">
-        <li>
-            <a href="#" role="button">
-                <span class="mr-2 text-gray-600">GAME</span>
-            </a>
-        </li>
-    </ul>
-    <div class="topbar-divider d-none d-sm-block"></div>
-    <ul class="navbar-nav">
-        <li>
-            <a href="#" role="button">
-                <span class="mr-2 text-gray-600">MEU PERFIL</span>
-            </a>
-        </li>
-    </ul>
-    <div class="topbar-divider d-none d-sm-block"></div>
-
-    <ul class="navbar-nav">
-        <li>
-            <a href="{{route('logout')}}" role="button">
-                <span class="mr-2 text-gray-600">LOGOUT</span>
-            </a>
-        </li>
-    </ul>
 </nav>
