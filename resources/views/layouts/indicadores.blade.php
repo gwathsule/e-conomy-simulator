@@ -54,7 +54,7 @@
     }
 </script>
 
-<div class="col-xl-6 col-lg-5">
+<div class="col-xl-6 col-lg-5 mb-3">
     <div class="card">
         <div class="card-header">
             Indicadores

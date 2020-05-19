@@ -1,4 +1,4 @@
-<div class="ol-xl-12 col-lg-12">
+<div class="ol-xl-12 col-lg-12 mb-3">
     <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">

@@ -9,6 +9,9 @@
                 <a class="nav-link" href="#">GAME <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="#">NOVO JOGO<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#">MEU PERFIL</a>
             </li>
             <li class="nav-item">

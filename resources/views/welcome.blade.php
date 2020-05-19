@@ -18,10 +18,10 @@
         <div id="content">
             @include('layouts.menu')
             <div class="container-fluid">
-                <div class="row mb-3">
+                <div class="row">
                     @include('layouts.medidas')
                 </div>
-                <div class="row mb-3">
+                <div class="row">
                     @include('layouts.eventos')
                     @include('layouts.indicadores')
                 </div>
