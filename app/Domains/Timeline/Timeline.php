@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $round
- * @property float $pib
+ * @property float $pib measured in trillions ( pib * 1 trillion)
  * @property float $unemployment_tax
  * @property float $inflation
  * @property string $measure_code
@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Timeline extends Model
 {
+    protected $table = 'timeline';
 
     protected $casts = [
         'decision_choice' => 'bool',

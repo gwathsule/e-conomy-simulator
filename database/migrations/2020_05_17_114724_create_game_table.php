@@ -19,8 +19,9 @@ class CreateGameTable extends Migration
             $table->string('president_name')->nullable();
             $table->string('minister_name')->nullable();
             $table->string('currency_name')->nullable();
-            $table->string('description', 500)->nullable();
+            $table->string('description')->nullable();
             $table->integer('rounds')->nullable();
+            $table->boolean('active')->nullable();
             // store_application relation
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')

@@ -31,6 +31,14 @@ class User extends Authenticatable
         'email_verified_at',
     ];
 
+    /**
+     * @return Game|null
+     */
+    public function getActiveGame()
+    {
+        return $this->games->where('active', true)->first();
+    }
+
     public function games()
     {
         return $this->hasMany(Game::class);

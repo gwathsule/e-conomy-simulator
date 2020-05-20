@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @property string $minister_name
  * @property string $currency_name
  * @property string $description
+ * @property boolean $active
  * @property int $rounds
  * @property int $user_id
  * @property User $user
@@ -21,6 +22,17 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class Game extends Model
 {
+    protected $table = 'game';
+
+    protected $casts = [
+        'active' => 'boolean',
+    ];
+
+    public function getRound(int $roundNumber)
+    {
+        return $this->timelines->where('round', $roundNumber)->first();
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
