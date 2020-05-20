@@ -20,11 +20,8 @@ class GameController extends Controller
             $service = app()->make(CreateNewGame::class);
             /** @var Game $game */
             $game = $service->handle($request->toArray());
-            /** @var Timeline $timeLine */
-            $timeLine = $game->getRound(0);
             return back()->with([
-                'game' => $game,
-                'timeline' => $timeLine,
+                'game' => $game
             ]);
         }catch (ValidationException $ex){
             return $this->returnWithException($ex)->withInput();

@@ -19,7 +19,7 @@
             if(! isset($game)){
                 $game = \Illuminate\Support\Facades\Auth::user()->getActiveGame();
             }
-            if(! is_null($game) && ! isset($timeline)) {
+            if(! is_null($game)) {
                 $timeline = $game->timelines->last();
             }
             @endphp
@@ -51,14 +51,15 @@
     </div>
 
 </div>
+<!-- scripts auxiliares do bootstrap (após finalizar o projeto, remover os que não estão sendo utilizado) -->
+<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+<!-- scripts externos -->
 <script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script>
-<script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
-<script src="{{asset('js/demo/chart-pie-demo.js')}}"></script>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<!-- scripts do sistema -->
+<script src="{{asset('js/medidasPage.js')}}"></script>
 @include('alerts.errors')
 </body>
 </html>
