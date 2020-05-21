@@ -6,7 +6,7 @@ class InternalErrorException extends ExceptionBase
 {
     private const CODE = 500;
     private const CATEGORY = 'internal_error';
-    private $userMessage;
+    protected $userMessage;
 
     public function __construct($userMessage = "", $internalMessage = "", Throwable $previous = null)
     {

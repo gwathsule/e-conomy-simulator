@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Measures\Validators;
+namespace App\Domains\Measure\Validators;
 
 use App\Support\Validator;
 
@@ -9,7 +9,7 @@ class CalcularRecolhimentoCompulsorioValidator extends Validator
     public function rules()
     {
         return [
-            'valor' => ['integer', 'max:10'],
+            'valor' => ['required', 'integer', 'max:10'],
         ];
     }
 }

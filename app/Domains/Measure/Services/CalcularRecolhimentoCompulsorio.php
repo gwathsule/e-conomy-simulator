@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Domains\Measures\Services;
+namespace App\Domains\Measure\Services;
 
 use App\Domains\Game\Game;
 use App\Domains\Timeline\Timeline;
 use App\Domains\Timeline\TimelineRepository;
 use App\Domains\User\User;
-use App\Domains\Measures\RecolhimentoCompulsorio;
-use App\Domains\Measures\Validators\CalcularRecolhimentoCompulsorioValidator;
+use App\Domains\Measure\RecolhimentoCompulsorio;
+use App\Domains\Measure\Validators\CalcularRecolhimentoCompulsorioValidator;
 use App\Support\Service;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,12 +47,12 @@ class CalcularRecolhimentoCompulsorio extends Service
         $newTimeline = new Timeline();
         $newTimeline->game_id = $game->id;
         $newTimeline->pib = $newInfo['pib'];
-        $newTimeline->unemployment_tax = $newInfo['unemployment_tax'];
+        $newTimeline->unemployment_tax = $newInfo['unemploymentTax'];
         $newTimeline->inflation = $newInfo['inflation'];
         $newTimeline->measure_code = $this->measure->getCode();
         $newTimeline->measure_description = $this->measure->getDescription();
         $newTimeline->measure_value = $data['valor'];
-        $newTimeline->round = $oldTimeline->round++;
+        $newTimeline->round = count($game->timelines);
         $this->timelineRepository->save($newTimeline);
         return $game;
     }

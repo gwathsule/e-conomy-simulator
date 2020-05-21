@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Domains\Measures;
+namespace App\Domains\Measure;
 
 /**
  * Essa classe só serve de exemplo
  * Class RecolhimentoCompulsorio
  * @package App\Measures
  */
-class RecolhimentoCompulsorio extends Measures
+class RecolhimentoCompulsorio extends Measure
 {
     private const CODE = 'recolhimento_compulsorio';
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Domains\Measures;
+namespace App\Domains\Measure;
 
 use App\Domains\Timeline\Timeline;
 use App\Support\Exceptions\InternalErrorException;
 use Illuminate\Support\Facades\Validator as CoreValidator;
 use Illuminate\Validation\ValidationException as CoreValidationException;
 
-abstract class Measures
+abstract class Measure
 {
     /**
      * Perform the measurement, calculating and returning the pib, unemploymentTax and inflation values on an array
@@ -55,9 +55,9 @@ abstract class Measures
     private function validateReturn(array $info)
     {
        $rules = [
-            'pib' => ['required', 'number'],
-            'unemploymentTax' => ['required', 'number'],
-            'inflation' => ['required', 'number'],
+            'pib' => ['required', 'numeric'],
+            'unemploymentTax' => ['required', 'numeric'],
+            'inflation' => ['required', 'numeric'],
         ];
 
         $validator = CoreValidator::make(
