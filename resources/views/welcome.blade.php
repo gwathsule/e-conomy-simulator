@@ -60,6 +60,7 @@
 <script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script>
 <!-- scripts do sistema -->
 <script src="{{asset('js/medidasPage.js')}}"></script>
+<script src="{{asset('js/indicadoresPage.js')}}"></script>
 @include('alerts.errors')
 </body>
 </html>
