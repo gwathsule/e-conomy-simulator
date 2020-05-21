@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $inflation
  * @property string $measure_code
  * @property string $measure_value
+ * @property string $measure_description
  * @property boolean $decision_choice
  * @property int $decision_id
  * @property int $game_id

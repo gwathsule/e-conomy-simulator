@@ -15,8 +15,11 @@
         </div>
         <div class="card-body" style="height: 300px">
             <div class="tab-content mt-3">
-                <div class="tab-pane active" id="monetarias" role="tabpanel">
-                    politicas monetarias
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">Recolhimento compulsório</p>
+                    </div>
                 </div>
 
                 <div class="tab-pane" id="fiscais" role="tabpanel" aria-labelledby="fiscais-tab">

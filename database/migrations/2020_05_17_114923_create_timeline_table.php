@@ -21,6 +21,7 @@ class CreateTimelineTable extends Migration
             $table->decimal('unemployment_tax');
             $table->decimal('inflation');
             $table->string('measure_code')->nullable();
+            $table->string('measure_description')->nullable();
             $table->string('measure_value')->nullable();
             $table->boolean('decision_choice')->nullable();
 
