@@ -5,15 +5,11 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <a class="navbar-brand">E-CONOMY SIMULATOR</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">GAME <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">NOVO JOGO<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">MEU PERFIL</a>
-            </li>
+        @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
+                @include('admin.menu')
+            @else
+                @include('game.menu')
+            @endif
             <li class="nav-item">
                 <a class="nav-link" href="{{route('logout')}}" tabindex="-1">LOGOUT</a>
             </li>

@@ -35,6 +35,6 @@ class UserController extends Controller
 
     public function homeUserPage()
     {
-        return view('welcome');
+        return view('game.home');
     }
 }
