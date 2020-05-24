@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @property string $email
  * @property string $password
  * @property string $remember_token
+ * @property boolean $is_admin
  * @property Carbon $email_verified_at
  * @property Collection $games
  */
@@ -29,6 +30,14 @@ class User extends Authenticatable
 
     protected $dates = [
         'email_verified_at',
+    ];
+
+    protected $casts = [
+        'is_admin' => 'boolean',
+    ];
+
+    protected $attributes = [
+        'is_admin' => false,
     ];
 
     /**

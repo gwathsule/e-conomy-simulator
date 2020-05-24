@@ -2,14 +2,28 @@
 
 use App\Domains\User\Auth\ForgotPasswordController;
 use App\Domains\User\Auth\LoginController;
+use App\Domains\User\UserAdminController;
 use App\Domains\User\Auth\ResetPasswordController;
 use App\Domains\User\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('user')->group(function () {
+//the user routes are default, don't need prefix
+Route::prefix('')->group(function () {
+    Route::middleware(['auth'])->group(function () {
+        /** @see UserController::homeUserPage() */
+        Route::get('home', UserController::class.'@homeUserPage')->name('user.home');
+    });
 
 });
 
+Route::prefix('admin')->group(function () {
+    Route::middleware(['auth', 'isAdmin'])->group(function () {
+        /** @see UserAdminController::homeAdminPage() */
+        Route::get('home', UserAdminController::class.'@homeAdminPage')->name('admin.home');
+    });
+});
+
+//public routes
 /** @see UserController::register() */
 Route::post('register', UserController::class . '@register')->name('register');
 /** @see UserController::registerPage() */

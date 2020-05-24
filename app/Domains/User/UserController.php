@@ -32,4 +32,9 @@ class UserController extends Controller
     {
         return view('auth.register');
     }
+
+    public function homeUserPage()
+    {
+        return view('welcome');
+    }
 }
