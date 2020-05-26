@@ -11,4 +11,9 @@ class NewsRepository extends Repository
     {
         return News::class;
     }
+
+    public function getAll()
+    {
+        return $this->newQuery()->get();
+    }
 }
