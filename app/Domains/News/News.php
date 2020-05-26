@@ -9,9 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title
  * @property string $description
  * @property string $image_url
- * @property string $condition
  * @property string $indicator
- * @property string $value
  */
 class News extends Model
 {
