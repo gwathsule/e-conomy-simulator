@@ -11,4 +11,14 @@ class IndicatorRuleRepository extends Repository
     {
         return IndicatorRule::class;
     }
+
+    public function getAllConditions()
+    {
+        return IndicatorRule::ALL_CONDITIONS;
+    }
+
+    public function getAllTypes()
+    {
+        return IndicatorRule::ALL_TYPES;
+    }
 }

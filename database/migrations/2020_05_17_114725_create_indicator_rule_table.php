@@ -15,9 +15,7 @@ class CreateIndicatorRuleTable extends Migration
     {
         Schema::create('indicator_rule', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('action', 50)
-                ->nullable();
-            $table->string('action_value', 50)
+            $table->string('type', 50)
                 ->nullable();
             $table->string('indicator', 50)
                 ->nullable();

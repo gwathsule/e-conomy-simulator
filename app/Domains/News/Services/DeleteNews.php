@@ -7,7 +7,6 @@ use App\Domains\News\NewsRepository;
 use App\Domains\News\Validators\DeleteNewsValidator;
 use App\Support\Service;
 use Illuminate\Contracts\Filesystem\Factory;
-use Illuminate\Support\Facades\DB;
 
 class DeleteNews extends Service
 {

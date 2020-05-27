@@ -50,5 +50,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')->group(base_path($pathDomains . 'News' . $defaultRouteFile));
         Route::middleware('web')->group(base_path($pathDomains . 'Timeline' . $defaultRouteFile));
         Route::middleware('web')->group(base_path($pathDomains . 'Measure' . $defaultRouteFile));
+        Route::middleware('web')->group(base_path($pathDomains . 'IndicatorRule' . $defaultRouteFile));
     }
 }

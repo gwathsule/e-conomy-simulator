@@ -19,6 +19,10 @@ class CreateNewsTable extends Migration
             $table->string('newscast')->nullable();
             $table->string('description', 500)->nullable();
             $table->string('image_url')->nullable();
+            $table->unsignedInteger('indicator_rule_id')->nullable();
+            $table->foreign('indicator_rule_id')
+                ->references('id')
+                ->on('indicator_rule');
             $table->timestamps();
         });
     }
