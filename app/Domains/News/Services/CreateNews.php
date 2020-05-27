@@ -37,6 +37,7 @@ class CreateNews extends Service
         $news = new News();
         $news->title = $data['title'];
         $news->description = $data['description'];
+        $news->newscast = $data['newscast'];
         DB::transaction(function () use ($data, $news) {
             $this->newsRepository->save($news);
             /** @var UploadedFile $imageFile  */

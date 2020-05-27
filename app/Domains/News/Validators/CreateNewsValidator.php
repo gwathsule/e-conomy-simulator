@@ -11,7 +11,7 @@ class CreateNewsValidator extends Validator
         return [
             'title' => ['required'],
             'description' => ['required'],
-            'newspaper' => ['required'],
+            'newscast' => ['required'],
             'image' => ['required', 'image'],
         ];
     }

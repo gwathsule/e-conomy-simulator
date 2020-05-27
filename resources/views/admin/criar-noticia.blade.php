@@ -8,7 +8,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="inputJornal">Nome do Jornal</label>
-                <input type="text" class="form-control" name="newspaper" value="{{old('newspaper')}}" id="inputJornal" placeholder="Ex: O Estadão">
+                <input type="text" class="form-control" name="newscast" value="{{old('newscast')}}" id="inputJornal" placeholder="Ex: O Estadão">
             </div>
         </div>
         <div class="form-row">

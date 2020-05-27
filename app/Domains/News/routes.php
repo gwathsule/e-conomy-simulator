@@ -9,5 +9,7 @@ Route::prefix('admin/news')->group(function () {
         Route::get('', NewsController::class . '@newsPage')->name('news');
         /** @see NewsController::createNews() */
         Route::post('create-news', NewsController::class . '@createNews')->name('create-news');
+        /** @see NewsController::deleteNews() */
+        Route::get('delete-news/{id}', NewsController::class . '@deleteNews')->name('delete-news');
     });
 });

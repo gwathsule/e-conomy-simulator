@@ -4,6 +4,7 @@ namespace App\Domains\News;
 
 use App\Domains\Indicator\IndicatorRepository;
 use App\Domains\News\Services\CreateNews;
+use App\Domains\News\Services\DeleteNews;
 use App\Http\Controllers\Controller;
 use App\Support\Exceptions\InternalErrorException;
 use App\Support\Exceptions\ValidationException;
@@ -28,6 +29,22 @@ class NewsController extends Controller
             /** @var CreateNews $service */
             $service = app()->make(CreateNews::class);
             $service->handle($request->toArray());
+            return $this->returnWithSuccess()->with([
+                'listNews' => $this->newsRepository->getAll(),
+            ]);
+        }catch (ValidationException $ex){
+            return $this->returnWithException($ex)->withInput();
+        }catch (Exception $ex){
+            return $this->returnWithException(new InternalErrorException())->withInput();
+        }
+    }
+
+    public function deleteNews($id)
+    {
+        try {
+            /** @var DeleteNews $service */
+            $service = app()->make(DeleteNews::class);
+            $service->handle(['id' => $id]);
             return $this->returnWithSuccess()->with([
                 'listNews' => $this->newsRepository->getAll(),
             ]);
