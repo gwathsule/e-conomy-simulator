@@ -1,5 +1,5 @@
 <div class="col-md-8" style="margin: 0 auto">
-    <form method="POST" action="{{route('new-game')}}">
+    <form method="POST" action="{{route('create-news')}}" enctype="multipart/form-data">
         @csrf
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -13,19 +13,16 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-12">
-                <label for="inputMinistro">Descrição</label>
-                <textarea type="text" class="form-control" name="ministro" id="inputMinistro"></textarea>
+                <label for="inputDescricao">Descrição</label>
+                <textarea type="text" class="form-control" name="description" id="inputDescricao">{{old('description')}}</textarea>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-12">
-                <label for="exampleFormControlFile1">Imagem (Tamanho: similar a 350 x 350)</label>
-                <input type="file" style="border: #d1d3e2 solid 1px" class="form-control-file" id="exampleFormControlFile1">
+                <label for="inputImagem">Imagem (Tamanho: similar a 350 x 350)</label>
+                <input type="file" name="image" style="border: #d1d3e2 solid 1px" class="form-control-file" id="inputImagem">
             </div>
         </div>
-        <div class="form-row">
-            Se: <select></select>
-        </div>
-        <button type="submit" class="btn btn-primary">Iniciar Jogo</button>
+        <button type="submit" class="btn btn-primary">Criar Notícia</button>
     </form>
 </div>

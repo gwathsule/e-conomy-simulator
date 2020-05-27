@@ -31,7 +31,7 @@ class Controller extends BaseController
     protected function returnWithSuccess($message = null)
     {
         if(is_null($message))
-            $message = __('action.success');
+            $message = __('user-messages.action.success');
         return back()->with([
             'response' => [
                 'type' => self::TYPE_SUCCESS_RETURN,

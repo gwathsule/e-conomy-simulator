@@ -6,12 +6,10 @@ class InternalErrorException extends ExceptionBase
 {
     private const CODE = 500;
     private const CATEGORY = 'internal_error';
-    protected $userMessage;
 
     public function __construct($userMessage = "", $internalMessage = "", Throwable $previous = null)
     {
-        $this->userMessage = $userMessage;
-        parent::__construct($internalMessage, $this->getErrorCode(), $previous);
+        parent::__construct($userMessage, $internalMessage, $previous);
     }
 
     function getErrorCode(): int
@@ -26,6 +24,8 @@ class InternalErrorException extends ExceptionBase
 
     function getErrors(): array
     {
-        return [];
+        return [
+            __('user-messages.internal-error')
+        ];
     }
 }

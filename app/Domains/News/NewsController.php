@@ -12,29 +12,36 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+    /**
+     * @var NewsRepository
+     */
+    private $newsRepository;
+
+    public function __construct(NewsRepository $newsRepository)
+    {
+        $this->newsRepository = $newsRepository;
+    }
+
     public function createNews(Request $request)
     {
         try {
             /** @var CreateNews $service */
             $service = app()->make(CreateNews::class);
             $service->handle($request->toArray());
-            return redirect()->route('news');
+            return $this->returnWithSuccess()->with([
+                'listNews' => $this->newsRepository->getAll(),
+            ]);
         }catch (ValidationException $ex){
             return $this->returnWithException($ex)->withInput();
         }catch (Exception $ex){
-            return $this->returnWithException(new InternalErrorException(__('internal-error')));
+            return $this->returnWithException(new InternalErrorException())->withInput();
         }
     }
 
     public function newsPage()
     {
-        $newsRepository = new NewsRepository();
-        $indicatorsRepository = new IndicatorRepository();
-        $indicators = $indicatorsRepository->getAll();
-        $listNews = $newsRepository->getAll();
         return view('admin.noticias')->with([
-            'listNews' => $listNews,
-            'indicators' => $indicators,
+            'listNews' => $this->newsRepository->getAll(),
         ]);
     }
 }

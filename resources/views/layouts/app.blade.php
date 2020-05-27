@@ -38,5 +38,6 @@
 <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 @yield('scripts')
 @include('alerts.errors')
+@include('alerts.success')
 </body>
 </html>

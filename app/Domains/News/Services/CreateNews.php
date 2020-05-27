@@ -37,13 +37,10 @@ class CreateNews extends Service
         $news = new News();
         $news->title = $data['title'];
         $news->description = $data['description'];
-        $news->condition = $data['condition'];
-        $news->value = $data['value'];
-        $news->indicator = $data['indicator'];
-        $this->newsRepository->save($news);
         DB::transaction(function () use ($data, $news) {
+            $this->newsRepository->save($news);
             /** @var UploadedFile $imageFile  */
-            $imageFile = $data['banner_image'] ?? null;
+            $imageFile = $data['image'] ?? null;
             $path = $news->getPathUrl();
             if ($imageFile) {
                 $this->storage->disk()->put($path, $imageFile, 'public');
