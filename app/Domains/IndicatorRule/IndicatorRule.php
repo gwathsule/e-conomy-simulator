@@ -4,7 +4,6 @@ namespace App\Domains\IndicatorRule;
 
 use App\Domains\Indicator\Indicator;
 use Illuminate\Database\Eloquent\Model;
-use phpDocumentor\Reflection\Types\This;
 
 /**
  * @property int $id
