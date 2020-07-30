@@ -25,6 +25,9 @@ class RecolhimentoCompulsorio extends Measure
 
     function calculateMeasure(float $pib, float $unemploymentTax, float $inflation, array $data): array
     {
+
+        //PRECISAMOS LISTAR AS MEDIDAS E FAZER OS CALCULOS PARA DEFINIR COMO SERÁ ESSA CLASSE
+
         $novosValores = [
             'pib' => 0,
             'unemploymentTax' => 0,
