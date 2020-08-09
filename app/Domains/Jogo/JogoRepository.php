@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Game;
+namespace App\Domains\Jogo;
 
 use App\Support\Repository;
 

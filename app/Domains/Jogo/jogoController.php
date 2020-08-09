@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Domains\Measure;
+namespace App\Domains\Jogo;
 
-use App\Domains\Game\Game;
-use App\Domains\Measure\Services\CalcularRecolhimentoCompulsorio;
+use App\Domains\Jogo\Services\CreateNewGame;
 use App\Http\Controllers\Controller;
 use App\Support\Exceptions\InternalErrorException;
 use App\Support\Exceptions\ValidationException;
 use Exception;
 use Illuminate\Http\Request;
 
-class MeasureController extends Controller
+class GameController extends Controller
 {
-    public function calcularRecolhimentoCompulsorio(Request $request)
+    //create a new game
+    public function newGame(Request $request)
     {
         try {
-            /** @var CalcularRecolhimentoCompulsorio $service */
-            $service = app()->make(CalcularRecolhimentoCompulsorio::class);
-            /** @var Game $game */
+            /** @var CreateNewGame $service */
+            $service = app()->make(CreateNewGame::class);
+            /** @var Jogo $game */
             $game = $service->handle($request->toArray());
             return back()->with([
                 'game' => $game

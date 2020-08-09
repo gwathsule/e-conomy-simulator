@@ -5,7 +5,7 @@ namespace App\Domains\Game\Services;
 use App\Domains\Game\Game;
 use App\Domains\Game\GameRepository;
 use App\Domains\Game\Validators\CreateNewGameValidator;
-use App\Domains\Timeline\Timeline;
+use App\Domains\Timeline\Momento;
 use App\Domains\Timeline\TimelineRepository;
 use App\Domains\User\User;
 use App\Support\Service;
@@ -50,7 +50,7 @@ class CreateNewGame extends Service
         $newGame->active = true;
 
         //create first timeline with real information of Brazil in 2019
-        $firstTimeline = new Timeline();
+        $firstTimeline = new Momento();
         $firstTimeline->round = 0;
         $firstTimeline->pib = 7.3;
         $firstTimeline->unemployment_tax = 11.9;

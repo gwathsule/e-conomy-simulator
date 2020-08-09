@@ -8,6 +8,6 @@ class TimelineRepository extends Repository
 {
     public function getModel(): string
     {
-        return Timeline::class;
+        return Momento::class;
     }
 }

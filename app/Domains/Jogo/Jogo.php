@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domains\Game;
+namespace App\Domains\Jogo;
 
-use App\Domains\Timeline\Timeline;
+use App\Domains\Timeline\Momento;
 use App\Domains\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
@@ -40,6 +40,6 @@ class Game extends Model
 
     public function timelines()
     {
-        return $this->hasMany(Timeline::class);
+        return $this->hasMany(Momento::class);
     }
 }
