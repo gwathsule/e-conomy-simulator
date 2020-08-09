@@ -2,25 +2,27 @@
 
 namespace App\Domains\Jogo;
 
-use App\Domains\Timeline\Momento;
+use App\Domains\Momento\Momento;
 use App\Domains\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
  * @property int $id
- * @property string $country_name
- * @property string $president_name
- * @property string $minister_name
- * @property string $currency_name
- * @property string $description
- * @property boolean $active
- * @property int $rounds
+ * @property string $pais
+ * @property string $presidente
+ * @property string $ministro
+ * @property string $moeda
+ * @property string $descricao
+ * @property boolean $ativo
+ * @property int $rodadas
+ * @property int $populacao
+ * @property int $pib
  * @property int $user_id
  * @property User $user
- * @property Collection $timelines
+ * @property Collection $momentos
  */
-class Game extends Model
+class Jogo extends Model
 {
     protected $table = 'game';
 
@@ -38,7 +40,7 @@ class Game extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function timelines()
+    public function momentos()
     {
         return $this->hasMany(Momento::class);
     }

@@ -1,9 +1,7 @@
 <?php
 
-use App\Domains\User\Auth\ForgotPasswordController;
 use App\Domains\User\Auth\LoginController;
 use App\Domains\User\UserAdminController;
-use App\Domains\User\Auth\ResetPasswordController;
 use App\Domains\User\UserController;
 use Illuminate\Support\Facades\Route;
 

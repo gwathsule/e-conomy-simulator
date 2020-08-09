@@ -5,7 +5,7 @@
 @section('content')
     @php
         if(! isset($game)){
-            $game = \Illuminate\Support\Facades\Auth::user()->getActiveGame();
+            $game = \Illuminate\Support\Facades\Auth::user()->getJogoAtivo();
         }
         if(! is_null($game)) {
             $timeline = $game->timelines->last();

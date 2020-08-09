@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Timeline;
+namespace App\Domains\Momento;
 
 use Illuminate\Database\Eloquent\Model;
 

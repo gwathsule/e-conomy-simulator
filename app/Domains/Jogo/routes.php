@@ -1,11 +1,11 @@
 <?php
 
-use App\Domains\Game\GameController;
+use App\Domains\Jogo\jogoController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('game')->group(function () {
+Route::prefix('jogo')->group(function () {
     Route::middleware(['auth'])->group(function () {
-        /** @see GameController::newGame() */
-        Route::post('new-game', GameController::class . '@newGame')->name('new-game');
+        /** @see jogoController::newGame() */
+        Route::post('novo-jogo', jogoController::class . '@newGame')->name('new-game');
     });
 });

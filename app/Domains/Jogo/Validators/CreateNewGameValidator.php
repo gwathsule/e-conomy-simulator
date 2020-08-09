@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Game\Validators;
+namespace App\Domains\Jogo\Validators;
 
 use App\Support\Validator;
 

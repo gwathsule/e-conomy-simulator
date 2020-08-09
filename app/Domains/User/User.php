@@ -2,7 +2,7 @@
 
 namespace App\Domains\User;
 
-use App\Domains\Game\Game;
+use App\Domains\Jogo\Jogo;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @property string $remember_token
  * @property boolean $is_admin
  * @property Carbon $email_verified_at
- * @property Collection $games
+ * @property Collection $jogos
  */
 class User extends Authenticatable
 {
@@ -41,16 +41,16 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return Game|null
+     * @return Jogo|null
      */
-    public function getActiveGame()
+    public function getJogoAtivo()
     {
-        return $this->games->where('active', true)->first();
+        return $this->jogos->where('ativo', true)->first();
     }
 
-    public function games()
+    public function jogos()
     {
-        return $this->hasMany(Game::class);
+        return $this->hasMany(Jogo::class);
     }
 
 }

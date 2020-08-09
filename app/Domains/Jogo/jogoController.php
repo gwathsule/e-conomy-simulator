@@ -9,7 +9,7 @@ use App\Support\Exceptions\ValidationException;
 use Exception;
 use Illuminate\Http\Request;
 
-class GameController extends Controller
+class jogoController extends Controller
 {
     //create a new game
     public function newGame(Request $request)

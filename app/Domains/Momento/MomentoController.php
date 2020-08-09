@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\Timeline;
+namespace App\Domains\Momento;
 
 use App\Http\Controllers\Controller;
 
-class TimelineController extends Controller
+class MomentoController extends Controller
 {
 
 }

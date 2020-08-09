@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\Timeline;
+namespace App\Domains\Momento;
 
 use App\Support\Repository;
 
-class TimelineRepository extends Repository
+class MomentoRepository extends Repository
 {
     public function getModel(): string
     {

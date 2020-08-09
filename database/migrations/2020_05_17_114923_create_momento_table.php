@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimelineTable extends Migration
+class CreateMomentoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateTimelineTable extends Migration
      */
     public function up()
     {
-        Schema::create('instante', function (Blueprint $table) {
+        Schema::create('momento', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedInteger('rodada');
             $table->json('medida')->nullable();
-            $table->unsignedBigInteger('game_id');
-            $table->foreign('game_id')
+            $table->json('noticias')->nullable();
+            $table->unsignedBigInteger('jogo_id');
+            $table->foreign('jogo_id')
                 ->references('id')
-                ->on('game');
+                ->on('jogo');
             $table->timestamps();
         });
     }

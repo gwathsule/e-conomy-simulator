@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGameTable extends Migration
+class CreateJogoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateGameTable extends Migration
      */
     public function up()
     {
-        Schema::create('game', function (Blueprint $table) {
+        Schema::create('jogo', function (Blueprint $table) {
             $table->id();
-            $table->string('country_name')->nullable();
-            $table->string('president_name')->nullable();
-            $table->string('minister_name')->nullable();
-            $table->string('currency_name')->nullable();
-            $table->string('description')->nullable();
-            $table->integer('rounds')->nullable();
-            $table->boolean('active')->nullable();
-            // store_application relation
+            $table->string('pais')->nullable();
+            $table->string('presidente')->nullable();
+            $table->string('ministro')->nullable();
+            $table->string('moeda')->nullable();
+            $table->string('descricao')->nullable();
+            $table->boolean('ativo')->nullable();
+            $table->integer('rodadas')->nullable();
+            $table->integer('populacao')->nullable();
+            $table->integer('pib')->nullable();
+            // user relation
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')

@@ -5,9 +5,9 @@ volumes:
     driver: local
 
 services:
-  # MySQL 5.6
+  # MySQL 8
   mysql:
-    image: mysql:5.6
+    image: mysql:5.7
     container_name: economy-mysql
     command: --default-authentication-plugin=mysql_native_password # bugfix
     volumes:
@@ -23,7 +23,7 @@ services:
   # PHP (with Nginx)
   # you can change from nginx to apache, just change session 'image'
   app:
-    image: ambientum/php:7.3-nginx
+    image: ambientum/php:7.4-nginx
     container_name: economy-app
     volumes:
       - .:/var/www/app
