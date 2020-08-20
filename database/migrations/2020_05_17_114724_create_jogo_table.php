@@ -23,7 +23,7 @@ class CreateJogoTable extends Migration
             $table->boolean('ativo')->nullable();
             $table->integer('rodadas')->nullable();
             $table->integer('populacao')->nullable();
-            $table->integer('pib')->nullable();
+            $table->unsignedBigInteger('pib')->nullable();
             // user relation
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')

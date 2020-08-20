@@ -2,7 +2,7 @@
 
 namespace App\Domains\Jogo;
 
-use App\Domains\Jogo\Services\CreateNewGame;
+use App\Domains\Jogo\Services\CriarNovoJogo;
 use App\Http\Controllers\Controller;
 use App\Support\Exceptions\InternalErrorException;
 use App\Support\Exceptions\ValidationException;
@@ -11,20 +11,20 @@ use Illuminate\Http\Request;
 
 class jogoController extends Controller
 {
-    //create a new game
-    public function newGame(Request $request)
+    public function novoJogo(Request $request)
     {
         try {
-            /** @var CreateNewGame $service */
-            $service = app()->make(CreateNewGame::class);
+            /** @var CriarNovoJogo $servico */
+            $servico = app()->make(CriarNovoJogo::class);
             /** @var Jogo $game */
-            $game = $service->handle($request->toArray());
+            $jogo = $servico->handle($request->toArray());
             return back()->with([
-                'game' => $game
+                'jogo' => $jogo
             ]);
         }catch (ValidationException $ex){
             return $this->returnWithException($ex)->withInput();
         }catch (Exception $ex){
+            dd($ex->getMessage());
             return $this->returnWithException(new InternalErrorException(__('internal-error')));
         }
     }

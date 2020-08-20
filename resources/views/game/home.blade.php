@@ -4,15 +4,14 @@
 
 @section('content')
     @php
-        if(! isset($game)){
-            $game = \Illuminate\Support\Facades\Auth::user()->getJogoAtivo();
+        if(! isset($jogo)){
+            $jogo = \Illuminate\Support\Facades\Auth::user()->getJogoAtivo();
         }
-        if(! is_null($game)) {
-            $timeline = $game->timelines->last();
+        if(! is_null($jogo)) {
+            $timeline = $jogo->momentos->last();
         }
     @endphp
-
-    @if(is_null($game))
+    @if(is_null($jogo))
         <div class="row">
             @include('game.novoJogo')
         </div>

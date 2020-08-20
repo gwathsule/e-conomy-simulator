@@ -9,10 +9,11 @@ use App\Domains\Momento\MomentoRepository;
 use App\Domains\Momento\Momento;
 use App\Domains\User\User;
 use App\Support\Service;
+use App\Support\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class CreateNewGame extends Service
+class CriarNovoJogo extends Service
 {
     /**
      * @var JogoRepository
@@ -34,7 +35,19 @@ class CreateNewGame extends Service
 
     public function validate(array $data)
     {
-        return (new CreateNewGameValidator())->validate($data);
+        return (new class extends Validator {
+            public function rules()
+            {
+                return [
+                    'pais' => ['required'],
+                    'moeda' => ['required'],
+                    'ministro' => ['required'],
+                    'presidente' => ['required'],
+                    'descricao' => ['required'],
+                    'rodadas' => ['required', 'int', 'min:10'],
+                ];
+            }
+        })->validate($data);
     }
 
     protected function perform(array $data, array $columns = ['*'], array $relations = [])
@@ -48,6 +61,7 @@ class CreateNewGame extends Service
         $novoJogo->descricao = $data['descricao'];
         $novoJogo->ativo = true;
         $novoJogo->rodadas = $data['rodadas'];
+        $novoJogo->pib = $data['populacao'] * config('jogo.inicio.renda_anual_pessoa');
 
         //create first timeline with real information of Brazil in 2019
         $primeiroMomento = new Momento();

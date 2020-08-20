@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class Jogo extends Model
 {
-    protected $table = 'game';
+    protected $table = 'jogo';
 
     protected $casts = [
         'active' => 'boolean',

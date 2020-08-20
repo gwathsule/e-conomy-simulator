@@ -22,19 +22,13 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">PIB</th>
-                        <th scope="col">Inflação</th>
-                        <th scope="col">Desemprego</th>
-                        <th scope="col">Medida</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($game->timelines as $timeline)
+                    @foreach($jogo->momentos as $momento)
                         <tr>
-                            <th scope="row">{{$timeline->round}}</th>
-                            <td id="eventos_table_pib">{{$timeline->pib}}</td>
-                            <td id="eventos_table_inflacao">{{$timeline->inflation}}</td>
-                            <td id="eventos_table_desemprego">{{$timeline->unemployment_tax}}</td>
-                            <td id="eventos_table_descricao">{{$timeline->measure_description}}</td>
+                            <th scope="row">{{$momento->rodada}}</th>
+                            <td id="eventos_table_pib">{{$momento->pib}}</td>
                         </tr>
                     @endforeach
                     </tbody>

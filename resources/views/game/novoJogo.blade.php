@@ -4,16 +4,20 @@
             Cadastrar novo jogo
         </div>
         <div class="card-body">
-            <form method="POST" action="{{route('new-game')}}">
+            <form method="POST" action="{{route('novo-jogo')}}">
                 @csrf
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="inputPais">Nome da País</label>
                         <input type="text" class="form-control" name="pais" value="{{old('pais')}}" id="inputPais" placeholder="Arrume um bem criativo">
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="inputMoeda">Nome da moeda</label>
                         <input type="text" class="form-control" name="moeda" value="{{old('moeda')}}" id="inputMoeda" placeholder="Informar o plural (ex.: reais)">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputMoeda">População</label>
+                        <input type="number" value="100000" class="form-control" name="populacao" value="{{old('populacao')}}" id="inputPopulacao">
                     </div>
                 </div>
                 <div class="form-row">
@@ -33,7 +37,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputRodadas">Duração (rodadas)</label>
-                        <input type="number" class="form-control" name="rodadas" value="{{old('rodadas')}}" id="inputRodadas" placeholder="Limitada a no mínimo 10">
+                        <input type="number" value="12" class="form-control" name="rodadas" value="{{old('rodadas')}}" id="inputRodadas">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Iniciar Jogo</button>

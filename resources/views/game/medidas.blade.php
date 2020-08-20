@@ -29,7 +29,7 @@
                     <div class="modal fade" id="rec_compulsorio" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form method="POST" action="{{route('recolhimento-compulsorio')}}">
+                                <form method="POST" action="#">
                                     @csrf
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="rec_compulsorioLabel">Insira um valor</h5>

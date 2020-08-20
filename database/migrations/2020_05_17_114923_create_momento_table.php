@@ -15,9 +15,10 @@ class CreateMomentoTable extends Migration
     {
         Schema::create('momento', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('rodada');
             $table->json('medida')->nullable();
             $table->json('noticias')->nullable();
+            $table->unsignedInteger('rodada')->nullable();
+            $table->unsignedBigInteger('pib')->nullable();
             $table->unsignedBigInteger('jogo_id');
             $table->foreign('jogo_id')
                 ->references('id')
