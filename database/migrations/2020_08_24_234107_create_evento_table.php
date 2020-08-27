@@ -16,7 +16,8 @@ class CreateEventoTable extends Migration
         Schema::create('evento', function (Blueprint $table) {
             $table->id();
             $table->integer('rodadas_restantes');
-            $table->json('noticia');
+            $table->json('data');
+            $table->string('code');
             $table->unsignedBigInteger('jogo_id');
             $table->foreign('jogo_id')
                 ->references('id')
