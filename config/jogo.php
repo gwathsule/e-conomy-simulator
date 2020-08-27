@@ -6,7 +6,14 @@ return [
         'renda_anual_pessoa' => env('RENDA_ANUAL_PESSOA', 14000),
     ],
     'pib' => [
-        'consumo' => env('PIB_PORCENTAGEM_CONSUMO', 0.7),
-        'investimento' => env('PIB_PORCENTAGEM_INVESTIMENTO', 0.3),
+        'consumo' => env('PIB_PORCENTAGEM_CONSUMO', 0.70),
+        'investimento' => env('PIB_PORCENTAGEM_INVESTIMENTO', 0.30),
+        'previsao_anual' => env('PIB_PREVISAO_ANUAL', 0.03),
+        'frequencia_calculo' => env('PIB_FREQUENCIA_CALCULO', 12),
+        'frequencia_previsao_anual' => env('PIB_FREQUENCIA_PREVISAO_ANUAL', 3),
+        'frequencia_previsao_mensal' => env('PIB_FREQUENCIA_PREVISAO_MENSAL', 1),
+        'frequencia_comparacao_resultado' => env('PIB_FREQUENCIA_COMPARACAO_RESULTADO', 12),
+        'variacao_previsao_pib_positivo' => env('PIB_VARIACAO_PREVISAO_PIB_POSITIVO', 0.5),
+        'variacao_previsao_pib_negativo' => env('PIB_VARIACAO_PREVISAO_PIB_NEGATIVO', -0.5),
     ],
 ];

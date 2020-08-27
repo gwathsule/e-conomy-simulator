@@ -24,7 +24,6 @@ class jogoController extends Controller
         }catch (ValidationException $ex){
             return $this->returnWithException($ex)->withInput();
         }catch (Exception $ex){
-            dd($ex->getMessage());
             return $this->returnWithException(new InternalErrorException(__('internal-error')));
         }
     }

@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $jogo_id
  * @property int $rodada
- * @property int $pib
+ * @property float $pib
+ * @property float $pib_prox_ano
+ * @property float $pib_consumo
+ * @property float $pib_investimento
  * @property array $medida
  * @property array $noticias
  */

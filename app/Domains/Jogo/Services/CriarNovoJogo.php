@@ -4,7 +4,6 @@ namespace App\Domains\Jogo\Services;
 
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
-use App\Domains\Jogo\Validators\CreateNewGameValidator;
 use App\Domains\Momento\MomentoRepository;
 use App\Domains\Momento\Momento;
 use App\Domains\User\User;
@@ -63,9 +62,12 @@ class CriarNovoJogo extends Service
         $novoJogo->rodadas = $data['rodadas'];
         $novoJogo->pib = $data['populacao'] * config('jogo.inicio.renda_anual_pessoa');
 
-        //create first timeline with real information of Brazil in 2019
+        //Informação do Brazil em 2019
         $primeiroMomento = new Momento();
         $primeiroMomento->pib = $data['populacao'] * config('jogo.inicio.renda_anual_pessoa');
+        $primeiroMomento->pib_prox_ano = config('jogo.pib.previsao_anual');
+        $primeiroMomento->pib_consumo = $primeiroMomento->pib * config('jogo.pib.consumo');
+        $primeiroMomento->pib_investimento = $primeiroMomento->pib * config('jogo.pib.investimento');
 
         DB::transaction(function () use ($data, $novoJogo, $primeiroMomento) {
             /** @var User $user */
