@@ -2,6 +2,7 @@
 
 namespace App\Domains\Jogo;
 
+use App\Domains\Evento\Evento;
 use App\Domains\Momento\Momento;
 use App\Domains\User\User;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @property int $user_id
  * @property User $user
  * @property Collection $momentos
+ * @property Collection $eventos
  */
 class Jogo extends Model
 {
@@ -46,5 +48,10 @@ class Jogo extends Model
     public function momentos()
     {
         return $this->hasMany(Momento::class);
+    }
+
+    public function eventos()
+    {
+        return $this->hasMany(Evento::class);
     }
 }

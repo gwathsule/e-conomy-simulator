@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $pib_prox_ano
  * @property float $pib_consumo
  * @property float $pib_investimento
- * @property array $medida
+ * @property array $medidas
  * @property array $noticias
  */
 class Momento extends Model

@@ -2,7 +2,11 @@
 
 namespace App\Domains\Jogo\Services;
 
+use App\Domains\Evento\Evento;
+use App\Domains\Evento\EventoRepository;
+use App\Domains\Evento\Eventos\CalcularPrevisaoAnualPIB;
 use App\Domains\Jogo\Jogo;
+use App\Domains\Jogo\jogoController;
 use App\Domains\Jogo\JogoRepository;
 use App\Domains\Momento\MomentoRepository;
 use App\Domains\Momento\Momento;
@@ -79,9 +83,20 @@ class CriarNovoJogo extends Service
             }
             $novoJogo->user_id = $user->id;
             $this->jogoRepository->save($novoJogo);
+            $this->iniciarEventos($novoJogo);
             $primeiroMomento->jogo_id = $novoJogo->id;
             $this->momentoRepository->save($primeiroMomento);
         });
         return $novoJogo;
+    }
+
+    private function iniciarEventos(Jogo $novoJogo)
+    {
+        $evento = new Evento();
+        $evento->data = [];
+        $evento->rodadas_restantes = CalcularPrevisaoAnualPIB::RODADAS;
+        $evento->jogo_id = $novoJogo->id;
+        $evento->code = CalcularPrevisaoAnualPIB::CODE;
+        (new EventoRepository())->save($evento);
     }
 }

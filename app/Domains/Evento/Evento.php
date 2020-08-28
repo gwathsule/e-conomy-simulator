@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
+ * @property int $jogo_id
  * @property int $rodadas_restantes
  * @property string $code
  * @property array $data
