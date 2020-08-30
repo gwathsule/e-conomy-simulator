@@ -26,6 +26,11 @@ then
     docker-compose $@; exit;
 fi
 
+if [[ $1 = "test" ]]
+then
+    docker-compose exec ${SERVICE_NAME} vendor/bin/$@; exit;
+fi
+
 if [[ $1 = "fbuild" ]]
 then
     docker-compose run angular bash -c "pushd /var/www/app/resources/angular/e-conomy-simulator/ && ng build --prod --output-path=./../../../public/angularjs"

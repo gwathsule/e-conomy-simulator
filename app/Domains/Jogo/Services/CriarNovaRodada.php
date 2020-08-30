@@ -44,7 +44,8 @@ class CriarNovaRodada extends Service
             public function rules()
             {
                 return [
-                    'medidas' => ['array', 'required'],
+                    'medidas.*.data' => ['array', 'required'],
+                    'medidas.*.code' => ['string', 'required'],
                     'jogo_id' => ['int', 'required'],
                 ];
             }

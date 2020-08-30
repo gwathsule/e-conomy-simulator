@@ -5,21 +5,6 @@ volumes:
     driver: local
 
 services:
-  # MySQL 8
-  mysql:
-    image: mysql:5.7
-    container_name: economy-mysql
-    command: --default-authentication-plugin=mysql_native_password # bugfix
-    volumes:
-      - shipping-api-mysql-data:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=admin
-      - MYSQL_DATABASE=economy
-      - MYSQL_USER=admin
-      - MYSQL_PASSWORD=admin
-
   # PHP (with Nginx)
   # you can change from nginx to apache, just change session 'image'
   app:
@@ -35,3 +20,34 @@ services:
     environment:
       - XDEBUG_ENABLED=true
       - PHP_IDE_CONFIG=serverName=ambientum
+      - DOCKER_FOR_WINDOWS=${DOCKER_FOR_WINDOWS}
+
+
+  # MySQL 8
+  mysql:
+    image: mysql:5.7
+    container_name: economy-mysql
+    command: --default-authentication-plugin=mysql_native_password # bugfix
+    volumes:
+      - shipping-api-mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=economy
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+
+  # MySQL 8 (testing)
+  mysql-testing:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password # bugfix
+    container_name: economy-mysql-testing
+    tmpfs: /var/lib/mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=economy-testing
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin

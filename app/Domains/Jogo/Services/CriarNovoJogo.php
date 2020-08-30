@@ -6,7 +6,6 @@ use App\Domains\Evento\Evento;
 use App\Domains\Evento\EventoRepository;
 use App\Domains\Evento\Eventos\CalcularPrevisaoAnualPIB;
 use App\Domains\Jogo\Jogo;
-use App\Domains\Jogo\jogoController;
 use App\Domains\Jogo\JogoRepository;
 use App\Domains\Momento\MomentoRepository;
 use App\Domains\Momento\Momento;
@@ -48,6 +47,7 @@ class CriarNovoJogo extends Service
                     'presidente' => ['required'],
                     'descricao' => ['required'],
                     'rodadas' => ['required', 'int', 'min:10'],
+                    'populacao' => ['required', 'int'],
                 ];
             }
         })->validate($data);
@@ -65,13 +65,17 @@ class CriarNovoJogo extends Service
         $novoJogo->ativo = true;
         $novoJogo->rodadas = $data['rodadas'];
         $novoJogo->pib = $data['populacao'] * config('jogo.inicio.renda_anual_pessoa');
+        $novoJogo->pib_prox_ano = config('jogo.pib.previsao_anual');
+        $novoJogo->pib_consumo = $novoJogo->pib * config('jogo.pib.consumo');
+        $novoJogo->pib_investimento = $novoJogo->pib * config('jogo.pib.investimento');
 
         //Informação do Brazil em 2019
         $primeiroMomento = new Momento();
-        $primeiroMomento->pib = $data['populacao'] * config('jogo.inicio.renda_anual_pessoa');
-        $primeiroMomento->pib_prox_ano = config('jogo.pib.previsao_anual');
-        $primeiroMomento->pib_consumo = $primeiroMomento->pib * config('jogo.pib.consumo');
-        $primeiroMomento->pib_investimento = $primeiroMomento->pib * config('jogo.pib.investimento');
+        $primeiroMomento->pib = $novoJogo->pib;
+        $primeiroMomento->pib_prox_ano = $novoJogo->pib_prox_ano;
+        $primeiroMomento->pib_consumo = $novoJogo->pib_consumo;
+        $primeiroMomento->pib_investimento = $novoJogo->pib_investimento;
+        $primeiroMomento->rodada = 0;
 
         DB::transaction(function () use ($data, $novoJogo, $primeiroMomento) {
             /** @var User $user */
