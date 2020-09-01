@@ -2,8 +2,12 @@
 
 namespace Jogo;
 
+use App\Domains\Evento\Evento;
+use App\Domains\Evento\Eventos\CalcularPrevisaoAnualPIB;
 use App\Domains\Jogo\Jogo;
+use App\Domains\Jogo\Services\CriarNovaRodada;
 use App\Domains\Jogo\Services\CriarNovoJogo;
+use App\Domains\Momento\Momento;
 use App\Domains\User\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
@@ -42,5 +46,77 @@ class JogoTest extends TestCase
         $this->assertEquals(config('jogo.pib.previsao_anual'), $jogo->pib_prox_ano);
         $this->assertEquals($dadosNovoJogo->pib * config('jogo.pib.consumo'), $jogo->pib_consumo);
         $this->assertEquals($dadosNovoJogo->pib * config('jogo.pib.investimento'), $jogo->pib_investimento);
+        $this->assertCount(1, $jogo->momentos);
+        $this->assertCount(1, $jogo->eventos);
+        /** @var Momento $primeiraRodada */
+        $primeiraRodada = $jogo->momentos()->first();
+        $this->assertEquals($jogo->id, $primeiraRodada->jogo_id);
+        $this->assertEquals(0, $primeiraRodada->rodada);
+        $this->assertEquals($jogo->pib, $primeiraRodada->pib);
+        $this->assertEquals($jogo->pib_prox_ano, $primeiraRodada->pib_prox_ano);
+        $this->assertEquals($jogo->pib_consumo, $primeiraRodada->pib_consumo);
+        $this->assertEquals($jogo->pib_investimento, $primeiraRodada->pib_investimento);
+        $this->assertEquals([], $primeiraRodada->medidas);
+        $this->assertEquals([], $primeiraRodada->noticias);
+        /** @var Evento $eventoInicialPib */
+        $eventoInicialPib = $jogo->eventos()->where('code', CalcularPrevisaoAnualPIB::CODE)->first();
+        $this->assertEquals(3, $eventoInicialPib->rodadas_restantes);
+        $this->assertEquals(CalcularPrevisaoAnualPIB::CODE, $eventoInicialPib->code);
+        $this->assertEquals([], $eventoInicialPib->data);
+    }
+
+    /**
+     *
+     */
+    public function testCicloCompleto()
+    {
+        /** @var User $user */
+        $user = factory(User::class)->create();
+        $jogo = $this->iniciarjogo($user);
+        $data = [
+            'jogo_id' => $jogo->id,
+            'medidas' => [],
+        ];
+        /** @var CriarNovaRodada $servico */
+        $servico = app()->make(CriarNovaRodada::class);
+        $servico->handle($data);
+        $servico->handle($data);
+        $servico->handle($data);
+        $servico->handle($data);
+        $servico->handle($data);
+        $servico->handle($data);
+        $servico->handle($data);
+        $jogo->refresh();
+        $this->assertCount(8, $jogo->momentos);
+        $this->assertCount(1, $jogo->eventos);
+        $this->assertEquals(7, $jogo->momentos->last()->rodada);
+        $this->assertCount(1, $jogo->momentos[3]->noticias);
+        $this->assertCount(1, $jogo->momentos[6]->noticias);
+    }
+
+    /**
+     * @param User $user
+     * @return Jogo
+     * @throws \App\Support\Exceptions\ValidationException
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    private function iniciarjogo(User $user)
+    {
+        /** @var Jogo $dadosNovoJogo */
+        $dadosNovoJogo = factory(Jogo::class)->make(['user_id' => null]);
+        $data = [
+            'pais' => $dadosNovoJogo->pais,
+            'moeda' => $dadosNovoJogo->moeda,
+            'ministro' => $dadosNovoJogo->ministro,
+            'presidente' => $dadosNovoJogo->presidente,
+            'descricao' => $dadosNovoJogo->descricao,
+            'rodadas' => $dadosNovoJogo->rodadas,
+            'populacao' => $dadosNovoJogo->populacao,
+        ];
+        Auth::login($user);
+        /** @var CriarNovoJogo $servico */
+        $servico = app()->make(CriarNovoJogo::class);
+        /** @var Jogo $jogo */
+        return $servico->handle($data);
     }
 }

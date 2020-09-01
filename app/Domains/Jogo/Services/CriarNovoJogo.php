@@ -75,6 +75,8 @@ class CriarNovoJogo extends Service
         $primeiroMomento->pib_prox_ano = $novoJogo->pib_prox_ano;
         $primeiroMomento->pib_consumo = $novoJogo->pib_consumo;
         $primeiroMomento->pib_investimento = $novoJogo->pib_investimento;
+        $primeiroMomento->medidas = [];
+        $primeiroMomento->noticias = $this->noticiasIniciais();
         $primeiroMomento->rodada = 0;
 
         DB::transaction(function () use ($data, $novoJogo, $primeiroMomento) {
@@ -102,5 +104,15 @@ class CriarNovoJogo extends Service
         $evento->jogo_id = $novoJogo->id;
         $evento->code = CalcularPrevisaoAnualPIB::CODE;
         (new EventoRepository())->save($evento);
+    }
+
+    /**
+     * cria uma noticia de boas vindas
+     * @return array
+     */
+    private function noticiasIniciais()
+    {
+        // TODO criar uma noticia de boas vindas ao jogo aqui
+        return [];
     }
 }

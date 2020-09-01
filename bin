@@ -26,7 +26,7 @@ then
     docker-compose $@; exit;
 fi
 
-if [[ $1 = "test" ]]
+if [[ $1 = "phpunit" ]]
 then
     docker-compose exec ${SERVICE_NAME} vendor/bin/$@; exit;
 fi

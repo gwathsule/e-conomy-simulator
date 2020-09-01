@@ -18,4 +18,9 @@ use Illuminate\Database\Eloquent\Model;
 class Momento extends Model
 {
     protected $table = 'momento';
+
+    protected $casts = [
+        'medidas' => 'array',
+        'noticias' => 'array',
+    ];
 }

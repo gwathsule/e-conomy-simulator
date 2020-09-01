@@ -18,5 +18,5 @@ abstract class Evento
      * @param array $data
      * @return Noticia
      */
-    abstract public function modificacoes(Jogo $jogo, array $data) : Noticia;
+    abstract public function modificacoes(Jogo $jogo, array $data) : array;
 }

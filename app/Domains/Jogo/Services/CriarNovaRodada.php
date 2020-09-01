@@ -44,8 +44,8 @@ class CriarNovaRodada extends Service
             public function rules()
             {
                 return [
-                    'medidas.*.data' => ['array', 'required'],
-                    'medidas.*.code' => ['string', 'required'],
+                    'medidas.*.data' => ['array'],
+                    'medidas.*.code' => ['string'],
                     'jogo_id' => ['int', 'required'],
                 ];
             }
@@ -65,7 +65,7 @@ class CriarNovaRodada extends Service
         $jogo = $this->jogoRepository->getById($data['jogo_id']);
         $noticias = collect();
         $jogo->eventos->each(function (Evento $evento, $key) use ($noticias, $jogo){
-            if($evento->rodadas_restantes == 0) {
+            if($evento->rodadas_restantes == 1) {
                 $noticia = $this->executarEvento($evento, $jogo->id);
                 if(! is_null($noticia)) {
                     $noticias->add($noticia);
@@ -93,7 +93,7 @@ class CriarNovaRodada extends Service
         $momento->pib_prox_ano = $jogo->pib_prox_ano;
         $momento->pib_consumo = $jogo->pib_consumo;
         $momento->pib_investimento = $jogo->pib_investimento;
-        $momento->rodada = $jogo->momentos->count() + 1;
+        $momento->rodada = $jogo->momentos->count();
         $this->momentoRepository->save($momento);
         return $jogo;
     }

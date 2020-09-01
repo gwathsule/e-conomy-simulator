@@ -33,7 +33,7 @@ abstract class Noticia
 
     /**
      * @param array $data
-     * @return false|string
+     * @return array
      * @throws ValidationException
      */
     public function buidJsonNoticia()
@@ -54,6 +54,6 @@ abstract class Noticia
             'text' => $this->getTexto($data),
             'relevancia' => $this->getRelevancia(),
         ];
-        return json_encode($noticia);
+        return $noticia;
     }
 }
