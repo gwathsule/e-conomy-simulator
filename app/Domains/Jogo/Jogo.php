@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @property boolean $ativo
  * @property int $rodadas
  * @property int $populacao
- * @property int $pib
+ * @property float $pib
  * @property float $pib_prox_ano
  * @property float $pib_consumo
  * @property float $pib_investimento

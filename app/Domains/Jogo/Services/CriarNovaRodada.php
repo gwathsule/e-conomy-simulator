@@ -4,6 +4,7 @@ namespace App\Domains\Jogo\Services;
 
 use App\Domains\Evento\Evento;
 use App\Domains\Evento\EventoRepository;
+use App\Domains\Evento\Eventos\CalcularPibAnual;
 use App\Domains\Evento\Eventos\CalcularPrevisaoAnualPIB;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
@@ -105,6 +106,8 @@ class CriarNovaRodada extends Service
         switch ($evento->code) {
             case CalcularPrevisaoAnualPIB::CODE:
                 return (new CalcularPrevisaoAnualPIB())->modificacoes($jogo, $evento->data);
+            case CalcularPibAnual::CODE:
+                return (new CalcularPibAnual())->modificacoes($jogo, $evento->data);
             default:
                 return null;
         }

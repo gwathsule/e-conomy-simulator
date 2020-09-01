@@ -36,7 +36,7 @@ abstract class Noticia
      * @return array
      * @throws ValidationException
      */
-    public function buidJsonNoticia()
+    public function buidDataNoticia()
     {
         $data = $this->data;
         $validator = Validator::make(

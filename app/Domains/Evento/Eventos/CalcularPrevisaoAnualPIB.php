@@ -32,7 +32,7 @@ class CalcularPrevisaoAnualPIB extends Evento
             'aumento' => true,
             'previsao' => number_format (($previsao * 100), 2) . '%',
         ]);
-        return $noticia->buidJsonNoticia();
+        return $noticia->buidDataNoticia();
     }
 
     private function aleatorio() {

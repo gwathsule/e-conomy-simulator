@@ -23,10 +23,10 @@ class CreateJogoTable extends Migration
             $table->boolean('ativo')->nullable();
             $table->integer('rodadas')->nullable();
             $table->integer('populacao')->nullable();
-            $table->decimal('pib', 13, 1, true)->nullable();
-            $table->decimal('pib_prox_ano', 13, 1, true)->nullable();
-            $table->decimal('pib_consumo', 13, 1, true)->nullable();
-            $table->decimal('pib_investimento', 13, 1, true)->nullable();
+            $table->decimal('pib_prox_ano', 4, 4, true)->nullable();
+            $table->decimal('pib', 13, 2, true)->nullable();
+            $table->decimal('pib_consumo', 13, 2, true)->nullable();
+            $table->decimal('pib_investimento', 13, 2, true)->nullable();
             // user relation
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')

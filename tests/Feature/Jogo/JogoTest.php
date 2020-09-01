@@ -65,9 +65,6 @@ class JogoTest extends TestCase
         $this->assertEquals([], $eventoInicialPib->data);
     }
 
-    /**
-     *
-     */
     public function testCicloCompleto()
     {
         /** @var User $user */
@@ -86,12 +83,21 @@ class JogoTest extends TestCase
         $servico->handle($data);
         $servico->handle($data);
         $servico->handle($data);
+        $servico->handle($data);
+        $servico->handle($data);
+        $servico->handle($data);
+        $servico->handle($data);
+        $servico->handle($data);
+        $servico->handle($data);
         $jogo->refresh();
-        $this->assertCount(8, $jogo->momentos);
-        $this->assertCount(1, $jogo->eventos);
-        $this->assertEquals(7, $jogo->momentos->last()->rodada);
+        $this->assertCount(14, $jogo->momentos);
+        $this->assertCount(2, $jogo->eventos);
+        $this->assertEquals(13, $jogo->momentos->last()->rodada);
         $this->assertCount(1, $jogo->momentos[3]->noticias);
         $this->assertCount(1, $jogo->momentos[6]->noticias);
+        $this->assertCount(1, $jogo->momentos[9]->noticias);
+        $this->assertCount(2, $jogo->momentos[12]->noticias);
+        $this->assertNotEquals($jogo->momentos[1]->pib, $jogo->momentos[13]->pib);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Domains\Jogo\Services;
 
 use App\Domains\Evento\Evento;
 use App\Domains\Evento\EventoRepository;
+use App\Domains\Evento\Eventos\CalcularPibAnual;
 use App\Domains\Evento\Eventos\CalcularPrevisaoAnualPIB;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
@@ -103,6 +104,13 @@ class CriarNovoJogo extends Service
         $evento->rodadas_restantes = CalcularPrevisaoAnualPIB::RODADAS;
         $evento->jogo_id = $novoJogo->id;
         $evento->code = CalcularPrevisaoAnualPIB::CODE;
+        (new EventoRepository())->save($evento);
+
+        $evento = new Evento();
+        $evento->data = [];
+        $evento->rodadas_restantes = CalcularPibAnual::RODADAS;
+        $evento->jogo_id = $novoJogo->id;
+        $evento->code = CalcularPibAnual::CODE;
         (new EventoRepository())->save($evento);
     }
 
