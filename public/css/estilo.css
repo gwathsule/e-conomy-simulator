@@ -1,0 +1,117 @@
+@font-face{
+	font-family: Roboto;
+	src: url("../font/Roboto-Regular.woff");
+}
+
+body{
+	font-family: Roboto;
+	font-style: normal;
+	height: 100%
+}
+
+h1{
+	font-weight: 900;
+	font-size: 20px;
+	color: #fff;
+}
+
+label{
+	margin-bottom: 0;
+}
+
+.text-menu{
+	font-weight: bold;
+	font-size: 18px;
+	color: #fff;
+}
+
+.text-form01{
+	font-weight: bold;
+	font-size: 18px;
+	color: #000000;
+}
+
+.text-form02{
+	font-weight: bold;
+	font-size: 14px;
+	color: #828282;
+}
+
+.text-nav{
+	font-weight: 900;
+	font-size: 24px;
+	color: #29ABE2;
+}
+
+.text-perfil{
+	font-size: 14px;
+	line-height: 16px;
+	color: #828282;
+	border-bottom: 2px solid  #828282;
+}
+
+.conteudo-nav{
+	background: #29ABE2;
+	border-radius: 20px 20px 0px 0px;
+}
+
+.conteudo-corpo{
+	background: #fff;
+	border-radius: 0px 0px 20px 20px;
+}
+
+.bg-botoes{
+	background: #29ABE2;
+	border-radius: 20px;
+}
+
+.bg-caixas{
+	background: #fff;
+	border-radius: 30px;
+	backdrop-filter: blur(4px);
+}
+
+.bg-titulo{
+	background: #C4C4C4;
+	border-radius: 20px;
+}
+
+.fixot{
+	position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.fixob{
+	position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+
+}
+
+.carousel-indicators li {
+    width: 5px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    background-color: #C4C4C4;
+    box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.5);
+}
+.carousel-indicators .active {
+    width: 5px;
+    background-color: #29ABE2;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}

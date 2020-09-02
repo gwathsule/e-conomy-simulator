@@ -1,102 +1,77 @@
 <!DOCTYPE html>
-<html lang="br">
-
+<html lang="pt-br">
 <head>
-
+    <!-- Meta tags Obrigatórias -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <!-- Custom fonts for this template-->
-    <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-    <!-- Custom styles for this template-->
-    <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <!-- Estilo Customizado -->
+
+    <link rel="stylesheet" type="text/css" href="{{asset('css/estilo.css')}}">
+
+    <link rel="icon" type="imagem/png" href="{{asset('img/resources/icon-principal.png')}}" />
+
+    <title>E-Conomy - Login</title>
 
 </head>
-
-<body class="bg-gradient-primary">
+<body style="background-image: url('{{asset('img/resources/fundo.png')}}');">
 
 <div class="container">
+    <div class="row justify-content-center mt-5 ">
+        <img src="{{asset('img/resources/logo.png')}}" width="258">
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class= "col-8 bg-caixas ">
+            <h1 class="bg-botoes col-9 mx-auto mt-4 text-center p-2">BEM VINDO!</h1>
 
-    <!-- Outer Row -->
-    <div class="row justify-content-center">
+            <form class="text-center p-3" method="post" action="{{route('login')}}"> <!-- Inicio FORM -->
+                @csrf
+                <label for="LoginFormEmail"><p class="text-form01">LOGIN</p></label>
+                <input type="email" name="email" id="LoginFormEmail" class="form-control mb-4 col-8 mx-auto text-center text-form02" placeholder="Entre com o e-mail cadastrado" value="{{ old('email') }}">
 
-        <div class="col-xl-10 col-lg-12 col-md-9">
+                <label for="LoginFormPassword"><p class="text-form01">SENHA</p></label>
+                <input type="password" name="password" id="LoginFormPassword" class="form-control mb-4 col-8 mx-auto text-center text-form02" placeholder="********">
 
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
-                    <!-- Nested Row within Card Body -->
-                    <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                        <div class="col-lg-6">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Bem vindo de volta!</h1>
-                                </div>
-                                <form class="user" method="POST" action="{{ route('login') }}">
-                                    @csrf
-                                    <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email" aria-describedby="emailHelp" value="{{ old('email') }}" placeholder="Entre com o email cadastrado">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" name="password" placeholder="Senha">
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck">
-                                            <label class="custom-control-label" for="customCheck">Mantenha-me conectado</label>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">
-                                        Login
-                                    </button>
-                                    <hr>
-                                    <!--
-                                    <a href="#" class="btn btn-google btn-user btn-block">
-                                        <i class="fab fa-google fa-fw"></i> Login with Google
-                                    </a>
-                                    <a href="#" class="btn btn-facebook btn-user btn-block">
-                                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                    </a>
-                                    -->
-                                </form>
-                                <hr>
-                                <!--
-                                <div class="text-center">
-                                    <a class="small" href="#">Forgot Password?</a>
-                                </div>
-                                -->
-                                <div class="text-center">
-                                    <a class="small" href="{{route('register')}}">Crie uma conta!</a>
-                                </div>
-                            </div>
+                <div class="d-flex justify-content-between col-8 mx-auto ">
+                    <div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="LoginFormRemember">
+                            <label class="custom-control-label" for="LoginFormRemember">Mantenha-me conectado</label>
                         </div>
                     </div>
+                    {{--
+                    <div>
+                        <a  href="">Esqueceu a senha?</a>
+                    </div>
+                    --}}
                 </div>
-            </div>
 
+                <button class="btn btn-block bg-botoes col-6 mx-auto mt-4 mb-4 p-2 text-menu text-center " type="submit">LOGIN</button>
+
+                <a href="{{route('register')}}">Crie uma conta!</a>
+            </form><!-- Fim FORM -->
         </div>
-
     </div>
-
 </div>
 
-<!-- Bootstrap core JavaScript-->
-<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-<script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+{{-- <footer class="page-footer font-small bg-white mt-5 fixob"> <!-- Inicio Footer -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href=""> E-Conomy Simulator</a>
+    </div>
+</footer> <!-- Fim Footer -->--}}
 
-<!-- Core plugin JavaScript-->
-<script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
-
+<!-- JavaScript (Opcional) -->
+<!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+{{--
 @if(isset($errors) && count($errors) > 0)
     <div class="modal fade" id="errorsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -120,7 +95,6 @@
         $('#errorsModal').modal('show');
     </script>'
 @endif
-
+--}}
 </body>
-
 </html>

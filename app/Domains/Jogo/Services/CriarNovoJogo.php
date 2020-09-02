@@ -48,7 +48,7 @@ class CriarNovoJogo extends Service
                     'presidente' => ['required'],
                     'descricao' => ['required'],
                     'rodadas' => ['required', 'int', 'min:10'],
-                    'populacao' => ['required', 'int'],
+                    'populacao' => ['int'],
                 ];
             }
         })->validate($data);
@@ -65,12 +65,12 @@ class CriarNovoJogo extends Service
         $novoJogo->descricao = $data['descricao'];
         $novoJogo->ativo = true;
         $novoJogo->rodadas = $data['rodadas'];
-        $novoJogo->pib = $data['populacao'] * config('jogo.inicio.renda_anual_pessoa');
+        $populacao = $data['populacao'] ?? config('jogo.inicio.qtd_populacao');
+        $novoJogo->pib = $populacao * config('jogo.inicio.renda_anual_pessoa');
         $novoJogo->pib_prox_ano = config('jogo.pib.previsao_anual');
         $novoJogo->pib_consumo = $novoJogo->pib * config('jogo.pib.consumo');
         $novoJogo->pib_investimento = $novoJogo->pib * config('jogo.pib.investimento');
 
-        //Informação do Brazil em 2019
         $primeiroMomento = new Momento();
         $primeiroMomento->pib = $novoJogo->pib;
         $primeiroMomento->pib_prox_ano = $novoJogo->pib_prox_ano;

@@ -35,6 +35,12 @@ class UserController extends Controller
 
     public function homeUserPage()
     {
-        return view('game.home');
+        /** @var User $user */
+        $user = Auth::user();
+        if(is_null($user->getJogoAtivo())) {
+            return view('game.novoJogo');
+        } else {
+            return view('game.home');
+        }
     }
 }
