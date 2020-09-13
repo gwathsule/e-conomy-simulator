@@ -34,6 +34,9 @@
                             <img src="{{asset('img/resources/icon-perfil.png')}}" width="30">
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{url('logout')}}" class="nav-link text-nav mr-3 ml-2">X</a>
+                    </li>
                 </ul>
             </div>
         </div>
