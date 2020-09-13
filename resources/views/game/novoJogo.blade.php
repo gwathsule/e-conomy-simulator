@@ -168,7 +168,6 @@
         <div class="form-row mb-4 justify-content-center">
             <button class="btn btn-block bg-botoes col-4 mx-auto mt-4 mb-4 p-2 text-menu text-center" type="submit">PRONTO!</button>
         </div>
-        <div class="num"></div>
     </form><!-- Fim FORM -->
 
 

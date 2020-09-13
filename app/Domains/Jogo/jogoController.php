@@ -3,11 +3,13 @@
 namespace App\Domains\Jogo;
 
 use App\Domains\Jogo\Services\CriarNovoJogo;
+use App\Domains\User\User;
 use App\Http\Controllers\Controller;
 use App\Support\Exceptions\InternalErrorException;
 use App\Support\Exceptions\ValidationException;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class jogoController extends Controller
 {
@@ -35,4 +37,20 @@ class jogoController extends Controller
             return $this->returnWithException(new InternalErrorException(__('internal-error')));
         }
     }
+
+    public function perfilJogoPage()
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $jogo = $user->getJogoAtivo();
+        if(is_null($jogo)) {
+            return view('game.novoJogo');
+        } else {
+            return view('game.perfil')->with([
+                'jogo' => $jogo,
+                'user' => $user,
+            ]);
+        }
+    }
+
 }

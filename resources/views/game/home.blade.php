@@ -30,7 +30,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-nav mr-3 ml-2">MEU PERFIL
+                        <a href="{{route('jogo-perfil')}}" class="nav-link text-nav mr-3 ml-2">MEU PERFIL
                             <img src="{{asset('img/resources/icon-perfil.png')}}" width="30">
                         </a>
                     </li>
