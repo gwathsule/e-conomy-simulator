@@ -38,99 +38,99 @@
         </div>
     </div>
 
-    <div class="row justify-content-center mt-4"><!-- Inicio SELECAO DE PERSONAGEM -->
-
-        <div id="carouselpf" class="carousel slide p-2 col-2" data-ride="carousel" >
-            <ol class="carousel-indicators m-0">
-                <li data-target="#carouselpf" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselpf" data-slide-to="1"></li>
-                <li data-target="#carouselpf" data-slide-to="2"></li>
-                <li data-target="#carouselpf" data-slide-to="3"></li>
-                <li data-target="#carouselpf" data-slide-to="4"></li>
-                <li data-target="#carouselpf" data-slide-to="5"></li>
-            </ol>
-
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="{{asset('img/resources/pf01.png')}}" alt="Personagem F um">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="{{asset('img/resources/pf02.png')}}" alt="Personagem F dois">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100"  src="{{asset('img/resources/pf03.png')}}" alt="Personagem F tres">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="{{asset('img/resources/pf04.png')}}" alt="Personagem F quatro">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="{{asset('img/resources/pf05.png')}}" alt="Personagem F cinco">
-                </div>
-            </div>
-
-            <a class="carousel-control-prev" href="#carouselpf" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselpf" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Próximo</span>
-            </a>
-        </div>
-
-        <div id="carouselpm" class="carousel slide p-2 col-2" data-ride="carousel" >
-            <ol class="carousel-indicators m-0">
-                <li data-target="#carouselpm" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselpm" data-slide-to="1"></li>
-                <li data-target="#carouselpm" data-slide-to="2"></li>
-                <li data-target="#carouselpm" data-slide-to="3"></li>
-                <li data-target="#carouselpm" data-slide-to="4"></li>
-                <li data-target="#carouselpm" data-slide-to="5"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="{{asset('img/resources/pm01.png')}}" alt="Personagem M um">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="{{asset('img/resources/pm02.png')}}" alt="Personagem M dois">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="{{asset('img/resources/pm03.png')}}" alt="Personagem M tres">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="{{asset('img/resources/pm04.png')}}" alt="Personagem M quatro">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="{{asset('img/resources/pm05.png')}}" alt="Personagem M cinco">
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselpm" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselpm" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Próximo</span>
-            </a>
-        </div>
-    </div><!-- Fim SELECAO DE PERSONAGEM -->
-
-
-    <div class="row justify-content-center mb-2"><!-- Inicio SELECAO DE SEXO -->
-
-        <div class="custom-control custom-radio custom-control-inline col-2 justify-content-center m-0" >
-            <input type="radio" class="custom-control-input" id="selecao-sexo-f" name="inlineDefaultRadiosExample">
-            <label class="custom-control-label text-form01" style="cursor: pointer;" for="selecao-sexo-f">MINISTRA</label>
-        </div>
-
-        <div class="custom-control custom-radio custom-control-inline col-2 justify-content-center m-0">
-            <input type="radio" class="custom-control-input" id="selecao-sexo-m" name="inlineDefaultRadiosExample">
-            <label class="custom-control-label text-form01" style="cursor: pointer;"  for="selecao-sexo-m">MINISTRO</label>
-        </div>
-    </div><!-- Fim SELECAO DE SEXO -->
-
     <form class="pt-4" method="post" action="{{route('novo-jogo')}}"><!-- Inicio FORM -->
         @csrf
+        <div class="row justify-content-center mt-4"><!-- Inicio SELECAO DE PERSONAGEM -->
+
+            <div id="carouselpf" class="carousel slide p-2 col-2" data-ride="carousel" >
+                <ol class="carousel-indicators m-0">
+                    <li data-target="#carouselpf" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselpf" data-slide-to="1"></li>
+                    <li data-target="#carouselpf" data-slide-to="2"></li>
+                    <li data-target="#carouselpf" data-slide-to="3"></li>
+                    <li data-target="#carouselpf" data-slide-to="4"></li>
+                </ol>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="{{\App\Domains\Jogo\Personagem::getPersonagem(\App\Domains\Jogo\Personagem::MINISTRA_0)}}" alt="Personagem F um">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{{\App\Domains\Jogo\Personagem::getPersonagem(\App\Domains\Jogo\Personagem::MINISTRA_1)}}" alt="Personagem F dois">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100"  src="{{\App\Domains\Jogo\Personagem::getPersonagem(\App\Domains\Jogo\Personagem::MINISTRA_2)}}" alt="Personagem F tres">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{{\App\Domains\Jogo\Personagem::getPersonagem(\App\Domains\Jogo\Personagem::MINISTRA_3)}}" alt="Personagem F quatro">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{{\App\Domains\Jogo\Personagem::getPersonagem(\App\Domains\Jogo\Personagem::MINISTRA_4)}}" alt="Personagem F cinco">
+                    </div>
+                </div>
+
+                <a class="carousel-control-prev" href="#carouselpf" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselpf" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Próximo</span>
+                </a>
+            </div>
+            <input type="hidden" name="index_pf" id="index_pf" value="0">
+
+            <div id="carouselpm" class="carousel slide p-2 col-2" data-ride="carousel" >
+                <ol class="carousel-indicators m-0">
+                    <li data-target="#carouselpm" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselpm" data-slide-to="1"></li>
+                    <li data-target="#carouselpm" data-slide-to="2"></li>
+                    <li data-target="#carouselpm" data-slide-to="3"></li>
+                    <li data-target="#carouselpm" data-slide-to="4"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="{{\App\Domains\Jogo\Personagem::getPersonagem(\App\Domains\Jogo\Personagem::MINISTRO_0)}}" alt="Personagem M um">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{{\App\Domains\Jogo\Personagem::getPersonagem(\App\Domains\Jogo\Personagem::MINISTRO_1)}}" alt="Personagem M dois">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{{\App\Domains\Jogo\Personagem::getPersonagem(\App\Domains\Jogo\Personagem::MINISTRO_2)}}" alt="Personagem M tres">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{{\App\Domains\Jogo\Personagem::getPersonagem(\App\Domains\Jogo\Personagem::MINISTRO_3)}}" alt="Personagem M quatro">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="{{\App\Domains\Jogo\Personagem::getPersonagem(\App\Domains\Jogo\Personagem::MINISTRO_4)}}" alt="Personagem M cinco">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselpm" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselpm" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Próximo</span>
+                </a>
+            </div>
+            <input type="hidden" name="index_pm" id="index_pm" value="0">
+        </div><!-- Fim SELECAO DE PERSONAGEM -->
+
+
+        <div class="row justify-content-center mb-2"><!-- Inicio SELECAO DE SEXO -->
+
+            <div class="custom-control custom-radio custom-control-inline col-2 justify-content-center m-0" >
+                <input type="radio" name="genero" class="custom-control-input" id="selecao-sexo-f" value="F" checked>
+                <label class="custom-control-label text-form01" style="cursor: pointer;" for="selecao-sexo-f">MINISTRA</label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline col-2 justify-content-center m-0">
+                <input type="radio" name="genero" class="custom-control-input" id="selecao-sexo-m"  value="M">
+                <label class="custom-control-label text-form01" style="cursor: pointer;"  for="selecao-sexo-m">MINISTRO</label>
+            </div>
+        </div><!-- Fim SELECAO DE SEXO -->
+
         <div class="form-row mb-4 justify-content-center">
             <div class="col-3">
                 <label for="pais"><p class="text-form01 mb-0">PAÍS</p></label>
@@ -168,6 +168,7 @@
         <div class="form-row mb-4 justify-content-center">
             <button class="btn btn-block bg-botoes col-4 mx-auto mt-4 mb-4 p-2 text-menu text-center" type="submit">PRONTO!</button>
         </div>
+        <div class="num"></div>
     </form><!-- Fim FORM -->
 
 
@@ -188,6 +189,12 @@
     $('.carousel').carousel({
         interval: 0
     });
+    $('#carouselpm').on('slid.bs.carousel', function () {
+        document.getElementById("index_pm").value = $('#carouselpm div.active').index();
+    })
+    $('#carouselpf').on('slid.bs.carousel', function () {
+        document.getElementById("index_pf").value = $('#carouselpf div.active').index();
+    })
 </script>
 </body>
 </html>

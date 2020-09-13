@@ -15,6 +15,7 @@ use App\Support\Service;
 use App\Support\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class CriarNovoJogo extends Service
 {
@@ -42,12 +43,14 @@ class CriarNovoJogo extends Service
             public function rules()
             {
                 return [
-                    'pais' => ['required'],
-                    'moeda' => ['required'],
-                    'ministro' => ['required'],
-                    'presidente' => ['required'],
-                    'descricao' => ['required'],
-                    'rodadas' => ['required', 'int', 'min:10'],
+                    'pais' => ['required', 'string'],
+                    'moeda' => ['required', 'string'],
+                    'ministro' => ['required', 'string'],
+                    'genero' => ['required', 'string', 'max:1', Rule::in(['M', 'F'])],
+                    'personagem' => ['required', 'int'],
+                    'presidente' => ['required', 'string'],
+                    'descricao' => ['required', 'string'],
+                    'rodadas' => ['required', 'int', 'min:12'],
                     'populacao' => ['int'],
                 ];
             }
@@ -63,6 +66,8 @@ class CriarNovoJogo extends Service
         $novoJogo->ministro = $data['ministro'];
         $novoJogo->presidente = $data['presidente'];
         $novoJogo->descricao = $data['descricao'];
+        $novoJogo->genero = $data['genero'];
+        $novoJogo->personagem = $data['personagem'];
         $novoJogo->ativo = true;
         $novoJogo->rodadas = $data['rodadas'];
         $populacao = $data['populacao'] ?? config('jogo.inicio.qtd_populacao');

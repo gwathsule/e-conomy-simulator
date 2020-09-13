@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Collection;
  * @property int $id
  * @property string $pais
  * @property string $presidente
+ * @property string $genero
+ * @property int $personagem
  * @property string $ministro
  * @property string $moeda
  * @property string $descricao
