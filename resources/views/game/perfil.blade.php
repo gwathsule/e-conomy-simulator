@@ -89,7 +89,9 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-block bg-botoes col-4 mx-auto mt-4 mb-4 p-2 text-menu text-center" type="submit">Altear informações</button>
+    <a href="{{route('alterar-jogo')}}">
+        <button class="btn btn-block bg-botoes col-4 mx-auto mt-4 mb-4 p-2 text-menu text-center">Altear informações</button>
+    </a>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

@@ -2,6 +2,7 @@
 
 namespace App\Domains\Jogo;
 
+use App\Domains\Jogo\Services\AlterarJogo;
 use App\Domains\Jogo\Services\CriarNovoJogo;
 use App\Domains\User\User;
 use App\Http\Controllers\Controller;
@@ -30,10 +31,36 @@ class jogoController extends Controller
                 'jogo' => $jogo
             ]);
         }catch (ValidationException $ex){
-            dd($ex->getMessage());
             return $this->returnWithException($ex)->withInput();
         }catch (Exception $ex){
-            dd($ex->getMessage());
+            return $this->returnWithException(new InternalErrorException(__('internal-error')));
+        }
+    }
+
+    public function alterarJogo(Request $request)
+    {
+        try {
+            $dataService = $request->toArray();
+            /** @var User $user */
+            $user = Auth::user();
+            $jogo = $user->getJogoAtivo();
+            $dataService['id'] = $jogo->id;
+            if($dataService['genero'] == 'M') {
+                $dataService['personagem'] = $dataService['index_pm'];
+            } else {
+                $dataService['personagem'] = $dataService['index_pf'] + 5;
+            }
+            /** @var CriarNovoJogo $servico */
+            $servico = app()->make(AlterarJogo::class);
+            /** @var Jogo $game */
+            $jogo = $servico->handle($dataService);
+            return view('game.perfil')->with([
+                'jogo' => $jogo,
+                'user' => $user,
+            ]);
+        }catch (ValidationException $ex){
+            return $this->returnWithException($ex)->withInput();
+        }catch (Exception $ex){
             return $this->returnWithException(new InternalErrorException(__('internal-error')));
         }
     }
@@ -53,4 +80,18 @@ class jogoController extends Controller
         }
     }
 
+    public function alterarJogoPage()
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $jogo = $user->getJogoAtivo();
+        if(is_null($jogo)) {
+            return view('game.novoJogo');
+        } else {
+            return view('game.alterarJogo')->with([
+                'jogo' => $jogo,
+                'user' => $user,
+            ]);
+        }
+    }
 }
