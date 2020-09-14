@@ -8,6 +8,6 @@ O **E-Conomy Simulator** é um jogo de simulação, que irá representar a econo
 O sistema faz parte do trabalho de Conclusão de curso dos alunos [Rafael](https://github.com/gwathsule) e [Kassio](https://github.com/kassioschaider "Kassio"), o front foi desenhado e desenvolvido por Lynn (Por achar que o front anterior era considerado feio esteticamente).
 </p>
 
-"./bin up -d" - levanta os conteiners
-"./bin php artisan migrate" - monta o banco de dados
-"./bin php artisan db:seed" - cadastra dois usuários: admin e normal
+<p align="left">"./bin up -d" - levanta os conteiners</p>
+<p align="left">"./bin php artisan migrate" - monta o banco de dados</p>
+<p align="left">"./bin php artisan db:seed" - cadastra dois usuários: admin e normal</p>
