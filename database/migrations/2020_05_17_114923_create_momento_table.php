@@ -20,8 +20,11 @@ class CreateMomentoTable extends Migration
             $table->unsignedInteger('rodada')->nullable();
             $table->decimal('pib_prox_ano', 4, 4, true)->nullable();
             $table->decimal('pib', 13, 2, true)->nullable();
-            $table->decimal('pib_consumo', 13, 2, true)->nullable();
-            $table->decimal('pib_investimento', 13, 2, true)->nullable();
+            $table->decimal('consumo', 13, 2, true)->nullable();
+            $table->decimal('investimento', 13, 2, true)->nullable();
+            $table->decimal('gastos_governamentais', 13, 2, true)->nullable();
+            $table->decimal('transferencias', 13, 2, true)->nullable();
+            $table->decimal('impostos', 13, 2, true)->nullable();
             $table->unsignedBigInteger('jogo_id');
             $table->foreign('jogo_id')
                 ->references('id')

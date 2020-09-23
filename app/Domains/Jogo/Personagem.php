@@ -16,6 +16,19 @@ class Personagem
     public const MINISTRA_3 = 8;
     public const MINISTRA_4 = 9;
 
+    public const ALL = [
+        self::MINISTRO_0,
+        self::MINISTRO_1,
+        self::MINISTRO_2,
+        self::MINISTRO_3,
+        self::MINISTRO_4,
+        self::MINISTRA_0,
+        self::MINISTRA_1,
+        self::MINISTRA_2,
+        self::MINISTRA_3,
+        self::MINISTRA_4,
+    ];
+
     public static function getPersonagem(int $code)
     {
         $url = null;

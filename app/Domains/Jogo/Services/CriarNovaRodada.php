@@ -92,8 +92,8 @@ class CriarNovaRodada extends Service
         $momento->medidas = $data['medidas'];
         $momento->pib = $jogo->pib;
         $momento->pib_prox_ano = $jogo->pib_prox_ano;
-        $momento->pib_consumo = $jogo->pib_consumo;
-        $momento->pib_investimento = $jogo->pib_investimento;
+        $momento->consumo = $jogo->consumo;
+        $momento->investimento = $jogo->investimento;
         $momento->rodada = $jogo->momentos->count();
         $this->momentoRepository->save($momento);
         return $jogo;

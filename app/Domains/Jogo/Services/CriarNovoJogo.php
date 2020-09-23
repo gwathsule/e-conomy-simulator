@@ -19,6 +19,16 @@ use Illuminate\Validation\Rule;
 
 class CriarNovoJogo extends Service
 {
+    private const POPULACAO = 100000;
+    private const RENDA_ANUAL_PESSOA = 1200;
+    private const PREVISAO_ANUAL = 0.03;
+    private const PIB = self::POPULACAO * self::RENDA_ANUAL_PESSOA;
+    private const CONSUMO = self::PIB * 0.40;
+    private const INVESTIMENTO = self::PIB * 0.2;
+    private const GASTOS_GOVERNAMENTAIS = self::PIB * 0.2;
+    private const TRANSFERENCIAS = self::PIB * 0.1;
+    private const IMPOSTOS = self::PIB * 0.1;
+
     /**
      * @var JogoRepository
      */
@@ -51,7 +61,6 @@ class CriarNovoJogo extends Service
                     'presidente' => ['required', 'string'],
                     'descricao' => ['required', 'string'],
                     'rodadas' => ['required', 'int', 'min:12'],
-                    'populacao' => ['int'],
                 ];
             }
         })->validate($data);
@@ -70,17 +79,23 @@ class CriarNovoJogo extends Service
         $novoJogo->personagem = $data['personagem'];
         $novoJogo->ativo = true;
         $novoJogo->rodadas = $data['rodadas'];
-        $populacao = $data['populacao'] ?? config('jogo.inicio.qtd_populacao');
-        $novoJogo->pib = $populacao * config('jogo.inicio.renda_anual_pessoa');
-        $novoJogo->pib_prox_ano = config('jogo.pib.previsao_anual');
-        $novoJogo->pib_consumo = $novoJogo->pib * config('jogo.pib.consumo');
-        $novoJogo->pib_investimento = $novoJogo->pib * config('jogo.pib.investimento');
+        $novoJogo->populacao = self::POPULACAO;
+        $novoJogo->pib = self::PIB;
+        $novoJogo->pib_prox_ano = self::PREVISAO_ANUAL;
+        $novoJogo->consumo = self::CONSUMO;
+        $novoJogo->investimento = self::INVESTIMENTO;
+        $novoJogo->gastos_governamentais = self::GASTOS_GOVERNAMENTAIS;
+        $novoJogo->transferencias = self::TRANSFERENCIAS;
+        $novoJogo->impostos = self::IMPOSTOS;
 
         $primeiroMomento = new Momento();
         $primeiroMomento->pib = $novoJogo->pib;
         $primeiroMomento->pib_prox_ano = $novoJogo->pib_prox_ano;
-        $primeiroMomento->pib_consumo = $novoJogo->pib_consumo;
-        $primeiroMomento->pib_investimento = $novoJogo->pib_investimento;
+        $primeiroMomento->consumo = $novoJogo->consumo;
+        $primeiroMomento->investimento = $novoJogo->investimento;
+        $primeiroMomento->gastos_governamentais = $novoJogo->gastos_governamentais;
+        $primeiroMomento->transferencias = $novoJogo->transferencias;
+        $primeiroMomento->impostos = $novoJogo->impostos;
         $primeiroMomento->medidas = [];
         $primeiroMomento->noticias = $this->noticiasIniciais();
         $primeiroMomento->rodada = 0;

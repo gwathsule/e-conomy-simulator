@@ -15,6 +15,8 @@ $factory->define(Jogo::class, function (Faker $faker) {
         'ministro' => $faker->name,
         'moeda' => $faker->currencyCode,
         'descricao' => $faker->colorName,
+        'genero' => $faker->randomElement(['M', 'F']),
+        'personagem' => $faker->randomElement(\App\Domains\Jogo\Personagem::ALL),
         'ativo' => true,
         'rodadas' => 12,
         'populacao' => $populacao,

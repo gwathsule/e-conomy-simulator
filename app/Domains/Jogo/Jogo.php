@@ -22,8 +22,11 @@ use Illuminate\Database\Eloquent\Collection;
  * @property int $populacao
  * @property float $pib
  * @property float $pib_prox_ano
- * @property float $pib_consumo
- * @property float $pib_investimento
+ * @property float $consumo
+ * @property float $investimento
+ * @property float $gastos_governamentais
+ * @property float $transferencias
+ * @property float $impostos
  * @property int $user_id
  * @property User $user
  * @property Collection $momentos

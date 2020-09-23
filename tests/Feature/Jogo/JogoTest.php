@@ -25,10 +25,11 @@ class JogoTest extends TestCase
             'pais' => $dadosNovoJogo->pais,
             'moeda' => $dadosNovoJogo->moeda,
             'ministro' => $dadosNovoJogo->ministro,
+            'genero' => $dadosNovoJogo->genero,
+            'personagem' => $dadosNovoJogo->personagem,
             'presidente' => $dadosNovoJogo->presidente,
             'descricao' => $dadosNovoJogo->descricao,
             'rodadas' => $dadosNovoJogo->rodadas,
-            'populacao' => $dadosNovoJogo->populacao,
         ];
         Auth::login(factory(User::class)->create());
         /** @var CriarNovoJogo $servico */
@@ -42,20 +43,19 @@ class JogoTest extends TestCase
         $this->assertEquals($dadosNovoJogo->presidente, $jogo->presidente);
         $this->assertEquals($dadosNovoJogo->descricao, $jogo->descricao);
         $this->assertEquals($dadosNovoJogo->rodadas, $jogo->rodadas);
-        $this->assertEquals($data['populacao'] * config('jogo.inicio.renda_anual_pessoa'), $jogo->pib);
-        $this->assertEquals(config('jogo.pib.previsao_anual'), $jogo->pib_prox_ano);
-        $this->assertEquals($dadosNovoJogo->pib * config('jogo.pib.consumo'), $jogo->pib_consumo);
-        $this->assertEquals($dadosNovoJogo->pib * config('jogo.pib.investimento'), $jogo->pib_investimento);
         $this->assertCount(1, $jogo->momentos);
-        $this->assertCount(1, $jogo->eventos);
+        $this->assertCount(2, $jogo->eventos);
         /** @var Momento $primeiraRodada */
         $primeiraRodada = $jogo->momentos()->first();
         $this->assertEquals($jogo->id, $primeiraRodada->jogo_id);
         $this->assertEquals(0, $primeiraRodada->rodada);
         $this->assertEquals($jogo->pib, $primeiraRodada->pib);
         $this->assertEquals($jogo->pib_prox_ano, $primeiraRodada->pib_prox_ano);
-        $this->assertEquals($jogo->pib_consumo, $primeiraRodada->pib_consumo);
-        $this->assertEquals($jogo->pib_investimento, $primeiraRodada->pib_investimento);
+        $this->assertEquals($jogo->consumo, $primeiraRodada->consumo);
+        $this->assertEquals($jogo->investimento, $primeiraRodada->investimento);
+        $this->assertEquals($jogo->gastos_governamentais, $primeiraRodada->gastos_governamentais);
+        $this->assertEquals($jogo->transferencias, $primeiraRodada->transferencias);
+        $this->assertEquals($jogo->impostos, $primeiraRodada->impostos);
         $this->assertEquals([], $primeiraRodada->medidas);
         $this->assertEquals([], $primeiraRodada->noticias);
         /** @var Evento $eventoInicialPib */
@@ -114,10 +114,11 @@ class JogoTest extends TestCase
             'pais' => $dadosNovoJogo->pais,
             'moeda' => $dadosNovoJogo->moeda,
             'ministro' => $dadosNovoJogo->ministro,
+            'genero' => $dadosNovoJogo->genero,
+            'personagem' => $dadosNovoJogo->personagem,
             'presidente' => $dadosNovoJogo->presidente,
             'descricao' => $dadosNovoJogo->descricao,
             'rodadas' => $dadosNovoJogo->rodadas,
-            'populacao' => $dadosNovoJogo->populacao,
         ];
         Auth::login($user);
         /** @var CriarNovoJogo $servico */

@@ -10,8 +10,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $rodada
  * @property float $pib
  * @property float $pib_prox_ano
- * @property float $pib_consumo
- * @property float $pib_investimento
+ * @property float $consumo
+ * @property float $investimento
+ * @property float $gastos_governamentais
+ * @property float $transferencias
+ * @property float $impostos
  * @property array $medidas
  * @property array $noticias
  */
