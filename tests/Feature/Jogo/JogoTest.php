@@ -4,7 +4,6 @@ namespace Jogo;
 
 use App\Domains\Evento\Evento;
 use App\Domains\Evento\Eventos\CalcularPrevisaoAnualPIB;
-use App\Domains\Evento\Eventos\FazerTransferenciaGeral;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\Services\CriarNovaRodada;
 use App\Domains\Jogo\Services\CriarNovoJogo;
@@ -12,11 +11,12 @@ use App\Domains\Momento\Momento;
 use App\Domains\User\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
+use Tests\Support\TarefasBasicasDoJogo;
 use Tests\TestCase;
 
 class JogoTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, TarefasBasicasDoJogo;
 
     public function testCriarNovoJogo()
     {
@@ -99,60 +99,5 @@ class JogoTest extends TestCase
         $this->assertCount(1, $jogo->momentos[9]->noticias);
         $this->assertCount(2, $jogo->momentos[12]->noticias);
         $this->assertNotEquals($jogo->momentos[1]->pib, $jogo->momentos[13]->pib);
-    }
-
-    public function testFazerTransferenciaGeral()
-    {
-        /** @var User $user */
-        $user = factory(User::class)->create();
-        $jogo = $this->iniciarjogo($user);
-        $data = [
-            'jogo_id' => $jogo->id,
-            'medidas' => [
-                [
-                    'data' => ['transferencia' => 10000],
-                    'code' => FazerTransferenciaGeral::CODE,
-                ]
-            ],
-        ];
-
-        $transferencia_antiga = $jogo->transferencias;
-        $imposto_antigo = $jogo->impostos;
-
-        /** @var CriarNovaRodada $servico */
-        $servico = app()->make(CriarNovaRodada::class);
-        $servico->handle($data);
-        $jogo->refresh();
-
-        $this->assertEquals($transferencia_antiga + 10000, $jogo->transferencias);
-        $this->assertEquals($imposto_antigo - 10000, $jogo->impostos);
-    }
-
-
-    /**
-     * @param User $user
-     * @return Jogo
-     * @throws \App\Support\Exceptions\ValidationException
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    private function iniciarjogo(User $user)
-    {
-        /** @var Jogo $dadosNovoJogo */
-        $dadosNovoJogo = factory(Jogo::class)->make(['user_id' => null]);
-        $data = [
-            'pais' => $dadosNovoJogo->pais,
-            'moeda' => $dadosNovoJogo->moeda,
-            'ministro' => $dadosNovoJogo->ministro,
-            'genero' => $dadosNovoJogo->genero,
-            'personagem' => $dadosNovoJogo->personagem,
-            'presidente' => $dadosNovoJogo->presidente,
-            'descricao' => $dadosNovoJogo->descricao,
-            'rodadas' => $dadosNovoJogo->rodadas,
-        ];
-        Auth::login($user);
-        /** @var CriarNovoJogo $servico */
-        $servico = app()->make(CriarNovoJogo::class);
-        /** @var Jogo $jogo */
-        return $servico->handle($data);
     }
 }
