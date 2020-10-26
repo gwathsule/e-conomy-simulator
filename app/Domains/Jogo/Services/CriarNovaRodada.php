@@ -6,6 +6,7 @@ use App\Domains\Evento\Evento;
 use App\Domains\Evento\EventoRepository;
 use App\Domains\Evento\Eventos\CalcularPibAnual;
 use App\Domains\Evento\Eventos\CalcularPrevisaoAnualPIB;
+use App\Domains\Evento\Eventos\FazerTransferenciaGeral;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
 use App\Domains\Momento\Momento;
@@ -128,6 +129,8 @@ class CriarNovaRodada extends Service
                     $medida['code'],
                     $jogoId
                 );
+            case FazerTransferenciaGeral::CODE:
+                return (new FazerTransferenciaGeral())->modificacoes($jogo, $medida['data']);
             default:
                 return null;
         }

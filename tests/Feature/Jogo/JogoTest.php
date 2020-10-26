@@ -4,6 +4,7 @@ namespace Jogo;
 
 use App\Domains\Evento\Evento;
 use App\Domains\Evento\Eventos\CalcularPrevisaoAnualPIB;
+use App\Domains\Evento\Eventos\FazerTransferenciaGeral;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\Services\CriarNovaRodada;
 use App\Domains\Jogo\Services\CriarNovoJogo;
@@ -99,6 +100,34 @@ class JogoTest extends TestCase
         $this->assertCount(2, $jogo->momentos[12]->noticias);
         $this->assertNotEquals($jogo->momentos[1]->pib, $jogo->momentos[13]->pib);
     }
+
+    public function testFazerTransferenciaGeral()
+    {
+        /** @var User $user */
+        $user = factory(User::class)->create();
+        $jogo = $this->iniciarjogo($user);
+        $data = [
+            'jogo_id' => $jogo->id,
+            'medidas' => [
+                [
+                    'data' => ['transferencia' => 10000],
+                    'code' => FazerTransferenciaGeral::CODE,
+                ]
+            ],
+        ];
+
+        $transferencia_antiga = $jogo->transferencias;
+        $imposto_antigo = $jogo->impostos;
+
+        /** @var CriarNovaRodada $servico */
+        $servico = app()->make(CriarNovaRodada::class);
+        $servico->handle($data);
+        $jogo->refresh();
+
+        $this->assertEquals($transferencia_antiga + 10000, $jogo->transferencias);
+        $this->assertEquals($imposto_antigo - 10000, $jogo->impostos);
+    }
+
 
     /**
      * @param User $user
