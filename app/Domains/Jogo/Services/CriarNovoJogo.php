@@ -20,16 +20,18 @@ use Illuminate\Validation\Rule;
 class CriarNovoJogo extends Service
 {
     private const POPULACAO = 100000;
-    private const RENDA_ANUAL_PESSOA = 1200;
+    private const PIB_PER_CAPITA = 1200;
     private const PREVISAO_ANUAL = 0.03;
-    private const PIB = self::POPULACAO * self::RENDA_ANUAL_PESSOA;
-    private const CONSUMO = self::PIB * 0.35;
-    private const INVESTIMENTO = self::PIB * 0.24;
-    private const GASTOS_GOVERNAMENTAIS = self::PIB * 0.15;
-    private const TRANSFERENCIAS = self::PIB * 0.05;
-    private const IMPOSTOS = self::PIB * 0.21;
-    //  DEFINIR CAIXA ANUAL DO GOVERNO, NA FORMA DE PREVISÃO
-    //  CALCULAR BS E RETORNAR PARA O FRONT EM FORMA NOTÍCIA
+    private const PIB = self::POPULACAO * self::PIB_PER_CAPITA;
+
+    private const CONSUMO = self::PIB * 0.60;
+    private const INVESTIMENTO = self::PIB * 0.15;
+    private const IMPOSTOS = self::PIB * 0.25;
+
+    private const GASTOS_GOVERNAMENTAIS = self::IMPOSTO * 0.80; //80% do imposto arrecadado
+    private const TRANSFERENCIAS = self::IMPOSTO * 0.20; //20% do imposto arrecadado
+
+    private const BS = self::IMPOSTOS - self::TRANSFERENCIAS - self::GASTOS_GOVERNAMENTAIS;
 
     /**
      * @var JogoRepository

@@ -13,12 +13,12 @@ class CalcularPrevisaoAnualPIB extends Evento
 {
     public const RODADAS = 3;
     public const CODE = 'calcular_previsao_anual';
+    private const PIB_MODULO_VARIACAO = 0.01; //módulo (x2) da margem de variação do PIB (0,5%)
+    private const PIB_PREVISAO_VARIACAO = 0.025; //previsão de 3% subtraindo variação (resultando em 2,5%)
 
     public function modificacoes(Jogo $jogo, array $data): array
     {
-        $variacao = config('jogo.pib.previsao_variacao');
-        $modulo = config('jogo.pib.variacao_previsao_pib_modulo');
-        $previsao = $variacao + ($this->aleatorio() * $modulo);
+        $previsao = self::PIB_PREVISAO_VARIACAO + ($this->aleatorioZeroAUm() * self::PIB_MODULO_VARIACAO);
         $jogo->pib_prox_ano = $previsao;
         (new JogoRepository())->update($jogo);
         //cria um novo evento
@@ -35,7 +35,7 @@ class CalcularPrevisaoAnualPIB extends Evento
         return $noticia->buidDataNoticia();
     }
 
-    private function aleatorio() {
+    private function aleatorioZeroAUm() {
         return (0.1 + lcg_value()*(abs(0.99 - 0.1)));
     }
 
