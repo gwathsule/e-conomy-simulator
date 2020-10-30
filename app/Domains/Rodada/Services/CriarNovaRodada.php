@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Domains\Jogo\Services;
+
+namespace App\Domains\Rodada\Services;
+
 
 use App\Domains\Evento\Evento;
 use App\Domains\Evento\EventoRepository;
 use App\Domains\Evento\Eventos\CalcularPibAnual;
 use App\Domains\Evento\Eventos\CalcularPrevisaoAnualPIB;
-use App\Domains\Evento\Eventos\FazerTransferenciaGeral;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
 use App\Domains\Rodada\Rodada;
@@ -15,6 +16,7 @@ use App\Support\Service;
 use App\Support\Validator;
 use Exception;
 use Illuminate\Support\Facades\DB;
+
 
 class CriarNovaRodada extends Service
 {
@@ -153,8 +155,6 @@ class CriarNovaRodada extends Service
                     $medida['code'],
                     $rodada->jogo_id
                 );
-            case FazerTransferenciaGeral::CODE:
-                return (new FazerTransferenciaGeral())->modificacoes($rodada, $medida['data']);
             default:
                 return null;
         }
