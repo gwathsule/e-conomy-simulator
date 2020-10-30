@@ -4,6 +4,8 @@ namespace App\Domains\Evento\Eventos;
 
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
+use App\Domains\Rodada\Rodada;
+use App\Domains\Rodada\RodadaRepository;
 use App\Support\Evento;
 use App\Domains\Evento\Noticias\FazerTransferenciaGeralNoticia;
 
@@ -27,17 +29,17 @@ class FazerTransferenciaGeral extends Evento
         return self::RODADAS;
     }
 
-    public function modificacoes(Jogo $jogo, array $data): array
+    public function modificacoes(Rodada $rodada, array $data): array
     {
-        $jogo->impostos -= $data['transferencia'];
-        $jogo->transferencias += $data['transferencia'];
+        $rodada->impostos -= $data['transferencia'];
+        $rodada->transferencias += $data['transferencia'];
 
-        (new JogoRepository())->update($jogo);
+        (new RodadaRepository())->update($rodada);
 
         $dataNoticia = [
             'valor_transferencia' => $data['transferencia'],
-            'imposto_atual' => $jogo->impostos,
-            'transferencias_atual' => $jogo->transferencias,
+            'imposto_atual' => $rodada->impostos,
+            'transferencias_atual' => $rodada->transferencias,
         ];
         $noticia = new FazerTransferenciaGeralNoticia($dataNoticia);
         return $noticia->buidDataNoticia();

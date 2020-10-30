@@ -4,8 +4,8 @@ namespace App\Domains\Evento\Eventos;
 
 use App\Domains\Evento\EventoRepository;
 use App\Domains\Evento\Noticias\CalcularPibAnualNoticia;
-use App\Domains\Jogo\Jogo;
-use App\Domains\Jogo\JogoRepository;
+use App\Domains\Rodada\Rodada;
+use App\Domains\Rodada\RodadaRepository;
 use App\Support\Evento;
 use App\Domains\Evento\Evento as EventoModel;
 
@@ -24,16 +24,16 @@ class CalcularPibAnual extends Evento
         return self::RODADAS;
     }
 
-    public function modificacoes(Jogo $jogo, array $data): array
+    public function modificacoes(Rodada $rodada, array $data): array
     {
-        $pibAntigo = $jogo->pib;
-        $aumento = $jogo->pib_prox_ano * 100;
-        $novoPib = $jogo->pib * ($jogo->pib_prox_ano + 1);
-        $jogo->pib = $novoPib;
-        (new JogoRepository())->update($jogo);
+        $pibAntigo = $rodada->pib;
+        $aumento = $rodada->pib_prox_ano * 100;
+        $novoPib = $rodada->pib * ($rodada->pib_prox_ano + 1);
+        $rodada->pib = $novoPib;
+        (new RodadaRepository())->update($rodada);
         //cria um novo evento
         $novoEvento = new EventoModel();
-        $novoEvento->jogo_id = $jogo->id;
+        $novoEvento->jogo_id = $rodada->jogo_id;
         $novoEvento->rodadas_restantes = self::RODADAS;
         $novoEvento->code = self::CODE;
         $novoEvento->data = [];

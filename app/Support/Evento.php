@@ -2,7 +2,7 @@
 
 namespace App\Support;
 
-use App\Domains\Jogo\Jogo;
+use App\Domains\Rodada\Rodada;
 
 abstract class Evento
 {
@@ -14,9 +14,9 @@ abstract class Evento
 
     /**
      * Método a ser executado quando as rodadas do Evento chegar a 0
-     * @param Jogo $jogo
+     * @param Rodada $rodada
      * @param array $data
-     * @return Noticia
+     * @return array
      */
-    abstract public function modificacoes(Jogo $jogo, array $data) : array;
+    abstract public function modificacoes(Rodada $rodada, array $data) : array;
 }

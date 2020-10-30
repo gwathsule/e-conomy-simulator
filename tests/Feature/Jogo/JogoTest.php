@@ -2,12 +2,13 @@
 
 namespace Jogo;
 
+use App\Domains\ConfiguracoesGerais\ConfiguracoesGerais;
 use App\Domains\Evento\Evento;
 use App\Domains\Evento\Eventos\CalcularPrevisaoAnualPIB;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\Services\CriarNovaRodada;
 use App\Domains\Jogo\Services\CriarNovoJogo;
-use App\Domains\Momento\Momento;
+use App\Domains\Rodada\Rodada;
 use App\Domains\User\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,6 @@ class JogoTest extends TestCase
             'personagem' => $dadosNovoJogo->personagem,
             'presidente' => $dadosNovoJogo->presidente,
             'descricao' => $dadosNovoJogo->descricao,
-            'rodadas' => $dadosNovoJogo->rodadas,
         ];
         Auth::login(factory(User::class)->create());
         /** @var CriarNovoJogo $servico */
@@ -43,20 +43,20 @@ class JogoTest extends TestCase
         $this->assertEquals($dadosNovoJogo->ministro, $jogo->ministro);
         $this->assertEquals($dadosNovoJogo->presidente, $jogo->presidente);
         $this->assertEquals($dadosNovoJogo->descricao, $jogo->descricao);
-        $this->assertEquals($dadosNovoJogo->rodadas, $jogo->rodadas);
-        $this->assertCount(1, $jogo->momentos);
+        $this->assertEquals(ConfiguracoesGerais::QTD_RODADAS, $jogo->qtd_rodadas);
+        $this->assertCount(1, $jogo->rodadas);
         $this->assertCount(2, $jogo->eventos);
-        /** @var Momento $primeiraRodada */
-        $primeiraRodada = $jogo->momentos()->first();
+        /** @var Rodada $primeiraRodada */
+        $primeiraRodada = $jogo->rodadas()->first();
         $this->assertEquals($jogo->id, $primeiraRodada->jogo_id);
         $this->assertEquals(0, $primeiraRodada->rodada);
-        $this->assertEquals($jogo->pib, $primeiraRodada->pib);
-        $this->assertEquals($jogo->pib_prox_ano, $primeiraRodada->pib_prox_ano);
-        $this->assertEquals($jogo->consumo, $primeiraRodada->consumo);
-        $this->assertEquals($jogo->investimento, $primeiraRodada->investimento);
-        $this->assertEquals($jogo->gastos_governamentais, $primeiraRodada->gastos_governamentais);
-        $this->assertEquals($jogo->transferencias, $primeiraRodada->transferencias);
-        $this->assertEquals($jogo->impostos, $primeiraRodada->impostos);
+        $this->assertEquals(ConfiguracoesGerais::PIB_ANO_ANTERIOR, $primeiraRodada->pib);
+        $this->assertEquals(ConfiguracoesGerais::PREVISAO_ANUAL, $primeiraRodada->pib_prox_ano);
+        $this->assertEquals(ConfiguracoesGerais::CONSUMO, $primeiraRodada->consumo);
+        $this->assertEquals(ConfiguracoesGerais::INVESTIMENTO, $primeiraRodada->investimento);
+        $this->assertEquals(ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS, $primeiraRodada->gastos_governamentais);
+        $this->assertEquals(ConfiguracoesGerais::TRANSFERENCIAS, $primeiraRodada->transferencias);
+        $this->assertEquals(ConfiguracoesGerais::IMPOSTOS, $primeiraRodada->impostos);
         $this->assertEquals([], $primeiraRodada->medidas);
         $this->assertEquals([], $primeiraRodada->noticias);
         /** @var Evento $eventoInicialPib */
@@ -70,6 +70,7 @@ class JogoTest extends TestCase
     {
         /** @var User $user */
         $user = factory(User::class)->create();
+        /** @var Jogo $jogo */
         $jogo = $this->iniciarjogo($user);
         $data = [
             'jogo_id' => $jogo->id,
@@ -91,13 +92,13 @@ class JogoTest extends TestCase
         $servico->handle($data);
         $servico->handle($data);
         $jogo->refresh();
-        $this->assertCount(14, $jogo->momentos);
+        $this->assertCount(14, $jogo->rodadas);
         $this->assertCount(2, $jogo->eventos);
-        $this->assertEquals(13, $jogo->momentos->last()->rodada);
-        $this->assertCount(1, $jogo->momentos[3]->noticias);
-        $this->assertCount(1, $jogo->momentos[6]->noticias);
-        $this->assertCount(1, $jogo->momentos[9]->noticias);
-        $this->assertCount(2, $jogo->momentos[12]->noticias);
-        $this->assertNotEquals($jogo->momentos[1]->pib, $jogo->momentos[13]->pib);
+        $this->assertEquals(13, $jogo->rodadas->last()->rodada);
+        $this->assertCount(1, $jogo->rodadas[3]->noticias);
+        $this->assertCount(1, $jogo->rodadas[6]->noticias);
+        $this->assertCount(1, $jogo->rodadas[9]->noticias);
+        $this->assertCount(2, $jogo->rodadas[12]->noticias);
+        $this->assertNotEquals($jogo->rodadas[1]->pib, $jogo->rodadas[13]->pib);
     }
 }

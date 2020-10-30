@@ -4,6 +4,7 @@ namespace Eventos;
 
 use App\Domains\Evento\Eventos\FazerTransferenciaGeral;
 use App\Domains\Jogo\Services\CriarNovaRodada;
+use App\Domains\Rodada\Rodada;
 use App\Domains\User\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Support\TarefasBasicasDoJogo;
@@ -27,16 +28,19 @@ class FazerTransferenciaGeralTest extends TestCase
                 ]
             ],
         ];
-
-        $transferencia_antiga = $jogo->transferencias;
-        $imposto_antigo = $jogo->impostos;
+        /** @var Rodada $primeiraRodada */
+        $primeiraRodada = $jogo->rodadas->last();
+        $transferencia_antiga = $primeiraRodada->transferencias;
+        $imposto_antigo = $primeiraRodada->impostos;
 
         /** @var CriarNovaRodada $servico */
         $servico = app()->make(CriarNovaRodada::class);
         $servico->handle($data);
         $jogo->refresh();
+        /** @var Rodada $ultimaRodada */
+        $ultimaRodada = $jogo->rodadas->last();
 
-        $this->assertEquals($transferencia_antiga + 10000, $jogo->transferencias);
-        $this->assertEquals($imposto_antigo - 10000, $jogo->impostos);
+        $this->assertEquals($transferencia_antiga + 10000, $ultimaRodada->transferencias);
+        $this->assertEquals($imposto_antigo - 10000, $ultimaRodada->impostos);
     }
 }

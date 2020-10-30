@@ -4,8 +4,8 @@ namespace App\Domains\Evento\Eventos;
 
 use App\Domains\Evento\EventoRepository;
 use App\Domains\Evento\Noticias\PrevisaoAnualPibNoticia;
-use App\Domains\Jogo\Jogo;
-use App\Domains\Jogo\JogoRepository;
+use App\Domains\Rodada\Rodada;
+use App\Domains\Rodada\RodadaRepository;
 use App\Support\Evento;
 use App\Domains\Evento\Evento as EventoModel;
 
@@ -16,14 +16,14 @@ class CalcularPrevisaoAnualPIB extends Evento
     private const PIB_MODULO_VARIACAO = 0.01; //módulo (x2) da margem de variação do PIB (0,5%)
     private const PIB_PREVISAO_VARIACAO = 0.025; //previsão de 3% subtraindo variação (resultando em 2,5%)
 
-    public function modificacoes(Jogo $jogo, array $data): array
+    public function modificacoes(Rodada $rodada, array $data): array
     {
         $previsao = self::PIB_PREVISAO_VARIACAO + ($this->aleatorioZeroAUm() * self::PIB_MODULO_VARIACAO);
-        $jogo->pib_prox_ano = $previsao;
-        (new JogoRepository())->update($jogo);
+        $rodada->pib_prox_ano = $previsao;
+        (new RodadaRepository())->update($rodada);
         //cria um novo evento
         $novoEvento = new EventoModel();
-        $novoEvento->jogo_id = $jogo->id;
+        $novoEvento->jogo_id = $rodada->jogo_id;
         $novoEvento->rodadas_restantes = self::RODADAS;
         $novoEvento->code = self::CODE;
         $novoEvento->data = [];

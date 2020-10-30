@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Momento;
+namespace App\Domains\Rodada;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $jogo_id
  * @property int $rodada
+ * @property int $populacao
  * @property float $pib
  * @property float $pib_prox_ano
  * @property float $consumo
@@ -18,9 +19,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property array $medidas
  * @property array $noticias
  */
-class Momento extends Model
+class Rodada extends Model
 {
-    protected $table = 'momento';
+    protected $table = 'rodada';
 
     protected $casts = [
         'medidas' => 'array',

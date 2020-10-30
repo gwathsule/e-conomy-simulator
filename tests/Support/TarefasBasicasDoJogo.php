@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 trait TarefasBasicasDoJogo
 {
-    public function iniciarjogo(User $user)
+    public function iniciarjogo(User $user) : Jogo
     {
         /** @var Jogo $dadosNovoJogo */
         $dadosNovoJogo = factory(Jogo::class)->make(['user_id' => null]);
@@ -21,7 +21,7 @@ trait TarefasBasicasDoJogo
             'personagem' => $dadosNovoJogo->personagem,
             'presidente' => $dadosNovoJogo->presidente,
             'descricao' => $dadosNovoJogo->descricao,
-            'rodadas' => $dadosNovoJogo->rodadas,
+            'rodadas' => $dadosNovoJogo->qtd_rodadas,
         ];
         Auth::login($user);
         /** @var CriarNovoJogo $servico */

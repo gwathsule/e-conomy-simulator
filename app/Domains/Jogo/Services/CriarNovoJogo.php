@@ -2,14 +2,15 @@
 
 namespace App\Domains\Jogo\Services;
 
+use App\Domains\ConfiguracoesGerais\ConfiguracoesGerais;
 use App\Domains\Evento\Evento;
 use App\Domains\Evento\EventoRepository;
 use App\Domains\Evento\Eventos\CalcularPibAnual;
 use App\Domains\Evento\Eventos\CalcularPrevisaoAnualPIB;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
-use App\Domains\Momento\MomentoRepository;
-use App\Domains\Momento\Momento;
+use App\Domains\Rodada\RodadaRepository;
+use App\Domains\Rodada\Rodada;
 use App\Domains\User\User;
 use App\Support\Service;
 use App\Support\Validator;
@@ -19,36 +20,22 @@ use Illuminate\Validation\Rule;
 
 class CriarNovoJogo extends Service
 {
-    private const POPULACAO = 100000;
-    private const PIB_PER_CAPITA = 1200;
-    private const PREVISAO_ANUAL = 0.03;
-    private const PIB = self::POPULACAO * self::PIB_PER_CAPITA;
-
-    private const CONSUMO = self::PIB * 0.60;
-    private const INVESTIMENTO = self::PIB * 0.15;
-    private const IMPOSTOS = self::PIB * 0.25;
-
-    private const GASTOS_GOVERNAMENTAIS = self::IMPOSTO * 0.80; //80% do imposto arrecadado
-    private const TRANSFERENCIAS = self::IMPOSTO * 0.20; //20% do imposto arrecadado
-
-    private const BS = self::IMPOSTOS - self::TRANSFERENCIAS - self::GASTOS_GOVERNAMENTAIS;
-
     /**
      * @var JogoRepository
      */
     private $jogoRepository;
     /**
-     * @var MomentoRepository
+     * @var RodadaRepository
      */
-    private $momentoRepository;
+    private $rodadaRepository;
 
     public function __construct(
         JogoRepository $jogoRepository,
-        MomentoRepository $momentoRepository
+        RodadaRepository $rodadaRepository
     )
     {
         $this->jogoRepository = $jogoRepository;
-        $this->momentoRepository = $momentoRepository;
+        $this->rodadaRepository = $rodadaRepository;
     }
 
     public function validate(array $data)
@@ -64,7 +51,6 @@ class CriarNovoJogo extends Service
                     'personagem' => ['required', 'int'],
                     'presidente' => ['required', 'string'],
                     'descricao' => ['required', 'string'],
-                    'rodadas' => ['required', 'int', 'min:12'],
                 ];
             }
         })->validate($data);
@@ -82,29 +68,22 @@ class CriarNovoJogo extends Service
         $novoJogo->genero = $data['genero'];
         $novoJogo->personagem = $data['personagem'];
         $novoJogo->ativo = true;
-        $novoJogo->rodadas = $data['rodadas'];
-        $novoJogo->populacao = self::POPULACAO;
-        $novoJogo->pib = self::PIB;
-        $novoJogo->pib_prox_ano = self::PREVISAO_ANUAL;
-        $novoJogo->consumo = self::CONSUMO;
-        $novoJogo->investimento = self::INVESTIMENTO;
-        $novoJogo->gastos_governamentais = self::GASTOS_GOVERNAMENTAIS;
-        $novoJogo->transferencias = self::TRANSFERENCIAS;
-        $novoJogo->impostos = self::IMPOSTOS;
+        $novoJogo->qtd_rodadas = ConfiguracoesGerais::QTD_RODADAS;
 
-        $primeiroMomento = new Momento();
-        $primeiroMomento->pib = $novoJogo->pib;
-        $primeiroMomento->pib_prox_ano = $novoJogo->pib_prox_ano;
-        $primeiroMomento->consumo = $novoJogo->consumo;
-        $primeiroMomento->investimento = $novoJogo->investimento;
-        $primeiroMomento->gastos_governamentais = $novoJogo->gastos_governamentais;
-        $primeiroMomento->transferencias = $novoJogo->transferencias;
-        $primeiroMomento->impostos = $novoJogo->impostos;
-        $primeiroMomento->medidas = [];
-        $primeiroMomento->noticias = $this->noticiasIniciais();
-        $primeiroMomento->rodada = 0;
+        $primeiraRodada = new Rodada();
+        $primeiraRodada->pib = ConfiguracoesGerais::PIB_ANO_ANTERIOR;
+        $primeiraRodada->populacao = ConfiguracoesGerais::POPULACAO;
+        $primeiraRodada->pib_prox_ano = ConfiguracoesGerais::PREVISAO_ANUAL;
+        $primeiraRodada->consumo = ConfiguracoesGerais::CONSUMO;
+        $primeiraRodada->investimento = ConfiguracoesGerais::INVESTIMENTO;
+        $primeiraRodada->gastos_governamentais = ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS;
+        $primeiraRodada->transferencias = ConfiguracoesGerais::TRANSFERENCIAS;
+        $primeiraRodada->impostos = ConfiguracoesGerais::IMPOSTOS;
+        $primeiraRodada->medidas = [];
+        $primeiraRodada->noticias = $this->noticiasIniciais();
+        $primeiraRodada->rodada = 0;
 
-        DB::transaction(function () use ($data, $novoJogo, $primeiroMomento) {
+        DB::transaction(function () use ($data, $novoJogo, $primeiraRodada) {
             /** @var User $user */
             $user = Auth::user();
             //disable last game
@@ -115,8 +94,8 @@ class CriarNovoJogo extends Service
             $novoJogo->user_id = $user->id;
             $this->jogoRepository->save($novoJogo);
             $this->iniciarEventos($novoJogo);
-            $primeiroMomento->jogo_id = $novoJogo->id;
-            $this->momentoRepository->save($primeiroMomento);
+            $primeiraRodada->jogo_id = $novoJogo->id;
+            $this->rodadaRepository->save($primeiraRodada);
         });
         return $novoJogo;
     }

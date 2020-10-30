@@ -3,7 +3,7 @@
 namespace App\Domains\Jogo;
 
 use App\Domains\Evento\Evento;
-use App\Domains\Momento\Momento;
+use App\Domains\Rodada\Rodada;
 use App\Domains\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
@@ -18,18 +18,10 @@ use Illuminate\Database\Eloquent\Collection;
  * @property string $moeda
  * @property string $descricao
  * @property boolean $ativo
- * @property int $rodadas
- * @property int $populacao
- * @property float $pib
- * @property float $pib_prox_ano
- * @property float $consumo
- * @property float $investimento
- * @property float $gastos_governamentais
- * @property float $transferencias
- * @property float $impostos
+ * @property int $qtd_rodadas
  * @property int $user_id
  * @property User $user
- * @property Collection $momentos
+ * @property Collection $rodadas
  * @property Collection $eventos
  */
 class Jogo extends Model
@@ -50,9 +42,9 @@ class Jogo extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function momentos()
+    public function rodadas()
     {
-        return $this->hasMany(Momento::class);
+        return $this->hasMany(Rodada::class);
     }
 
     public function eventos()

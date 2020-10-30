@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMomentoTable extends Migration
+class CreateRodadaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateMomentoTable extends Migration
      */
     public function up()
     {
-        Schema::create('momento', function (Blueprint $table) {
+        Schema::create('rodada', function (Blueprint $table) {
             $table->id();
             $table->json('medidas')->nullable();
             $table->json('noticias')->nullable();
             $table->unsignedInteger('rodada')->nullable();
+            $table->integer('populacao')->nullable();
             $table->decimal('pib_prox_ano', 4, 4, true)->nullable();
             $table->decimal('pib', 13, 2, true)->nullable();
             $table->decimal('consumo', 13, 2, true)->nullable();
@@ -40,6 +41,6 @@ class CreateMomentoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('timeline');
+        Schema::dropIfExists('rodada');
     }
 }

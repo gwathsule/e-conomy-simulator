@@ -5,10 +5,6 @@ use App\Domains\Jogo\Jogo;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(Jogo::class, function (Faker $faker) {
-    $populacao = config('jogo.inicio.qtd_populacao');
-    $pib = $populacao * config('jogo.inicio.renda_anual_pessoa');
-    $pib_consumo = $pib * config('jogo.pib.consumo');
-    $pib_investimento = $pib * config('jogo.pib.investimento');
     return [
         'pais' => $faker->country,
         'presidente' => $faker->name,
@@ -18,12 +14,7 @@ $factory->define(Jogo::class, function (Faker $faker) {
         'genero' => $faker->randomElement(['M', 'F']),
         'personagem' => $faker->randomElement(\App\Domains\Jogo\Personagem::ALL),
         'ativo' => true,
-        'rodadas' => 12,
-        'populacao' => $populacao,
-        'pib' => $pib,
-        'pib_prox_ano' => config('jogo.pib.previsao_anual'),
-        'pib_consumo' => $pib_consumo,
-        'pib_investimento' => $pib_investimento,
+        'qtd_rodadas' => \App\Domains\ConfiguracoesGerais\ConfiguracoesGerais::QTD_RODADAS,
         'user_id' => User::query()->exists()
             ? User::all()->random()
             : factory(User::class)->create(),

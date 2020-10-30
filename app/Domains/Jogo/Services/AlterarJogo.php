@@ -4,7 +4,8 @@ namespace App\Domains\Jogo\Services;
 
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
-use App\Domains\Momento\MomentoRepository;
+use App\Domains\Rodada\RodadaRepository;
+use App\Domains\Rodada\Rodada;
 use App\Support\Service;
 use App\Support\Validator;
 use Illuminate\Validation\Rule;
@@ -16,17 +17,17 @@ class AlterarJogo extends Service
      */
     private $jogoRepository;
     /**
-     * @var MomentoRepository
+     * @var RodadaRepository
      */
-    private $momentoRepository;
+    private $rodadaRepository;
 
     public function __construct(
         JogoRepository $jogoRepository,
-        MomentoRepository $momentoRepository
+        RodadaRepository $rodadaRepository
     )
     {
         $this->jogoRepository = $jogoRepository;
-        $this->momentoRepository = $momentoRepository;
+        $this->rodadaRepository = $rodadaRepository;
     }
 
     public function validate(array $data)
@@ -59,7 +60,7 @@ class AlterarJogo extends Service
         $jogo->descricao = $data['descricao'];
         $jogo->genero = $data['genero'];
         $jogo->personagem = $data['personagem'];
-        $jogo->rodadas = $data['rodadas'];
+        $jogo->qtd_rodadas = $data['rodadas'];
         $jogo->update();
         return $jogo;
     }
