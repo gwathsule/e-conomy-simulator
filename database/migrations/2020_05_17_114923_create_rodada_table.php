@@ -22,12 +22,9 @@ class CreateRodadaTable extends Migration
             $table->decimal('pmgc', 2, 2)->nullable();
             $table->decimal('pib_previsao_anual', 2, 2)->nullable();
             $table->decimal('imposto_renda', 2, 2)->nullable();
-            $table->decimal('pib_ano_anterior', 13, 2, true)->nullable();
-            $table->decimal('consumo', 13, 2, true)->nullable();
-            $table->decimal('investimento', 13, 2, true)->nullable();
+            $table->decimal('investimentos', 13, 2, true)->nullable();
             $table->decimal('gastos_governamentais', 13, 2, true)->nullable();
             $table->decimal('transferencias', 13, 2, true)->nullable();
-            $table->decimal('impostos', 13, 2, true)->nullable();
             $table->unsignedBigInteger('jogo_id');
             $table->foreign('jogo_id')
                 ->references('id')

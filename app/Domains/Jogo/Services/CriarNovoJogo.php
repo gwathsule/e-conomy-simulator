@@ -50,7 +50,6 @@ class CriarNovoJogo extends Service
                     'genero' => ['required', 'string', 'max:1', Rule::in(['M', 'F'])],
                     'personagem' => ['required', 'int'],
                     'presidente' => ['required', 'string'],
-                    'descricao' => ['required', 'string'],
                 ];
             }
         })->validate($data);
@@ -64,22 +63,19 @@ class CriarNovoJogo extends Service
         $novoJogo->moeda = $data['moeda'];
         $novoJogo->ministro = $data['ministro'];
         $novoJogo->presidente = $data['presidente'];
-        $novoJogo->descricao = $data['descricao'];
         $novoJogo->genero = $data['genero'];
         $novoJogo->personagem = $data['personagem'];
         $novoJogo->ativo = true;
         $novoJogo->qtd_rodadas = ConfiguracoesGerais::QTD_RODADAS;
 
         $primeiraRodada = new Rodada();
-        $primeiraRodada->pib_ano_anterior = ConfiguracoesGerais::PIB_ANO_ANTERIOR;
-        $primeiraRodada->populacao = ConfiguracoesGerais::POPULACAO;
-        $primeiraRodada->pib_previsao_anual = ConfiguracoesGerais::PREVISAO_ANUAL;
-        $primeiraRodada->pmgc = ConfiguracoesGerais::PMGC;
-        $primeiraRodada->consumo = ConfiguracoesGerais::CONSUMO;
-        $primeiraRodada->investimento = ConfiguracoesGerais::INVESTIMENTO;
-        $primeiraRodada->gastos_governamentais = ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS;
-        $primeiraRodada->transferencias = ConfiguracoesGerais::TRANSFERENCIAS;
-        $primeiraRodada->impostos = ConfiguracoesGerais::IMPOSTOS;
+        $primeiraRodada->populacao = ConfiguracoesGerais::POPULACAO_INICIAL;
+        $primeiraRodada->pib_previsao_anual = ConfiguracoesGerais::PIB_PREVISAO_ANUAL_INICIAL;
+        $primeiraRodada->pmgc = ConfiguracoesGerais::PMGC_INICIAL;
+        $primeiraRodada->investimentos = ConfiguracoesGerais::INVESTIMENTOS_ANO_ANTERIOR;
+        $primeiraRodada->gastos_governamentais = ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS_ANO_ANTERIOR;
+        $primeiraRodada->imposto_renda = ConfiguracoesGerais::IMPOSTO_DE_RENDA_INICIAL;
+        $primeiraRodada->transferencias = ConfiguracoesGerais::TRANSFERENCIAS_ANO_ANTERIOR;
         $primeiraRodada->medidas = [];
         $primeiraRodada->noticias = $this->noticiasIniciais();
         $primeiraRodada->rodada = 0;

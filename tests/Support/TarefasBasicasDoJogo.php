@@ -20,7 +20,6 @@ trait TarefasBasicasDoJogo
             'genero' => $dadosNovoJogo->genero,
             'personagem' => $dadosNovoJogo->personagem,
             'presidente' => $dadosNovoJogo->presidente,
-            'descricao' => $dadosNovoJogo->descricao,
             'rodadas' => $dadosNovoJogo->qtd_rodadas,
         ];
         Auth::login($user);

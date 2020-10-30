@@ -57,7 +57,6 @@ class AlterarJogo extends Service
         $jogo->moeda = $data['moeda'];
         $jogo->ministro = $data['ministro'];
         $jogo->presidente = $data['presidente'];
-        $jogo->descricao = $data['descricao'];
         $jogo->genero = $data['genero'];
         $jogo->personagem = $data['personagem'];
         $jogo->qtd_rodadas = $data['rodadas'];

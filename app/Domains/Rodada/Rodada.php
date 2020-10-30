@@ -10,13 +10,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $rodada
  * @property int $populacao
  * @property float $pmgc
- * @property float $pib_ano_anterior
+ * @property float $imposto_renda
  * @property float $pib_previsao_anual
- * @property float $consumo
- * @property float $investimento
+ * @property float $investimentos
  * @property float $gastos_governamentais
  * @property float $transferencias
- * @property float $impostos
  * @property array $medidas
  * @property array $noticias
  */
@@ -29,43 +27,51 @@ class Rodada extends Model
         'noticias' => 'array',
     ];
 
-    public function impostos()
+    public function impostos() : float
     {
-
+        return $this->investimentos * ($this->multiplicadorKComImposto() - $this->multiplicadorKSemImposto());
     }
 
-    public function pibConsumo()
+    public function consumo() : float
     {
-
+        return ($this->investimentos * $this->multiplicadorKComImposto()) - $this->investimentos;
     }
 
-    public function pib()
+    public function pib() : float
     {
-
+        return $this->consumo() + $this->investimentos + $this->gastos_governamentais;
     }
 
     public function rendaDisponivel() : float
     {
-        $pibInicial = $this->pib_ano_anterior + $this->transferencias;
-        return $pibInicial + $this->transferencias - $this->impostos;
+        return $this->pib() + $this->gastos_governamentais - $this->transferencias;
     }
 
     public function deficitOuSuperavit(): float
     {
-        return $this->gastos_governamentais - $this->transferencias - $this->impostos;
+        return $this->gastos_governamentais - $this->transferencias - $this->impostos();
     }
 
-    public function multiplicadorK() : float
+    public function multiplicadorKComImposto() : float
     {
-        return 1/(1-$this->pmgc) * (1-$this->impostos);
+        return 1/(1-$this->pmgc) * (1-$this->imposto_renda);
+    }
+
+    public function multiplicadorKSemImposto() : float
+    {
+        return 1/(1-$this->pmgc);
     }
 
     public function toArray()
     {
         $valores = parent::toArray();
+        $valores['impostos'] = $this->impostos();
+        $valores['consumo'] = $this->consumo();
+        $valores['pib'] = $this->pib();
         $valores['renda_disponivel'] = $this->rendaDisponivel();
         $valores['deficit_ou_superavit'] = $this->deficitOuSuperavit();
-        $valores['multiplicador_K'] = $this->multiplicadorK();
+        $valores['multiplicador_k_com_imposto'] = $this->multiplicadorKComImposto();
+        $valores['multiplicador_k_sem_imposto'] = $this->multiplicadorKSemImposto();
         return $valores;
     }
 }

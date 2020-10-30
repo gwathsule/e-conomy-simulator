@@ -118,7 +118,7 @@ class CriarNovaRodada extends Service
         $novaRodada->pib_ano_anterior = $ultimaRodada->pib_ano_anterior;
         $novaRodada->pib_previsao_anual = $ultimaRodada->pib_previsao_anual;
         $novaRodada->consumo = $ultimaRodada->consumo;
-        $novaRodada->investimento = $ultimaRodada->investimento;
+        $novaRodada->investimentos = $ultimaRodada->investimentos;
         $novaRodada->populacao = $ultimaRodada->populacao;
         $novaRodada->gastos_governamentais = $ultimaRodada->gastos_governamentais;
         $novaRodada->transferencias = $ultimaRodada->transferencias;
