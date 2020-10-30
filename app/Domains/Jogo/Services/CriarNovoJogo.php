@@ -71,9 +71,10 @@ class CriarNovoJogo extends Service
         $novoJogo->qtd_rodadas = ConfiguracoesGerais::QTD_RODADAS;
 
         $primeiraRodada = new Rodada();
-        $primeiraRodada->pib = ConfiguracoesGerais::PIB_ANO_ANTERIOR;
+        $primeiraRodada->pib_ano_anterior = ConfiguracoesGerais::PIB_ANO_ANTERIOR;
         $primeiraRodada->populacao = ConfiguracoesGerais::POPULACAO;
-        $primeiraRodada->pib_prox_ano = ConfiguracoesGerais::PREVISAO_ANUAL;
+        $primeiraRodada->pib_previsao_anual = ConfiguracoesGerais::PREVISAO_ANUAL;
+        $primeiraRodada->pmgc = ConfiguracoesGerais::PMGC;
         $primeiraRodada->consumo = ConfiguracoesGerais::CONSUMO;
         $primeiraRodada->investimento = ConfiguracoesGerais::INVESTIMENTO;
         $primeiraRodada->gastos_governamentais = ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS;

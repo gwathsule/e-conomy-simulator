@@ -112,8 +112,9 @@ class CriarNovaRodada extends Service
         $novaRodada = new Rodada();
         $novaRodada->jogo_id = $jogo->id;
         $novaRodada->rodada = $jogo->rodadas->count();
-        $novaRodada->pib = $ultimaRodada->pib;
-        $novaRodada->pib_prox_ano = $ultimaRodada->pib_prox_ano;
+        $novaRodada->pmgc = $ultimaRodada->pmgc;
+        $novaRodada->pib_ano_anterior = $ultimaRodada->pib_ano_anterior;
+        $novaRodada->pib_previsao_anual = $ultimaRodada->pib_previsao_anual;
         $novaRodada->consumo = $ultimaRodada->consumo;
         $novaRodada->investimento = $ultimaRodada->investimento;
         $novaRodada->populacao = $ultimaRodada->populacao;

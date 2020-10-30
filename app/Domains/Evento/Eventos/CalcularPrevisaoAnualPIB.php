@@ -19,7 +19,7 @@ class CalcularPrevisaoAnualPIB extends Evento
     public function modificacoes(Rodada $rodada, array $data): array
     {
         $previsao = self::PIB_PREVISAO_VARIACAO + ($this->aleatorioZeroAUm() * self::PIB_MODULO_VARIACAO);
-        $rodada->pib_prox_ano = $previsao;
+        $rodada->pib_previsao_anual = $previsao;
         (new RodadaRepository())->update($rodada);
         //cria um novo evento
         $novoEvento = new EventoModel();

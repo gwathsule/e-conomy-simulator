@@ -19,8 +19,10 @@ class CreateRodadaTable extends Migration
             $table->json('noticias')->nullable();
             $table->unsignedInteger('rodada')->nullable();
             $table->integer('populacao')->nullable();
-            $table->decimal('pib_prox_ano', 4, 4, true)->nullable();
-            $table->decimal('pib', 13, 2, true)->nullable();
+            $table->decimal('pmgc', 2, 2)->nullable();
+            $table->decimal('pib_previsao_anual', 2, 2)->nullable();
+            $table->decimal('imposto_renda', 2, 2)->nullable();
+            $table->decimal('pib_ano_anterior', 13, 2, true)->nullable();
             $table->decimal('consumo', 13, 2, true)->nullable();
             $table->decimal('investimento', 13, 2, true)->nullable();
             $table->decimal('gastos_governamentais', 13, 2, true)->nullable();

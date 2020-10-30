@@ -14,6 +14,7 @@ class ConfiguracoesGerais extends Model
     public const PIB_PER_CAPITA = 1200;
     public const PREVISAO_ANUAL = 0.03;
     public const PIB = self::POPULACAO * self::PIB_PER_CAPITA;
+    public const PMGC = 0.7;
 
     public const CONSUMO = self::PIB * 0.60;
     public const INVESTIMENTO = self::PIB * 0.15;

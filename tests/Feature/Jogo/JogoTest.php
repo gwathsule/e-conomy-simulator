@@ -50,8 +50,8 @@ class JogoTest extends TestCase
         $primeiraRodada = $jogo->rodadas()->first();
         $this->assertEquals($jogo->id, $primeiraRodada->jogo_id);
         $this->assertEquals(0, $primeiraRodada->rodada);
-        $this->assertEquals(ConfiguracoesGerais::PIB_ANO_ANTERIOR, $primeiraRodada->pib);
-        $this->assertEquals(ConfiguracoesGerais::PREVISAO_ANUAL, $primeiraRodada->pib_prox_ano);
+        $this->assertEquals(ConfiguracoesGerais::PIB_ANO_ANTERIOR, $primeiraRodada->pib_ano_anterior);
+        $this->assertEquals(ConfiguracoesGerais::PREVISAO_ANUAL, $primeiraRodada->pib_previsao_anual);
         $this->assertEquals(ConfiguracoesGerais::CONSUMO, $primeiraRodada->consumo);
         $this->assertEquals(ConfiguracoesGerais::INVESTIMENTO, $primeiraRodada->investimento);
         $this->assertEquals(ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS, $primeiraRodada->gastos_governamentais);
@@ -99,6 +99,6 @@ class JogoTest extends TestCase
         $this->assertCount(1, $jogo->rodadas[6]->noticias);
         $this->assertCount(1, $jogo->rodadas[9]->noticias);
         $this->assertCount(2, $jogo->rodadas[12]->noticias);
-        $this->assertNotEquals($jogo->rodadas[1]->pib, $jogo->rodadas[13]->pib);
+        $this->assertNotEquals($jogo->rodadas[1]->pib_ano_anterior, $jogo->rodadas[13]->pib_ano_anterior);
     }
 }

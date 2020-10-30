@@ -26,10 +26,10 @@ class CalcularPibAnual extends Evento
 
     public function modificacoes(Rodada $rodada, array $data): array
     {
-        $pibAntigo = $rodada->pib;
-        $aumento = $rodada->pib_prox_ano * 100;
-        $novoPib = $rodada->pib * ($rodada->pib_prox_ano + 1);
-        $rodada->pib = $novoPib;
+        $pibAntigo = $rodada->pib_ano_anterior;
+        $aumento = $rodada->pib_previsao_anual * 100;
+        $novoPib = $rodada->pib_ano_anterior * ($rodada->pib_previsao_anual + 1);
+        $rodada->pib_ano_anterior = $novoPib;
         (new RodadaRepository())->update($rodada);
         //cria um novo evento
         $novoEvento = new EventoModel();
