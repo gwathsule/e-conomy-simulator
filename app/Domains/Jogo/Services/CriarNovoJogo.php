@@ -72,9 +72,9 @@ class CriarNovoJogo extends Service
         $primeiraRodada->populacao = ConfiguracoesGerais::POPULACAO_INICIAL;
         $primeiraRodada->pib_previsao_anual = ConfiguracoesGerais::PIB_PREVISAO_ANUAL_INICIAL;
         $primeiraRodada->pmgc = ConfiguracoesGerais::PMGC_INICIAL;
-        $primeiraRodada->investimentos = ConfiguracoesGerais::INVESTIMENTOS_ANO_ANTERIOR;
-        $primeiraRodada->gastos_governamentais = ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS_ANO_ANTERIOR;
         $primeiraRodada->imposto_renda = ConfiguracoesGerais::IMPOSTO_DE_RENDA_INICIAL;
+        $primeiraRodada->investimentos = ConfiguracoesGerais::INVESTIMENTOS_POR_RODADA;
+        $primeiraRodada->gastos_governamentais = ConfiguracoesGerais::INVESTIMENTOS_POR_RODADA;
         $primeiraRodada->transferencias = ConfiguracoesGerais::TRANSFERENCIAS_ANO_ANTERIOR;
         $primeiraRodada->medidas = [];
         $primeiraRodada->noticias = $this->noticiasIniciais();

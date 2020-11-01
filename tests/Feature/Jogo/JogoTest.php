@@ -48,7 +48,7 @@ class JogoTest extends TestCase
         $this->assertEquals($jogo->id, $primeiraRodada->jogo_id);
         $this->assertEquals(0, $primeiraRodada->rodada);
         $this->assertEquals(ConfiguracoesGerais::PIB_PREVISAO_ANUAL_INICIAL, $primeiraRodada->pib_previsao_anual);
-        $this->assertEquals(ConfiguracoesGerais::INVESTIMENTOS_ANO_ANTERIOR, $primeiraRodada->investimentos);
+        $this->assertEquals(ConfiguracoesGerais::INVESTIMENTOS_POR_RODADA, $primeiraRodada->investimentos);
         $this->assertEquals(ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS_ANO_ANTERIOR, $primeiraRodada->gastos_governamentais);
         $this->assertEquals(ConfiguracoesGerais::TRANSFERENCIAS_ANO_ANTERIOR, $primeiraRodada->transferencias);
         $this->assertEquals([], $primeiraRodada->medidas);

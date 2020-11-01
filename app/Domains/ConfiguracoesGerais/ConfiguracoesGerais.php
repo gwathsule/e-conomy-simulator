@@ -2,9 +2,7 @@
 
 namespace App\Domains\ConfiguracoesGerais;
 
-use Illuminate\Database\Eloquent\Model;
-
-class ConfiguracoesGerais extends Model
+class ConfiguracoesGerais
 {
     //configuracoes jogo
     public const QTD_RODADAS = 24;
@@ -25,4 +23,8 @@ class ConfiguracoesGerais extends Model
     //public const PIB_ANO_ANTERIOR = self::PIB_INICIAL - self::TRANSFERENCIAS_ANO_ANTERIOR;
 
     public const BS = self::IMPOSTOS_ANO_ANTERIOR - self::TRANSFERENCIAS_ANO_ANTERIOR - self::GASTOS_GOVERNAMENTAIS_ANO_ANTERIOR;
+
+    //valores que entram por rodada
+    public const INVESTIMENTOS_POR_RODADA = 1000000;
+    public const GASTOS_GOVERNAMENTAIS_POR_RODADA = 5000;
 }
