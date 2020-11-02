@@ -93,6 +93,8 @@ class CriarNovaRodada extends Service
                 }
             }
             $novaRodada->refresh();
+            $novaRodada->total_gastos_governamentais_anual += $novaRodada->gastos_governamentais_mensal;
+            $novaRodada->total_investimentos_anual += $novaRodada->investimentos_mesal;
             $novaRodada->noticias = $noticias->toArray();
             $novaRodada->medidas = $data['medidas'];
             $this->rodadaRepository->save($novaRodada);
@@ -115,17 +117,14 @@ class CriarNovaRodada extends Service
         $novaRodada->jogo_id = $jogo->id;
         $novaRodada->rodada = $jogo->rodadas->count();
         $novaRodada->pmgc = $ultimaRodada->pmgc;
-        $novaRodada->pib_ano_anterior = $ultimaRodada->pib_ano_anterior;
         $novaRodada->pib_previsao_anual = $ultimaRodada->pib_previsao_anual;
-        $novaRodada->consumo = $ultimaRodada->consumo;
-        $novaRodada->investimentos = $ultimaRodada->investimentos;
         $novaRodada->populacao = $ultimaRodada->populacao;
-        $novaRodada->gastos_governamentais = $ultimaRodada->gastos_governamentais;
-        $novaRodada->transferencias = $ultimaRodada->transferencias;
-        $novaRodada->impostos = $ultimaRodada->impostos;
+        $novaRodada->imposto_renda = $ultimaRodada->imposto_renda;
         $novaRodada->medidas = [];
         $novaRodada->noticias = [];
-        $this->rodadaRepository->save($novaRodada);
+        $novaRodada->investimentos_mesal = $ultimaRodada->investimentos_mesal;
+        $novaRodada->gastos_governamentais_mensal = $ultimaRodada->gastos_governamentais_mensal;
+        $novaRodada->gastos_governamentais_mensal = $ultimaRodada->gastos_governamentais_mensal;        $this->rodadaRepository->save($novaRodada);
         return $novaRodada;
     }
 

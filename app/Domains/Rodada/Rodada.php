@@ -12,9 +12,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $pmgc
  * @property float $imposto_renda
  * @property float $pib_previsao_anual
- * @property float $investimentos
- * @property float $gastos_governamentais
- * @property float $transferencias
+ * @property float $total_investimentos_anual montante anual dos investimentos
+ * @property float $investimentos_mesal quantidade fixa de dinheiro de investimento que entra no PIB mensalmente
+ * @property float $total_gastos_governamentais_anual montante anual dos gastos do governo
+ * @property float $gastos_governamentais_mensal quantidade fixa de dinheiro que o governo gasta mensalmente
+ * @property float $total_transferencias_anual
  * @property array $medidas
  * @property array $noticias
  */
@@ -29,27 +31,27 @@ class Rodada extends Model
 
     public function impostos() : float
     {
-        return $this->investimentos * ($this->multiplicadorKComImposto() - $this->multiplicadorKSemImposto());
+        return $this->total_investimentos_anual * ($this->multiplicadorKComImposto() - $this->multiplicadorKSemImposto());
     }
 
     public function consumo() : float
     {
-        return ($this->investimentos * $this->multiplicadorKComImposto()) - $this->investimentos;
+        return ($this->total_investimentos_anual * $this->multiplicadorKComImposto()) - $this->total_investimentos_anual;
     }
 
     public function pib() : float
     {
-        return $this->consumo() + $this->investimentos + $this->gastos_governamentais;
+        return $this->consumo() + $this->total_investimentos_anual + $this->total_gastos_governamentais_anual;
     }
 
     public function rendaDisponivel() : float
     {
-        return $this->pib() + $this->gastos_governamentais - $this->transferencias;
+        return $this->pib() + $this->total_gastos_governamentais_anual - $this->total_transferencias_anual;
     }
 
     public function deficitOuSuperavit(): float
     {
-        return $this->gastos_governamentais - $this->transferencias - $this->impostos();
+        return $this->total_gastos_governamentais_anual - $this->total_transferencias_anual - $this->impostos();
     }
 
     public function multiplicadorKComImposto() : float
