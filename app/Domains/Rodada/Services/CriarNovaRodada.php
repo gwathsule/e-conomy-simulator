@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Domains\Rodada\Services;
-
 
 use App\Domains\Evento\Evento;
 use App\Domains\Evento\EventoRepository;
@@ -93,8 +91,8 @@ class CriarNovaRodada extends Service
                 }
             }
             $novaRodada->refresh();
-            $novaRodada->total_gastos_governamentais_anual += $novaRodada->gastos_governamentais_mensal;
-            $novaRodada->total_investimentos_anual += $novaRodada->investimentos_mesal;
+            $novaRodada->gastos_governamentais += $novaRodada->gastos_governamentais_fixos;
+            $novaRodada->investimentos += $novaRodada->investimentos_fixos;
             $novaRodada->noticias = $noticias->toArray();
             $novaRodada->medidas = $data['medidas'];
             $this->rodadaRepository->save($novaRodada);
@@ -122,9 +120,12 @@ class CriarNovaRodada extends Service
         $novaRodada->imposto_renda = $ultimaRodada->imposto_renda;
         $novaRodada->medidas = [];
         $novaRodada->noticias = [];
-        $novaRodada->investimentos_mesal = $ultimaRodada->investimentos_mesal;
-        $novaRodada->gastos_governamentais_mensal = $ultimaRodada->gastos_governamentais_mensal;
-        $novaRodada->gastos_governamentais_mensal = $ultimaRodada->gastos_governamentais_mensal;        $this->rodadaRepository->save($novaRodada);
+        $novaRodada->investimentos_fixos = $ultimaRodada->investimentos_fixos;
+        $novaRodada->gastos_governamentais_fixos = $ultimaRodada->gastos_governamentais_fixos;
+        $novaRodada->transferencias = 0;
+        $novaRodada->gastos_governamentais = 0;
+        $novaRodada->investimentos = 0;
+        $this->rodadaRepository->save($novaRodada);
         return $novaRodada;
     }
 
@@ -147,13 +148,13 @@ class CriarNovaRodada extends Service
         switch ($medida['code']) {
             //case CalcularPrevisaoAnualPIB::CODE: //caso for uma medida instantanea
             //    return (new CalcularPrevisaoAnualPIB())->modificacoes($jogo, $medida['data']);
-            case CalcularPrevisaoAnualPIB::CODE:
-                return $this->criarEvento(
-                    $medida['data'],
-                    CalcularPrevisaoAnualPIB::RODADAS,
-                    $medida['code'],
-                    $rodada->jogo_id
-                );
+            //case CalcularPrevisaoAnualPIB::CODE:
+            //    return $this->criarEvento(
+            //        $medida['data'],
+            //        CalcularPrevisaoAnualPIB::RODADAS,
+            //        $medida['code'],
+            //        $rodada->jogo_id
+            //    );
             default:
                 return null;
         }

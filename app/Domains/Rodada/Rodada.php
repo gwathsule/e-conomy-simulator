@@ -12,11 +12,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $pmgc
  * @property float $imposto_renda
  * @property float $pib_previsao_anual
- * @property float $total_investimentos_anual montante anual dos investimentos
- * @property float $investimentos_mesal quantidade fixa de dinheiro de investimento que entra no PIB mensalmente
- * @property float $total_gastos_governamentais_anual montante anual dos gastos do governo
- * @property float $gastos_governamentais_mensal quantidade fixa de dinheiro que o governo gasta mensalmente
- * @property float $total_transferencias_anual
+ * @property float $investimentos total dos investimentos da rodada
+ * @property float $investimentos_fixos quantidade fixa de dinheiro de investimento que entra no PIB mensalmente
+ * @property float $gastos_governamentais gastos do governo na rodada
+ * @property float $gastos_governamentais_fixos quantidade fixa de dinheiro que o governo gasta mensalmente
+ * @property float $transferencias total de transferencias realizada na rodada
  * @property array $medidas
  * @property array $noticias
  */
@@ -31,27 +31,27 @@ class Rodada extends Model
 
     public function impostos() : float
     {
-        return $this->total_investimentos_anual * ($this->multiplicadorKComImposto() - $this->multiplicadorKSemImposto());
+        return $this->investimentos * ($this->multiplicadorKSemImposto() - $this->multiplicadorKComImposto());
     }
 
     public function consumo() : float
     {
-        return ($this->total_investimentos_anual * $this->multiplicadorKComImposto()) - $this->total_investimentos_anual;
+        return ($this->investimentos * $this->multiplicadorKComImposto()) - $this->investimentos;
     }
 
     public function pib() : float
     {
-        return $this->consumo() + $this->total_investimentos_anual + $this->total_gastos_governamentais_anual;
+        return $this->consumo() + $this->investimentos + $this->gastos_governamentais;
     }
 
     public function rendaDisponivel() : float
     {
-        return $this->pib() + $this->total_gastos_governamentais_anual - $this->total_transferencias_anual;
+        return $this->pib() + $this->gastos_governamentais - $this->transferencias;
     }
 
     public function deficitOuSuperavit(): float
     {
-        return $this->total_gastos_governamentais_anual - $this->total_transferencias_anual - $this->impostos();
+        return $this->gastos_governamentais - $this->transferencias - $this->impostos();
     }
 
     public function multiplicadorKComImposto() : float

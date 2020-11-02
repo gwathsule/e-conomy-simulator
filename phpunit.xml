@@ -15,6 +15,12 @@
         <testsuite name="Eventos.Feature">
             <directory suffix="Test.php">./tests/Feature/Eventos</directory>
         </testsuite>
+        <testsuite name="Rodada.Feature">
+            <directory suffix="Test.php">./tests/Feature/Rodada</directory>
+        </testsuite>
+        <testsuite name="User.Feature">
+            <directory suffix="Test.php">./tests/Feature/User</directory>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
