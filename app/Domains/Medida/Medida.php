@@ -16,5 +16,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Medida extends Model
 {
+    public const TIPOS_MEDIDA = [
+        'liberal' => 'Liberal',
+        'estatal' => 'Estatal',
+    ];
+
     protected $table = 'medida';
 }

@@ -20,12 +20,12 @@ class EventoRepository extends Repository
     public function allEventos()
     {
         return [
-            AlterarGastoGovernamental::CODE,
-            AlterarGastoGovernamentalMensal::CODE,
-            AlterarImpostoDeRenda::CODE,
-            AlterarInvestimentos::CODE,
-            AlterarInvestimentosMensal::CODE,
-            CriarTransferencia::CODE,
+            AlterarGastoGovernamental::CODE => 'Alterar Gastos Governamentais',
+            AlterarGastoGovernamentalMensal::CODE => 'Alterar Gastos Governamentais Fixos',
+            AlterarImpostoDeRenda::CODE => 'Alterar Imposto de Renda',
+            AlterarInvestimentos::CODE => 'Alterar Investimentos',
+            AlterarInvestimentosMensal::CODE => 'Alterar Investimentos Fixos',
+            CriarTransferencia::CODE => 'Criar Transferencias',
         ];
     }
 }

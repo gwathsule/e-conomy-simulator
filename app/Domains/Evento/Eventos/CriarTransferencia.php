@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Domains\Evento\Eventos;
-
 
 use App\Domains\Medida\Medida;
 use App\Domains\Medida\MedidaRepository;
@@ -14,7 +12,7 @@ use App\Support\Noticia;
 class CriarTransferencia extends Evento
 {
     public const RODADAS = 1;
-    public const CODE = 'alterar_gasto_governamental';
+    public const CODE = 'criar_transferencia';
 
     protected function getCode(): string
     {

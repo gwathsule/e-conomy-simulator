@@ -1,3 +1,8 @@
+@php
+    $medidaRepository = new \App\Domains\Medida\MedidaRepository();
+    $eventoRepository = new \App\Domains\Evento\EventoRepository();
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Administrador')
@@ -5,45 +10,52 @@
 @section('content')
     <form>
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12">
                 <label for="nome">Nome da medida</label>
                 <input type="text" class="form-control" id="nome">
             </div>
-            <div class="form-group col-md-6">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
                 <label for="rodadas_para_excutar">Rodadas para executar</label>
                 <input type="number" class="form-control" id="rodadas_para_excutar">
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="inputState">State</label>
-                <select id="inputState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
+            <div class="form-group col-md-12">
+                <label for="diferenca">Diferença na variável chave (depende do evento)</label>
+                <input type="number" class="form-control" id="diferenca">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="texto_noticia">Texto da Noticia</label>
+                <textarea class="form-control" id="texto_noticia" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="tipo">Tipo</label>
+                <select id="tipo" class="form-control">
+                    @foreach(array_keys($medidaRepository->getTiposDeMedida()) as $tipo)
+                    <option value="{{$tipo}}">{{$medidaRepository->getTiposDeMedida()[$tipo]}}</option>
+                    @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-4">
-                <label for="inputState">State</label>
-                <select id="inputState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputState">State</label>
-                <select id="inputState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="codigo_evento">Evento</label>
+                <select id="codigo_evento" class="form-control">
+                    @foreach(array_keys($eventoRepository->allEventos()) as $evento)
+                        <option value="{{$evento}}">{{$eventoRepository->allEventos()[$evento]}}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
-                    Check me out
-                </label>
-            </div>
+            <label for="exampleFormControlFile1">Imagem da notícia</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1">
         </div>
         <button type="submit" class="btn btn-primary">Criar</button>
     </form>

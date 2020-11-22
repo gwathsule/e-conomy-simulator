@@ -12,7 +12,7 @@ use App\Support\Noticia;
 class AlterarImpostoDeRenda extends Evento
 {
     public const RODADAS = 1;
-    public const CODE = 'alterar_gasto_governamental';
+    public const CODE = 'alterar_imposto_de_renda';
 
     protected function getCode(): string
     {
