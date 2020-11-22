@@ -2,58 +2,35 @@
 
 namespace App\Support;
 
-use App\Support\Exceptions\ValidationException;
-use Illuminate\Support\Facades\Validator;
+use App\Domains\Medida\Medida;
 
-abstract class Noticia
+class Noticia
 {
-    public const RELEVANCIA_ALTA = 3;
-    public const RELEVANCIA_MEDIA = 2;
-    public const RELEVANCIA_BAIXA = 1;
+    /**
+     * @var Medida $medida
+     */
+    public $medida;
 
-    protected $data;
-
-    public function __construct(array $data)
+    public function __construct(Medida $medida)
     {
-        $this->data = $data;
+        $this->medida = $medida;
     }
 
-    protected abstract function getUrlImagem($data) : string;
-
-    protected abstract function getTexto($data) : string;
-
-    protected abstract function getRelevancia() : int;
-
-    /**
-     * seta as regras que precisa para mensagem compilar
-     * @param array $data
-     * @return array
-     */
-    protected abstract function regras(array $data) : array;
+    private function buildText() : string
+    {
+        return $this->medida->texto_noticia;
+    }
 
     /**
      * @param array $data
      * @return array
-     * @throws ValidationException
      */
     public function buidDataNoticia()
     {
-        $data = $this->data;
-        $validator = Validator::make(
-            $data,
-            $this->regras($data)
-        );
-        try {
-            $validator->validate();
-        } catch (ValidationException $e) {
-            throw new ValidationException($e->errors(), $e->getMessage());
-        }
-
-        $noticia = [
-            'url_imagem' => $this->getUrlImagem($data),
-            'text' => $this->getTexto($data),
-            'relevancia' => $this->getRelevancia(),
+        return [
+            'url_imagem' => $this->medida->url_imagem,
+            'text' => $this->buildText(),
+            'tipo' => $this->medida->tipo,
         ];
-        return $noticia;
     }
 }

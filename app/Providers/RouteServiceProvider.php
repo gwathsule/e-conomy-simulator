@@ -47,5 +47,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')->group(base_path($pathDomains . 'Rodada' . $defaultRouteFile));
         Route::middleware('web')->group(base_path($pathDomains . 'User' . $defaultRouteFile));
         Route::middleware('web')->group(base_path($pathDomains . 'Evento' . $defaultRouteFile));
+        Route::middleware('web')->group(base_path($pathDomains . 'Medida' . $defaultRouteFile));
     }
 }
