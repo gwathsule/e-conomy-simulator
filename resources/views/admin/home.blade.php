@@ -5,58 +5,36 @@
 
 @extends('layouts.app')
 
-@section('title', 'Administrador')
+@section('title', 'Medidas')
 
 @section('content')
-    <form>
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <label for="nome">Nome da medida</label>
-                <input type="text" class="form-control" id="nome">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <label for="rodadas_para_excutar">Rodadas para executar</label>
-                <input type="number" class="form-control" id="rodadas_para_excutar">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <label for="diferenca">Diferença na variável chave (depende do evento)</label>
-                <input type="number" class="form-control" id="diferenca">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <label for="texto_noticia">Texto da Noticia</label>
-                <textarea class="form-control" id="texto_noticia" rows="3"></textarea>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <label for="tipo">Tipo</label>
-                <select id="tipo" class="form-control">
-                    @foreach(array_keys($medidaRepository->getTiposDeMedida()) as $tipo)
-                    <option value="{{$tipo}}">{{$medidaRepository->getTiposDeMedida()[$tipo]}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <label for="codigo_evento">Evento</label>
-                <select id="codigo_evento" class="form-control">
-                    @foreach(array_keys($eventoRepository->allEventos()) as $evento)
-                        <option value="{{$evento}}">{{$eventoRepository->allEventos()[$evento]}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlFile1">Imagem da notícia</label>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-        </div>
-        <button type="submit" class="btn btn-primary">Criar</button>
-    </form>
+    <table class="table">
+        <caption>Lista de Medidas</caption>
+        <thead>
+        <tr>
+            <th scope="col">Evento</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Time</th>
+            <th scope="col">Imagem</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Texto</th>
+            <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($listaMedidas as $medida)
+        <tr>
+            <th scope="row">{{$medida->codigo_evento}}</th>
+            <td>{{$medida->nome}}</td>
+            <td>{{$medida->rodadas_para_excutar}}</td>
+            <td>...</td>
+            <td>{{$medida->tipo}}</td>
+            <td>{{$medida->texto_noticia}}</td>
+            <td>{{$medida->diferenca}}</td>
+            <td><a href="{{route('medida.editar',  ['id' => $medida->id])}}">Editar</a></td>
+            <td><a href="{{route('medida.deletar',  ['id' => $medida->id])}}">Excluir</a></td>
+        </tr>
+        @endforeach
+        </tbody>
+    </table>
 @endsection
