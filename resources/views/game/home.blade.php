@@ -1,118 +1,256 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-    <!-- Meta tags Obrigatórias -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <!-- Estilo Customizado -->
-    <link rel="stylesheet" type="text/css" href="{{asset('css/estilo.css')}}">
-    <link rel="icon" type="imagem/png" href="{{asset('img/resources/icon-principal.png')}}" />
     <title>E-Conomy Simulator</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/estilo.css')}}">
+    <script src="{{asset('js/chartjs.js')}}"></script>
+    <script src="{{asset('js/grafico.js')}}"></script>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
 </head>
-<body style="background-image: url('{{asset('img/resources/fundo.png')}}');">
-
-<header class="bg-light"> <!-- Inicio cabecalho -->
-    <nav class="navbar navbar-expand-sm bg-light" style="height: 77px;">
-        <div class="container">
-            <a href="#" class="navbar-brand">
-                <img src="{{asset('img/resources/logo.png')}}" width="110" style="margin-top: 77px;" >
-            </a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="{{route('user.home')}}" class="nav-link text-nav">PRINCIPAL
-                            <img src="{{asset('img/resources/icon-principal.png')}}" width="20" class="mb-2 ml-2">
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('jogo-perfil')}}" class="nav-link text-nav mr-3 ml-2">MEU PERFIL
-                            <img src="{{asset('img/resources/icon-perfil.png')}}" width="30">
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{url('logout')}}" class="nav-link text-nav mr-3 ml-2">X</a>
-                    </li>
-                </ul>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<div class="container">
+    <div class="page-inner no-page-title">
+        <!-- start page main wrapper -->
+        <div id="main-wrapper">
+            <div class="row">
+                <div class="col-lg-5 col-xl-3">
+                    <div class="card card-white grid-margin">
+                        <div class="card-heading clearfix">
+                            <h4 class="card-title">Gabinete</h4>
+                        </div>
+                        <div class="card-body user-profile-card mb-3">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="user-profile-image rounded-circle" alt="" />
+                            <h4 class="text-center h6 mt-2">Rafael dos Santos</h4>
+                            <button class="btn btn-theme btn-sm">Logout</button>
+                            <button class="btn btn-theme btn-sm">Configs</button>
+                        </div>
+                        <hr />
+                        <div class="card-heading clearfix mt-3">
+                            <h4 class="card-title">Finanças:</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <p><strong>PIB</strong>: <small>R$ 1.000.000,00</small></p>
+                                <p><strong>INV.</strong>: <small>R$ 1.000.000,00</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-xl-6">
+                    <div class="card card-white grid-margin">
+                        <div class="card-body">
+                            <canvas id="canvas"></canvas>
+                        </div>
+                    </div>
+                    <div class="profile-timeline">
+                        <ul class="list-unstyled">
+                            <li class="timeline-item">
+                                <div class="card card-white grid-margin">
+                                    <div class="card-body">
+                                        <div class="timeline-item-header">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" />
+                                            <p>Veema Walkeror</p>
+                                            <small>7 hours ago</small>
+                                        </div>
+                                        <div class="timeline-item-post">
+                                            <p>totam rem aperiam, eaque ipsa quae ab illo inventore</p>
+                                            <img src="{{asset('img/noticias/previsao_pib.jpg')}}" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="timeline-item-header">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" />
+                                            <p>Veema Walkeror</p>
+                                            <small>7 hours ago</small>
+                                        </div>
+                                        <div class="timeline-item-post">
+                                            <p>totam rem aperiam, eaque ipsa quae ab illo inventore</p>
+                                            <img src="{{asset('img/noticias/previsao_pib.jpg')}}" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="timeline-item-header">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" />
+                                            <p>Veema Walkeror</p>
+                                            <small>7 hours ago</small>
+                                        </div>
+                                        <div class="timeline-item-post">
+                                            <p>totam rem aperiam, eaque ipsa quae ab illo inventore</p>
+                                            <img src="{{asset('img/noticias/previsao_pib.jpg')}}" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="timeline-item-header">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" />
+                                            <p>Veema Walkeror</p>
+                                            <small>7 hours ago</small>
+                                        </div>
+                                        <div class="timeline-item-post">
+                                            <p>totam rem aperiam, eaque ipsa quae ab illo inventore</p>
+                                            <img src="{{asset('img/noticias/previsao_pib.jpg')}}" alt="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-xl-3">
+                    <div class="card card-white grid-margin">
+                        <div class="card-heading clearfix">
+                            <h4 class="card-title">Popularidade</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="team">
+                                <li style="font-size: 15px; list-style: none">Empresarios: 16%</li>
+                                <li style="font-size: 15px; list-style: none">Trabalhadores: 16%</li>
+                                <li style="font-size: 15px; list-style: none">Estado: 16%</li>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-white grid-margin">
+                        <div class="card-heading clearfix">
+                            <h4 class="card-title">Instruções</h4>
+                        </div>
+                        <div class="card-body">
+                            <li style="list-style: none">Medida A</li>
+                            <li style="list-style: none">Medida B</li>
+                            <li style="list-style: none">Medida D</li>
+                            <li style="list-style: none">Medida E</li>
+                            <li style="list-style: none">Medida F</li>
+                            <li style="list-style: none">Medida G</li>
+                            <li style="list-style: none">Medida H</li>
+                            <li style="list-style: none">Medida I</li>
+                            <li style="list-style: none">Medida J</li>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- Row -->
         </div>
-    </nav>
-</header> <!-- Fim cabecalho -->
-
-<div class="container " style="margin-top: 75px;"><!-- Inicio CONTEUDO -->
-
-    <div class="row"> <!-- Inicio MEDIDAS ECONOMICAS -->
-
-        <nav class=" navbar navbar-expand-sm col-12 conteudo-nav container pb-0 no-gutters">
-            <h1 class="navbar-brand">MEDIDAS ECONOMICAS</h1>
-
-            <div class="collapse navbar-collapse" >
-                <ul class="nav nav-tabs ml-auto pt-2" id="myTab" role="tablist" >
-                    <li class="nav-item">
-                        <a class="nav-link active text-menu" id="monetarias-tab" data-toggle="tab" href="#monetarias" role="tab" aria-controls="monetarias" aria-selected="true">MONETÁRIAS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-menu" id="fiscais-tab" data-toggle="tab" href="#fiscais" role="tab" aria-controls="fiscais" aria-selected="false">FISCAIS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-menu" id="cambiais-tab" data-toggle="tab" href="#cambiais" role="tab" aria-controls="cambiais" aria-selected="false">CAMBIAIS</a>
-                    </li>
-                </ul>
-            </div>
-
-        </nav>
-
-        <div class="tab-content container conteudo-corpo p-4" id="myTabContent">
-            <div class="tab-pane fade show active" id="monetarias" role="tabpanel" aria-labelledby="monetarias-tab"><p>Mussum Ipsum, cacilds vidis litro abertis. Mé faiz elementum girarzis, nisi eros vermeio. Atirei o pau no gatis, per gatis num morreus. Cevadis im ampola pa arma uma pindureta. Casamentiss faiz malandris se pirulitá.</p></div>
-            <div class="tab-pane fade" id="fiscais" role="tabpanel" aria-labelledby="fiscais-tab"><p>Mussum Ipsum, cacilds vidis litro abertis. Interagi no mé, cursus quis, vehicula ac nisi. Quem num gosta di mé, boa gentis num é. Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio. Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.</p></div>
-            <div class="tab-pane fade" id="cambiais" role="tabpanel" aria-labelledby="cambiais-tab"><p>Mussum Ipsum, cacilds vidis litro abertis. Interagi no mé, cursus quis, vehicula ac nisi. Quem num gosta di mé, boa gentis num é. Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio. Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.</p></div>
+        <!-- end page main wrapper -->
+        <div class="page-footer">
+            <p>E-conomy Simulator © 2020.</p>
         </div>
-    </div><!-- Fim MEDIDAS ECONOMICAS -->
-
-    <div class="row mt-4" >
-
-        <div class="col-6 pl-0"><!-- Inicio EVENTOS-->
-
-            <div class="conteudo-nav container p-2">
-                <h1 class="pl-2 pt-2">EVENTOS</h1>
-            </div>
-
-            <div class="container conteudo-corpo p-4 " id="myTabContent">
-                <div><p>Mussum Ipsum, cacilds vidis litro abertis. Mé faiz elementum girarzis, nisi eros vermeio. Atirei o pau no gatis, per gatis num morreus. Cevadis im ampola pa arma uma pindureta. Casamentiss faiz malandris se pirulitá.</p></div>
-            </div>
-        </div> <!-- Fim EVENTOS -->
-
-        <div class="col-6 pr-0"><!-- Inicio GRÁFICO DE INDICADORES -->
-
-            <div class="conteudo-nav container p-2">
-                <h1 class="pl-2 pt-2">GRÁFICO DE INDICADORES</h1>
-            </div>
-
-            <div class="container conteudo-corpo p-4" id="myTabContent">
-                <div><p>Mussum Ipsum, cacilds vidis litro abertis. Mé faiz elementum girarzis, nisi eros vermeio. Atirei o pau no gatis, per gatis num morreus. Cevadis im ampola pa arma uma pindureta. Casamentiss faiz malandris se pirulitá.</p></div>
-            </div>
-        </div><!-- Fim GRÁFICO DE INDICADORES -->
-
     </div>
-</div> <!-- Fim CONTEUDO -->
+</div>
+<script>
+    var config = {
+        type: 'line',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'PIB',
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ],
+                backgroundColor: window.chartColors.red,
+                borderColor: window.chartColors.red,
+                fill: false,
+                borderDash: [5, 5],
+                pointRadius: 15,
+                pointHoverRadius: 10,
+            }, {
+                label: 'Gasto Governamentais',
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ],
+                backgroundColor: window.chartColors.blue,
+                borderColor: window.chartColors.blue,
+                fill: false,
+                borderDash: [5, 5],
+                pointRadius: [2, 4, 6, 18, 0, 12, 20],
+            }, {
+                label: 'Investimentos',
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ],
+                backgroundColor: window.chartColors.green,
+                borderColor: window.chartColors.green,
+                fill: false,
+                pointHoverRadius: 30,
+            }, {
+                label: 'Transferências',
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ],
+                backgroundColor: window.chartColors.yellow,
+                borderColor: window.chartColors.yellow,
+                fill: false,
+                pointHitRadius: 20,
+            }]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'bottom',
+            },
+            hover: {
+                mode: 'index'
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Month'
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Value'
+                    }
+                }]
+            },
+            title: {
+                display: true,
+                text: 'Chart.js Line Chart - Different point sizes'
+            }
+        }
+    };
 
-
-
-<footer class="page-footer font-small bg-white fixed-bottom">
-    <div class="footer-copyright text-center py-3">© 2020 Copyright:
-        <a href=""> E-Conomy Simulator</a>
-    </div>
-</footer>
-
-
-<!-- JavaScript (Opcional) -->
-<!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    window.onload = function() {
+        var ctx = document.getElementById('canvas').getContext('2d');
+        window.myLine = new Chart(ctx, config);
+    };
+</script>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
 </html>
