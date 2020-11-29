@@ -18,22 +18,22 @@ class jogoController extends Controller
     {
         try {
             $dataService = $request->toArray();
-            if($dataService['genero'] == 'M') {
-                $dataService['personagem'] = $dataService['index_pm'];
-            } else {
-                $dataService['personagem'] = $dataService['index_pf'] + 5;
-            }
+            //if($dataService['genero'] == 'M') {
+            //    $dataService['personagem'] = $dataService['index_pm'];
+            //} else {
+            //    $dataService['personagem'] = $dataService['index_pf'] + 5;
+            //}
             /** @var CriarNovoJogo $servico */
             $servico = app()->make(CriarNovoJogo::class);
             /** @var Jogo $game */
             $jogo = $servico->handle($dataService);
-            return back()->with([
+            return view('game.home')->with([
                 'jogo' => $jogo
             ]);
         }catch (ValidationException $ex){
             return $this->returnWithException($ex)->withInput();
         }catch (Exception $ex){
-            return $this->returnWithException(new InternalErrorException(__('internal-error')));
+            return $this->returnWithException(new InternalErrorException(__('internal-error')))->withInput();
         }
     }
 
@@ -56,11 +56,10 @@ class jogoController extends Controller
             $jogo = $servico->handle($dataService);
             return view('game.perfil')->with([
                 'jogo' => $jogo,
-                'user' => $user,
             ]);
         }catch (ValidationException $ex){
             return $this->returnWithException($ex)->withInput();
-        }catch (Exception $ex){
+        }catch (Exception $ex) {
             return $this->returnWithException(new InternalErrorException(__('internal-error')));
         }
     }
@@ -93,5 +92,10 @@ class jogoController extends Controller
                 'user' => $user,
             ]);
         }
+    }
+
+    public function novoJogoPage()
+    {
+        return view('game.novoJogo');
     }
 }

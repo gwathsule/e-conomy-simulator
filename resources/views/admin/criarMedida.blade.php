@@ -7,7 +7,7 @@
 
 @section('title', 'Criar Medida')
 
-@section('content')
+@section('conteudo')
     <form method="post" action="{{route('medida.nova')}}" enctype="multipart/form-data">
         @csrf
         <div class="form-row">

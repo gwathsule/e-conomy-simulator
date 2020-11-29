@@ -1,100 +1,112 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-    <!-- Meta tags Obrigatórias -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>Bootstrap Google Plus Style Login Form - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        body{margin-top:20px;}
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        /* custom google plus style theme */
+        @import url(http://fonts.googleapis.com/css?family=Roboto:400);
+        body {
+            background-color:#e0e0e0;
+            -webkit-font-smoothing: antialiased;
+            font: normal 14px Roboto,arial,sans-serif;
+            color:#545454;
+        }
 
-    <!-- Estilo Customizado -->
+        .btn,.form-control,.panel,.list-group,.well {border-radius:1px;box-shadow:0 0 0;}
+        .form-control {border-color:#d7d7d7;}
+        .btn-primary {border-color:transparent;}
+        .btn-primary,.label-primary,.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {background-color:#4285f4;}
+        .btn-plus {background-color:#ffffff;border-width:1px;border-color:#dddddd;box-shadow:1px 1px 0 #999999;border-radius:3px;color:#666666;text-shadow:0 0 1px #bbbbbb;}
+        .well,.panel {border-color:#d2d2d2;box-shadow:0 1px 0 #cfcfcf;border-radius:3px;}
+        .btn-success,.label-success,.progress-bar-success{background-color:#65b045;}
+        .btn-info,.label-info,.progress-bar-info{background-color:#a0c3ff,border-color:#a0c3ff;}
+        .btn-danger,.label-danger,.progress-bar-danger{background-color:#dd4b39;}
+        .btn-warning,.label-warning,.progress-bar-warning{background-color:#f4b400;color:#444444;}
 
-    <link rel="stylesheet" type="text/css" href="{{asset('css/estilo.css')}}">
+        hr {border-color:#ececec;}
+        button {
+            outline: 0;
+        }
 
-    <link rel="icon" type="imagem/png" href="{{asset('img/resources/icon-principal.png')}}" />
+        .panel .btn i,.btn span{
+            color:#666666;
+        }
+        .panel .panel-heading {
+            background-color:#ffffff;
+            font-weight:700;
+            font-size:16px;
+            color:#262626;
+            border-color:#ffffff;
+        }
+        .panel .panel-heading a {
+            font-weight:400;
+            font-size:11px;
+        }
+        .panel .panel-default {
+            border-color:#cccccc;
+        }
+        .panel .img-circle {
+            width:50px;
+            height:50px;
+        }
 
-    <title>E-Conomy - Login</title>
+        h3,h4,h5 {
+            border:0 solid #efefef;
+            border-bottom-width:1px;
+            padding-bottom:10px;
+        }
 
+        .modal-dialog {
+            width: 450px;
+        }
+
+        .modal-footer,.modal-content,.modal-header {
+            border-width:0;
+        }
+
+
+    </style>
 </head>
-<body style="background-image: url('{{asset('img/resources/fundo.png')}}');">
-
-<div class="container">
-    <div class="row justify-content-center mt-5 ">
-        <img src="{{asset('img/resources/logo.png')}}" width="258">
-    </div>
-    <div class="row justify-content-center mt-5">
-        <div class= "col-8 bg-caixas ">
-            <h1 class="bg-botoes col-9 mx-auto mt-4 text-center p-2">BEM VINDO!</h1>
-
-            <form class="text-center p-3" method="post" action="{{route('login')}}"> <!-- Inicio FORM -->
-                @csrf
-                <label for="LoginFormEmail"><p class="text-form01">LOGIN</p></label>
-                <input type="email" name="email" id="LoginFormEmail" class="form-control mb-4 col-8 mx-auto text-center text-form02" placeholder="Entre com o e-mail cadastrado" value="{{ old('email') }}">
-
-                <label for="LoginFormPassword"><p class="text-form01">SENHA</p></label>
-                <input type="password" name="password" id="LoginFormPassword" class="form-control mb-4 col-8 mx-auto text-center text-form02" placeholder="********">
-
-                <div class="d-flex justify-content-between col-8 mx-auto ">
-                    <div>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="LoginFormRemember">
-                            <label class="custom-control-label" for="LoginFormRemember">Mantenha-me conectado</label>
-                        </div>
+<body>
+<!--login modal-->
+<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-center"><img style="height: 240px; width: 240px" src="{{asset('img/resources/logo.png')}}" class="img-circle"><br>Login</h2>
+            </div>
+            <div class="modal-body">
+                <form class="form col-md-12 center-block" method="post" action="{{route('login')}}">
+                    @csrf
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" name="email" placeholder="Email">
                     </div>
-                    {{--
-                    <div>
-                        <a  href="">Esqueceu a senha?</a>
+                    <div class="form-group">
+                        <input type="password" class="form-control input-lg" name="password" placeholder="Password">
                     </div>
-                    --}}
-                </div>
-
-                <button class="btn btn-block bg-botoes col-6 mx-auto mt-4 mb-4 p-2 text-menu text-center " type="submit">LOGIN</button>
-
-                <a href="{{route('register')}}">Crie uma conta!</a>
-            </form><!-- Fim FORM -->
-        </div>
-    </div>
-</div>
-
-{{-- <footer class="page-footer font-small bg-white mt-5 fixob"> <!-- Inicio Footer -->
-    <div class="footer-copyright text-center py-3">© 2020 Copyright:
-        <a href=""> E-Conomy Simulator</a>
-    </div>
-</footer> <!-- Fim Footer -->--}}
-
-<!-- JavaScript (Opcional) -->
-<!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-{{--
-@if(isset($errors) && count($errors) > 0)
-    <div class="modal fade" id="errorsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Login inválido
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-lg btn-block">Sign In</button>
+                        <span class="pull-right"><a href="{{route('register')}}">Registrar</a></span><span><a target="_blank" href="https://github.com/gwathsule/e-conomy-simulator">Github</a></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-12">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-        $('#errorsModal').modal('show');
-    </script>'
-@endif
---}}
+</div>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </body>
 </html>

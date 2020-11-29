@@ -7,6 +7,8 @@ Route::prefix('jogo')->group(function () {
     Route::middleware(['auth'])->group(function () {
         /** @see jogoController::novoJogo() */
         Route::post('novo-jogo', jogoController::class . '@novoJogo')->name('novo-jogo');
+        /** @see jogoController::novoJogoPage() */
+        Route::get('novo-jogo', jogoController::class . '@novoJogoPage')->name('novo-jogo');
         /** @see jogoController::alterarJogo() */
         Route::post('alterar-jogo', jogoController::class . '@alterarJogo')->name('alterar-jogo');
         /** @see jogoController::perfilJogoPage() */

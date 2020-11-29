@@ -3,6 +3,7 @@
 namespace App\Domains\Jogo\Services;
 
 use App\Domains\ConfiguracoesGerais\ConfiguracoesGerais;
+use App\Domains\Evento\Evento;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
 use App\Domains\Rodada\RodadaRepository;
@@ -44,7 +45,7 @@ class CriarNovoJogo extends Service
                     'moeda' => ['required', 'string'],
                     'ministro' => ['required', 'string'],
                     'genero' => ['required', 'string', 'max:1', Rule::in(['M', 'F'])],
-                    'personagem' => ['required', 'int'],
+                    //'personagem' => ['required', 'int'],
                     'presidente' => ['required', 'string'],
                 ];
             }
@@ -60,7 +61,7 @@ class CriarNovoJogo extends Service
         $novoJogo->ministro = $data['ministro'];
         $novoJogo->presidente = $data['presidente'];
         $novoJogo->genero = $data['genero'];
-        $novoJogo->personagem = $data['personagem'];
+        //$novoJogo->personagem = $data['personagem'];
         $novoJogo->ativo = true;
         $novoJogo->qtd_rodadas = ConfiguracoesGerais::QTD_RODADAS;
 
@@ -81,10 +82,20 @@ class CriarNovoJogo extends Service
         DB::transaction(function () use ($data, $novoJogo, $primeiraRodada) {
             /** @var User $user */
             $user = Auth::user();
-            //disable last game
+            /** @var Jogo $ultimoJogo */
             $ultimoJogo = $user->getJogoAtivo();
             if(! is_null($ultimoJogo)) {
-                $this->jogoRepository->delete($ultimoJogo);
+                /** @var Rodada $rodada */
+                foreach ($ultimoJogo->rodadas as $rodada) {
+                    $rodada->delete();
+                }
+
+                /** @var Evento $evento */
+                foreach ($ultimoJogo->eventos as $evento) {
+                    $evento->delete();
+                }
+
+                $ultimoJogo->delete();
             }
             $novoJogo->user_id = $user->id;
             $this->jogoRepository->save($novoJogo);
