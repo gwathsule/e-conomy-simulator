@@ -18,11 +18,11 @@ class jogoController extends Controller
     {
         try {
             $dataService = $request->toArray();
-            //if($dataService['genero'] == 'M') {
-            //    $dataService['personagem'] = $dataService['index_pm'];
-            //} else {
-            //    $dataService['personagem'] = $dataService['index_pf'] + 5;
-            //}
+            if($dataService['genero'] == 'M') {
+                $dataService['personagem'] = $dataService['index_pm'];
+            } else {
+                $dataService['personagem'] = $dataService['index_pf'] + 5;
+            }
             /** @var CriarNovoJogo $servico */
             $servico = app()->make(CriarNovoJogo::class);
             /** @var Jogo $game */

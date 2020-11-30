@@ -55,6 +55,11 @@ class Jogo extends Model
         return $this->hasMany(Evento::class);
     }
 
+    public function getImagemPersonagem()
+    {
+        return Personagem::getPersonagem($this->personagem);
+    }
+
     public function getResultadosAgregados()
     {
         $resultados[0] = [

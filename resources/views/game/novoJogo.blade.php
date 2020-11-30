@@ -11,6 +11,7 @@
     <div class="modal-body">
         <form class="form col-md-12 center-block" method="post" action="{{route('novo-jogo')}}" >
             @csrf
+            @include('game.personagens')
             <div class="row justify-content-center mb-2"><!-- Inicio SELECAO DE SEXO -->
 
                 <div class="custom-control custom-radio custom-control-inline col-2 justify-content-center m-0" >

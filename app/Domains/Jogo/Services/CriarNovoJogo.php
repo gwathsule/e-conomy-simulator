@@ -45,7 +45,7 @@ class CriarNovoJogo extends Service
                     'moeda' => ['required', 'string'],
                     'ministro' => ['required', 'string'],
                     'genero' => ['required', 'string', 'max:1', Rule::in(['M', 'F'])],
-                    //'personagem' => ['required', 'int'],
+                    'personagem' => ['required', 'int'],
                     'presidente' => ['required', 'string'],
                 ];
             }
@@ -61,7 +61,7 @@ class CriarNovoJogo extends Service
         $novoJogo->ministro = $data['ministro'];
         $novoJogo->presidente = $data['presidente'];
         $novoJogo->genero = $data['genero'];
-        //$novoJogo->personagem = $data['personagem'];
+        $novoJogo->personagem = $data['personagem'];
         $novoJogo->ativo = true;
         $novoJogo->qtd_rodadas = ConfiguracoesGerais::QTD_RODADAS;
 

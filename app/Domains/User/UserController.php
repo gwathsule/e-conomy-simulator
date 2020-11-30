@@ -40,7 +40,9 @@ class UserController extends Controller
         if(is_null($user->getJogoAtivo())) {
             return view('game.novoJogo');
         } else {
-            return view('game.home');
+            return view('game.home')->with([
+                'jogo' => $user->getJogoAtivo()
+            ]);
         }
     }
 }

@@ -4,7 +4,7 @@
             <h4 class="card-title">Gabinete</h4>
         </div>
         <div class="card-body user-profile-card mb-3">
-            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="user-profile-image rounded-circle" alt="" />
+            <img src="{{$jogo->getImagemPersonagem()}}" class="user-profile-image rounded-circle" alt="" />
             <h4 class="text-center h6 mt-2">{{$jogo->ministro}}</h4>
             <a href="{{url('logout')}}"><button class="btn btn-theme btn-sm">Logout</button></a>
             <a href="{{route('novo-jogo')}}"><button class="btn btn-theme btn-sm">Novo Mandato</button></a>
