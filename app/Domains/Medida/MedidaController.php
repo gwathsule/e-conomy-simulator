@@ -22,7 +22,7 @@ class MedidaController extends Controller
                     'codigo_evento' => ['required', 'max:255'],
                     'nome' => ['required', 'max:255'],
                     'rodadas_para_excutar' => ['required', 'max:255'],
-                    'imagem_noticia' => ['required'],
+                    'imagem_noticia' => ['required', 'file', 'image'],
                     'diferenca' => ['required', 'numeric'],
                     'texto_noticia' => ['required'],
                     'tipo' => ['required', 'max:255'],
@@ -65,7 +65,7 @@ class MedidaController extends Controller
                     'codigo_evento' => ['required', 'max:255'],
                     'nome' => ['required', 'max:255'],
                     'rodadas_para_excutar' => ['required', 'max:255'],
-                    'imagem_noticia' => ['required'],
+                    'imagem_noticia' => ['file', 'image'],
                     'diferenca' => ['required', 'numeric'],
                     'texto_noticia' => ['required'],
                     'tipo' => ['required', 'max:255'],
@@ -87,9 +87,12 @@ class MedidaController extends Controller
             $medida->diferenca_popularidade_trabalhadores = $request['popularidade_trabalhadores'];
             $medida->diferenca_popularidade_estado = $request['popularidade_estado'];
             $medida->update();
-            $path = Storage::disk('public')->put('medidas/' . $medida->id, $request->file('imagem_noticia'));
-            $medida->url_imagem = $path;
-            $medida->update();
+            if(isset($request['imagem_noticia'])) {
+                Storage::disk('public')->delete($medida->url_imagem);
+                $path = Storage::disk('public')->put('medidas/' . $medida->id, $request->file('imagem_noticia'));
+                $medida->url_imagem = $path;
+                $medida->update();
+            }
 
             return redirect()->route('admin.home');
         }catch (CoreValidationException $e){

@@ -66,10 +66,9 @@
             <input type="file" class="form-control-file" id="imagem_noticia" name="imagem_noticia">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlFile1">Imagem</label>
-            <img src="{{url($medida->url_imagem)}}">
+            <img src="{{\Illuminate\Support\Facades\Storage::url($medida->url_imagem)}}">
         </div>
-        <button type="submit" class="btn btn-primary">Criar</button>
+        <button type="submit" class="btn btn-primary">Editar</button>
     </form>
 @endsection
 
