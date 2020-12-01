@@ -42,7 +42,7 @@
                 <td>{{$medida->tipo}}</td>
                 <td>{{$medida->texto_noticia}}</td>
                 <td>{{$medida->diferenca}}</td>
-                <td><a href="{{route('medida.editar',  ['id' => $medida->id])}}">Editar</a></td>
+                <td><a href="{{route('medida.editarPage',  ['id' => $medida->id])}}">Editar</a></td>
                 <td><a href="{{route('medida.deletar',  ['id' => $medida->id])}}">Excluir</a></td>
             </tr>
             @endforeach

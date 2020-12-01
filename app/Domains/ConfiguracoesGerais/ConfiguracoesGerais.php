@@ -15,9 +15,9 @@ class ConfiguracoesGerais
     public const IMPOSTO_DE_RENDA_INICIAL= 0.2;
     public const PIB_INICIAL = self::POPULACAO_INICIAL * self::PIB_PER_CAPITA_INICIAL;
 
-    public const POPULARIDADE_EMPRESARIOS = 0.5;
-    public const POPULARIDADE_TRABALHADORES = 0.5;
-    public const POPULARIDADE_ESTADO = 0.5;
+    public const POPULARIDADE_EMPRESARIOS = 50;
+    public const POPULARIDADE_TRABALHADORES = 50;
+    public const POPULARIDADE_ESTADO = 50;
 
     //valores do ano anterior
     public const K_IMPOSTO_ANO_ANTERIOR = 1/(1-self::PMGC_INICIAL)*(1-self::IMPOSTO_DE_RENDA_INICIAL);

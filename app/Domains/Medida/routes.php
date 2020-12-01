@@ -11,9 +11,9 @@ Route::prefix('admin')->group(function () {
         Route::get('medida/nova', MedidaController::class.'@novaMedidaPage')->name('medida.nova');
 
         /** @see MedidaController::editarMedida() */
-        Route::post('medida/editar/{id}', MedidaController::class.'@editarMedida')->name('medida.editar');
+        Route::post('medida/editar', MedidaController::class.'@editarMedida')->name('medida.editar');
         /** @see MedidaController::editarMedidaPage() */
-        Route::get('medida/editar', MedidaController::class.'@editarMedidaPage')->name('medida.editar');
+        Route::get('medida/editarPage/{id}', MedidaController::class.'@editarMedidaPage')->name('medida.editarPage');
 
         /** @see MedidaController::deletarMedida() */
         Route::get('medida/deletar/{id}', MedidaController::class.'@deletarMedida')->name('medida.deletar');

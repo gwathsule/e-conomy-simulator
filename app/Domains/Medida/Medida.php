@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $tipo
  * @property string $texto_noticia
  * @property float $diferenca_financas
- * @property float $diferenca_popularidade_empresarios
- * @property float $diferenca_popularidade_trabalhadores
- * @property float $diferenca_popularidade_estado
+ * @property int $diferenca_popularidade_empresarios
+ * @property int $diferenca_popularidade_trabalhadores
+ * @property int $diferenca_popularidade_estado
  */
 class Medida extends Model
 {
