@@ -12,7 +12,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $url_imagem
  * @property string $tipo
  * @property string $texto_noticia
- * @property float $diferenca
+ * @property float $diferenca_financas
+ * @property float $diferenca_popularidade_empresarios
+ * @property float $diferenca_popularidade_trabalhadores
+ * @property float $diferenca_popularidade_estado
  */
 class Medida extends Model
 {

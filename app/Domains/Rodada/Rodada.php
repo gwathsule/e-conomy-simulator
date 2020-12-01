@@ -17,6 +17,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $gastos_governamentais gastos do governo na rodada
  * @property float $gastos_governamentais_fixos quantidade fixa de dinheiro que o governo gasta mensalmente
  * @property float $transferencias total de transferencias realizada na rodada
+ * @property float $popularidade_empresarios
+ * @property float $popularidade_trabalhadores
+ * @property float $popularidade_estado
  * @property array $medidas
  * @property array $noticias
  */

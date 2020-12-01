@@ -34,6 +34,9 @@ class MedidaController extends Controller
             $medida->rodadas_para_excutar = $request['rodadas_para_excutar'];
             $medida->tipo = $request['tipo'];
             $medida->texto_noticia = $request['texto_noticia'];
+            $medida->diferenca_popularidade_empresarios = $request['popularidade_empresarios'];
+            $medida->diferenca_popularidade_trabalhadores = $request['popularidade_trabalhadores'];
+            $medida->diferenca_popularidade_estado = $request['popularidade_estado'];
             $medida->save();
             $path = Storage::disk('public')->put('medidas/' . $medida->id, $request->file('imagem_noticia'));
             $medida->url_imagem = $path;

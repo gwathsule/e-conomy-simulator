@@ -28,7 +28,10 @@ class AlterarImpostoDeRenda extends Evento
     {
         /** @var Medida $medida */
         $medida = (new MedidaRepository())->getById($data['medida_id']);
-        $rodada->imposto_renda += $medida->diferenca;
+        $rodada->imposto_renda += $medida->diferenca_financas;
+        $rodada->popularidade_empresarios += $medida->diferenca_popularidade_empresarios;
+        $rodada->popularidade_trabalhadores += $medida->diferenca_popularidade_trabalhadores;
+        $rodada->popularidade_estado += $medida->diferenca_popularidade_estado;
         (new RodadaRepository())->update($rodada);
         $noticia = new Noticia($medida);
         return $noticia->buidDataNoticia();

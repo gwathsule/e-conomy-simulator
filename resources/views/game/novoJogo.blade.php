@@ -46,19 +46,6 @@
                     <input type="text" name="presidente" value="{{old('presidente')}}" id="presidente" class="form-control text-form02" placeholder="E esse seu chefe">
                 </div>
             </div>
-
-            <div class="form-row mb-4 justify-content-center">
-                <div class="col-5">
-                    <label for="descri-economia"><p class="text-form01 mb-0">DESCRIÇÃO DA ECONOMIA</p></label>
-                    <input type="text" name="descricao" value="{{old('descricao')}}" id="descri-economia" class="form-control text-form02" placeholder="Breve descrição">
-                </div>
-
-                <div class="col-1">
-                    <label for="quantity"><p class="text-form01 mb-0">TURNOS</p></label><br>
-                    <input type="number" name="rodadas" value="{{old('rodadas')}}" id="quantity" class="form-control text-form02" min="10" max="500" placeholder="10">
-                </div>
-            </div>
-
             <div class="form-row mb-4 justify-content-center">
                 <button class="btn btn-primary btn-lg btn-block text-menu text-center" type="submit">PRONTO!</button>
             </div>
