@@ -21,10 +21,10 @@ class CreateMedidaTable extends Migration
             $table->string('url_imagem')->nullable();
             $table->string('tipo')->nullable();
             $table->text('texto_noticia')->nullable();
-            $table->decimal('diferenca_financas')->nullable();
-            $table->integer('diferenca_popularidade_empresarios')->nullable();
-            $table->integer('diferenca_popularidade_trabalhadores')->nullable();
-            $table->integer('diferenca_popularidade_estado')->nullable();
+            $table->bigInteger('diferenca_financas')->nullable();
+            $table->bigInteger('diferenca_popularidade_empresarios')->nullable();
+            $table->bigInteger('diferenca_popularidade_trabalhadores')->nullable();
+            $table->bigInteger('diferenca_popularidade_estado')->nullable();
             $table->timestamps();
         });
     }

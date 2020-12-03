@@ -27,6 +27,9 @@ class CreateRodadaTable extends Migration
             $table->decimal('gastos_governamentais', 13, 2, true)->nullable();
             $table->decimal('gastos_governamentais_fixos', 13, 2, true)->nullable();
             $table->decimal('transferencias', 13, 2, true)->nullable();
+            $table->integer('popularidade_empresarios')->nullable();
+            $table->integer('popularidade_trabalhadores')->nullable();
+            $table->integer('popularidade_estado')->nullable();
             $table->unsignedBigInteger('jogo_id');
             $table->foreign('jogo_id')
                 ->references('id')
