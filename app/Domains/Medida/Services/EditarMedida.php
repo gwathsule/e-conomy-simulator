@@ -52,7 +52,7 @@ class EditarMedida extends Service
         $medida->codigo_evento = $data['codigo_evento'];
         $medida->nome = $data['nome'];
         $medida->rodadas_para_excutar = $data['rodadas_para_excutar'];
-        $medida->tipo = $data['tipo'];
+        $medida->tipo_noticia = $data['tipo'];
         $medida->texto_noticia = $data['texto_noticia'];
         //$medida->url_imagem = $data['imagem'];
         $medida->update();

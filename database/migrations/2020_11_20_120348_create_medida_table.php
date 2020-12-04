@@ -19,8 +19,9 @@ class CreateMedidaTable extends Migration
             $table->string('nome')->nullable();
             $table->string('rodadas_para_excutar')->nullable();
             $table->string('url_imagem')->nullable();
-            $table->string('tipo')->nullable();
+            $table->string('tipo_noticia')->nullable();
             $table->text('texto_noticia')->nullable();
+            $table->text('titulo_noticia')->nullable();
             $table->bigInteger('diferenca_financas')->nullable();
             $table->bigInteger('diferenca_popularidade_empresarios')->nullable();
             $table->bigInteger('diferenca_popularidade_trabalhadores')->nullable();

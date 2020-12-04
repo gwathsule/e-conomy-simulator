@@ -26,7 +26,7 @@ class AlterarImpostoDeRenda extends Evento
 
     public function modificacoes(Rodada $rodada, Medida $medida): array
     {
-        $rodada->imposto_renda += $medida->diferenca_financas;
+        $rodada->imposto_renda += ($medida->diferenca_financas / 100);
         $rodada->popularidade_empresarios += $medida->diferenca_popularidade_empresarios;
         $rodada->popularidade_trabalhadores += $medida->diferenca_popularidade_trabalhadores;
         $rodada->popularidade_estado += $medida->diferenca_popularidade_estado;

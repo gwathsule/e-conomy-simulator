@@ -38,10 +38,10 @@
                 <input type="number" class="form-control" id="diferenca" name="popularidade_estado" value="{{old('popularidade_estado')}}">
             </div>
             <div class="form-group col-md-2">
-                <label for="tipo">Tipo</label>
+                <label for="tipo">Tipo da Notícia</label>
                 <select id="tipo" name="tipo" class="form-control">
-                    @foreach(array_keys($medidaRepository->getTiposDeMedida()) as $tipo)
-                        <option value="{{$tipo}}" {{old('tipo') == $tipo ? 'selected' : ''}}>{{$medidaRepository->getTiposDeMedida()[$tipo]}}</option>
+                    @foreach(array_keys($medidaRepository->getTiposDeNoticias()) as $tipo)
+                        <option value="{{$tipo}}" {{old('tipo') == $tipo ? 'selected' : ''}}>{{$medidaRepository->getTiposDeNoticias()[$tipo]}}</option>
                     @endforeach
                 </select>
             </div>
@@ -52,6 +52,12 @@
                         <option value="{{$evento}}" {{old('codigo_evento') == $evento ? 'selected' : ''}}>{{$eventoRepository->allEventos()[$evento]}}</option>
                     @endforeach
                 </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="nome">Titulo da Notícia</label>
+                <input type="text" class="form-control" id="titulo_noticia" name="titulo_noticia" value="{{old('titulo_noticia')}}">
             </div>
         </div>
         <div class="form-row">

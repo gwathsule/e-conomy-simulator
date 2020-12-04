@@ -21,8 +21,9 @@ class MedidasSeeder extends Seeder
         $medida1 = new Medida();
         $medida1->codigo_evento = AlterarGastoGovernamental::CODE;
         $medida1->nome = 'Aumentar Gasto Governamental';
+        $medida1->titulo_noticia = 'Governo aumenta gastos nesse mês';
         $medida1->rodadas_para_excutar = 1;
-        $medida1->tipo = Medida::TIPO_ESTATAL;
+        $medida1->tipo_noticia = Medida::TIPO_NOTICIA_ESTATAL;
         $medida1->texto_noticia = "{a/o} {ministro/a} {nomeMinistro} anunciou neste mês o aumento da verba destinado ao senado. 10 milhões de {moeda} serão destinados a gastos do governo.";
         $medida1->diferenca_financas = +10000000;
         $medida1->diferenca_popularidade_empresarios = -10;
@@ -40,8 +41,9 @@ class MedidasSeeder extends Seeder
         $medida2 = new Medida();
         $medida2->codigo_evento = AlterarGastoGovernamental::CODE;
         $medida2->nome = 'Reduzir Gasto Governamental';
+        $medida2->titulo_noticia = 'Governo reduz gastos nesse mês';
         $medida2->rodadas_para_excutar = 1;
-        $medida2->tipo = Medida::TIPO_LIBERAL;
+        $medida2->tipo_noticia = Medida::TIPO_NOTICIA_LIBERAL;
         $medida2->texto_noticia = "{a/o} {ministro/a} {nomeMinistro} anunciou neste mês uma redução nos gastos governamentais, ainda não se sabe o porquê. O governo não contará com 10 milhões de {moeda} esse mês.";
         $medida2->diferenca_financas = -10000000;
         $medida2->diferenca_popularidade_empresarios = +10;
@@ -59,8 +61,9 @@ class MedidasSeeder extends Seeder
         $medida3 = new Medida();
         $medida3->codigo_evento = AlterarGastoGovernamentalMensal::CODE;
         $medida3->nome = 'Aumentar Gasto Governamental Mensal';
+        $medida3->titulo_noticia = 'Governo decide aumentar gastos mensais';
         $medida3->rodadas_para_excutar = 1;
-        $medida3->tipo = Medida::TIPO_ESTATAL;
+        $medida3->tipo_noticia = Medida::TIPO_NOTICIA_ESTATAL;
         $medida3->texto_noticia = "{a/o} {ministro/a} {nomeMinistro} anunciou neste mês o aumento da verba gasta mensalmente, destinado ao governo. 500 mil {moeda} a mais serão destinados a gastos do governo todo mês.";
         $medida3->diferenca_financas = +500000;
         $medida3->diferenca_popularidade_empresarios = -10;
@@ -78,8 +81,9 @@ class MedidasSeeder extends Seeder
         $medida4 = new Medida();
         $medida4->codigo_evento = AlterarGastoGovernamentalMensal::CODE;
         $medida4->nome = 'Reduzir Gasto Governamental Mensal';
+        $medida4->titulo_noticia = 'Governo decide reduzir gastos mensais';
         $medida4->rodadas_para_excutar = 1;
-        $medida4->tipo = Medida::TIPO_LIBERAL;
+        $medida4->tipo_noticia = Medida::TIPO_NOTICIA_LIBERAL;
         $medida4->texto_noticia = "{a/o} {ministro/a} {nomeMinistro} anunciou neste mês uma redução da verba gasta mensalmente pelo governo. 500 mil {moeda} serão retiradas dos cofres públicos todos os meses.";
         $medida4->diferenca_financas = -500000;
         $medida4->diferenca_popularidade_empresarios = +10;
@@ -97,8 +101,9 @@ class MedidasSeeder extends Seeder
         $medida5 = new Medida();
         $medida5->codigo_evento = AlterarImpostoDeRenda::CODE;
         $medida5->nome = 'Aumentar Imposto de Renda';
+        $medida5->titulo_noticia = '{ministro/a} {nomeMinistro} anuncia aumento no IR';
         $medida5->rodadas_para_excutar = 1;
-        $medida5->tipo = Medida::TIPO_ESTATAL;
+        $medida5->tipo_noticia = Medida::TIPO_NOTICIA_ESTATAL;
         $medida5->texto_noticia = "{a/o} {ministro/a} {nomeMinistro} anunciou um aumento do imposto de renda de 5%. A partir de hoje o imposto será de {imposto_de_renda}%";
         $medida5->diferenca_financas = +5;
         $medida5->diferenca_popularidade_empresarios = -10;
@@ -116,8 +121,9 @@ class MedidasSeeder extends Seeder
         $medida6 = new Medida();
         $medida6->codigo_evento = AlterarImpostoDeRenda::CODE;
         $medida6->nome = 'Reduzir imposto de renda';
+        $medida6->titulo_noticia = '{nomeMinistro} de bom humor, anuncia redução no IR';
         $medida6->rodadas_para_excutar = 1;
-        $medida6->tipo = Medida::TIPO_LIBERAL;
+        $medida6->tipo_noticia = Medida::TIPO_NOTICIA_LIBERAL;
         $medida6->texto_noticia = "{a/o} {ministro/a} {nomeMinistro} anunciou uma redução no imposto de renda de 5%. A partir de hoje o imposto será de {imposto_de_renda}%";
         $medida6->diferenca_financas = -5;
         $medida6->diferenca_popularidade_empresarios = +10;
@@ -135,8 +141,9 @@ class MedidasSeeder extends Seeder
         $medida7 = new Medida();
         $medida7->codigo_evento = CriarTransferencia::CODE;
         $medida7->nome = 'Criar Transferencias';
+        $medida7->titulo_noticia = 'Desvio de dinheiro ou politica social?';
         $medida7->rodadas_para_excutar = 1;
-        $medida7->tipo = Medida::TIPO_ESTATAL;
+        $medida7->tipo_noticia = Medida::TIPO_NOTICIA_ESTATAL;
         $medida7->texto_noticia = '{a/o} {ministro/a} {nomeMinistro} anunciou o programa social Bolsa Familia, que irá destinar a população carente cerca de 500 mil {moeda}.';
         $medida7->diferenca_financas = 500000;
         $medida7->diferenca_popularidade_empresarios = +5;

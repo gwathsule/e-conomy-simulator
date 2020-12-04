@@ -56,7 +56,7 @@ class JogoTest extends TestCase
         $this->assertEquals(ConfiguracoesGerais::IMPOSTO_DE_RENDA_INICIAL, $primeiraRodada->imposto_renda);
         $this->assertEquals(ConfiguracoesGerais::POPULACAO_INICIAL, $primeiraRodada->populacao);
         $this->assertEquals(ConfiguracoesGerais::PMGC_INICIAL, $primeiraRodada->pmgc);
-        $this->assertEquals(null, $primeiraRodada->medida);
+        $this->assertEquals(null, $primeiraRodada->medida_id);
         $this->assertEquals([], $primeiraRodada->noticias);
         ///** @var Evento $eventoInicialPib */
         //$eventoInicialPib = $jogo->eventos()->where('code', CalcularPrevisaoAnualPIB::CODE)->first();

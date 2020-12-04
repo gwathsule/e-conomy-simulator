@@ -78,7 +78,7 @@ class CriarNovoJogo extends Service
         $primeiraRodada->popularidade_trabalhadores = ConfiguracoesGerais::POPULARIDADE_TRABALHADORES;
         $primeiraRodada->popularidade_estado = ConfiguracoesGerais::POPULARIDADE_ESTADO;
         $primeiraRodada->transferencias = 0;
-        $primeiraRodada->medida = null;
+        $primeiraRodada->medida_id = null;
         $primeiraRodada->noticias = $this->noticiasIniciais();
         $primeiraRodada->rodada = 0;
 

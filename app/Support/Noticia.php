@@ -30,7 +30,7 @@ class Noticia
         return [
             'url_imagem' => $this->medida->url_imagem,
             'text' => $this->buildText(),
-            'tipo' => $this->medida->tipo,
+            'tipo' => $this->medida->tipo_noticia,
         ];
     }
 }

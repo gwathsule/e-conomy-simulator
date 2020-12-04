@@ -11,9 +11,9 @@ class MedidaRepository extends Repository
         return Medida::class;
     }
 
-    public function getTiposDeMedida() : array
+    public function getTiposDeNoticias() : array
     {
-        return Medida::TIPOS_MEDIDA;
+        return Medida::TIPOS_NOTICIA;
     }
 
     public function getAllMedidas() : array

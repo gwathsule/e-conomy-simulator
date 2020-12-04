@@ -87,7 +87,7 @@ class CriarNovaRodada extends Service
             $novaRodada->investimentos += $novaRodada->investimentos_fixos;
             $novaRodada->noticias = $noticias->toArray();
             if(! is_null($medida))
-                $novaRodada->medida = $medida->codigo_evento;
+                $novaRodada->medida_id = $medida->id;
             $this->rodadaRepository->save($novaRodada);
         } catch (Exception $exception) {
             DB::rollBack();
@@ -111,7 +111,7 @@ class CriarNovaRodada extends Service
         $novaRodada->pib_previsao_anual = $ultimaRodada->pib_previsao_anual;
         $novaRodada->populacao = $ultimaRodada->populacao;
         $novaRodada->imposto_renda = $ultimaRodada->imposto_renda;
-        $novaRodada->medida = null;
+        $novaRodada->medida_id = null;
         $novaRodada->noticias = [];
         $novaRodada->investimentos_fixos = $ultimaRodada->investimentos_fixos;
         $novaRodada->gastos_governamentais_fixos = $ultimaRodada->gastos_governamentais_fixos;

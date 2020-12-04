@@ -25,6 +25,7 @@ class MedidaController extends Controller
                     'imagem_noticia' => ['required', 'file', 'image'],
                     'diferenca' => ['required', 'numeric'],
                     'texto_noticia' => ['required'],
+                    'titulo_noticia' => ['required'],
                     'tipo' => ['required', 'max:255'],
                     'popularidade_empresarios' => ['required', 'int', 'max:100', 'min:-100'],
                     'popularidade_trabalhadores' => ['required', 'int', 'max:100', 'min:-100'],
@@ -36,8 +37,9 @@ class MedidaController extends Controller
             $medida->codigo_evento = $request['codigo_evento'];
             $medida->nome = $request['nome'];
             $medida->rodadas_para_excutar = $request['rodadas_para_excutar'];
-            $medida->tipo = $request['tipo'];
+            $medida->tipo_noticia = $request['tipo'];
             $medida->texto_noticia = $request['texto_noticia'];
+            $medida->titulo_noticia = $request['titulo_noticia'];
             $medida->diferenca_financas = $request['diferenca'];
             $medida->diferenca_popularidade_empresarios = $request['popularidade_empresarios'];
             $medida->diferenca_popularidade_trabalhadores = $request['popularidade_trabalhadores'];
@@ -68,6 +70,7 @@ class MedidaController extends Controller
                     'imagem_noticia' => ['file', 'image'],
                     'diferenca' => ['required', 'numeric'],
                     'texto_noticia' => ['required'],
+                    'titulo_noticia' => ['required'],
                     'tipo' => ['required', 'max:255'],
                     'popularidade_empresarios' => ['required', 'int', 'max:100', 'min:-100'],
                     'popularidade_trabalhadores' => ['required', 'int', 'max:100', 'min:-100'],
@@ -80,8 +83,9 @@ class MedidaController extends Controller
             $medida->codigo_evento = $request['codigo_evento'];
             $medida->nome = $request['nome'];
             $medida->rodadas_para_excutar = $request['rodadas_para_excutar'];
-            $medida->tipo = $request['tipo'];
+            $medida->tipo_noticia = $request['tipo'];
             $medida->texto_noticia = $request['texto_noticia'];
+            $medida->titulo_noticia = $request['titulo_noticia'];
             $medida->diferenca_financas = $request['diferenca'];
             $medida->diferenca_popularidade_empresarios = $request['popularidade_empresarios'];
             $medida->diferenca_popularidade_trabalhadores = $request['popularidade_trabalhadores'];

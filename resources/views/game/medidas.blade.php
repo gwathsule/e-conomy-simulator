@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         @foreach(\App\Domains\Medida\Medida::all() as $medida)
-            <a href="#"><li style="list-style: none">{{$medida->nome}}</li></a>
+            <a href="{{route('nova-rodada',  ['jogoId' => $jogo->id, 'medidaId' => $medida->id])}}"><li style="list-style: none">{{$medida->nome}}</li></a>
         @endforeach
     </div>
 </div>

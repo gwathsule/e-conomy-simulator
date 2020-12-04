@@ -15,7 +15,7 @@ class CreateRodadaTable extends Migration
     {
         Schema::create('rodada', function (Blueprint $table) {
             $table->id();
-            $table->string('medida')->nullable();
+            $table->unsignedInteger('medida_id')->nullable();
             $table->json('noticias')->nullable();
             $table->unsignedInteger('rodada')->nullable();
             $table->integer('populacao')->nullable();
