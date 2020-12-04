@@ -2,7 +2,7 @@
     $ultimaRodada = $jogo->rodadas->last()->toArray();
 @endphp
 @extends('layouts.app')
-@section('title') Game @endsection
+@section('title') E-Conomy Simulator @endsection
 @section('css_adicionais')
     <script src="{{asset('js/chartjs.js')}}"></script>
     <script src="{{asset('js/grafico.js')}}"></script>

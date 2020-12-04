@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Domains\Medida\Medida;
 use App\Domains\Rodada\Rodada;
 
 abstract class Evento
@@ -18,5 +19,5 @@ abstract class Evento
      * @param array $data
      * @return array
      */
-    abstract public function modificacoes(Rodada $rodada, array $data) : array;
+    abstract public function modificacoes(Rodada $rodada, Medida $medida) : array;
 }

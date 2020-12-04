@@ -20,7 +20,7 @@ class RodadaTest extends TestCase
         /** @var CriarNovaRodada $servico */
         $servico = app()->make(CriarNovaRodada::class);
         $dataPadrao = [
-            'medidas' => [],
+            'medida_id' => null,
             'jogo_id' => $jogo->id,
         ];
         for($i = 0; $i<=22; $i++){

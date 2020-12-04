@@ -24,10 +24,8 @@ class AlterarGastoGovernamentalMensal extends Evento
         return self::RODADAS;
     }
 
-    public function modificacoes(Rodada $rodada, array $data): array
+    public function modificacoes(Rodada $rodada, Medida $medida): array
     {
-        /** @var Medida $medida */
-        $medida = (new MedidaRepository())->getById($data['medida_id']);
         $rodada->gastos_governamentais_fixos += $medida->diferenca_financas;
         $rodada->popularidade_empresarios += $medida->diferenca_popularidade_empresarios;
         $rodada->popularidade_trabalhadores += $medida->diferenca_popularidade_trabalhadores;

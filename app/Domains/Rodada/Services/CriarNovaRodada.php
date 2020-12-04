@@ -2,10 +2,15 @@
 
 namespace App\Domains\Rodada\Services;
 
-use App\Domains\Evento\Evento;
 use App\Domains\Evento\EventoRepository;
+use App\Domains\Evento\Eventos\AlterarGastoGovernamental;
+use App\Domains\Evento\Eventos\AlterarGastoGovernamentalMensal;
+use App\Domains\Evento\Eventos\AlterarImpostoDeRenda;
+use App\Domains\Evento\Eventos\CriarTransferencia;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
+use App\Domains\Medida\Medida;
+use App\Domains\Medida\MedidaRepository;
 use App\Domains\Rodada\Rodada;
 use App\Domains\Rodada\RodadaRepository;
 use App\Support\Service;
@@ -46,8 +51,7 @@ class CriarNovaRodada extends Service
             public function rules()
             {
                 return [
-                    'medidas.*.data' => ['array'],
-                    'medidas.*.code' => ['string'],
+                    'medida_id' => ['int', 'nullable'],
                     'jogo_id' => ['int', 'required'],
                 ];
             }
@@ -69,20 +73,10 @@ class CriarNovaRodada extends Service
             $jogo = $this->jogoRepository->getById($data['jogo_id']);
             $novaRodada = $this->criarNovaRodada($jogo);
             $noticias = collect();
-            $jogo->eventos->each(function (Evento $evento, $key) use ($noticias, $novaRodada) {
-                if ($evento->rodadas_restantes == 1) {
-                    $noticia = $this->executarEvento($evento, $novaRodada);
-                    if (!is_null($noticia)) {
-                        $noticias->add($noticia);
-                    }
-                    $this->eventoRepository->delete($evento);
-                } else {
-                    $evento->rodadas_restantes--;
-                    $this->eventoRepository->update($evento);
-                }
-            });
-
-            foreach ($data['medidas'] as $medida) {
+            $medida = null;
+            if(! is_null($data['medida_id'])) {
+                /** @var Medida $medida */
+                $medida = (new MedidaRepository())->getById($data['medida_id']);
                 $noticia = $this->executarMedida($medida, $novaRodada);
                 if (!is_null($noticia)) {
                     $noticias->add($noticia);
@@ -92,7 +86,8 @@ class CriarNovaRodada extends Service
             $novaRodada->gastos_governamentais += $novaRodada->gastos_governamentais_fixos;
             $novaRodada->investimentos += $novaRodada->investimentos_fixos;
             $novaRodada->noticias = $noticias->toArray();
-            $novaRodada->medidas = $data['medidas'];
+            if(! is_null($medida))
+                $novaRodada->medida = $medida->codigo_evento;
             $this->rodadaRepository->save($novaRodada);
         } catch (Exception $exception) {
             DB::rollBack();
@@ -116,56 +111,34 @@ class CriarNovaRodada extends Service
         $novaRodada->pib_previsao_anual = $ultimaRodada->pib_previsao_anual;
         $novaRodada->populacao = $ultimaRodada->populacao;
         $novaRodada->imposto_renda = $ultimaRodada->imposto_renda;
-        $novaRodada->medidas = [];
+        $novaRodada->medida = null;
         $novaRodada->noticias = [];
         $novaRodada->investimentos_fixos = $ultimaRodada->investimentos_fixos;
         $novaRodada->gastos_governamentais_fixos = $ultimaRodada->gastos_governamentais_fixos;
         $novaRodada->transferencias = 0;
         $novaRodada->gastos_governamentais = 0;
         $novaRodada->investimentos = 0;
+        $novaRodada->popularidade_empresarios = $ultimaRodada->popularidade_empresarios;
+        $novaRodada->popularidade_trabalhadores = $ultimaRodada->popularidade_trabalhadores;
+        $novaRodada->popularidade_estado = $ultimaRodada->popularidade_estado;
         $this->rodadaRepository->save($novaRodada);
         return $novaRodada;
     }
 
-    private function executarEvento(Evento $evento, Rodada $rodada)
+    private function executarMedida(Medida $medida, Rodada $rodada)
     {
         $rodada->refresh();
-        switch ($evento->code) {
-            case CalcularPrevisaoAnualPIB::CODE:
-                return (new CalcularPrevisaoAnualPIB())->modificacoes($rodada, $evento->data);
-            case CalcularPibAnual::CODE:
-                return (new CalcularPibAnual())->modificacoes($rodada, $evento->data);
+        switch ($medida->codigo_evento) {
+            case AlterarGastoGovernamental::CODE:
+                return (new AlterarGastoGovernamental())->modificacoes($rodada, $medida);
+            case AlterarGastoGovernamentalMensal::CODE:
+                return (new AlterarGastoGovernamentalMensal())->modificacoes($rodada, $medida);
+            case AlterarImpostoDeRenda::CODE:
+                return (new AlterarImpostoDeRenda())->modificacoes($rodada, $medida);
+            case CriarTransferencia::CODE:
+                return (new CriarTransferencia())->modificacoes($rodada, $medida);
             default:
                 return null;
         }
-    }
-
-    private function executarMedida(array $medida, Rodada $rodada)
-    {
-        $rodada->refresh();
-        switch ($medida['code']) {
-            //case CalcularPrevisaoAnualPIB::CODE: //caso for uma medida instantanea
-            //    return (new CalcularPrevisaoAnualPIB())->modificacoes($jogo, $medida['data']);
-            //case CalcularPrevisaoAnualPIB::CODE:
-            //    return $this->criarEvento(
-            //        $medida['data'],
-            //        CalcularPrevisaoAnualPIB::RODADAS,
-            //        $medida['code'],
-            //        $rodada->jogo_id
-            //    );
-            default:
-                return null;
-        }
-    }
-
-    private function criarEvento(array $data, $nRodadas, $code, $jogoId)
-    {
-        $evento = new Evento();
-        $evento->data = $data;
-        $evento->rodadas_restantes = $nRodadas;
-        $evento->jogo_id = $jogoId;
-        $evento->code = $code;
-        $this->eventoRepository->save($evento);
-        return null;
     }
 }

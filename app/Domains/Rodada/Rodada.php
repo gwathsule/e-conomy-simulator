@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $popularidade_empresarios
  * @property float $popularidade_trabalhadores
  * @property float $popularidade_estado
- * @property array $medidas
+ * @property string $medida
  * @property array $noticias
  */
 class Rodada extends Model
@@ -28,7 +28,6 @@ class Rodada extends Model
     protected $table = 'rodada';
 
     protected $casts = [
-        'medidas' => 'array',
         'noticias' => 'array',
     ];
 
