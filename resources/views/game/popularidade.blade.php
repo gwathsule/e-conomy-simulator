@@ -4,9 +4,9 @@
     </div>
     <div class="card-body">
         <div class="team">
-            <li style="font-size: 15px; list-style: none">Empresarios: 16%</li>
-            <li style="font-size: 15px; list-style: none">Trabalhadores: 16%</li>
-            <li style="font-size: 15px; list-style: none">Estado: 16%</li>
+            <li style="font-size: 15px; list-style: none">Empresarios: {{$ultimaRodada['popularidade_empresarios']}}%</li>
+            <li style="font-size: 15px; list-style: none">Trabalhadores: {{$ultimaRodada['popularidade_trabalhadores']}}%</li>
+            <li style="font-size: 15px; list-style: none">Estado: {{$ultimaRodada['popularidade_estado']}}%</li>
         </div>
     </div>
 </div>

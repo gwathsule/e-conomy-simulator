@@ -4,8 +4,6 @@ namespace App\Domains\Rodada\Services;
 
 use App\Domains\Evento\Evento;
 use App\Domains\Evento\EventoRepository;
-use App\Domains\Evento\Eventos\CalcularPibAnual;
-use App\Domains\Evento\Eventos\CalcularPrevisaoAnualPIB;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
 use App\Domains\Rodada\Rodada;

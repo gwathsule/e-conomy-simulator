@@ -1,3 +1,6 @@
+@php
+    $ultimaRodada = $jogo->rodadas->last()->toArray();
+@endphp
 @extends('layouts.app')
 @section('title') Game @endsection
 @section('css_adicionais')

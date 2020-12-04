@@ -15,4 +15,9 @@ class MedidaRepository extends Repository
     {
         return Medida::TIPOS_MEDIDA;
     }
+
+    public function getAllMedidas() : array
+    {
+        return Medida::all();
+    }
 }

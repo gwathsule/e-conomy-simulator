@@ -74,9 +74,9 @@ class CriarNovoJogo extends Service
         $primeiraRodada->investimentos = ConfiguracoesGerais::INVESTIMENTOS_POR_RODADA;
         $primeiraRodada->gastos_governamentais = ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS_POR_RODADA;
         $primeiraRodada->gastos_governamentais_fixos = ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS_POR_RODADA;
-        $primeiraRodada->popularidade_empresarios = ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS_POR_RODADA;
-        $primeiraRodada->popularidade_trabalhadores = ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS_POR_RODADA;
-        $primeiraRodada->popularidade_estado = ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS_POR_RODADA;
+        $primeiraRodada->popularidade_empresarios = ConfiguracoesGerais::POPULARIDADE_EMPRESARIOS;
+        $primeiraRodada->popularidade_trabalhadores = ConfiguracoesGerais::POPULARIDADE_TRABALHADORES;
+        $primeiraRodada->popularidade_estado = ConfiguracoesGerais::POPULARIDADE_ESTADO;
         $primeiraRodada->transferencias = 0;
         $primeiraRodada->medidas = [];
         $primeiraRodada->noticias = $this->noticiasIniciais();
