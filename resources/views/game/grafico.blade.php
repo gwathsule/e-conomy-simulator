@@ -8,71 +8,86 @@
     var config = {
         type: 'line',
         data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'PIB',
-                data: [
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor()
-                ],
-                backgroundColor: window.chartColors.red,
-                borderColor: window.chartColors.red,
-                fill: false,
-                borderDash: [5, 5],
-                pointRadius: 15,
-                pointHoverRadius: 10,
-            }, {
-                label: 'Gasto Governamentais',
-                data: [
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor()
-                ],
-                backgroundColor: window.chartColors.blue,
-                borderColor: window.chartColors.blue,
-                fill: false,
-                borderDash: [5, 5],
-                pointRadius: [2, 4, 6, 18, 0, 12, 20],
-            }, {
-                label: 'Investimentos',
-                data: [
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor()
-                ],
-                backgroundColor: window.chartColors.green,
-                borderColor: window.chartColors.green,
-                fill: false,
-                pointHoverRadius: 30,
-            }, {
-                label: 'Transferências',
-                data: [
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor()
-                ],
-                backgroundColor: window.chartColors.yellow,
-                borderColor: window.chartColors.yellow,
-                fill: false,
-                pointHitRadius: 20,
-            }]
+            labels: [
+                @for($i=0; $i< $jogo->rodadas->count(); $i++)
+                {{$i}},
+                @endfor
+            ],
+            datasets: [
+                {
+                    label: 'PIB',
+                    data: [
+                        @foreach($jogo->rodadas as $rodada)
+                        {{round($rodada->pib())}},
+                        @endforeach
+                    ],
+                    backgroundColor: window.chartColors.purple,
+                    borderColor: window.chartColors.purple,
+                    fill: false,
+                    borderDash: [5, 5],
+                },
+                {
+                    label: 'Consumo',
+                    data: [
+                        @foreach($jogo->rodadas as $rodada)
+                        {{round($rodada->consumo())}},
+                        @endforeach
+                    ],
+                    backgroundColor: window.chartColors.blue,
+                    borderColor: window.chartColors.blue,
+                    fill: false,
+                    borderDash: [5, 5],
+                },
+                {
+                    label: 'Transferencias',
+                    data: [
+                        @foreach($jogo->rodadas as $rodada)
+                        {{round($rodada->transferencias)}},
+                        @endforeach
+                    ],
+                    backgroundColor: window.chartColors.green,
+                    borderColor: window.chartColors.green,
+                    fill: false,
+                    borderDash: [5, 5],
+                },
+                {
+                    label: 'Impostos',
+                    data: [
+                        @foreach($jogo->rodadas as $rodada)
+                        {{round($rodada->impostos())}},
+                        @endforeach
+                    ],
+                    backgroundColor: window.chartColors.yellow,
+                    borderColor: window.chartColors.yellow,
+                    fill: false,
+                    borderDash: [5, 5],
+                },
+                {
+                    label: 'Investimentos',
+                    data: [
+                        @foreach($jogo->rodadas as $rodada)
+                        {{round($rodada->investimentos)}},
+                        @endforeach
+                    ],
+                    backgroundColor: window.chartColors.orange,
+                    borderColor: window.chartColors.orange,
+                    fill: false,
+                    borderDash: [5, 5],
+                },
+                {
+                    label: 'Gst. Gov.',
+                    data: [
+                        @foreach($jogo->rodadas as $rodada)
+                        {{round($rodada->gastos_governamentais)}},
+                        @endforeach
+                    ],
+                    backgroundColor: window.chartColors.red,
+                    borderColor: window.chartColors.red,
+                    fill: false,
+                    borderDash: [5, 5],
+                },
+
+            ]
         },
         options: {
             responsive: true,
@@ -87,14 +102,14 @@
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'Month'
+                        labelString: 'Rodadas'
                     }
                 }],
                 yAxes: [{
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'Value'
+                        labelString: '{{$jogo->moeda}}'
                     }
                 }]
             },
