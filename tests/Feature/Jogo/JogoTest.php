@@ -28,7 +28,6 @@ class JogoTest extends TestCase
             'ministro' => $dadosNovoJogo->ministro,
             'genero' => $dadosNovoJogo->genero,
             'personagem' => $dadosNovoJogo->personagem,
-            'presidente' => $dadosNovoJogo->presidente,
         ];
         Auth::login(factory(User::class)->create());
         /** @var CriarNovoJogo $servico */
@@ -39,7 +38,6 @@ class JogoTest extends TestCase
         $this->assertEquals($dadosNovoJogo->pais, $jogo->pais);
         $this->assertEquals($dadosNovoJogo->moeda, $jogo->moeda);
         $this->assertEquals($dadosNovoJogo->ministro, $jogo->ministro);
-        $this->assertEquals($dadosNovoJogo->presidente, $jogo->presidente);
         $this->assertEquals(ConfiguracoesGerais::QTD_RODADAS, $jogo->qtd_rodadas);
         $this->assertCount(1, $jogo->rodadas);
         //$this->assertCount(2, $jogo->eventos);

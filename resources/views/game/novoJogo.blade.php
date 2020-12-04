@@ -37,13 +37,9 @@
             </div>
 
             <div class="form-row mb-4 justify-content-center">
-                <div class="col-3">
+                <div class="col-6">
                     <label for="ministro"><p class="text-form01 mb-0">MINISTRO(A) DA ECONOMIA</p></label>
                     <input type="text" name="ministro" value="{{old('ministro')}}" id="ministro" class="form-control text-form02" placeholder="Esse será você!">
-                </div>
-                <div class="col-3">
-                    <label for="presidente"><p class="text-form01 mb-0">PRESIDENTE</p></label>
-                    <input type="text" name="presidente" value="{{old('presidente')}}" id="presidente" class="form-control text-form02" placeholder="E esse seu chefe">
                 </div>
             </div>
             <div class="form-row mb-4 justify-content-center">

@@ -42,7 +42,6 @@ class AlterarJogo extends Service
                     'ministro' => ['required', 'string'],
                     'genero' => ['required', 'string', 'max:1', Rule::in(['M', 'F'])],
                     'personagem' => ['required', 'int'],
-                    'presidente' => ['required', 'string'],
                     'descricao' => ['required', 'string'],
                     'rodadas' => ['required', 'int', 'min:12'],
                 ];

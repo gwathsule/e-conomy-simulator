@@ -2,7 +2,9 @@
 
 namespace App\Domains\Medida;
 
+use App\Domains\Jogo\Jogo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
  * @property int $id
@@ -40,5 +42,25 @@ class Medida extends Model
     {
         if($this->tipo_noticia == self::TIPO_NOTICIA_LIBERAL) return 'Jornal Liberal';
         if($this->tipo_noticia == self::TIPO_NOTICIA_ESTATAL) return 'Jornal Estatal';
+    }
+
+    public function buildTituloNoticia(Jogo $jogo)
+    {
+        return $this->buildText($this->titulo_noticia, $jogo);
+    }
+
+    public function buildTextoNoticia(Jogo $jogo)
+    {
+        return $this->buildText($this->texto_noticia, $jogo);
+    }
+
+    private function buildText(string $texto, Jogo $jogo) : string
+    {
+        $texto = Str::replaceFirst('{a/o}', $jogo->genero == 'm' ? 'o' : 'a', $texto);
+        $texto = Str::replaceFirst('{ministro/a}', $jogo->genero == 'm' ? 'ministro' : 'ministra', $texto);
+        $texto = Str::replaceFirst('{nomeMinistro}', $jogo->ministro, $texto);
+        $texto = Str::replaceFirst('{moeda}', $jogo->moeda, $texto);
+        $texto = Str::replaceFirst('{pais}', $jogo->pais, $texto);
+        return $texto;
     }
 }

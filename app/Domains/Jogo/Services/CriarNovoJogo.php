@@ -46,7 +46,6 @@ class CriarNovoJogo extends Service
                     'ministro' => ['required', 'string'],
                     'genero' => ['required', 'string', 'max:1', Rule::in(['M', 'F'])],
                     'personagem' => ['required', 'int'],
-                    'presidente' => ['required', 'string'],
                 ];
             }
         })->validate($data);
@@ -59,7 +58,6 @@ class CriarNovoJogo extends Service
         $novoJogo->pais = $data['pais'];
         $novoJogo->moeda = $data['moeda'];
         $novoJogo->ministro = $data['ministro'];
-        $novoJogo->presidente = $data['presidente'];
         $novoJogo->genero = $data['genero'];
         $novoJogo->personagem = $data['personagem'];
         $novoJogo->ativo = true;

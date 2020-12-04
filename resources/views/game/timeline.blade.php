@@ -10,11 +10,11 @@
                 <div class="card-body">
                     <div class="timeline-item-header">
                         <img src="{{$medida->getAvatarNoticia()}}" alt="" />
-                        <p>{{$medida->titulo_noticia}}</p>
+                        <p>{{$medida->buildTituloNoticia($jogo)}}</p>
                         <small>{{$medida->getNomeJornal()}}</small>
                     </div>
                     <div class="timeline-item-post">
-                        <p>{{$medida->texto_noticia}}</p>
+                        <p>{{$medida->buildTextoNoticia($jogo)}}</p>
                         <img src="{{\Illuminate\Support\Facades\Storage::url($medida->url_imagem)}}" alt="" />
                     </div>
                 </div>

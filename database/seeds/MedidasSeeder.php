@@ -104,7 +104,7 @@ class MedidasSeeder extends Seeder
         $medida5->titulo_noticia = '{ministro/a} {nomeMinistro} anuncia aumento no IR';
         $medida5->rodadas_para_excutar = 1;
         $medida5->tipo_noticia = Medida::TIPO_NOTICIA_ESTATAL;
-        $medida5->texto_noticia = "{a/o} {ministro/a} {nomeMinistro} anunciou um aumento do imposto de renda de 5%. A partir de hoje o imposto será de {imposto_de_renda}%";
+        $medida5->texto_noticia = "{a/o} {ministro/a} {nomeMinistro} anunciou um aumento do imposto de renda de 5%.J";
         $medida5->diferenca_financas = +5;
         $medida5->diferenca_popularidade_empresarios = -10;
         $medida5->diferenca_popularidade_trabalhadores = -10;
