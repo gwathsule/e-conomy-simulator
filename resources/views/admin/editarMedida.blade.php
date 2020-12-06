@@ -60,6 +60,10 @@
                 <label for="nome">Titulo da Notícia</label>
                 <input type="text" class="form-control" id="titulo_noticia" name="titulo_noticia" value="{{$medida->titulo_noticia}}">
             </div>
+            <div class="form-group col-md-6">
+                <label for="nome">Resumo da Notícia</label>
+                <input type="text" class="form-control" id="resumo" name="resumo" value="{{$medida->resumo}}">
+            </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-12">

@@ -5,7 +5,7 @@
             <p class="text-center h6 mt-2 nome_ministro">{{$jogo->ministro}}</p>
             <table style="align-content: center">
                 <tr>
-                    <td><a href="{{url('logout')}}"><button class="btn btn-theme btn-sm btn_gabinete">Logout</button></a></td>
+                    <td><a href="{{url('logout')}}"><button class="btn btn-theme btn-sm btn_gabinete" >Logout</button></a></td>
                     <td><a href="{{route('novo-jogo')}}"><button class="btn btn-theme btn-sm btn_gabinete">Novo Jogo</button></a></td>
                 </tr>
             </table>
@@ -31,6 +31,10 @@
                 <p>
                     <strong>Transferencias</strong> <br>
                     <small>$$ {{number_format($ultimaRodada['transferencias'], 2, ',', '.')}}</small>
+                </p>
+                <p>
+                    <strong>Imposto de renda</strong> <br>
+                    <small>{{$ultimaRodada['imposto_renda'] * 100}}%</small>
                 </p>
                 <p>
                     <strong>Impostos</strong> <br>

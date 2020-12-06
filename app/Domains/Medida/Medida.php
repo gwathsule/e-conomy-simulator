@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
  * @property int $id
  * @property string $codigo_evento
  * @property string $nome
+ * @property string $resumo
  * @property string $rodadas_para_excutar
  * @property string $url_imagem
  * @property string $tipo_noticia

@@ -21,6 +21,7 @@ class MedidasSeeder extends Seeder
         $medida1 = new Medida();
         $medida1->codigo_evento = AlterarGastoGovernamental::CODE;
         $medida1->nome = 'Aumentar Gasto Governamental';
+        $medida1->resumo = 'Gasto Governamental +10.000.000';
         $medida1->titulo_noticia = 'Governo aumenta gastos nesse mês';
         $medida1->rodadas_para_excutar = 1;
         $medida1->tipo_noticia = Medida::TIPO_NOTICIA_ESTATAL;
@@ -41,6 +42,7 @@ class MedidasSeeder extends Seeder
         $medida2 = new Medida();
         $medida2->codigo_evento = AlterarGastoGovernamental::CODE;
         $medida2->nome = 'Reduzir Gasto Governamental';
+        $medida2->resumo = 'Gasto Governamental -10.000.000';
         $medida2->titulo_noticia = 'Governo reduz gastos nesse mês';
         $medida2->rodadas_para_excutar = 1;
         $medida2->tipo_noticia = Medida::TIPO_NOTICIA_LIBERAL;
@@ -61,6 +63,7 @@ class MedidasSeeder extends Seeder
         $medida3 = new Medida();
         $medida3->codigo_evento = AlterarGastoGovernamentalMensal::CODE;
         $medida3->nome = 'Aumentar Gasto Governamental Mensal';
+        $medida3->resumo = 'Gasto Governamental Mensal +500.000';
         $medida3->titulo_noticia = 'Governo decide aumentar gastos mensais';
         $medida3->rodadas_para_excutar = 1;
         $medida3->tipo_noticia = Medida::TIPO_NOTICIA_ESTATAL;
@@ -81,6 +84,7 @@ class MedidasSeeder extends Seeder
         $medida4 = new Medida();
         $medida4->codigo_evento = AlterarGastoGovernamentalMensal::CODE;
         $medida4->nome = 'Reduzir Gasto Governamental Mensal';
+        $medida4->resumo = 'Gasto Governamental Mensal -500.000';
         $medida4->titulo_noticia = 'Governo decide reduzir gastos mensais';
         $medida4->rodadas_para_excutar = 1;
         $medida4->tipo_noticia = Medida::TIPO_NOTICIA_LIBERAL;
@@ -101,6 +105,7 @@ class MedidasSeeder extends Seeder
         $medida5 = new Medida();
         $medida5->codigo_evento = AlterarImpostoDeRenda::CODE;
         $medida5->nome = 'Aumentar Imposto de Renda';
+        $medida5->resumo = 'Imposto de Renda +5%';
         $medida5->titulo_noticia = '{ministro/a} {nomeMinistro} anuncia aumento no IR';
         $medida5->rodadas_para_excutar = 1;
         $medida5->tipo_noticia = Medida::TIPO_NOTICIA_ESTATAL;
@@ -121,6 +126,7 @@ class MedidasSeeder extends Seeder
         $medida6 = new Medida();
         $medida6->codigo_evento = AlterarImpostoDeRenda::CODE;
         $medida6->nome = 'Reduzir imposto de renda';
+        $medida6->resumo = 'Imposto de Renda -5%';
         $medida6->titulo_noticia = '{nomeMinistro} de bom humor, anuncia redução no IR';
         $medida6->rodadas_para_excutar = 1;
         $medida6->tipo_noticia = Medida::TIPO_NOTICIA_LIBERAL;
@@ -141,6 +147,7 @@ class MedidasSeeder extends Seeder
         $medida7 = new Medida();
         $medida7->codigo_evento = CriarTransferencia::CODE;
         $medida7->nome = 'Criar Transferencias';
+        $medida7->resumo = 'Transferencias +500.000';
         $medida7->titulo_noticia = 'Desvio de dinheiro ou politica social?';
         $medida7->rodadas_para_excutar = 1;
         $medida7->tipo_noticia = Medida::TIPO_NOTICIA_ESTATAL;

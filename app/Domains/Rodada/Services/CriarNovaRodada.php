@@ -88,6 +88,24 @@ class CriarNovaRodada extends Service
             $novaRodada->noticias = $noticias->toArray();
             if(! is_null($medida))
                 $novaRodada->medida_id = $medida->id;
+
+            if($novaRodada->popularidade_empresarios < 0)
+                $novaRodada->popularidade_empresarios = 0;
+
+            if($novaRodada->popularidade_trabalhadores < 0)
+                $novaRodada->popularidade_trabalhadores = 0;
+
+            if($novaRodada->popularidade_estado < 0)
+                $novaRodada->popularidade_estado = 0;
+
+            if($novaRodada->popularidade_empresarios > 100)
+               $novaRodada->popularidade_empresarios = 100;
+            if($novaRodada->popularidade_trabalhadores > 100)
+               $novaRodada->popularidade_trabalhadores = 100;
+            if($novaRodada->popularidade_estado > 100)
+               $novaRodada->popularidade_estado = 100;
+
+
             $this->rodadaRepository->save($novaRodada);
         } catch (Exception $exception) {
             DB::rollBack();

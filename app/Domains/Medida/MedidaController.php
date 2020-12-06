@@ -21,6 +21,7 @@ class MedidaController extends Controller
                 [
                     'codigo_evento' => ['required', 'max:255'],
                     'nome' => ['required', 'max:255'],
+                    'resumo' => ['required', 'max:255'],
                     'rodadas_para_excutar' => ['required', 'max:255'],
                     'imagem_noticia' => ['required', 'file', 'image'],
                     'diferenca' => ['required', 'numeric'],
@@ -36,6 +37,7 @@ class MedidaController extends Controller
             $medida = new Medida();
             $medida->codigo_evento = $request['codigo_evento'];
             $medida->nome = $request['nome'];
+            $medida->resumo = $request['resumo'];
             $medida->rodadas_para_excutar = $request['rodadas_para_excutar'];
             $medida->tipo_noticia = $request['tipo'];
             $medida->texto_noticia = $request['texto_noticia'];
@@ -66,6 +68,7 @@ class MedidaController extends Controller
                     'id' => ['required', 'int'],
                     'codigo_evento' => ['required', 'max:255'],
                     'nome' => ['required', 'max:255'],
+                    'resumo' => ['required', 'max:255'],
                     'rodadas_para_excutar' => ['required', 'max:255'],
                     'imagem_noticia' => ['file', 'image'],
                     'diferenca' => ['required', 'numeric'],
@@ -82,6 +85,7 @@ class MedidaController extends Controller
             $medida = Medida::query()->find($request['id']);
             $medida->codigo_evento = $request['codigo_evento'];
             $medida->nome = $request['nome'];
+            $medida->resumo = $request['resumo'];
             $medida->rodadas_para_excutar = $request['rodadas_para_excutar'];
             $medida->tipo_noticia = $request['tipo'];
             $medida->texto_noticia = $request['texto_noticia'];

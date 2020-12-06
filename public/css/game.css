@@ -20,6 +20,11 @@ h4{
     font-size: 12px;
 }
 
+.tooltip-inner {
+    background-color: #29abe2;
+    border: solid;
+}
+
 .medidas a:hover{
     text-decoration: none;
     font-weight: bold;

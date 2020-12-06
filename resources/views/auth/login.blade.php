@@ -96,7 +96,7 @@
                         <input type="password" class="form-control input-lg" name="password" placeholder="Password">
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary btn-lg btn-block">Sign In</button>
+                        <button class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px">Sign In</button>
                         <span class="pull-right"><a href="{{route('register')}}">Registrar</a></span><span><a target="_blank" href="https://github.com/gwathsule/e-conomy-simulator">Github</a></span>
                     </div>
                 </form>

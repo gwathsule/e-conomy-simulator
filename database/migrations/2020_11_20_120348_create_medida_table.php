@@ -17,6 +17,7 @@ class CreateMedidaTable extends Migration
             $table->id();
             $table->string('codigo_evento')->nullable();
             $table->string('nome')->nullable();
+            $table->string('resumo')->nullable();
             $table->string('rodadas_para_excutar')->nullable();
             $table->string('url_imagem')->nullable();
             $table->string('tipo_noticia')->nullable();

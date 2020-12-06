@@ -28,7 +28,7 @@ class AlterarImpostoDeRenda extends Evento
     public function modificacoes(Rodada $rodada, Medida $medida): array
     {
         $rodada->imposto_renda += ($medida->diferenca_financas / 100);
-        if($rodada->gastos_governamentais <= 0) {
+        if($rodada->imposto_renda <= 0) {
             throw new UserException(__('user-messages.ir-menor-que-zero'));
         }
         $rodada->popularidade_empresarios += $medida->diferenca_popularidade_empresarios;
