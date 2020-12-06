@@ -2,19 +2,18 @@
 
 namespace App\Support\Exceptions;
 
-class ValidationException extends ExceptionBase
+class UserException extends ExceptionBase
 {
-    public const CODE = 422;
-    public const CATEGORY = 'validation_error';
+    private const CODE = 400;
+    private const CATEGORY = 'user_error';
     /**
      * @var array
      */
     private $errors;
 
-    public function __construct(array $errors, $userMessage = "", $internalMessage = "", $previous = null)
+    public function __construct($userMessage = "", $internalMessage = "", $previous = null)
     {
         parent::__construct($userMessage, $internalMessage, $previous);
-        $this->errors = $errors;
     }
 
     function getErrorCode(): int

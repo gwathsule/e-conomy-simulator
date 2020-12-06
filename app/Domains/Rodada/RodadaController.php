@@ -2,10 +2,10 @@
 
 namespace App\Domains\Rodada;
 
-use App\Domains\Jogo\Jogo;
 use App\Domains\Rodada\Services\CriarNovaRodada;
 use App\Http\Controllers\Controller;
 use App\Support\Exceptions\InternalErrorException;
+use App\Support\Exceptions\UserException;
 use App\Support\Exceptions\ValidationException;
 
 class RodadaController extends Controller
@@ -22,8 +22,9 @@ class RodadaController extends Controller
             return redirect()->route('user.home');
         }catch (ValidationException $ex){
             return $this->returnWithException($ex)->withInput();
+        }catch (UserException $ex){
+            return $this->returnWithException($ex)->withInput();
         }catch (\Exception $ex){
-            dd($ex);
             return $this->returnWithException(new InternalErrorException(__('internal-error')))->withInput();
         }
     }
