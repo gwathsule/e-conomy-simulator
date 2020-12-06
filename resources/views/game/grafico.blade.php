@@ -1,4 +1,4 @@
-<div class="card card-white grid-margin">
+<div class="card card-white grid-margin grafico">
     <div class="card-body">
         <canvas id="canvas"></canvas>
     </div>
@@ -115,7 +115,7 @@
             },
             title: {
                 display: true,
-                text: 'Chart.js Line Chart - Different point sizes'
+                text: 'Variáveis Econômicas'
             }
         }
     };

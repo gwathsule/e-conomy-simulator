@@ -7,6 +7,7 @@
     <title>Bootstrap Google Plus Style Login Form - Bootdey.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('css/game.css')}}" rel="stylesheet">
     <style type="text/css">
 
         body{margin-top:20px;}

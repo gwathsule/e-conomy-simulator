@@ -6,6 +6,7 @@
 @section('css_adicionais')
     <script src="{{asset('js/chartjs.js')}}"></script>
     <script src="{{asset('js/grafico.js')}}"></script>
+    <link href="{{asset('css/game.css')}}" rel="stylesheet">
 @endsection
 
 @section('conteudo')

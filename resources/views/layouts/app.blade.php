@@ -7,11 +7,12 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/estilo.css')}}">
     @yield('css_adicionais')
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<div class="btn_up"><a href="#"><img src="{{asset('img/resources/up-chevron.svg')}}"></a></div>
 <div class="container">
-    <div class="page-inner no-page-title">
+    <div class="page-inner no-page-title main-page">
         <!-- start page main wrapper -->
         <div id="main-wrapper">
             @yield('conteudo')

@@ -9,7 +9,10 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
 
-        body{margin-top:20px;}
+        body{
+            background-color: #29abe2;
+            margin-top: 20px;
+        }
 
         /* custom google plus style theme */
         @import url(http://fonts.googleapis.com/css?family=Roboto:400);
@@ -77,7 +80,7 @@
 </head>
 <body>
 <!--login modal-->
-<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true" style="background-color: #29abe2">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

@@ -1,0 +1,76 @@
+/* geral */
+h4{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+/* grafico */
+.page-inner{
+    background: rgba(212, 201, 201, 0.5);
+}
+
+/* medidas */
+.medidas li{
+    background-color: #29abe2;
+    color: white;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    padding: 10px 10px;
+    font-size: 12px;
+}
+
+.medidas a:hover{
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.chevron_medidas{
+    width: 16px;
+    height: 16px;
+}
+
+.card-body.medidas{
+    padding: 0;
+}
+
+/* popularidade */
+.popularidade .titulo{
+    font-weight: bold;
+    font-size: 14px;
+    padding-right: 10px;
+}
+.popularidade .porcentagem{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.popularidade{
+
+}
+
+
+/* gabinete */
+.gabinete p strong{
+    text-transform: uppercase;
+    font-size: 10px;
+}
+.gabinete p small{
+    color: #636b6f;
+}
+.gabinete h5{
+    text-transform: uppercase;
+    font-size: 13px;
+    background-color: #2ec5d3;
+    padding: 10px 5px;
+    color: white;
+    text-align: center;
+    border-radius: 3px;
+}
+.btn_gabinete{
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.gabinete .nome_ministro {
+}

@@ -1,6 +1,27 @@
 body {
-	background:#eee;
+	background-color: #29abe2;
 	margin-top: 20px;
+}
+.page-footer{
+	color: white;
+	text-align: center;
+}
+.btn_up{
+	position: fixed;
+	bottom: 65px;
+	right: 50px;
+	z-index: 999;
+	background: white;
+	border-radius: 50%;
+	box-shadow: 0 0 black;
+	width: 28px;
+	height: 28px;
+	text-align: center;
+}
+.btn_up img{
+	padding-bottom: 2px;
+	width: 24px;
+	height: 24px;
 }
 .page-inner.no-page-title {
 	padding-top: 30px;
@@ -209,3 +230,5 @@ body {
 	vertical-align: baseline;
 	border-radius: 0.25em;
 }
+
+page-
