@@ -3,6 +3,17 @@
 @section('css_adicionais')
     <script src="{{asset('js/chartjs.js')}}"></script>
     <script src="{{asset('js/grafico.js')}}"></script>
+    <style>
+        .carousel-control-prev-icon {
+            background-color: #29abe2;
+            border-radius: 50%;
+        }
+
+        .carousel-control-next-icon {
+            background-color: #29abe2;
+            border-radius: 50%;
+        }
+    </style>
 @endsection
 @section('conteudo')
     <div class="modal-header">
