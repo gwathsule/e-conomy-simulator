@@ -115,7 +115,7 @@
             },
             title: {
                 display: true,
-                text: 'Variáveis Econômicas'
+                text: 'Gráfico Econômico'
             }
         }
     };
