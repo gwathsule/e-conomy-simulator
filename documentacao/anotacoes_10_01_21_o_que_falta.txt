@@ -1,0 +1,45 @@
+ ------------------ / iniciar variáveis investimentos /-----------
+ * iniciar a variável investimento, ela será fixa mensamente, e inicialmente será a quantidade mensal média do ultimo ano.
+
+ ------------------ / implementar caixa do governo /--------------
+ * irá iniciar com um valor fixo, e será retirado/subtraído mensalmente
+
+ ------------------ / implementar taxa de retorno do investimento esperado (EMGK) /--------------------------
+ * será tirado diretamente do centro de pesquisas meu cu;
+
+ ----------------- / implementar dívida interna /----------------------
+ * criar a variável chamada "dívida interna" e ir aumentando de acordo com os títulos vendidos
+ * essa variável será mudada a cada rodada, dependendo das alterações na taxa de juros (selic);
+ * ao final do ano, será debitado do caixa do governo o valor total, e iniciará o novo ano zerado. 
+
+ ----------------- / implementar taxa de juros para se trabalhar com investimentos /-------------------
+ * taxa de juros vai ajudar a calcular o investimento médio mensal;
+ * comparar taxa de juros com o retorno esperado (EMGK = eficácia marginal do capital), e cada 1% de diferença diminuir/aumentar x% na quantidade mensal de investimento;
+ * o valor adquirido com títulos será adicionado no caixa do governo;
+ * o juros resultante será somado na dívida interna;
+
+-------------------- / calcular inflação de demanda /------------
+* retirar valores médios de investimento do ano anterior e do ano atual para comparações
+ > pegar o valor de investimento médio mensal;
+ > ano anterior  = somatório do valor total / 12
+ > ano corrente =  somatório do valor até o mês calculado / numero do mês calculado
+ > fazer a mesma coisa com transferências
+
+* como tirar o valor da inflação: 
+ > comparar valor médio do investimento no mês atual, para o mesmo mês no ano anterior, se o valor de investimento adquirido for maior, a inflação diminui, se for menor a inflação aumenta.
+ > comparar o valor de transferência media mensal, se as transferências média no mês atual aumentou, aumenta a inflação, se diminuir, diminui a inflação
+ > > aumentar/diminuir em quanto?
+
+-------------------- / calcular inflação de custo /------------
+> baseado no aumento e diminuição do imposto de renda
+> aumentar/diminuir a mesma porcentagem 
+
+------------------- / calcular inflação /---------------
+> inflação de custo + inflação de demanda
+
+------------------/ calcular desemprego /--------------
+Se o PIB aumentar, aumenta o emprego
+Se o PIB diminuir, diminui o emprego
+abaixo de 5% é pleno emprego
+> 8 a 9% é preocupante
+> acima de 10% o valor de popularidade com os trabalhadores vai a 0 automaticamente.
