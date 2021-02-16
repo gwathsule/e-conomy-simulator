@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Domains\User\User;
 use App\Domains\User\UserRepository;
+use Illuminate\Support\Str;
 
 class UsersSeeder extends Seeder
 {
@@ -20,6 +21,7 @@ class UsersSeeder extends Seeder
         $user->name = 'User';
         $user->email = 'user@mail.com';
         $user->password = bcrypt('123');
+        $user->api_token = Str::random(80);
         $repository->save($user);
 
         //create admin user
@@ -28,6 +30,7 @@ class UsersSeeder extends Seeder
         $admin->name = 'Admin';
         $admin->email = 'admin@mail.com';
         $admin->password = bcrypt('admin');
+        $admin->api_token = Str::random(80);
         $repository->save($admin);
     }
 }

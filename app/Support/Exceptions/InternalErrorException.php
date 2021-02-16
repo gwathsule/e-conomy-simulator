@@ -4,8 +4,8 @@ namespace App\Support\Exceptions;
 
 class InternalErrorException extends ExceptionBase
 {
-    private const CODE = 500;
-    private const CATEGORY = 'internal_error';
+    public const CODE = 500;
+    public const CATEGORY = 'internal_error';
 
     public function __construct($userMessage = "", $internalMessage = "", Throwable $previous = null)
     {

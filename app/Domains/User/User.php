@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @property string $name
  * @property string $email
  * @property string $password
+ * @property string $api_token
  * @property string $remember_token
  * @property boolean $is_admin
  * @property Carbon $email_verified_at
