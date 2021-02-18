@@ -2,8 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Domains\User\Auth\LoginController;
-
+use App\Domains\User\Auth\JwtAuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,5 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-/** @see LoginController::getToken() */
-Route::post('getToken', LoginController::class . '@getToken');
+Route::middleware(['api'])->group(function ($router) {
+    Route::post('login', JwtAuthController::class . '@login');
+    Route::post('logout', JwtAuthController::class . '@logout');
+    Route::post('refresh', JwtAuthController::class . '@refresh');
+    Route::get('me', JwtAuthController::class . '@me');
+});
