@@ -94,4 +94,15 @@ class Jogo extends Model
 
         return $resultados;
     }
+
+    public function toArray()
+    {
+        return [
+            'jogo' => $this->attributesToArray(),
+            'rodadas' => $this->rodadas,
+            'eventos' => $this->eventos,
+            'resultados_agregados' => $this->getResultadosAgregados(),
+            'url_personagem' => $this->getImagemPersonagem()
+        ];
+    }
 }

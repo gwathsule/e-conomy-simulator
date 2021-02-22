@@ -13,9 +13,12 @@ use App\Domains\Medida\Medida;
 use App\Domains\Medida\MedidaRepository;
 use App\Domains\Rodada\Rodada;
 use App\Domains\Rodada\RodadaRepository;
+use App\Domains\User\User;
+use App\Support\Exceptions\UserException;
 use App\Support\Service;
 use App\Support\Validator;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -71,6 +74,11 @@ class CriarNovaRodada extends Service
         try {
             /** @var Jogo $jogo */
             $jogo = $this->jogoRepository->getById($data['jogo_id']);
+            /** @var User $user */
+            $user = Auth::user();
+            if((int)$data['jogo_id'] != $user->getJogoAtivo()->id) {
+                throw new UserException(__('nao autorizado'));
+            }
             $novaRodada = $this->criarNovaRodada($jogo);
             $noticias = collect();
             $medida = null;
