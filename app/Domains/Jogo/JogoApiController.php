@@ -17,11 +17,10 @@ class JogoApiController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function novoJogo(Request $request)
+    public function novoJogo()
     {
         try {
-            $dataService = $request->toArray();
-
+            $dataService = json_decode(request()->getContent(), true);
             if($dataService['genero'] == 'M') {
                 $dataService['personagem'] = $dataService['index_pm'];
             } else {
