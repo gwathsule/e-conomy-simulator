@@ -7,19 +7,19 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Collection;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * @property int $id
  * @property string $name
  * @property string $email
  * @property string $password
- * @property string $api_token
  * @property string $remember_token
  * @property boolean $is_admin
  * @property Carbon $email_verified_at
  * @property Collection $jogos
  */
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -54,4 +54,13 @@ class User extends Authenticatable
         return $this->hasMany(Jogo::class);
     }
 
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
