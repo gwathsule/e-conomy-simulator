@@ -43,7 +43,7 @@ class CriarNovoJogo extends Service
                 return [
                     'pais' => ['required', 'string'],
                     'moeda' => ['required', 'string'],
-                    'ministro' => ['required', 'string'],
+                    'ministro' => ['required', 'string', 'max:30'],
                     'genero' => ['required', 'string', 'max:1', Rule::in(['M', 'F'])],
                     'personagem' => ['required', 'int'],
                 ];
