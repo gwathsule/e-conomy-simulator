@@ -2,7 +2,7 @@
 
 namespace Rodada;
 
-use App\Domains\ConfiguracoesGerais\ConfiguracoesGerais;
+use App\Domains\ConfiguracoesGerais\ResultadosIniciais;
 use App\Domains\Rodada\Services\CriarNovaRodada;
 use App\Domains\User\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -28,12 +28,12 @@ class RodadaTest extends TestCase
         }
         $jogo->refresh();
         $resultadosAgregados = $jogo->getResultadosAgregados();
-        $this->assertEquals(ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS_ANO_ANTERIOR , $resultadosAgregados[0]['gastos_governamentais']);
-        $this->assertEquals(ConfiguracoesGerais::INVESTIMENTOS_ANO_ANTERIOR , $resultadosAgregados[0]['investimentos']);
-        $this->assertEquals(ConfiguracoesGerais::IMPOSTOS_ANO_ANTERIOR , $resultadosAgregados[0]['impostos']);
-        $this->assertEquals(ConfiguracoesGerais::TRANSFERENCIAS_ANO_ANTERIOR , $resultadosAgregados[0]['transferencias']);
-        $this->assertEquals(ConfiguracoesGerais::CONSUMO_ANO_ANTERIOR , $resultadosAgregados[0]['consumo']);
-        $this->assertEquals(ConfiguracoesGerais::PIB_ANO_ANTERIOR , $resultadosAgregados[0]['pib']);
+        $this->assertEquals(ResultadosIniciais::GASTOS_GOVERNAMENTAIS_ANO_ANTERIOR , $resultadosAgregados[0]['gastos_governamentais']);
+        $this->assertEquals(ResultadosIniciais::INVESTIMENTOS_ANO_ANTERIOR , $resultadosAgregados[0]['investimentos']);
+        $this->assertEquals(ResultadosIniciais::IMPOSTOS_ANO_ANTERIOR , $resultadosAgregados[0]['impostos']);
+        $this->assertEquals(ResultadosIniciais::TRANSFERENCIAS_ANO_ANTERIOR , $resultadosAgregados[0]['transferencias']);
+        $this->assertEquals(ResultadosIniciais::CONSUMO_ANO_ANTERIOR , $resultadosAgregados[0]['consumo']);
+        $this->assertEquals(ResultadosIniciais::PIB_ANO_ANTERIOR , $resultadosAgregados[0]['pib']);
         // esses valores para comparação foi obtido através da planilha que fizemos para simular o jogo
         $this->assertEquals(round(12000000.0), round($resultadosAgregados[1]['gastos_governamentais']));
         $this->assertEquals(round(42000000.0), round($resultadosAgregados[1]['investimentos']));

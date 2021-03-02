@@ -18,15 +18,18 @@ class CreateRodadaTable extends Migration
             $table->unsignedInteger('medida_id')->nullable();
             $table->json('noticias')->nullable();
             $table->unsignedInteger('rodada')->nullable();
-            $table->integer('populacao')->nullable();
-            $table->decimal('pmgc', 2, 2)->nullable();
-            $table->decimal('pib_previsao_anual', 2, 2)->nullable();
-            $table->decimal('imposto_renda', 2, 2)->nullable();
-            $table->decimal('investimentos', 13, 2, true)->nullable();
-            $table->decimal('investimentos_fixos', 13, 2, true)->nullable();
-            $table->decimal('gastos_governamentais', 13, 2, true)->nullable();
-            $table->decimal('gastos_governamentais_fixos', 13, 2, true)->nullable();
-            $table->decimal('transferencias', 13, 2, true)->nullable();
+
+            $table->decimal('pib_investimento_potencial', 13, 2)->nullable();
+            $table->decimal('gastos_governamentais', 13, 2)->nullable();
+            $table->decimal('transferencias', 13, 2)->nullable();
+            $table->decimal('taxa_base_de_juros', 2, 2, true)->nullable();
+            $table->decimal('efmk', 2, 2, true)->nullable();
+            $table->decimal('inflacao_de_demanda', 2, 2, true)->nullable();
+            $table->decimal('inflacao_de_custo', 2, 2, true)->nullable();
+            $table->decimal('inflacao_total', 2, 2, true)->nullable();
+            $table->decimal('pmgc', 2, 2, true)->nullable();
+            $table->decimal('imposto_renda', 2, 2, true)->nullable();
+
             $table->integer('popularidade_empresarios')->nullable();
             $table->integer('popularidade_trabalhadores')->nullable();
             $table->integer('popularidade_estado')->nullable();

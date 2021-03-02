@@ -2,8 +2,8 @@
 
 namespace App\Domains\Jogo;
 
-use App\Domains\ConfiguracoesGerais\ConfiguracoesGerais;
 use App\Domains\Evento\Evento;
+use App\Domains\ResultadoAnual\ResultadoAnual;
 use App\Domains\Rodada\Rodada;
 use App\Domains\User\User;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @property int $user_id
  * @property User $user
  * @property Collection $rodadas
+ * @property Collection $resultados_anuais
  * @property Collection $eventos
  */
 class Jogo extends Model
@@ -34,6 +35,10 @@ class Jogo extends Model
         'resultado_anual' => 'array',
     ];
 
+    /**
+     * @param int $roundNumber
+     * @return Rodada | null
+     */
     public function getRodada(int $roundNumber)
     {
         return $this->timelines->where('round', $roundNumber)->first();
@@ -49,6 +54,11 @@ class Jogo extends Model
         return $this->hasMany(Rodada::class);
     }
 
+    public function resultados_anuais()
+    {
+        return $this->hasMany(ResultadoAnual::class);
+    }
+
     public function eventos()
     {
         return $this->hasMany(Evento::class);
@@ -59,49 +69,13 @@ class Jogo extends Model
         return Personagem::getPersonagem($this->personagem);
     }
 
-    public function getResultadosAgregados()
-    {
-        $resultados[0] = [
-            'gastos_governamentais' => ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS_ANO_ANTERIOR,
-            'investimentos' => ConfiguracoesGerais::INVESTIMENTOS_ANO_ANTERIOR,
-            'impostos' => ConfiguracoesGerais::IMPOSTOS_ANO_ANTERIOR,
-            'transferencias' => ConfiguracoesGerais::TRANSFERENCIAS_ANO_ANTERIOR,
-            'consumo' => ConfiguracoesGerais::CONSUMO_ANO_ANTERIOR,
-            'pib' => ConfiguracoesGerais::PIB_ANO_ANTERIOR,
-        ];
-
-        $resultados[1] = $this->rodadas->slice(0, 12)->reduce(function ($carry, Rodada $item) {
-               $carry['consumo'] += $item->consumo();
-               $carry['gastos_governamentais'] += $item->gastos_governamentais;
-               $carry['investimentos'] += $item->investimentos;
-               $carry['impostos'] += $item->impostos();
-               $carry['transferencias'] += $item->transferencias;
-               $carry['pib'] += $item->pib();
-               return $carry;
-        }, ['gastos_governamentais' => 0, 'investimentos' => 0, 'impostos' => 0, 'transferencias' => 0, 'consumo' => 0, 'pib' => 0]);
-
-        if(($this->rodadas->count() > 12)) {
-            $resultados[2] = $this->rodadas->slice(12, 24)->reduce(function ($carry, Rodada $item) {
-                $carry['consumo'] += $item->consumo();
-                $carry['gastos_governamentais'] += $item->gastos_governamentais;
-                $carry['investimentos'] += $item->investimentos;
-                $carry['impostos'] += $item->impostos();
-                $carry['transferencias'] += $item->transferencias;
-                $carry['pib'] += $item->pib();
-                return $carry;
-            }, ['gastos_governamentais' => 0, 'investimentos' => 0, 'impostos' => 0, 'transferencias' => 0, 'consumo' => 0, 'pib' => 0]);
-        }
-
-        return $resultados;
-    }
-
     public function toArray()
     {
         return [
             'jogo' => $this->attributesToArray(),
             'rodadas' => $this->rodadas,
             'eventos' => $this->eventos,
-            'resultados_agregados' => $this->getResultadosAgregados(),
+            'resultados_anuais' => $this->resultados_anuais,
             'url_personagem' => $this->getImagemPersonagem()
         ];
     }

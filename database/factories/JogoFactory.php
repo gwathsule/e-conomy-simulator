@@ -13,7 +13,7 @@ $factory->define(Jogo::class, function (Faker $faker) {
         'genero' => $faker->randomElement(['M', 'F']),
         'personagem' => $faker->randomElement(\App\Domains\Jogo\Personagem::ALL),
         'ativo' => true,
-        'qtd_rodadas' => \App\Domains\ConfiguracoesGerais\ConfiguracoesGerais::QTD_RODADAS,
+        'qtd_rodadas' => \App\Domains\ConfiguracoesGerais\ResultadosIniciais::QTD_RODADAS,
         'user_id' => User::query()->exists()
             ? User::all()->random()
             : factory(User::class)->create(),

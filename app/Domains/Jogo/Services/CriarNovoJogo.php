@@ -2,12 +2,13 @@
 
 namespace App\Domains\Jogo\Services;
 
-use App\Domains\ConfiguracoesGerais\ConfiguracoesGerais;
 use App\Domains\Evento\Evento;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
+use App\Domains\ResultadoAnual\Services\CriarResultadoAnualPrimario;
 use App\Domains\Rodada\RodadaRepository;
 use App\Domains\Rodada\Rodada;
+use App\Domains\Rodada\Services\CriarNovaRodada;
 use App\Domains\User\User;
 use App\Support\Service;
 use App\Support\Validator;
@@ -25,14 +26,26 @@ class CriarNovoJogo extends Service
      * @var RodadaRepository
      */
     private $rodadaRepository;
+    /**
+     * @var CriarNovaRodada
+     */
+    private $novaRodadaService;
+    /**
+     * @var CriarResultadoAnualPrimario
+     */
+    private $resulAnualPrimarioService;
 
     public function __construct(
         JogoRepository $jogoRepository,
-        RodadaRepository $rodadaRepository
+        RodadaRepository $rodadaRepository,
+        CriarNovaRodada $novaRodadaService,
+        CriarResultadoAnualPrimario $resulAnualPrimarioService
     )
     {
         $this->jogoRepository = $jogoRepository;
         $this->rodadaRepository = $rodadaRepository;
+        $this->novaRodadaService = $novaRodadaService;
+        $this->resulAnualPrimarioService = $resulAnualPrimarioService;
     }
 
     public function validate(array $data)
@@ -61,26 +74,9 @@ class CriarNovoJogo extends Service
         $novoJogo->genero = $data['genero'];
         $novoJogo->personagem = $data['personagem'];
         $novoJogo->ativo = true;
-        $novoJogo->qtd_rodadas = ConfiguracoesGerais::QTD_RODADAS;
+        $novoJogo->qtd_rodadas = 24;
 
-        $primeiraRodada = new Rodada();
-        $primeiraRodada->populacao = ConfiguracoesGerais::POPULACAO_INICIAL;
-        $primeiraRodada->pib_previsao_anual = ConfiguracoesGerais::PIB_PREVISAO_ANUAL_INICIAL;
-        $primeiraRodada->pmgc = ConfiguracoesGerais::PMGC_INICIAL;
-        $primeiraRodada->imposto_renda = ConfiguracoesGerais::IMPOSTO_DE_RENDA_INICIAL;
-        $primeiraRodada->investimentos_fixos = ConfiguracoesGerais::INVESTIMENTOS_POR_RODADA;
-        $primeiraRodada->investimentos = ConfiguracoesGerais::INVESTIMENTOS_POR_RODADA;
-        $primeiraRodada->gastos_governamentais = ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS_POR_RODADA;
-        $primeiraRodada->gastos_governamentais_fixos = ConfiguracoesGerais::GASTOS_GOVERNAMENTAIS_POR_RODADA;
-        $primeiraRodada->popularidade_empresarios = ConfiguracoesGerais::POPULARIDADE_EMPRESARIOS;
-        $primeiraRodada->popularidade_trabalhadores = ConfiguracoesGerais::POPULARIDADE_TRABALHADORES;
-        $primeiraRodada->popularidade_estado = ConfiguracoesGerais::POPULARIDADE_ESTADO;
-        $primeiraRodada->transferencias = 0;
-        $primeiraRodada->medida_id = null;
-        $primeiraRodada->noticias = $this->noticiasIniciais();
-        $primeiraRodada->rodada = 0;
-
-        DB::transaction(function () use ($data, $novoJogo, $primeiraRodada) {
+        DB::transaction(function () use ($data, $novoJogo) {
             /** @var User $user */
             $user = Auth::user();
             /** @var Jogo $ultimoJogo */
@@ -99,25 +95,15 @@ class CriarNovoJogo extends Service
                 $ultimoJogo->delete();
             }
             $novoJogo->user_id = $user->id;
-            $this->jogoRepository->save($novoJogo);
-            $this->iniciarEventos($novoJogo);
-            $primeiraRodada->jogo_id = $novoJogo->id;
-            $this->rodadaRepository->save($primeiraRodada);
+            $novoJogo->save();
+            $this->resulAnualPrimarioService->handle([
+                'jogo_id' => $novoJogo->id,
+            ]);
+            $this->novaRodadaService->handle([
+                'medida_id' => null,
+                'jogo_id' => $novoJogo->id,
+            ]);
         });
         return $novoJogo;
-    }
-
-    private function iniciarEventos(Jogo $novoJogo)
-    {
-    }
-
-    /**
-     * cria uma noticia de boas vindas
-     * @return array
-     */
-    private function noticiasIniciais()
-    {
-        // TODO criar uma noticia de boas vindas ao jogo aqui
-        return [];
     }
 }

@@ -11,6 +11,7 @@ use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
 use App\Domains\Medida\Medida;
 use App\Domains\Medida\MedidaRepository;
+use App\Domains\ResultadoAnual\ResultadoAnual;
 use App\Domains\Rodada\Rodada;
 use App\Domains\Rodada\RodadaRepository;
 use App\Domains\User\User;
@@ -91,29 +92,21 @@ class CriarNovaRodada extends Service
                 }
             }
             $novaRodada->refresh();
-            $novaRodada->gastos_governamentais += $novaRodada->gastos_governamentais_fixos;
-            $novaRodada->investimentos += $novaRodada->investimentos_fixos;
             $novaRodada->noticias = $noticias->toArray();
             if(! is_null($medida))
                 $novaRodada->medida_id = $medida->id;
-
             if($novaRodada->popularidade_empresarios < 0)
                 $novaRodada->popularidade_empresarios = 0;
-
             if($novaRodada->popularidade_trabalhadores < 0)
                 $novaRodada->popularidade_trabalhadores = 0;
-
             if($novaRodada->popularidade_estado < 0)
                 $novaRodada->popularidade_estado = 0;
-
             if($novaRodada->popularidade_empresarios > 100)
                $novaRodada->popularidade_empresarios = 100;
             if($novaRodada->popularidade_trabalhadores > 100)
                $novaRodada->popularidade_trabalhadores = 100;
             if($novaRodada->popularidade_estado > 100)
                $novaRodada->popularidade_estado = 100;
-
-
             $this->rodadaRepository->save($novaRodada);
         } catch (Exception $exception) {
             DB::rollBack();
@@ -130,25 +123,55 @@ class CriarNovaRodada extends Service
     {
         /** @var Rodada $ultimaRodada */
         $ultimaRodada = $jogo->rodadas->last();
+        /** @var ResultadoAnual $ultimoAno */
+        $ultimoAno = $jogo->resultados_anuais->last();
+        if(is_null($ultimaRodada) || $ultimaRodada->rodada == 12) {
+            return $this->iniciarPrimeiraRodadaDoAno($ultimoAno, $jogo);
+        }
         $novaRodada = new Rodada();
         $novaRodada->jogo_id = $jogo->id;
         $novaRodada->rodada = $jogo->rodadas->count();
+
+        $novaRodada->pib_investimento_potencial = $ultimaRodada->pib_investimento_potencial;
+        $novaRodada->gastos_governamentais = $ultimaRodada->gastos_governamentais;
+        $novaRodada->transferencias = $ultimaRodada->transferencias;
+        $novaRodada->taxa_base_de_juros = $ultimaRodada->taxa_base_de_juros;
         $novaRodada->pmgc = $ultimaRodada->pmgc;
-        $novaRodada->pib_previsao_anual = $ultimaRodada->pib_previsao_anual;
-        $novaRodada->populacao = $ultimaRodada->populacao;
         $novaRodada->imposto_renda = $ultimaRodada->imposto_renda;
+        $novaRodada->inflacao_de_demanda = 0;//TODO
+        $novaRodada->inflacao_de_custo = 0;//TODO
+        $novaRodada->inflacao_total = 0;//TODO
+        $novaRodada->efmk = 0;//TODO
+
         $novaRodada->medida_id = null;
         $novaRodada->noticias = [];
-        $novaRodada->investimentos_fixos = $ultimaRodada->investimentos_fixos;
-        $novaRodada->gastos_governamentais_fixos = $ultimaRodada->gastos_governamentais_fixos;
-        $novaRodada->transferencias = 0;
-        $novaRodada->gastos_governamentais = 0;
-        $novaRodada->investimentos = 0;
         $novaRodada->popularidade_empresarios = $ultimaRodada->popularidade_empresarios;
         $novaRodada->popularidade_trabalhadores = $ultimaRodada->popularidade_trabalhadores;
         $novaRodada->popularidade_estado = $ultimaRodada->popularidade_estado;
         $this->rodadaRepository->save($novaRodada);
         return $novaRodada;
+    }
+
+    private function iniciarPrimeiraRodadaDoAno(ResultadoAnual $ultimoAno, Jogo $jogo)
+    {
+        $rodada = new Rodada();
+        $rodada->jogo_id = $jogo->id;
+        $rodada->rodada = $ultimoAno == 0 ? 1 : $jogo->rodadas->count();
+        //TODO ADICIONAR OS VALORES COM OS CALCULOS DA PRIMEIRA RODADA AQUI
+        $rodada->pib_investimento_potencial = 0;//TODO
+        $rodada->gastos_governamentais = 0;//TODO
+        $rodada->transferencias = 0;//TODO
+        $rodada->taxa_base_de_juros = 0;//TODO
+        $rodada->pmgc = 0;//TODO
+        $rodada->imposto_renda = 0;//TODO
+        $rodada->inflacao_de_demanda = 0;//TODO
+        $rodada->inflacao_de_custo = 0;//TODO
+        $rodada->inflacao_total = 0;//TODO
+        $rodada->efmk = 0;//TODO
+
+        $rodada->noticias = [];
+        $rodada->save();
+        return $rodada;
     }
 
     private function executarMedida(Medida $medida, Rodada $rodada)
