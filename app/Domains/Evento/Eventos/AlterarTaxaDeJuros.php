@@ -3,30 +3,27 @@
 namespace App\Domains\Evento\Eventos;
 
 use App\Domains\Medida\Medida;
-use App\Domains\Medida\MedidaRepository;
 use App\Domains\Rodada\Rodada;
 use App\Domains\Rodada\RodadaRepository;
 use App\Support\Evento;
+use App\Support\Exceptions\UserException;
 use App\Support\Noticia;
 
-class AlterarInvestimentos extends Evento
+class AlterarTaxaDeJuros extends Evento
 {
-    public const RODADAS = 1;
-    public const CODE = 'alterar_investimentos';
+    public const CODE = 'alterar_taxa_de_juros';
 
-    protected function getCode(): string
+    public function getCode(): string
     {
         return self::CODE;
     }
 
-    protected function getRodadas(): int
-    {
-        return self::RODADAS;
-    }
-
     public function modificacoes(Rodada $rodada, Medida $medida): array
     {
-        $rodada->investimentos += $medida->diferenca_financas;
+        $rodada->imposto_renda += ($medida->diferenca_financas / 100);
+        if($rodada->imposto_renda <= 0) {
+            throw new UserException(__('user-messages.ir-menor-que-zero'));
+        }
         $rodada->popularidade_empresarios += $medida->diferenca_popularidade_empresarios;
         $rodada->popularidade_trabalhadores += $medida->diferenca_popularidade_trabalhadores;
         $rodada->popularidade_estado += $medida->diferenca_popularidade_estado;

@@ -1,8 +1,6 @@
 <?php
 
 use App\Domains\Medida\Medida;
-use App\Domains\Evento\Eventos\AlterarGastoGovernamental;
-use App\Domains\Evento\Eventos\AlterarGastoGovernamentalMensal;
 use App\Domains\Evento\Eventos\AlterarImpostoDeRenda;
 use App\Domains\Evento\Eventos\CriarTransferencia;
 use Illuminate\Database\Seeder;
@@ -18,90 +16,6 @@ class MedidasSeeder extends Seeder
      */
     public function run()
     {
-        $medida1 = new Medida();
-        $medida1->codigo_evento = AlterarGastoGovernamental::CODE;
-        $medida1->nome = 'Aumentar Gasto Governamental';
-        $medida1->resumo = 'Gasto Governamental +10.000.000';
-        $medida1->titulo_noticia = 'Governo aumenta gastos nesse mês';
-        $medida1->rodadas_para_excutar = 1;
-        $medida1->tipo_noticia = Medida::TIPO_NOTICIA_ESTATAL;
-        $medida1->texto_noticia = "{a/o} {ministro/a} {nomeMinistro} anunciou neste mês o aumento da verba destinado ao senado. 10 milhões de {moeda} serão destinados a gastos do governo.";
-        $medida1->diferenca_financas = +10000000;
-        $medida1->diferenca_popularidade_empresarios = -10;
-        $medida1->diferenca_popularidade_trabalhadores = -5;
-        $medida1->diferenca_popularidade_estado = +15;
-        $medida1->save();
-        Storage::putFileAs(
-            'public/medidas/' . $medida1->id,
-            new File(public_path('img/medidas_exemplos/aumentar_gastos_governamentais.jpg')),
-            'aumentar_gastos_governamentais.jpg'
-        );
-        $medida1->url_imagem = 'medidas/' . $medida1->id . '/aumentar_gastos_governamentais.jpg';
-        $medida1->update();
-
-        $medida2 = new Medida();
-        $medida2->codigo_evento = AlterarGastoGovernamental::CODE;
-        $medida2->nome = 'Reduzir Gasto Governamental';
-        $medida2->resumo = 'Gasto Governamental -10.000.000';
-        $medida2->titulo_noticia = 'Governo reduz gastos nesse mês';
-        $medida2->rodadas_para_excutar = 1;
-        $medida2->tipo_noticia = Medida::TIPO_NOTICIA_LIBERAL;
-        $medida2->texto_noticia = "{a/o} {ministro/a} {nomeMinistro} anunciou neste mês uma redução nos gastos governamentais, ainda não se sabe o porquê. O governo não contará com 10 milhões de {moeda} esse mês.";
-        $medida2->diferenca_financas = -10000000;
-        $medida2->diferenca_popularidade_empresarios = +10;
-        $medida2->diferenca_popularidade_trabalhadores = +5;
-        $medida2->diferenca_popularidade_estado = -15;
-        $medida2->save();
-        Storage::putFileAs(
-            'public/medidas/' . $medida2->id,
-            new File(public_path('img/medidas_exemplos/diminuir_gastos_governamentais.jpg')),
-            'diminuir_gastos_governamentais.jpg'
-        );
-        $medida2->url_imagem = 'medidas/' . $medida2->id . '/diminuir_gastos_governamentais.jpg';
-        $medida2->update();
-
-        $medida3 = new Medida();
-        $medida3->codigo_evento = AlterarGastoGovernamentalMensal::CODE;
-        $medida3->nome = 'Aumentar Gasto Governamental Mensal';
-        $medida3->resumo = 'Gasto Governamental Mensal +500.000';
-        $medida3->titulo_noticia = 'Governo decide aumentar gastos mensais';
-        $medida3->rodadas_para_excutar = 1;
-        $medida3->tipo_noticia = Medida::TIPO_NOTICIA_ESTATAL;
-        $medida3->texto_noticia = "{a/o} {ministro/a} {nomeMinistro} anunciou neste mês o aumento da verba gasta mensalmente, destinado ao governo. 500 mil {moeda} a mais serão destinados a gastos do governo todo mês.";
-        $medida3->diferenca_financas = +500000;
-        $medida3->diferenca_popularidade_empresarios = -10;
-        $medida3->diferenca_popularidade_trabalhadores = -5;
-        $medida3->diferenca_popularidade_estado = +15;
-        $medida3->save();
-        Storage::putFileAs(
-            'public/medidas/' . $medida3->id,
-            new File(public_path('img/medidas_exemplos/aumentar_gastos_governamentais.jpg')),
-            'aumentar_gastos_governamentais.jpg'
-        );
-        $medida3->url_imagem = 'medidas/' . $medida3->id . '/aumentar_gastos_governamentais.jpg';
-        $medida3->update();
-
-        $medida4 = new Medida();
-        $medida4->codigo_evento = AlterarGastoGovernamentalMensal::CODE;
-        $medida4->nome = 'Reduzir Gasto Governamental Mensal';
-        $medida4->resumo = 'Gasto Governamental Mensal -500.000';
-        $medida4->titulo_noticia = 'Governo decide reduzir gastos mensais';
-        $medida4->rodadas_para_excutar = 1;
-        $medida4->tipo_noticia = Medida::TIPO_NOTICIA_LIBERAL;
-        $medida4->texto_noticia = "{a/o} {ministro/a} {nomeMinistro} anunciou neste mês uma redução da verba gasta mensalmente pelo governo. 500 mil {moeda} serão retiradas dos cofres públicos todos os meses.";
-        $medida4->diferenca_financas = -500000;
-        $medida4->diferenca_popularidade_empresarios = +10;
-        $medida4->diferenca_popularidade_trabalhadores = +5;
-        $medida4->diferenca_popularidade_estado = -15;
-        $medida4->save();
-        Storage::putFileAs(
-            'public/medidas/' . $medida4->id,
-            new File(public_path('img/medidas_exemplos/diminuir_gastos_governamentais.jpg')),
-            'diminuir_gastos_governamentais.jpg'
-        );
-        $medida4->url_imagem = 'medidas/' . $medida4->id . '/diminuir_gastos_governamentais.jpg';
-        $medida4->update();
-
         $medida5 = new Medida();
         $medida5->codigo_evento = AlterarImpostoDeRenda::CODE;
         $medida5->nome = 'Aumentar Imposto de Renda';

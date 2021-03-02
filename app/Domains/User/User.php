@@ -46,7 +46,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJogoAtivo()
     {
-        return $this->jogos->where('ativo', true)->first();
+        return $this->jogos()->where('ativo', true)->first();
     }
 
     public function jogos()

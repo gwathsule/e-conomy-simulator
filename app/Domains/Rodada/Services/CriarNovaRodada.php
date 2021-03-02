@@ -132,16 +132,17 @@ class CriarNovaRodada extends Service
         $novaRodada->jogo_id = $jogo->id;
         $novaRodada->rodada = $jogo->rodadas->count();
 
-        $novaRodada->pib_investimento_potencial = $ultimaRodada->pib_investimento_potencial;
-        $novaRodada->gastos_governamentais = $ultimaRodada->gastos_governamentais;
-        $novaRodada->transferencias = $ultimaRodada->transferencias;
+        //VALORES DE PROGRESSÃO NORMAL (SEM INTERFERENCIA DO USUÁRIO)
+        $novaRodada->pib_investimento_potencial = $ultimoAno->pib_investimento_potencial / 12;
+        $novaRodada->gastos_governamentais = $ultimoAno->gastos_governamentais / 12;
+        $novaRodada->transferencias = $ultimoAno->transferencias / 12;;
         $novaRodada->taxa_base_de_juros = $ultimaRodada->taxa_base_de_juros;
         $novaRodada->pmgc = $ultimaRodada->pmgc;
         $novaRodada->imposto_renda = $ultimaRodada->imposto_renda;
-        $novaRodada->inflacao_de_demanda = 0;//TODO
-        $novaRodada->inflacao_de_custo = 0;//TODO
-        $novaRodada->inflacao_total = 0;//TODO
-        $novaRodada->efmk = 0;//TODO
+        $novaRodada->inflacao_de_demanda = $ultimoAno->inflacao_de_demanda;
+        $novaRodada->inflacao_de_custo = $ultimoAno->inflacao_de_custo;
+        $novaRodada->inflacao_total = $ultimoAno->inflacao_total;
+        $novaRodada->efmk = ($ultimoAno->transferencias/1000000000) + 0.075;
 
         $novaRodada->medida_id = null;
         $novaRodada->noticias = [];
@@ -156,18 +157,19 @@ class CriarNovaRodada extends Service
     {
         $rodada = new Rodada();
         $rodada->jogo_id = $jogo->id;
-        $rodada->rodada = $ultimoAno == 0 ? 1 : $jogo->rodadas->count();
-        //TODO ADICIONAR OS VALORES COM OS CALCULOS DA PRIMEIRA RODADA AQUI
-        $rodada->pib_investimento_potencial = 0;//TODO
-        $rodada->gastos_governamentais = 0;//TODO
-        $rodada->transferencias = 0;//TODO
-        $rodada->taxa_base_de_juros = 0;//TODO
-        $rodada->pmgc = 0;//TODO
-        $rodada->imposto_renda = 0;//TODO
-        $rodada->inflacao_de_demanda = 0;//TODO
-        $rodada->inflacao_de_custo = 0;//TODO
-        $rodada->inflacao_total = 0;//TODO
-        $rodada->efmk = 0;//TODO
+        $rodada->rodada = $ultimoAno->ano == 0 ? 1 : $jogo->rodadas->count();
+
+        //VALORES DA PRIMEIRA RODADA
+        $rodada->pib_investimento_potencial = $ultimoAno->pib_investimento_potencial / 12;
+        $rodada->gastos_governamentais = $ultimoAno->gastos_governamentais / 12;
+        $rodada->transferencias = $ultimoAno->transferencias / 12;;
+        $rodada->taxa_base_de_juros = $ultimoAno->taxa_de_juros_base;
+        $rodada->pmgc = $ultimoAno->pmgc;
+        $rodada->imposto_renda = $ultimoAno->imposto_de_renda;
+        $rodada->inflacao_de_demanda = $ultimoAno->inflacao_de_demanda;
+        $rodada->inflacao_de_custo = $ultimoAno->inflacao_de_custo;
+        $rodada->inflacao_total = $ultimoAno->inflacao_total;
+        $rodada->efmk = ($ultimoAno->transferencias/1000000000) + 0.075;
 
         $rodada->noticias = [];
         $rodada->save();
@@ -178,10 +180,6 @@ class CriarNovaRodada extends Service
     {
         $rodada->refresh();
         switch ($medida->codigo_evento) {
-            case AlterarGastoGovernamental::CODE:
-                return (new AlterarGastoGovernamental())->modificacoes($rodada, $medida);
-            case AlterarGastoGovernamentalMensal::CODE:
-                return (new AlterarGastoGovernamentalMensal())->modificacoes($rodada, $medida);
             case AlterarImpostoDeRenda::CODE:
                 return (new AlterarImpostoDeRenda())->modificacoes($rodada, $medida);
             case CriarTransferencia::CODE:

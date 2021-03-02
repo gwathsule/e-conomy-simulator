@@ -36,6 +36,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ResultadoAnual extends Model
 {
+    protected $table = 'resultado_anual';
+    public $timestamps = false;
+
     public function calcularBalancoAnual()
     {
         //TODO

@@ -19,7 +19,6 @@ trait TarefasBasicasDoJogo
             'ministro' => $dadosNovoJogo->ministro,
             'genero' => $dadosNovoJogo->genero,
             'personagem' => $dadosNovoJogo->personagem,
-            'presidente' => $dadosNovoJogo->presidente,
             'rodadas' => $dadosNovoJogo->qtd_rodadas,
         ];
         Auth::login($user);
