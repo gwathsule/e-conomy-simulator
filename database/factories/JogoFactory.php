@@ -7,8 +7,7 @@ use App\Domains\Jogo\Jogo;
 $factory->define(Jogo::class, function (Faker $faker) {
     return [
         'pais' => $faker->country,
-        'presidente' => $faker->name,
-        'ministro' => $faker->name,
+        'ministro' => 'Ministro Teste',
         'moeda' => $faker->currencyCode,
         'genero' => $faker->randomElement(['M', 'F']),
         'personagem' => $faker->randomElement(\App\Domains\Jogo\Personagem::ALL),

@@ -16,7 +16,6 @@ class CreateJogoTable extends Migration
         Schema::create('jogo', function (Blueprint $table) {
             $table->id();
             $table->string('pais')->nullable();
-            $table->string('presidente')->nullable();
             $table->string('ministro')->nullable();
             $table->char('genero')->nullable();
             $table->tinyInteger('personagem')->nullable();

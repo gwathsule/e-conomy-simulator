@@ -157,7 +157,19 @@ class CriarNovaRodada extends Service
     {
         $rodada = new Rodada();
         $rodada->jogo_id = $jogo->id;
-        $rodada->rodada = $ultimoAno->ano == 0 ? 1 : $jogo->rodadas->count();
+        if($ultimoAno->ano == 0) {
+            $rodada->popularidade_empresarios = 50;
+            $rodada->popularidade_trabalhadores = 50;
+            $rodada->popularidade_estado = 50;
+            $rodada->rodada = 1;
+        } else {
+            /** @var Rodada $ultimaRodada */
+            $ultimaRodada = $jogo->rodadas->last();
+            $rodada->popularidade_empresarios = $ultimaRodada->popularidade_empresarios;
+            $rodada->popularidade_trabalhadores = $ultimaRodada->popularidade_trabalhadores;
+            $rodada->popularidade_estado = $ultimaRodada->popularidade_estado;
+            $jogo->rodadas->count();
+        }
 
         //VALORES DA PRIMEIRA RODADA
         $rodada->pib_investimento_potencial = $ultimoAno->pib_investimento_potencial / 12;

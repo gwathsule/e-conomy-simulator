@@ -38,57 +38,57 @@ class Rodada extends Model
     public function jogo(){
         return $this->belongsTo(Jogo::class);
     }
-    private function pib(){
-        return $this->pib_consumo() + $this->pib_investimento_realizado() + $this->gastos_governamentais;
+    private function pib($ultimoAno){
+        return $this->pib_consumo($ultimoAno) + $this->pib_investimento_realizado($ultimoAno) + $this->gastos_governamentais;
     }
     private function previsao_anual(ResultadoAnual $ultimoAno){
         return $ultimoAno->previsao_anual;
     }
-    private function yd(){
-        return $this->pib() - $this->impostos() + $this->transferencias;
+    private function yd($ultimoAno){
+        return $this->pib($ultimoAno) - $this->impostos($ultimoAno) + $this->transferencias;
     }
-    private function pib_consumo(){
-        return ($this->pib_investimento_realizado() * $this->k_com_imposto()) - $this->pib_investimento_realizado() +
+    private function pib_consumo($ultimoAno){
+        return ($this->pib_investimento_realizado($ultimoAno) * $this->k_com_imposto()) - $this->pib_investimento_realizado($ultimoAno) +
                ($this->gastos_governamentais * $this->k_com_imposto()) - $this->gastos_governamentais;
     }
-    private function pib_investimento_realizado(){
-        return $this->pib_investimento_potencial * (1 - $this->investimento_em_titulos());
+    private function pib_investimento_realizado($ultimoAno){
+        return $this->pib_investimento_potencial * (1 - $this->investimento_em_titulos($ultimoAno));
     }
-    private function impostos(){
-        return $this->pib_investimento_realizado() * ($this->k() - $this->k_com_imposto());
+    private function impostos($ultimoAno){
+        return $this->pib_investimento_realizado($ultimoAno) * ($this->k($ultimoAno) - $this->k_com_imposto());
     }
-    private function bs(){
-        return $this->impostos() - $this->gastos_governamentais - $this->transferencias;
+    private function bs($ultimoAno){
+        return $this->impostos($ultimoAno) - $this->gastos_governamentais - $this->transferencias;
     }
-    private function titulos(){
-        return $this->pib_investimento_potencial - $this->pib_investimento_realizado();
+    private function titulos($ultimoAno){
+        return $this->pib_investimento_potencial - $this->pib_investimento_realizado($ultimoAno);
     }
-    private function juros_divida_interna(){
-        return $this->titulos() * $this->taxa_base_de_juros;
+    private function juros_divida_interna($ultimoAno){
+        return $this->titulos($ultimoAno) * $this->taxa_base_de_juros;
     }
-    private function caixa(ResultadoAnual $ultimoAno, array $ultimaRodada){
+    private function caixa($ultimoAno, $ultimaRodada){
         if($this->rodada == 1){
-            return $ultimoAno->caixa + $this->bs();
+            return $ultimoAno->caixa + $this->bs($ultimoAno);
         }
-        return $ultimaRodada['caixa'] + $this->bs();
+        return $ultimaRodada['caixa'] + $this->bs($ultimoAno);
     }
-    private function divida_total(array $ultimaRodada){
+    private function divida_total($ultimaRodada, $ultimoAno){
         if($this->rodada == 1) {
-            return $this->titulos() + $this->juros_divida_interna();
+            return $this->titulos($ultimoAno) + $this->juros_divida_interna($ultimoAno);
         } else {
-            return $ultimaRodada['divida_total'] + $this->titulos() + $this->juros_divida_interna();
+            return $ultimaRodada['divida_total'] + $this->titulos($ultimoAno) + $this->juros_divida_interna($ultimoAno);
         }
     }
     private function investimento_em_titulos(ResultadoAnual $ultimoAno){
-        if($this->taxa_base_de_juros > $this->efmk($ultimoAno)) {
-            return 5 * ($this->taxa_base_de_juros - $this->efmk($ultimoAno));
+        if($this->taxa_base_de_juros > $this->efmk) {
+            return 5 * ($this->taxa_base_de_juros - $this->efmk);
         } else {
-            return 5 * ((-1) * ($this->efmk($ultimoAno) - $this->taxa_base_de_juros));
+            return 5 * ((-1) * ($this->efmk - $this->taxa_base_de_juros));
         }
     }
 
     private function desemprego(ResultadoAnual $ultimoAno){
-        return $ultimoAno->desemprego * (($ultimoAno->pib/12)/$this->pib());
+        return $ultimoAno->desemprego * (($ultimoAno->pib/12)/$this->pib($ultimoAno));
     }
     private function k(ResultadoAnual $ultimoAno){
         return 1/(1-$ultimoAno->pmgc);
@@ -106,17 +106,17 @@ class Rodada extends Model
             $ultimaRodada = $this->jogo->getRodada($this->rodada - 1)->toArray();
         }
         $valores = parent::toArray();
-        $valores['pib'] = $this->pib();
+        $valores['pib'] = $this->pib($ultimoAno);
         $valores['previsao_anual'] = $this->previsao_anual($ultimoAno);
-        $valores['yd'] = $this->yd();
-        $valores['pib_consumo'] = $this->pib_consumo();
-        $valores['pib_investimento_realizado'] = $this->pib_investimento_realizado();
-        $valores['impostos'] = $this->impostos();
-        $valores['bs'] = $this->bs();
-        $valores['titulos'] = $this->titulos();
-        $valores['juros_divida_interna'] = $this->juros_divida_interna();
+        $valores['yd'] = $this->yd($ultimoAno);
+        $valores['pib_consumo'] = $this->pib_consumo($ultimoAno);
+        $valores['pib_investimento_realizado'] = $this->pib_investimento_realizado($ultimoAno);
+        $valores['impostos'] = $this->impostos($ultimoAno);
+        $valores['bs'] = $this->bs($ultimoAno);
+        $valores['titulos'] = $this->titulos($ultimoAno);
+        $valores['juros_divida_interna'] = $this->juros_divida_interna($ultimoAno);
         $valores['caixa'] = $this->caixa($ultimoAno, $ultimaRodada);
-        $valores['divida_total'] = $this->divida_total($ultimaRodada);
+        $valores['divida_total'] = $this->divida_total($ultimaRodada, $ultimoAno);
         $valores['investimento_em_titulos'] = $this->investimento_em_titulos($ultimoAno);
         $valores['desemprego'] = $this->desemprego($ultimoAno);
         $valores['k'] = $this->k($ultimoAno);
