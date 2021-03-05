@@ -13,13 +13,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $pib_investimento_potencial
  * @property float $gastos_governamentais
  * @property float $transferencias
- * @property float $taxa_base_de_juros
+ * @property float $taxa_de_juros_base
  * @property float $efmk
  * @property float $inflacao_de_demanda
  * @property float $inflacao_de_custo
  * @property float $inflacao_total
  * @property float $pmgc
- * @property float $imposto_renda
+ * @property float $imposto_de_renda
  * @property float $popularidade_empresarios
  * @property float $popularidade_trabalhadores
  * @property float $popularidade_estado
@@ -64,7 +64,7 @@ class Rodada extends Model
         return $this->pib_investimento_potencial - $this->pib_investimento_realizado($ultimoAno);
     }
     private function juros_divida_interna($ultimoAno){
-        return $this->titulos($ultimoAno) * $this->taxa_base_de_juros;
+        return $this->titulos($ultimoAno) * $this->taxa_de_juros_base;
     }
     private function caixa($ultimoAno, $ultimaRodada){
         if($this->rodada == 1){
@@ -80,10 +80,10 @@ class Rodada extends Model
         }
     }
     private function investimento_em_titulos(ResultadoAnual $ultimoAno){
-        if($this->taxa_base_de_juros > $this->efmk) {
-            return 5 * ($this->taxa_base_de_juros - $this->efmk);
+        if($this->taxa_de_juros_base > $this->efmk) {
+            return 5 * ($this->taxa_de_juros_base - $this->efmk);
         } else {
-            return 5 * ((-1) * ($this->efmk - $this->taxa_base_de_juros));
+            return 5 * ((-1) * ($this->efmk - $this->taxa_de_juros_base));
         }
     }
 
@@ -94,18 +94,18 @@ class Rodada extends Model
         return 1/(1-$ultimoAno->pmgc);
     }
     private function k_com_imposto(){
-        return 1/(1-$this->pmgc) * (1 - $this->imposto_renda);
+        return 1/(1-$this->pmgc) * (1 - $this->imposto_de_renda);
     }
 
-    public function toArray()
+    public function toInformation()
     {
         /** @var ResultadoAnual $ultimoAno */
         $ultimoAno = $this->jogo->resultados_anuais->last();
         $ultimaRodada = null;
         if($this->rodada > 1){
-            $ultimaRodada = $this->jogo->getRodada($this->rodada - 1)->toArray();
+            $ultimaRodada = $this->jogo->getRodada($this->rodada - 1)->toInformation();
         }
-        $valores = parent::toArray();
+        $valores = parent::attributesToArray();
         $valores['pib'] = $this->pib($ultimoAno);
         $valores['previsao_anual'] = $this->previsao_anual($ultimoAno);
         $valores['yd'] = $this->yd($ultimoAno);

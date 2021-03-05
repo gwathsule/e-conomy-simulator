@@ -3,8 +3,6 @@
 namespace App\Domains\Rodada\Services;
 
 use App\Domains\Evento\EventoRepository;
-use App\Domains\Evento\Eventos\AlterarGastoGovernamental;
-use App\Domains\Evento\Eventos\AlterarGastoGovernamentalMensal;
 use App\Domains\Evento\Eventos\AlterarImpostoDeRenda;
 use App\Domains\Evento\Eventos\CriarTransferencia;
 use App\Domains\Jogo\Jogo;
@@ -12,6 +10,7 @@ use App\Domains\Jogo\JogoRepository;
 use App\Domains\Medida\Medida;
 use App\Domains\Medida\MedidaRepository;
 use App\Domains\ResultadoAnual\ResultadoAnual;
+use App\Domains\ResultadoAnual\Services\CriarResultadoAnual;
 use App\Domains\Rodada\Rodada;
 use App\Domains\Rodada\RodadaRepository;
 use App\Domains\User\User;
@@ -37,16 +36,22 @@ class CriarNovaRodada extends Service
      * @var RodadaRepository
      */
     private $rodadaRepository;
+    /**
+     * @var CriarResultadoAnual
+     */
+    private $criarResultadoAnual;
 
     public function __construct(
         JogoRepository $jogoRepository,
         EventoRepository $eventoRepository,
-        RodadaRepository $rodadaRepository
+        RodadaRepository $rodadaRepository,
+        CriarResultadoAnual $criarResultadoAnual
     )
     {
         $this->jogoRepository = $jogoRepository;
         $this->eventoRepository = $eventoRepository;
         $this->rodadaRepository = $rodadaRepository;
+        $this->criarResultadoAnual = $criarResultadoAnual;
     }
 
     public function validate(array $data)
@@ -80,7 +85,15 @@ class CriarNovaRodada extends Service
             if((int)$data['jogo_id'] != $user->getJogoAtivo()->id) {
                 throw new UserException(__('nao autorizado'));
             }
-            $novaRodada = $this->criarNovaRodada($jogo);
+            /** @var Rodada $ultimaRodada */
+            $ultimaRodada = $jogo->rodadas->last();
+            if($ultimaRodada != null && $ultimaRodada->rodada == 12){
+                $this->criarResultadoAnual->handle([
+                    'jogo_id' => $jogo->id,
+                    'ano' => 1
+                ]);
+            }
+            $novaRodada = $this->criarNovaRodada($jogo, $ultimaRodada);
             $noticias = collect();
             $medida = null;
             if(! is_null($data['medida_id'])) {
@@ -107,7 +120,7 @@ class CriarNovaRodada extends Service
                $novaRodada->popularidade_trabalhadores = 100;
             if($novaRodada->popularidade_estado > 100)
                $novaRodada->popularidade_estado = 100;
-            $this->rodadaRepository->save($novaRodada);
+            $novaRodada->update();
         } catch (Exception $exception) {
             DB::rollBack();
             throw $exception;
@@ -119,29 +132,27 @@ class CriarNovaRodada extends Service
     /**
      * Cria uma nova rodada com os valores iniciais (pode ser modificada durante o processo desse servico)
      */
-    private function criarNovaRodada(Jogo $jogo) : Rodada
+    private function criarNovaRodada(Jogo $jogo, $ultimaRodada) : Rodada
     {
-        /** @var Rodada $ultimaRodada */
-        $ultimaRodada = $jogo->rodadas->last();
         /** @var ResultadoAnual $ultimoAno */
         $ultimoAno = $jogo->resultados_anuais->last();
-        if(is_null($ultimaRodada) || $ultimaRodada->rodada == 12) {
-            return $this->iniciarPrimeiraRodadaDoAno($ultimoAno, $jogo);
+        if(is_null($ultimaRodada)) {
+            return $this->iniciarPrimeiraRodada($ultimoAno, $jogo);
         }
         $novaRodada = new Rodada();
         $novaRodada->jogo_id = $jogo->id;
-        $novaRodada->rodada = $jogo->rodadas->count();
+        $novaRodada->rodada = $jogo->rodadas->count() + 1;
 
         //VALORES DE PROGRESSÃO NORMAL (SEM INTERFERENCIA DO USUÁRIO)
         $novaRodada->pib_investimento_potencial = $ultimoAno->pib_investimento_potencial / 12;
         $novaRodada->gastos_governamentais = $ultimoAno->gastos_governamentais / 12;
-        $novaRodada->transferencias = $ultimoAno->transferencias / 12;;
-        $novaRodada->taxa_base_de_juros = $ultimaRodada->taxa_base_de_juros;
+        $novaRodada->transferencias = number_format($ultimoAno->transferencias / 12, 2, '.', '');
+        $novaRodada->taxa_de_juros_base = $ultimaRodada->taxa_de_juros_base;
         $novaRodada->pmgc = $ultimaRodada->pmgc;
-        $novaRodada->imposto_renda = $ultimaRodada->imposto_renda;
+        $novaRodada->imposto_de_renda = $ultimaRodada->imposto_de_renda;
         $novaRodada->inflacao_de_demanda = $ultimoAno->inflacao_de_demanda;
         $novaRodada->inflacao_de_custo = $ultimoAno->inflacao_de_custo;
-        $novaRodada->inflacao_total = $ultimoAno->inflacao_total;
+        $novaRodada->inflacao_total = $novaRodada->inflacao_de_custo + $novaRodada->inflacao_de_demanda;
         $novaRodada->efmk = ($ultimoAno->transferencias/1000000000) + 0.075;
 
         $novaRodada->medida_id = null;
@@ -149,40 +160,34 @@ class CriarNovaRodada extends Service
         $novaRodada->popularidade_empresarios = $ultimaRodada->popularidade_empresarios;
         $novaRodada->popularidade_trabalhadores = $ultimaRodada->popularidade_trabalhadores;
         $novaRodada->popularidade_estado = $ultimaRodada->popularidade_estado;
-        $this->rodadaRepository->save($novaRodada);
+        $novaRodada->save();
         return $novaRodada;
     }
 
-    private function iniciarPrimeiraRodadaDoAno(ResultadoAnual $ultimoAno, Jogo $jogo)
+    /**
+     * inicia primeira rodada da partida
+     * @param ResultadoAnual $ultimoAno
+     * @param Jogo $jogo
+     * @return Rodada
+     */
+    private function iniciarPrimeiraRodada(ResultadoAnual $ultimoAno, Jogo $jogo)
     {
         $rodada = new Rodada();
         $rodada->jogo_id = $jogo->id;
-        if($ultimoAno->ano == 0) {
-            $rodada->popularidade_empresarios = 50;
-            $rodada->popularidade_trabalhadores = 50;
-            $rodada->popularidade_estado = 50;
-            $rodada->rodada = 1;
-        } else {
-            /** @var Rodada $ultimaRodada */
-            $ultimaRodada = $jogo->rodadas->last();
-            $rodada->popularidade_empresarios = $ultimaRodada->popularidade_empresarios;
-            $rodada->popularidade_trabalhadores = $ultimaRodada->popularidade_trabalhadores;
-            $rodada->popularidade_estado = $ultimaRodada->popularidade_estado;
-            $jogo->rodadas->count();
-        }
-
-        //VALORES DA PRIMEIRA RODADA
+        $rodada->popularidade_empresarios = 50;
+        $rodada->popularidade_trabalhadores = 50;
+        $rodada->popularidade_estado = 50;
+        $rodada->rodada = 1;
         $rodada->pib_investimento_potencial = $ultimoAno->pib_investimento_potencial / 12;
         $rodada->gastos_governamentais = $ultimoAno->gastos_governamentais / 12;
         $rodada->transferencias = $ultimoAno->transferencias / 12;;
-        $rodada->taxa_base_de_juros = $ultimoAno->taxa_de_juros_base;
+        $rodada->taxa_de_juros_base = $ultimoAno->taxa_de_juros_base;
         $rodada->pmgc = $ultimoAno->pmgc;
-        $rodada->imposto_renda = $ultimoAno->imposto_de_renda;
+        $rodada->imposto_de_renda = $ultimoAno->imposto_de_renda;
         $rodada->inflacao_de_demanda = $ultimoAno->inflacao_de_demanda;
         $rodada->inflacao_de_custo = $ultimoAno->inflacao_de_custo;
         $rodada->inflacao_total = $ultimoAno->inflacao_total;
         $rodada->efmk = ($ultimoAno->transferencias/1000000000) + 0.075;
-
         $rodada->noticias = [];
         $rodada->save();
         return $rodada;

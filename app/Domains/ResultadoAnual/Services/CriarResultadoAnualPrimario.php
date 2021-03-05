@@ -2,15 +2,28 @@
 
 namespace App\Domains\ResultadoAnual\Services;
 
+use App\Domains\Jogo\Jogo;
 use App\Domains\ResultadoAnual\ResultadoAnual;
+use App\Domains\User\User;
+use App\Support\Exceptions\UserException;
 use App\Support\Service;
 use App\Support\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class CriarResultadoAnualPrimario extends Service
 {
     public function validate(array $data)
     {
+        /** @var Jogo $jogo */
+        $jogo = Jogo::query()->find($data['jogo_id']);
+        /** @var User $user */
+        $user = Auth::user();
+        if($jogo->user_id != $user->id) {
+            throw new UserException(__('nao-autorizado'));
+        }
+
         return (new class extends Validator {
+
             public function rules()
             {
                 return [

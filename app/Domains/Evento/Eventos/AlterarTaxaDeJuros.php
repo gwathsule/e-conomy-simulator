@@ -20,8 +20,8 @@ class AlterarTaxaDeJuros extends Evento
 
     public function modificacoes(Rodada $rodada, Medida $medida): array
     {
-        $rodada->imposto_renda += ($medida->diferenca_financas / 100);
-        if($rodada->imposto_renda <= 0) {
+        $rodada->imposto_de_renda += ($medida->diferenca_financas / 100);
+        if($rodada->imposto_de_renda <= 0) {
             throw new UserException(__('user-messages.ir-menor-que-zero'));
         }
         $rodada->popularidade_empresarios += $medida->diferenca_popularidade_empresarios;

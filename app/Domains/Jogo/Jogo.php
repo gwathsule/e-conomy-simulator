@@ -39,9 +39,9 @@ class Jogo extends Model
      * @param int $roundNumber
      * @return Rodada | null
      */
-    public function getRodada(int $roundNumber)
+    public function getRodada(int $rodada)
     {
-        return $this->timelines->where('round', $roundNumber)->first();
+        return $this->rodadas->where('rodada', $rodada)->first();
     }
 
     public function user()

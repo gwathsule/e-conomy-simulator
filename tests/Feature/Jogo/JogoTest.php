@@ -5,7 +5,6 @@ namespace Jogo;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\Services\CriarNovoJogo;
 use App\Domains\ResultadoAnual\ResultadoAnual;
-use App\Domains\Rodada\Rodada;
 use App\Domains\User\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
