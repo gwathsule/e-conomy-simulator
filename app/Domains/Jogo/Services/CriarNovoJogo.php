@@ -2,7 +2,7 @@
 
 namespace App\Domains\Jogo\Services;
 
-use App\Domains\Evento\Evento;
+use App\Domains\Evento\EventoService;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
 use App\Domains\ResultadoAnual\Services\CriarResultadoAnualPrimario;
@@ -87,7 +87,7 @@ class CriarNovoJogo extends Service
                     $rodada->delete();
                 }
 
-                /** @var Evento $evento */
+                /** @var EventoService $evento */
                 foreach ($ultimoJogo->eventos as $evento) {
                     $evento->delete();
                 }

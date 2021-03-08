@@ -2,36 +2,35 @@
 
 namespace App\Domains\Evento\Eventos;
 
-use App\Domains\Medida\Medida;
-use App\Domains\Medida\MedidaRepository;
+use App\Domains\Evento\Evento;
 use App\Domains\Rodada\Rodada;
-use App\Domains\Rodada\RodadaRepository;
-use App\Support\Evento;
-use App\Support\Noticia;
+use App\Support\EventoService;
 
-class CriarTransferencia extends Evento
+class CriarTransferencia extends EventoService
 {
-    public const RODADAS = 1;
     public const CODE = 'criar_transferencia';
 
-    protected function getCode(): string
+    public function getCode(): string
     {
         return self::CODE;
     }
 
-    protected function getRodadas(): int
+    //essa medida cria um evento que vai rodar até o fim do ano corrente
+    public function modificacoes(Rodada $rodada, Evento $evento): array
     {
-        return self::RODADAS;
+        $rodada->transferencias += $evento->data['valor_diferenca'];
+        $evento->rodadas_restantes--;
+        if($evento->rodadas_restantes == 0) {
+            $evento->delete();
+        } else {
+            $evento->update();
+        }
     }
 
-    public function modificacoes(Rodada $rodada, Medida $medida): array
+    public function buidData(float $valorDiferenca): array
     {
-        $rodada->transferencias += $medida->diferenca_financas;
-        $rodada->popularidade_empresarios += $medida->diferenca_popularidade_empresarios;
-        $rodada->popularidade_trabalhadores += $medida->diferenca_popularidade_trabalhadores;
-        $rodada->popularidade_estado += $medida->diferenca_popularidade_estado;
-        (new RodadaRepository())->update($rodada);
-        $noticia = new Noticia($medida);
-        return $noticia->buidDataNoticia();
+        return [
+            'valor_diferenca' => $valorDiferenca
+        ];
     }
 }

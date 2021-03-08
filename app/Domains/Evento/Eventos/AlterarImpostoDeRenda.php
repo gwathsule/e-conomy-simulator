@@ -2,33 +2,41 @@
 
 namespace App\Domains\Evento\Eventos;
 
-use App\Domains\Medida\Medida;
+use App\Domains\Evento\Evento;
 use App\Domains\Rodada\Rodada;
-use App\Domains\Rodada\RodadaRepository;
-use App\Support\Evento;
+use App\Support\EventoService;
 use App\Support\Exceptions\UserException;
-use App\Support\Noticia;
 
-class AlterarImpostoDeRenda extends Evento
+class AlterarImpostoDeRenda extends EventoService
 {
     public const CODE = 'alterar_imposto_de_renda';
 
-    protected function getCode(): string
+    public function getCode(): string
     {
         return self::CODE;
     }
 
-    public function modificacoes(Rodada $rodada, Medida $medida): array
+    //essa medida não cria eventos
+    public function modificacoes(Rodada $rodada, Evento $evento): array
     {
-        $rodada->imposto_de_renda += ($medida->diferenca_financas / 100);
+        $rodada->imposto_de_renda += $evento->data['valor_diferenca'];
         if($rodada->imposto_de_renda <= 0) {
             throw new UserException(__('user-messages.ir-menor-que-zero'));
         }
-        $rodada->popularidade_empresarios += $medida->diferenca_popularidade_empresarios;
-        $rodada->popularidade_trabalhadores += $medida->diferenca_popularidade_trabalhadores;
-        $rodada->popularidade_estado += $medida->diferenca_popularidade_estado;
-        (new RodadaRepository())->update($rodada);
-        $noticia = new Noticia($medida);
-        return $noticia->buidDataNoticia();
+        $evento->rodadas_restantes--;
+        if($evento->rodadas_restantes == 0) {
+            $evento->delete();
+        } else {
+            $evento->update();
+        }
+
     }
+
+    public function buidData(float $valorDiferenca): array
+    {
+        return [
+            'valor_diferenca' => $valorDiferenca
+        ];
+    }
+
 }

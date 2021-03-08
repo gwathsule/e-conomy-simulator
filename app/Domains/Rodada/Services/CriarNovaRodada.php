@@ -2,9 +2,8 @@
 
 namespace App\Domains\Rodada\Services;
 
+use App\Domains\Evento\Evento;
 use App\Domains\Evento\EventoRepository;
-use App\Domains\Evento\Eventos\AlterarImpostoDeRenda;
-use App\Domains\Evento\Eventos\CriarTransferencia;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
 use App\Domains\Medida\Medida;
@@ -15,6 +14,7 @@ use App\Domains\Rodada\Rodada;
 use App\Domains\Rodada\RodadaRepository;
 use App\Domains\User\User;
 use App\Support\Exceptions\UserException;
+use App\Support\Noticia;
 use App\Support\Service;
 use App\Support\Validator;
 use Exception;
@@ -60,7 +60,7 @@ class CriarNovaRodada extends Service
             public function rules()
             {
                 return [
-                    'medida_id' => ['int', 'nullable'],
+                    'medida_code' => ['string', 'nullable'],
                     'jogo_id' => ['int', 'required'],
                 ];
             }
@@ -99,10 +99,14 @@ class CriarNovaRodada extends Service
             if(! is_null($data['medida_id'])) {
                 /** @var Medida $medida */
                 $medida = (new MedidaRepository())->getById($data['medida_id']);
-                $noticia = $this->executarMedida($medida, $novaRodada);
+                $noticia = $this->executarMedida($novaRodada, $medida);
                 if (!is_null($noticia)) {
                     $noticias->add($noticia);
                 }
+            }
+            /** @var Evento $evento */
+            foreach ($jogo->eventos as $evento) {
+                $this->executarEvento($evento, $novaRodada);
             }
             $novaRodada->refresh();
             $novaRodada->noticias = $noticias->toArray();
@@ -193,16 +197,38 @@ class CriarNovaRodada extends Service
         return $rodada;
     }
 
-    private function executarMedida(Medida $medida, Rodada $rodada)
+    private function executarEvento(Evento $evento, Rodada $novaRodada) {
+        $eventoService = (new EventoRepository())->getService($evento->code);
+        $eventoService->modificacoes($novaRodada, $evento);
+    }
+
+    private function executarMedida(Rodada $novaRodada, Medida $medida)
     {
-        $rodada->refresh();
-        switch ($medida->codigo_evento) {
-            case AlterarImpostoDeRenda::CODE:
-                return (new AlterarImpostoDeRenda())->modificacoes($rodada, $medida);
-            case CriarTransferencia::CODE:
-                return (new CriarTransferencia())->modificacoes($rodada, $medida);
-            default:
-                return null;
+        $eventoService = (new EventoRepository())->getService($medida->codigo_evento);
+        $evento = new Evento();
+        $evento->rodadas_restantes = $this->getNumerosDeRodadasFaltantes($novaRodada);
+        $evento->code = $eventoService->getCode();
+        $evento->jogo_id = $novaRodada->jogo_id.
+        $rodadasRestantes = $this->getNumerosDeRodadasFaltantes($novaRodada);
+        $evento->data = $eventoService->buidData($medida->diferenca_financas / $rodadasRestantes);
+        $evento->rodadas_restantes = $rodadasRestantes;
+        $evento->save();
+
+        $novaRodada->popularidade_empresarios += $medida->diferenca_popularidade_empresarios;
+        $novaRodada->popularidade_trabalhadores += $medida->diferenca_popularidade_trabalhadores;
+        $novaRodada->popularidade_estado += $medida->diferenca_popularidade_estado;
+        $novaRodada->update();
+
+        $noticia = new Noticia($medida);
+        return $noticia->buidDataNoticia();
+    }
+
+    private function getNumerosDeRodadasFaltantes(Rodada $novaRodada)
+    {
+        if($novaRodada->rodada >= 12) {
+            return 13 - $novaRodada->rodada;
+        } else {
+            return 25 - $novaRodada->rodada;
         }
     }
 }

@@ -7,21 +7,21 @@ use App\Domains\Rodada\Rodada;
 use App\Support\EventoService;
 use App\Support\Exceptions\UserException;
 
-class AlterarTaxaDeJuros extends EventoService
+class AlterarGastosGovernamentais extends EventoService
 {
-    public const CODE = 'alterar_taxa_de_juros';
+    public const CODE = 'alterar_imposto_de_renda';
 
     public function getCode(): string
     {
         return self::CODE;
     }
 
-    //essa medida não cria eventos
+    //essa medida cria um evento que vai rodar até o fim do ano corrente
     public function modificacoes(Rodada $rodada, Evento $evento): array
     {
-        $rodada->taxa_de_juros_base += $evento->data['valor_diferenca'];
-        if($rodada->taxa_de_juros_base <= 0) {
-            throw new UserException(__('user-messages.taxa-juros-menor-que-zero'));
+        $rodada->gastos_governamentais += $evento->data['valor_diferenca'];
+        if($rodada->gastos_governamentais <= 0) {
+            throw new UserException(__('user-messages.gastos-governamentais-menor-que-zero'));
         }
         $evento->rodadas_restantes--;
         if($evento->rodadas_restantes == 0) {
