@@ -92,58 +92,76 @@ class RodadaTest extends TestCase
             'jogo_id' => $jogo->id,
         ];
 
-        //1° rodada - sem interferência
-        $servico->handle($dataPadrao);
-
         //2° rodada - abaixar imposto de renda em 1% (-1%);
         $servico->handle([
             'medida_id' => Medida::query()->where('nome','Abaixar Imposto de Renda')->first()->id,
             'jogo_id' => $jogo->id,
         ]);
-
         //3° rodada - sem interferência
         $servico->handle($dataPadrao);
-
         //4° rodada - aumentar transferencias em $180.000,00 (+180.000)
         $servico->handle([
             'medida_id' => Medida::query()->where('nome','Aumentar Transferencias')->first()->id,
             'jogo_id' => $jogo->id,
         ]);
-
         //5° rodada - sem interferência
         $servico->handle($dataPadrao);
-
         //6° rodada - Abaixar taxa de juros em 1% (-1%)
         $servico->handle([
             'medida_id' => Medida::query()->where('nome','Abaixar taxa de Juros')->first()->id,
             'jogo_id' => $jogo->id,
         ]);
-
         //7° rodada - sem interferência
         $servico->handle($dataPadrao);
-
         //8° rodada - Aumentar Gastos Governamentais em $100.000,00 (+100.000)
         $servico->handle([
             'medida_id' => Medida::query()->where('nome','Investimento em Educação')->first()->id,
             'jogo_id' => $jogo->id,
         ]);
-
         //9° rodada - sem interferência
         $servico->handle($dataPadrao);
-
         //10° rodada - Aumentar Gastos Governamentais em $100.000,00 (+100.000)
         $servico->handle([
             'medida_id' => Medida::query()->where('nome','Investimento em Saúde')->first()->id,
             'jogo_id' => $jogo->id,
         ]);
-
         //11° rodada - sem interferência
         $servico->handle($dataPadrao);
-
         //12° rodada - sem interferência
         $servico->handle($dataPadrao);
-
+        //13° rodada - sem interferência
+        $servico->handle($dataPadrao);
         $jogo->refresh();
         $this->assertNotNull($jogo->id);
+
+        /** @var ResultadoAnual $resultado */
+        $resultado = $jogo->resultados_anuais->last();
+
+        $this->assertEquals(1, $resultado->ano);
+        $this->assertCount(2, $jogo->resultados_anuais);
+        $this->assertEquals(62027795, round($resultado->pib));
+        $this->assertEquals(2180000, round($resultado->transferencias));
+        $this->assertEquals(6414705, round($resultado->impostos));
+        $this->assertEquals(57793090, round($resultado->yd));
+        $this->assertEquals(41100645, round($resultado->pib_consumo));
+        $this->assertEquals(18000000, round($resultado->pib_investimento_potencial));
+        $this->assertEquals(17367150, round($resultado->pib_investimento_realizado));
+        $this->assertEquals(3560000, round($resultado->gastos_governamentais));
+        $this->assertEquals(674705, round($resultado->bs));
+        $this->assertEquals(632850, round($resultado->titulos));
+        $this->assertEquals(55476, round($resultado->juros_divida_interna));
+        $this->assertEquals(83079, round($resultado->caixa));
+        $this->assertEquals(688326, round($resultado->divida_total));
+        $this->assertEquals(0.080, $resultado->taxa_de_juros_base);
+        $this->assertEquals(0.077, $resultado->efmk);
+        $this->assertEquals(0.014, $resultado->investimento_em_titulos);
+        $this->assertEquals(0.026, $resultado->inflacao_total);
+        $this->assertEquals(0.014, $resultado->inflacao_de_custo);
+        $this->assertEquals(0.012, $resultado->inflacao_de_demanda);
+        $this->assertEquals(0.064, $resultado->desemprego);
+        $this->assertEquals(0.700, $resultado->pmgc);
+        $this->assertEquals(3.333, $resultado->k);
+        $this->assertEquals(0.110, $resultado->imposto_de_renda);
+        $this->assertEquals(2.967, $resultado->k_com_imposto);
     }
 }

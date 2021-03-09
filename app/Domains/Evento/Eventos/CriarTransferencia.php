@@ -20,6 +20,7 @@ class CriarTransferencia extends EventoService
     {
         $rodada->transferencias += $evento->data['valor_diferenca'];
         $evento->rodadas_restantes--;
+        $rodada->update();
         if($evento->rodadas_restantes == 0) {
             $evento->delete();
         } else {

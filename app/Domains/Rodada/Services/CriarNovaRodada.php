@@ -118,12 +118,12 @@ class CriarNovaRodada extends Service
                 $novaRodada->popularidade_trabalhadores = 0;
             if($novaRodada->popularidade_estado < 0)
                 $novaRodada->popularidade_estado = 0;
-            if($novaRodada->popularidade_empresarios > 100)
-               $novaRodada->popularidade_empresarios = 100;
-            if($novaRodada->popularidade_trabalhadores > 100)
-               $novaRodada->popularidade_trabalhadores = 100;
-            if($novaRodada->popularidade_estado > 100)
-               $novaRodada->popularidade_estado = 100;
+            if($novaRodada->popularidade_empresarios > 1)
+               $novaRodada->popularidade_empresarios = 1;
+            if($novaRodada->popularidade_trabalhadores > 1)
+               $novaRodada->popularidade_trabalhadores = 1;
+            if($novaRodada->popularidade_estado > 1)
+               $novaRodada->popularidade_estado = 1;
             $novaRodada->update();
         } catch (Exception $exception) {
             DB::rollBack();
@@ -206,7 +206,6 @@ class CriarNovaRodada extends Service
     {
         $eventoService = (new EventoRepository())->getService($medida->codigo_evento);
         $evento = new Evento();
-        $evento->rodadas_restantes = $this->getNumerosDeRodadasFaltantes($novaRodada);
         $evento->code = $eventoService->getCode();
         $evento->jogo_id = $novaRodada->jogo_id;
         if($medida->medida_imediata) {
@@ -230,7 +229,7 @@ class CriarNovaRodada extends Service
 
     private function getNumerosDeRodadasFaltantes(Rodada $novaRodada)
     {
-        if($novaRodada->rodada >= 12) {
+        if($novaRodada->rodada <= 12) {
             return 13 - $novaRodada->rodada;
         } else {
             return 25 - $novaRodada->rodada;
