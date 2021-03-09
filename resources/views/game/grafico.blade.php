@@ -18,7 +18,7 @@
                     label: 'PIB',
                     data: [
                         @foreach($jogo->rodadas as $rodada)
-                        {{round($rodada->pib())}},
+                        {{round($rodada->toInformation()['pib'])}},
                         @endforeach
                     ],
                     backgroundColor: window.chartColors.purple,
@@ -30,7 +30,7 @@
                     label: 'Consumo',
                     data: [
                         @foreach($jogo->rodadas as $rodada)
-                        {{round($rodada->consumo())}},
+                        {{round($rodada->toInformation()['pib'])}},
                         @endforeach
                     ],
                     backgroundColor: window.chartColors.blue,
@@ -42,7 +42,7 @@
                     label: 'Transferencias',
                     data: [
                         @foreach($jogo->rodadas as $rodada)
-                        {{round($rodada->transferencias)}},
+                        {{round($rodada->toInformation()['pib'])}},
                         @endforeach
                     ],
                     backgroundColor: window.chartColors.green,
@@ -54,7 +54,7 @@
                     label: 'Impostos',
                     data: [
                         @foreach($jogo->rodadas as $rodada)
-                        {{round($rodada->impostos())}},
+                        {{round($rodada->toInformation()['pib'])}},
                         @endforeach
                     ],
                     backgroundColor: window.chartColors.yellow,
@@ -66,7 +66,7 @@
                     label: 'Investimentos',
                     data: [
                         @foreach($jogo->rodadas as $rodada)
-                        {{round($rodada->investimentos)}},
+                        {{round($rodada->toInformation()['pib'])}},
                         @endforeach
                     ],
                     backgroundColor: window.chartColors.orange,
@@ -78,7 +78,7 @@
                     label: 'Gst. Gov.',
                     data: [
                         @foreach($jogo->rodadas as $rodada)
-                        {{round($rodada->gastos_governamentais)}},
+                        {{round($rodada->toInformation()['pib'])}},
                         @endforeach
                     ],
                     backgroundColor: window.chartColors.red,

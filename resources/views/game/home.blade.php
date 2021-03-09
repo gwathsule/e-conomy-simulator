@@ -1,5 +1,5 @@
 @php
-    $ultimaRodada = $jogo->rodadas->last()->toArray();
+    $ultimaRodada = $jogo->rodadas->last()->toInformation();
 @endphp
 @extends('layouts.app')
 @section('title') E-Conomy Simulator @endsection
