@@ -29,7 +29,7 @@ class CriarResultadoAnual extends Service
             public function rules()
             {
                 return [
-                    'jogo_id' => ['int', 'required', 'between:1,2'],
+                    'jogo_id' => ['int', 'required'],
                     'ano' => ['int', 'required']
                 ];
             }

@@ -2,7 +2,7 @@
 
 namespace App\Domains\Jogo;
 
-use App\Domains\Evento\EventoService;
+use App\Domains\Evento\Evento;
 use App\Domains\ResultadoAnual\ResultadoAnual;
 use App\Domains\Rodada\Rodada;
 use App\Domains\User\User;
@@ -61,7 +61,7 @@ class Jogo extends Model
 
     public function eventos()
     {
-        return $this->hasMany(EventoService::class);
+        return $this->hasMany(Evento::class);
     }
 
     public function getImagemPersonagem()

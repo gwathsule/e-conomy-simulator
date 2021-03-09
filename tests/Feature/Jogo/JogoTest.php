@@ -34,7 +34,7 @@ class JogoTest extends TestCase
         $this->assertNotNull($jogo);
         /** @var ResultadoAnual $anoAnterior */
         $anoAnterior = $jogo->resultados_anuais->first();
-        $prRodada = $jogo->rodadas->first()->toArray();
+        $prRodada = $jogo->rodadas->first()->toInformation();
 
         $this->assertEquals($anoAnterior->ano, 0);
         $this->assertEquals($anoAnterior->pib, 59224000.000);
@@ -76,7 +76,7 @@ class JogoTest extends TestCase
         $this->assertEquals(number_format($prRodada['juros_divida_interna'], 2, '.', ''), 8775.00);
         $this->assertEquals(number_format($prRodada['caixa'], 2, '.', ''), 211033.33);
         $this->assertEquals(number_format($prRodada['divida_total'], 2, '.', ''), 106275.00);
-        $this->assertEquals(number_format($prRodada['taxa_base_de_juros'], 2, '.', ''), 0.09);
+        $this->assertEquals(number_format($prRodada['taxa_de_juros_base'], 2, '.', ''), 0.09);
         $this->assertEquals(number_format($prRodada['efmk'], 2, '.', ''), 0.08);
         $this->assertEquals(number_format($prRodada['investimento_em_titulos'], 2, '.', ''), 0.07);
         $this->assertEquals(number_format($prRodada['inflacao_total'], 2, '.', ''), 0.03);
@@ -88,7 +88,7 @@ class JogoTest extends TestCase
         $this->assertEquals($prRodada['popularidade_estado'], 50);
         $this->assertEquals(number_format($prRodada['pmgc'], 2, '.', ''), 0.70);
         $this->assertEquals(number_format($prRodada['k'], 2, '.', ''), 3.33);
-        $this->assertEquals(number_format($prRodada['imposto_renda'], 2, '.', ''), 0.12);
+        $this->assertEquals(number_format($prRodada['imposto_de_renda'], 2, '.', ''), 0.12);
         $this->assertEquals(number_format($prRodada['k_com_imposto'], 2, '.', ''), 2.93);
     }
 }
