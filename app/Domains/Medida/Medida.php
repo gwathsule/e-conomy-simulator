@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
  * @property string $codigo_evento
  * @property string $nome
  * @property string $resumo
- * @property string $rodadas_para_excutar
+ * @property boolean $medida_imediata
  * @property string $url_imagem
  * @property string $tipo_noticia
  * @property string $texto_noticia

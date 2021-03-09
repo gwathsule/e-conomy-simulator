@@ -33,7 +33,7 @@ class CriarMedida extends Service
                 return [
                     'codigo_evento' => ['required', 'max:255'],
                     'nome' => ['required', 'max:255'],
-                    'rodadas_para_excutar' => ['required', 'max:255'],
+                    'medida_imediata' => ['required', 'boolean'],
                     'imagem,' => ['required'],
                     'tipo' => ['required', 'max:255'],
                     'texto_noticia' => ['required'],
@@ -47,7 +47,7 @@ class CriarMedida extends Service
         $medida = new Medida();
         $medida->codigo_evento = $data['codigo_evento'];
         $medida->nome = $data['nome'];
-        $medida->rodadas_para_excutar = $data['rodadas_para_excutar'];
+        $medida->medida_imediata = $data['medida_imediata'];
         $medida->tipo_noticia = $data['tipo'];
         $medida->texto_noticia = $data['texto_noticia'];
         //$medida->url_imagem = $data['imagem'];

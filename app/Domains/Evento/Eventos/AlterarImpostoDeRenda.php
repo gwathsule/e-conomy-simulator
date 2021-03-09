@@ -17,7 +17,7 @@ class AlterarImpostoDeRenda extends EventoService
     }
 
     //essa medida não cria eventos
-    public function modificacoes(Rodada $rodada, Evento $evento): array
+    public function modificacoes(Rodada $rodada, Evento $evento)
     {
         $rodada->imposto_de_renda += $evento->data['valor_diferenca'];
         if($rodada->imposto_de_renda <= 0) {

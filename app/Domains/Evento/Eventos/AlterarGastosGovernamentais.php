@@ -17,7 +17,7 @@ class AlterarGastosGovernamentais extends EventoService
     }
 
     //essa medida cria um evento que vai rodar até o fim do ano corrente
-    public function modificacoes(Rodada $rodada, Evento $evento): array
+    public function modificacoes(Rodada $rodada, Evento $evento)
     {
         $rodada->gastos_governamentais += $evento->data['valor_diferenca'];
         if($rodada->gastos_governamentais <= 0) {

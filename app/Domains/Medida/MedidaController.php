@@ -22,7 +22,7 @@ class MedidaController extends Controller
                     'codigo_evento' => ['required', 'max:255'],
                     'nome' => ['required', 'max:255'],
                     'resumo' => ['required', 'max:255'],
-                    'rodadas_para_excutar' => ['required', 'max:255'],
+                    'medida_imadiata' => ['required', 'boolean'],
                     'imagem_noticia' => ['required', 'file', 'image'],
                     'diferenca' => ['required', 'numeric'],
                     'texto_noticia' => ['required'],
@@ -38,7 +38,7 @@ class MedidaController extends Controller
             $medida->codigo_evento = $request['codigo_evento'];
             $medida->nome = $request['nome'];
             $medida->resumo = $request['resumo'];
-            $medida->rodadas_para_excutar = $request['rodadas_para_excutar'];
+            $medida->medida_imediata = $request['medida_imadiata'];
             $medida->tipo_noticia = $request['tipo'];
             $medida->texto_noticia = $request['texto_noticia'];
             $medida->titulo_noticia = $request['titulo_noticia'];
@@ -69,7 +69,7 @@ class MedidaController extends Controller
                     'codigo_evento' => ['required', 'max:255'],
                     'nome' => ['required', 'max:255'],
                     'resumo' => ['required', 'max:255'],
-                    'rodadas_para_excutar' => ['required', 'max:255'],
+                    'medida_imadiata' => ['required', 'boolean'],
                     'imagem_noticia' => ['file', 'image'],
                     'diferenca' => ['required', 'numeric'],
                     'texto_noticia' => ['required'],
@@ -86,7 +86,7 @@ class MedidaController extends Controller
             $medida->codigo_evento = $request['codigo_evento'];
             $medida->nome = $request['nome'];
             $medida->resumo = $request['resumo'];
-            $medida->rodadas_para_excutar = $request['rodadas_para_excutar'];
+            $medida->medida_imediata = $request['medida_imediata'];
             $medida->tipo_noticia = $request['tipo'];
             $medida->texto_noticia = $request['texto_noticia'];
             $medida->titulo_noticia = $request['titulo_noticia'];

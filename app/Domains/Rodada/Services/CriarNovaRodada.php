@@ -178,9 +178,9 @@ class CriarNovaRodada extends Service
     {
         $rodada = new Rodada();
         $rodada->jogo_id = $jogo->id;
-        $rodada->popularidade_empresarios = 50;
-        $rodada->popularidade_trabalhadores = 50;
-        $rodada->popularidade_estado = 50;
+        $rodada->popularidade_empresarios = 0.5;
+        $rodada->popularidade_trabalhadores = 0.5;
+        $rodada->popularidade_estado = 0.5;
         $rodada->rodada = 1;
         $rodada->pib_investimento_potencial = $ultimoAno->pib_investimento_potencial / 12;
         $rodada->gastos_governamentais = $ultimoAno->gastos_governamentais / 12;
@@ -208,10 +208,15 @@ class CriarNovaRodada extends Service
         $evento = new Evento();
         $evento->rodadas_restantes = $this->getNumerosDeRodadasFaltantes($novaRodada);
         $evento->code = $eventoService->getCode();
-        $evento->jogo_id = $novaRodada->jogo_id.
-        $rodadasRestantes = $this->getNumerosDeRodadasFaltantes($novaRodada);
-        $evento->data = $eventoService->buidData($medida->diferenca_financas / $rodadasRestantes);
-        $evento->rodadas_restantes = $rodadasRestantes;
+        $evento->jogo_id = $novaRodada->jogo_id;
+        if($medida->medida_imediata) {
+            $evento->data = $eventoService->buidData($medida->diferenca_financas);
+            $evento->rodadas_restantes = 1;
+        } else {
+            $rodadasRestantes = $this->getNumerosDeRodadasFaltantes($novaRodada);
+            $evento->data = $eventoService->buidData($medida->diferenca_financas / $rodadasRestantes);
+            $evento->rodadas_restantes = $rodadasRestantes;
+        }
         $evento->save();
 
         $novaRodada->popularidade_empresarios += $medida->diferenca_popularidade_empresarios;
