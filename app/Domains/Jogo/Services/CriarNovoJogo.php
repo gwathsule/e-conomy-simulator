@@ -5,6 +5,7 @@ namespace App\Domains\Jogo\Services;
 use App\Domains\Evento\Evento;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
+use App\Domains\ResultadoAnual\ResultadoAnual;
 use App\Domains\ResultadoAnual\Services\CriarResultadoAnualPrimario;
 use App\Domains\Rodada\RodadaRepository;
 use App\Domains\Rodada\Rodada;
@@ -91,7 +92,10 @@ class CriarNovoJogo extends Service
                 foreach ($ultimoJogo->eventos as $evento) {
                     $evento->delete();
                 }
-
+                /** @var ResultadoAnual $resultado */
+                foreach ($ultimoJogo->resultados_anuais as $resultado) {
+                    $resultado->delete();
+                }
                 $ultimoJogo->delete();
             }
             $novoJogo->user_id = $user->id;
