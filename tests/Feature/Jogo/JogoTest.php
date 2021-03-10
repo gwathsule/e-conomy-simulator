@@ -83,9 +83,9 @@ class JogoTest extends TestCase
         $this->assertEquals(number_format($prRodada['inflacao_de_custo'], 2, '.', ''), 0.02);
         $this->assertEquals(number_format($prRodada['inflacao_de_demanda'], 2, '.', ''), 0.02);
         $this->assertEquals(number_format($prRodada['desemprego'], 2, '.', ''), 0.07);
-        $this->assertEquals($prRodada['popularidade_empresarios'], 50);
-        $this->assertEquals($prRodada['popularidade_trabalhadores'], 50);
-        $this->assertEquals($prRodada['popularidade_estado'], 50);
+        $this->assertEquals($prRodada['popularidade_empresarios'], 0.5);
+        $this->assertEquals($prRodada['popularidade_trabalhadores'], 0.5);
+        $this->assertEquals($prRodada['popularidade_estado'], 0.5);
         $this->assertEquals(number_format($prRodada['pmgc'], 2, '.', ''), 0.70);
         $this->assertEquals(number_format($prRodada['k'], 2, '.', ''), 3.33);
         $this->assertEquals(number_format($prRodada['imposto_de_renda'], 2, '.', ''), 0.12);

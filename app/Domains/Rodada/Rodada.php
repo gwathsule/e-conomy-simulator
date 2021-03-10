@@ -106,21 +106,21 @@ class Rodada extends Model
             $ultimaRodada = $this->jogo->getRodada($this->rodada - 1)->toInformation();
         }
         $valores = parent::attributesToArray();
-        $valores['pib'] = $this->pib($ultimoAno);
-        $valores['previsao_anual'] = $this->previsao_anual($ultimoAno);
-        $valores['yd'] = $this->yd($ultimoAno);
-        $valores['pib_consumo'] = $this->pib_consumo($ultimoAno);
-        $valores['pib_investimento_realizado'] = $this->pib_investimento_realizado($ultimoAno);
-        $valores['impostos'] = $this->impostos($ultimoAno);
-        $valores['bs'] = $this->bs($ultimoAno);
-        $valores['titulos'] = $this->titulos($ultimoAno);
-        $valores['juros_divida_interna'] = $this->juros_divida_interna($ultimoAno);
-        $valores['caixa'] = $this->caixa($ultimoAno, $ultimaRodada);
-        $valores['divida_total'] = $this->divida_total($ultimaRodada, $ultimoAno);
-        $valores['investimento_em_titulos'] = $this->investimento_em_titulos($ultimoAno);
-        $valores['desemprego'] = $this->desemprego($ultimoAno);
-        $valores['k'] = $this->k($ultimoAno);
-        $valores['k_com_imposto'] = $this->k_com_imposto();
+        $valores['pib'] = number_format($this->pib($ultimoAno), 2, '.', '');
+        $valores['previsao_anual'] = number_format($this->previsao_anual($ultimoAno), 2, '.', '');
+        $valores['yd'] = number_format($this->yd($ultimoAno), 2, '.', '');
+        $valores['pib_consumo'] = number_format($this->pib_consumo($ultimoAno), 2, '.', '');
+        $valores['pib_investimento_realizado'] = number_format($this->pib_investimento_realizado($ultimoAno), 2, '.', '');
+        $valores['impostos'] = number_format($this->impostos($ultimoAno), 2, '.', '');
+        $valores['bs'] = number_format($this->bs($ultimoAno), 2, '.', '');
+        $valores['titulos'] = number_format($this->titulos($ultimoAno), 2, '.', '');
+        $valores['juros_divida_interna'] = number_format($this->juros_divida_interna($ultimoAno), 2, '.', '');
+        $valores['caixa'] = number_format($this->caixa($ultimoAno, $ultimaRodada), 2, '.', '');
+        $valores['divida_total'] = number_format($this->divida_total($ultimaRodada, $ultimoAno), 2, '.', '');
+        $valores['investimento_em_titulos'] = number_format($this->investimento_em_titulos($ultimoAno), 2, '.', '');
+        $valores['desemprego'] = number_format($this->desemprego($ultimoAno), 2, '.', '');
+        $valores['k'] = number_format($this->k($ultimoAno), 2, '.', '');
+        $valores['k_com_imposto'] = number_format($this->k_com_imposto(), 2, '.', '');
         return $valores;
     }
 }

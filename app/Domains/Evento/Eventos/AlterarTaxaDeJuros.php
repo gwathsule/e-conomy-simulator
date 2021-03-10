@@ -17,12 +17,13 @@ class AlterarTaxaDeJuros extends EventoService
     }
 
     //essa medida não cria eventos
-    public function modificacoes(Rodada $rodada, Evento $evento): array
+    public function modificacoes(Rodada $rodada, Evento $evento)
     {
         $rodada->taxa_de_juros_base += $evento->data['valor_diferenca'];
         if($rodada->taxa_de_juros_base <= 0) {
             throw new UserException(__('user-messages.taxa-juros-menor-que-zero'));
         }
+        $rodada->update();
         $evento->rodadas_restantes--;
         if($evento->rodadas_restantes == 0) {
             $evento->delete();

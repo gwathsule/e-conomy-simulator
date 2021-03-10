@@ -9,7 +9,7 @@ use App\Support\Exceptions\UserException;
 
 class AlterarGastosGovernamentais extends EventoService
 {
-    public const CODE = 'alterar_imposto_de_renda';
+    public const CODE = 'alterar_gastos_governamentais';
 
     public function getCode(): string
     {
@@ -17,12 +17,13 @@ class AlterarGastosGovernamentais extends EventoService
     }
 
     //essa medida cria um evento que vai rodar até o fim do ano corrente
-    public function modificacoes(Rodada $rodada, Evento $evento): array
+    public function modificacoes(Rodada $rodada, Evento $evento)
     {
         $rodada->gastos_governamentais += $evento->data['valor_diferenca'];
         if($rodada->gastos_governamentais <= 0) {
             throw new UserException(__('user-messages.gastos-governamentais-menor-que-zero'));
         }
+        $rodada->update();
         $evento->rodadas_restantes--;
         if($evento->rodadas_restantes == 0) {
             $evento->delete();

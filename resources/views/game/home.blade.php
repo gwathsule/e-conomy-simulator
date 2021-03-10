@@ -1,5 +1,5 @@
 @php
-    $ultimaRodada = $jogo->rodadas->last()->toArray();
+    $ultimaRodada = $jogo->rodadas->last()->toInformation();
 @endphp
 @extends('layouts.app')
 @section('title') E-Conomy Simulator @endsection
@@ -11,7 +11,10 @@
 
 @section('conteudo')
     <div class="row">
-        @include('game.gabinete')
+        <div class="col-lg-5 col-xl-3">
+            @include('game.gabinete')
+            @include('game.ultimoMes')
+        </div>
         <div class="col-lg-7 col-xl-6">
             @include('game.grafico')
             @include('game.timeline')

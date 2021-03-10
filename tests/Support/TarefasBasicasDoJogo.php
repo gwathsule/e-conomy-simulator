@@ -4,6 +4,7 @@ namespace Tests\Support;
 
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\Services\CriarNovoJogo;
+use App\Domains\Medida\Medida;
 use App\Domains\User\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,5 +27,11 @@ trait TarefasBasicasDoJogo
         $servico = app()->make(CriarNovoJogo::class);
         /** @var Jogo $jogo */
         return $servico->handle($data);
+    }
+
+    public function iniciarMedidas()
+    {
+        $seeder = new \MedidasSeeder();
+        $seeder->run();
     }
 }

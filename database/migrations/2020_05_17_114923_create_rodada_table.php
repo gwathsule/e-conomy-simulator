@@ -30,9 +30,9 @@ class CreateRodadaTable extends Migration
             $table->decimal('pmgc', 4, 3)->nullable();
             $table->decimal('imposto_de_renda', 4, 3)->nullable();
 
-            $table->integer('popularidade_empresarios')->nullable();
-            $table->integer('popularidade_trabalhadores')->nullable();
-            $table->integer('popularidade_estado')->nullable();
+            $table->decimal('popularidade_empresarios')->nullable();
+            $table->decimal('popularidade_trabalhadores')->nullable();
+            $table->decimal('popularidade_estado')->nullable();
             $table->unsignedBigInteger('jogo_id');
             $table->foreign('jogo_id')
                 ->references('id')

@@ -16,10 +16,11 @@ class CriarTransferencia extends EventoService
     }
 
     //essa medida cria um evento que vai rodar até o fim do ano corrente
-    public function modificacoes(Rodada $rodada, Evento $evento): array
+    public function modificacoes(Rodada $rodada, Evento $evento)
     {
         $rodada->transferencias += $evento->data['valor_diferenca'];
         $evento->rodadas_restantes--;
+        $rodada->update();
         if($evento->rodadas_restantes == 0) {
             $evento->delete();
         } else {

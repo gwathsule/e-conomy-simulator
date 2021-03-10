@@ -1,10 +1,10 @@
 @php
-function corPorcentagem(int $cor)
+function corPorcentagem(float $cor)
 {
-    if($cor < 10) return 'red';
-    if($cor < 30) return 'yellow';
-    if($cor > 70) return 'green';
-    if($cor > 90) return 'blue';
+    if($cor < 0.1) return 'red';
+    if($cor < 0.3) return 'yellow';
+    if($cor > 0.7) return 'green';
+    if($cor > 0.9) return 'blue';
     return 'black';
 }
 @endphp
@@ -18,15 +18,15 @@ function corPorcentagem(int $cor)
             <table>
                 <tr>
                     <td><span class="titulo">Empresarios:</span></td>
-                    <td><span style="color: {{corPorcentagem($ultimaRodada['popularidade_empresarios'])}}" class="porcentagem">{{$ultimaRodada['popularidade_empresarios']}}%</span></td>
+                    <td><span style="color: {{corPorcentagem($ultimaRodada['popularidade_empresarios'])}}" class="porcentagem">{{$ultimaRodada['popularidade_empresarios'] * 100}}%</span></td>
                 </tr>
                 <tr>
                     <td><span class="titulo">Trabalhadores:</span></td>
-                    <td><span style="color: {{corPorcentagem($ultimaRodada['popularidade_trabalhadores'])}}" class="porcentagem">{{$ultimaRodada['popularidade_trabalhadores']}}%</span></td>
+                    <td><span style="color: {{corPorcentagem($ultimaRodada['popularidade_trabalhadores'])}}" class="porcentagem">{{$ultimaRodada['popularidade_trabalhadores'] * 100}}%</span></td>
                 </tr>
                 <tr>
                     <td><span class="titulo">Estado:</span></td>
-                    <td><span style="color: {{corPorcentagem($ultimaRodada['popularidade_estado'])}}" class="porcentagem">{{$ultimaRodada['popularidade_estado']}}%</span></td>
+                    <td><span style="color: {{corPorcentagem($ultimaRodada['popularidade_estado'])}}" class="porcentagem">{{$ultimaRodada['popularidade_estado'] * 100}}%</span></td>
                 </tr>
             </table>
         </div>

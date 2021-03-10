@@ -11,15 +11,15 @@ use Illuminate\Support\Str;
  * @property string $codigo_evento
  * @property string $nome
  * @property string $resumo
- * @property string $rodadas_para_excutar
+ * @property boolean $medida_imediata
  * @property string $url_imagem
  * @property string $tipo_noticia
  * @property string $texto_noticia
  * @property string $titulo_noticia
  * @property float $diferenca_financas
- * @property int $diferenca_popularidade_empresarios
- * @property int $diferenca_popularidade_trabalhadores
- * @property int $diferenca_popularidade_estado
+ * @property float $diferenca_popularidade_empresarios
+ * @property float $diferenca_popularidade_trabalhadores
+ * @property float $diferenca_popularidade_estado
  */
 class Medida extends Model
 {
