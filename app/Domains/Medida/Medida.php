@@ -57,8 +57,8 @@ class Medida extends Model
 
     private function buildText(string $texto, Jogo $jogo) : string
     {
-        $texto = Str::replaceFirst('{a/o}', $jogo->genero == 'm' ? 'o' : 'a', $texto);
-        $texto = Str::replaceFirst('{ministro/a}', $jogo->genero == 'm' ? 'ministro' : 'ministra', $texto);
+        $texto = Str::replaceFirst('{a/o}', $jogo->genero == 'M' ? 'o' : 'a', $texto);
+        $texto = Str::replaceFirst('{ministro/a}', $jogo->genero == 'M' ? 'ministro' : 'ministra', $texto);
         $texto = Str::replaceFirst('{nomeMinistro}', $jogo->ministro, $texto);
         $texto = Str::replaceFirst('{moeda}', $jogo->moeda, $texto);
         $texto = Str::replaceFirst('{pais}', $jogo->pais, $texto);
