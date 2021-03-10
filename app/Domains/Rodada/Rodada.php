@@ -80,10 +80,10 @@ class Rodada extends Model
         }
     }
     private function investimento_em_titulos(ResultadoAnual $ultimoAno){
-        if($this->taxa_de_juros_base > $this->efmk) {
+        if($this->taxa_de_juros_base - $this->efmk > 0) {
             return 5 * ($this->taxa_de_juros_base - $this->efmk);
         } else {
-            return 5 * ((-1) * ($this->efmk - $this->taxa_de_juros_base));
+            return 0;
         }
     }
 
