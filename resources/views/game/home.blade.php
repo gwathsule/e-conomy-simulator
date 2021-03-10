@@ -11,12 +11,16 @@
 
 @section('conteudo')
     <div class="row">
+        <div class="col-lg-12 col-xl-12" >
+            @include('game.grafico')
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-5 col-xl-3">
             @include('game.gabinete')
             @include('game.ultimoMes')
         </div>
         <div class="col-lg-7 col-xl-6">
-            @include('game.grafico')
             @include('game.timeline')
         </div>
         <div class="col-lg-12 col-xl-3">

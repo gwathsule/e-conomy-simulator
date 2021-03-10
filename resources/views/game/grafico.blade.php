@@ -1,127 +1,149 @@
-<div class="card card-white grid-margin grafico">
-    <div class="card-body">
-        <canvas id="canvas"></canvas>
-    </div>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<div class="card card-white grid-margin">
+    <div id="container"></div>
 </div>
 
 <script>
-    var config = {
-        type: 'line',
-        data: {
-            labels: [
+    Highcharts.chart('container', {
+        chart: {
+            type: 'area',
+            height: 250,
+        },
+        title: {
+            text: 'Rodadas'
+        },
+        xAxis: {
+            categories: [
                 @for($i=0; $i< $jogo->rodadas->count(); $i++)
                 {{$i}},
                 @endfor
             ],
-            datasets: [
-                {
-                    label: 'PIB',
-                    data: [
-                        @foreach($jogo->rodadas as $rodada)
-                        {{round($rodada->toInformation()['pib'])}},
-                        @endforeach
-                    ],
-                    backgroundColor: window.chartColors.purple,
-                    borderColor: window.chartColors.purple,
-                    fill: false,
-                    borderDash: [5, 5],
-                },
-                {
-                    label: 'Consumo',
-                    data: [
-                        @foreach($jogo->rodadas as $rodada)
-                        {{round($rodada->toInformation()['pib'])}},
-                        @endforeach
-                    ],
-                    backgroundColor: window.chartColors.blue,
-                    borderColor: window.chartColors.blue,
-                    fill: false,
-                    borderDash: [5, 5],
-                },
-                {
-                    label: 'Transferencias',
-                    data: [
-                        @foreach($jogo->rodadas as $rodada)
-                        {{round($rodada->toInformation()['pib'])}},
-                        @endforeach
-                    ],
-                    backgroundColor: window.chartColors.green,
-                    borderColor: window.chartColors.green,
-                    fill: false,
-                    borderDash: [5, 5],
-                },
-                {
-                    label: 'Impostos',
-                    data: [
-                        @foreach($jogo->rodadas as $rodada)
-                        {{round($rodada->toInformation()['pib'])}},
-                        @endforeach
-                    ],
-                    backgroundColor: window.chartColors.yellow,
-                    borderColor: window.chartColors.yellow,
-                    fill: false,
-                    borderDash: [5, 5],
-                },
-                {
-                    label: 'Investimentos',
-                    data: [
-                        @foreach($jogo->rodadas as $rodada)
-                        {{round($rodada->toInformation()['pib'])}},
-                        @endforeach
-                    ],
-                    backgroundColor: window.chartColors.orange,
-                    borderColor: window.chartColors.orange,
-                    fill: false,
-                    borderDash: [5, 5],
-                },
-                {
-                    label: 'Gst. Gov.',
-                    data: [
-                        @foreach($jogo->rodadas as $rodada)
-                        {{round($rodada->toInformation()['pib'])}},
-                        @endforeach
-                    ],
-                    backgroundColor: window.chartColors.red,
-                    borderColor: window.chartColors.red,
-                    fill: false,
-                    borderDash: [5, 5],
-                },
-
-            ]
-        },
-        options: {
-            responsive: true,
-            legend: {
-                position: 'bottom',
-            },
-            hover: {
-                mode: 'index'
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Rodadas'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: '{{$jogo->moeda}}'
-                    }
-                }]
-            },
+            tickmarkPlacement: 'on',
             title: {
-                display: true,
-                text: 'Gráfico Econômico'
+                enabled: false
             }
-        }
-    };
-
-    window.onload = function() {
-        var ctx = document.getElementById('canvas').getContext('2d');
-        window.myLine = new Chart(ctx, config);
-    };
+        },
+        yAxis: {
+            title: {
+                text: 'Billions'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value / 1000;
+                }
+            }
+        },
+        tooltip: {
+            split: true,
+            valueSuffix: ' millions'
+        },
+        plotOptions: {
+            area: {
+                stacking: 'normal',
+                lineColor: '#666666',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 1,
+                    lineColor: '#666666'
+                }
+            }
+        },
+        series: [
+            {
+                name: 'PIB',
+                data: [
+                    @foreach($jogo->rodadas as $rodada)
+                    {{round($rodada->toInformation()['pib'])}},
+                    @endforeach
+                ]
+            },
+            {
+                name: 'Investimento',
+                data: [
+                    @foreach($jogo->rodadas as $rodada)
+                    {{round($rodada->toInformation()['pib_investimento_realizado'])}},
+                    @endforeach
+                ]
+            },
+            {
+                name: 'Gast. Gov.',
+                data: [
+                    @foreach($jogo->rodadas as $rodada)
+                    {{round($rodada->toInformation()['gastos_governamentais'])}},
+                    @endforeach
+                ]
+            },
+            {
+                name: 'Transferências',
+                data: [
+                    @foreach($jogo->rodadas as $rodada)
+                    {{round($rodada->toInformation()['transferencias'])}},
+                    @endforeach
+                ]
+            },
+            {
+                name: 'Títulos Comprados',
+                data: [
+                    @foreach($jogo->rodadas as $rodada)
+                    {{round($rodada->toInformation()['titulos'])}},
+                    @endforeach
+                ]
+            },
+            {
+                name: 'Dívida Governo',
+                data: [
+                    @foreach($jogo->rodadas as $rodada)
+                    {{round($rodada->toInformation()['divida_total'])}},
+                    @endforeach
+                ]
+            },
+            {
+                name: 'Títulos Comprados',
+                data: [
+                    @foreach($jogo->rodadas as $rodada)
+                    {{round($rodada->toInformation()['investimento_em_titulos'])}},
+                    @endforeach
+                ]
+            },
+        ]
+    });
 </script>
+
+<style>
+    #container {
+        height: 250px;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #EBEBEB;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+        height: 300px;
+    }
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+    .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+    .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+</style>
