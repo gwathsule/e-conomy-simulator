@@ -3,6 +3,12 @@
         <h4 class="card-title">Medidas</h4>
     </div>
     <div class="card-body medidas">
+        <a href="{{route('nova-rodada',  ['jogoId' => $jogo->id, 'medidaId' => '-1'])}}"
+           data-toggle="tooltip" data-html="true" title="Não faz nada :D">
+            <li style="list-style: none">
+                <img class="chevron_medidas" src="{{asset('img/resources/double-chevron.svg')}}"> Não Fazer Nada
+            </li>
+        </a>
         @foreach(\App\Domains\Medida\Medida::all() as $medida)
             <a href="{{route('nova-rodada',  ['jogoId' => $jogo->id, 'medidaId' => $medida->id])}}"
                data-toggle="tooltip" data-html="true" title="{{$medida->resumo}}">

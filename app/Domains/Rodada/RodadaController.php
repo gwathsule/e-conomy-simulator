@@ -12,6 +12,9 @@ class RodadaController extends Controller
 {
     public function criarNovaRodada(int $jogoId, int $medidaId)
     {
+        if($medidaId == -1) {
+            $medidaId = null;
+        }
         try {
             /** @var CriarNovaRodada $servico */
             $servico = app()->make(CriarNovaRodada::class);
