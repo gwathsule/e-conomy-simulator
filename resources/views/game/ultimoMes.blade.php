@@ -1,6 +1,6 @@
 <div class="card card-white grid-margin grafico">
     <div class="card-heading clearfix">
-        <h4 class="card-title">Último Mês</h4>
+        <h4 class="card-title">Último Mês ({{$ultimaRodada['rodada']}})</h4>
     </div>
     <div class="table-responsive">
         <table class="table table-sm table-striped">
