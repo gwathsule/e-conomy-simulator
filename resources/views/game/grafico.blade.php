@@ -16,6 +16,9 @@
         title: {
             text: 'Rodadas'
         },
+        subtitle: {
+            text: 'Clique numa variável para ocultá-la das demais.'
+        },
         xAxis: {
             categories: [
                 @for($i=0; $i< $jogo->rodadas->count(); $i++)

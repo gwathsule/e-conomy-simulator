@@ -16,9 +16,8 @@ trait NoticiasCondicionais
             return $noticias->toArray();
         }
         //começa verificacoes
-        $novaRodadaInfo = $ultimaRodada->toInformation();
+        $novaRodadaInfo = $novaRodada->toInformation();
         $ultimaRodadaInfo = $ultimaRodada->toInformation();
-
         $noticia = $this->inflacaoTotal($novaRodadaInfo, $ultimaRodadaInfo, $medida, $jogo);
         if (!is_null($noticia)) {
             $noticias->add($noticia);

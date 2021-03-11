@@ -6,9 +6,9 @@ use App\Domains\Evento\Evento;
 use App\Domains\Rodada\Rodada;
 use App\Support\EventoService;
 
-class CriarTransferencia extends EventoService
+class AlterarTransferencia extends EventoService
 {
-    public const CODE = 'criar_transferencia';
+    public const CODE = 'alterar_transferencias';
 
     public function getCode(): string
     {

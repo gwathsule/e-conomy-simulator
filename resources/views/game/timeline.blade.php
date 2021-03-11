@@ -15,7 +15,7 @@
                         </div>
                         <div class="timeline-item-post">
                             <p>{{$medida->buildTextoNoticia($jogo)}}</p>
-                            <img src="{{\Illuminate\Support\Facades\Storage::url($medida->url_imagem)}}" alt="" />
+                            <img src="{{$medida->getImagem($jogo)}}" alt="" />
                         </div>
                     </div>
                     @endif

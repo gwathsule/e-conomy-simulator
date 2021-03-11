@@ -35,13 +35,18 @@ class MedidasSeeder extends Seeder
         $medida->diferenca_popularidade_trabalhadores = $dataMedida['diferenca_popularidade_trabalhadores'];
         $medida->diferenca_popularidade_estado = $dataMedida['diferenca_popularidade_estado'];
         $medida->save();
-        $imagem = $dataMedida['imagem'];
-        Storage::putFileAs(
-            "public/medidas/" . $medida->id,
-            new File(public_path("img/medidas_exemplos/$imagem")),
-            $imagem
-        );
-        $medida->url_imagem = "medidas/$medida->id/$imagem";
+        try {
+            $imagem = $dataMedida['imagem'];
+            Storage::putFileAs(
+                "public/medidas/" . $medida->id,
+                new File(public_path("img/medidas_exemplos/$imagem")),
+                $imagem
+            );
+            $medida->url_imagem = "medidas/$medida->id/$imagem";
+        }catch (\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException $ex) {
+            $medida->url_imagem = null;
+        }
+
         $medida->update();
     }
 }

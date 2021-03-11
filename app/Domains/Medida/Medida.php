@@ -5,6 +5,7 @@ namespace App\Domains\Medida;
 use App\Domains\Jogo\Jogo;
 use App\Support\NoticiaBuilder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @property int $id
@@ -44,5 +45,18 @@ class Medida extends Model
     public function buildTextoNoticia(Jogo $jogo)
     {
         return NoticiaBuilder::buildText($this->texto_noticia, $jogo);
+    }
+
+    public function getImagem(Jogo $jogo)
+    {
+        if(! is_null($this->url_imagem)) {
+           return Storage::url($this->url_imagem);
+        } else {
+           if($jogo->genero == 'F') {
+               return asset('img/medidas_exemplos/medida_padrao_m.jpg');
+           } else {
+               return asset('img/medidas_exemplos/medida_padrao_h.jpeg');
+           }
+        }
     }
 }
