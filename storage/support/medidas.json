@@ -1,0 +1,44 @@
+[
+  {
+    "codigo_evento": "alterar_imposto_de_renda",
+    "nome": "Diminuir imposto",
+    "resumo": "Imposto de Renda -1%",
+    "titulo_noticia": "{nomeMinistro} de bom humor, anuncia redução no IR",
+    "medida_imediata": true,
+    "tipo_noticia": "liberal",
+    "texto_noticia": "{a/o} {ministro/a} {nomeMinistro} anunciou uma redução no imposto de renda de 1%.",
+    "diferenca_financas": -0.01,
+    "diferenca_popularidade_empresarios": 0.05,
+    "diferenca_popularidade_trabalhadores": 0.05,
+    "diferenca_popularidade_estado": 0,
+    "imagem": "diminuir_imposto_de_renda.jpg"
+  },
+  {
+    "codigo_evento": "criar_transferencia",
+    "nome": "Aumentar Transferencias",
+    "resumo": "Transferencias +180.000",
+    "titulo_noticia": "Desvio de dinheiro ou politica social?",
+    "medida_imediata": false,
+    "tipo_noticia": "estatal",
+    "texto_noticia": "{a/o} {ministro/a} {nomeMinistro} anunciou o programa social Bolsa Familia, que irá destinar a população carente cerca de 180 mil {moeda}.",
+    "diferenca_financas": 180000,
+    "diferenca_popularidade_empresarios": 0,
+    "diferenca_popularidade_trabalhadores": 0.05,
+    "diferenca_popularidade_estado": 0,
+    "imagem": "criar_transferencias.jpg"
+  },
+  {
+    "codigo_evento": "alterar_gastos_governamentais",
+    "nome": "Investimento em Educação",
+    "resumo": "Gastos Governamentais +100.000",
+    "titulo_noticia": "Governo anuncia investimento em educação.",
+    "medida_imediata": false,
+    "tipo_noticia": "estatal",
+    "texto_noticia": "{a/o} {ministro/a} {nomeMinistro} um investimento em educação até o fim do ano, no valor de 100.000",
+    "diferenca_financas": 100000,
+    "diferenca_popularidade_empresarios": 0,
+    "diferenca_popularidade_trabalhadores": 0,
+    "diferenca_popularidade_estado": 0.05,
+    "imagem": "aumentar_gastos_governamentais.jpg"
+  }
+]
