@@ -39,7 +39,7 @@ class MedidasSeeder extends Seeder
         Storage::putFileAs(
             "public/medidas/" . $medida->id,
             new File(public_path("img/medidas_exemplos/$imagem")),
-            "diminuir_imposto_de_renda.jpg"
+            $imagem
         );
         $medida->url_imagem = "medidas/$medida->id/$imagem";
         $medida->update();
