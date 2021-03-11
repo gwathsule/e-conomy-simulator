@@ -3,22 +3,35 @@
         <li class="timeline-item">
             <div class="card card-white grid-margin timeline">
                 @foreach($jogo->rodadas->reverse() as $rodada)
-                @php
-                    $medida = \App\Domains\Medida\Medida::query()->find($rodada->medida_id)
-                @endphp
-                @if(! is_null($medida))
-                <div class="card-body post">
-                    <div class="timeline-item-header">
-                        <img src="{{$medida->getAvatarNoticia()}}" alt="" />
-                        <p>{{$medida->buildTituloNoticia($jogo)}}</p>
-                        <small>{{$medida->getNomeJornal()}}</small>
+                    @php
+                        $medida = \App\Domains\Medida\Medida::query()->find($rodada->medida_id)
+                    @endphp
+                    @if(! is_null($medida))
+                    <div class="card-body post">
+                        <div class="timeline-item-header">
+                            <img src="{{$medida->getAvatarNoticia()}}" alt="" />
+                            <p>{{$medida->buildTituloNoticia($jogo)}}</p>
+                            <small>{{$medida->getNomeJornal()}} | Mês {{$rodada->rodada}}</small>
+                        </div>
+                        <div class="timeline-item-post">
+                            <p>{{$medida->buildTextoNoticia($jogo)}}</p>
+                            <img src="{{\Illuminate\Support\Facades\Storage::url($medida->url_imagem)}}" alt="" />
+                        </div>
                     </div>
-                    <div class="timeline-item-post">
-                        <p>{{$medida->buildTextoNoticia($jogo)}}</p>
-                        <img src="{{\Illuminate\Support\Facades\Storage::url($medida->url_imagem)}}" alt="" />
-                    </div>
-                </div>
-                @endif
+                    @endif
+                    @foreach($rodada->noticias as $noticia)
+                        <div class="card-body post">
+                            <div class="timeline-item-header">
+                                <img src="{{$noticia["avatar_jornal"]}}" alt="" />
+                                <p>{{$noticia["titulo"]}}</p>
+                                <small>{{$noticia["nome_jornal"]}} | Mês {{$rodada->rodada}}</small>
+                            </div>
+                            <div class="timeline-item-post">
+                                <p>{{$noticia["texto"]}}</p>
+                                <img src="{{$noticia["imagem"]}}" alt="" />
+                            </div>
+                        </div>
+                    @endforeach
                 @endforeach
             </div>
         </li>

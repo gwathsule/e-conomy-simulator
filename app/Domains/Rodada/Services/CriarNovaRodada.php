@@ -14,7 +14,6 @@ use App\Domains\Rodada\Rodada;
 use App\Domains\Rodada\RodadaRepository;
 use App\Domains\User\User;
 use App\Support\Exceptions\UserException;
-use App\Support\Noticia;
 use App\Support\Service;
 use App\Support\Validator;
 use Exception;
@@ -24,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 
 class CriarNovaRodada extends Service
 {
+    use NoticiasCondicionais;
     /**
      * @var JogoRepository
      */
@@ -94,22 +94,26 @@ class CriarNovaRodada extends Service
                 ]);
             }
             $novaRodada = $this->criarNovaRodada($jogo, $ultimaRodada);
-            $noticias = collect();
             $medida = null;
+            $nomeUltimaMedida = "";
             if(! is_null($data['medida_id'])) {
                 /** @var Medida $medida */
                 $medida = (new MedidaRepository())->getById($data['medida_id']);
-                $noticia = $this->executarMedida($novaRodada, $medida);
-                if (!is_null($noticia)) {
-                    $noticias->add($noticia);
-                }
+                $nomeUltimaMedida = $medida->nome;
+                $this->executarMedida($novaRodada, $medida);
             }
             /** @var Evento $evento */
             foreach ($jogo->eventos as $evento) {
                 $this->executarEvento($evento, $novaRodada);
             }
+
+            //TODO verificar se investimento realizado for diferente do ano 0/12 ou se houve alteração de transferencia na rodada
+            //TODO se sim calcular a inflação de demanda
+
+            //TODO calcular inflação de custo
+
             $novaRodada->refresh();
-            $novaRodada->noticias = $noticias->toArray();
+            $novaRodada->noticias = $this->obterNoticiasCondicionais($novaRodada, $ultimaRodada, $nomeUltimaMedida, $jogo);
             if(! is_null($medida))
                 $novaRodada->medida_id = $medida->id;
             if($novaRodada->popularidade_empresarios < 0)
@@ -222,9 +226,6 @@ class CriarNovaRodada extends Service
         $novaRodada->popularidade_trabalhadores += $medida->diferenca_popularidade_trabalhadores;
         $novaRodada->popularidade_estado += $medida->diferenca_popularidade_estado;
         $novaRodada->update();
-
-        $noticia = new Noticia($medida);
-        return $noticia->buidDataNoticia();
     }
 
     private function getNumerosDeRodadasFaltantes(Rodada $novaRodada)
