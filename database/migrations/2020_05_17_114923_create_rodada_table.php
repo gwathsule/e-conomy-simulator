@@ -23,7 +23,6 @@ class CreateRodadaTable extends Migration
             $table->decimal('gastos_governamentais', 13, 3)->nullable();
             $table->decimal('transferencias', 13, 3)->nullable();
             $table->decimal('taxa_de_juros_base', 4, 3)->nullable();
-            $table->decimal('efmk', 4, 3)->nullable();
             $table->decimal('inflacao_de_demanda', 4, 3)->nullable();
             $table->decimal('inflacao_de_custo', 4, 3)->nullable();
             $table->decimal('inflacao_total', 4, 3)->nullable();

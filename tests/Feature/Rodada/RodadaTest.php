@@ -94,35 +94,35 @@ class RodadaTest extends TestCase
 
         //2° rodada - abaixar imposto de renda em 1% (-1%);
         $servico->handle([
-            'medida_id' => Medida::query()->where('nome','Abaixar Imposto de Renda')->first()->id,
+            'medida_id' => Medida::query()->where('nome','Diminuir imposto')->first()->id,
             'jogo_id' => $jogo->id,
         ]);
         //3° rodada - sem interferência
         $servico->handle($dataPadrao);
         //4° rodada - aumentar transferencias em $180.000,00 (+180.000)
         $servico->handle([
-            'medida_id' => Medida::query()->where('nome','Aumentar Transferencias')->first()->id,
+            'medida_id' => Medida::query()->where('nome','Aumentar investimento social')->first()->id,
             'jogo_id' => $jogo->id,
         ]);
         //5° rodada - sem interferência
         $servico->handle($dataPadrao);
         //6° rodada - Abaixar taxa de juros em 1% (-1%)
         $servico->handle([
-            'medida_id' => Medida::query()->where('nome','Abaixar taxa de Juros')->first()->id,
+            'medida_id' => Medida::query()->where('nome','Diminuir taxa de juros')->first()->id,
             'jogo_id' => $jogo->id,
         ]);
         //7° rodada - sem interferência
         $servico->handle($dataPadrao);
         //8° rodada - Aumentar Gastos Governamentais em $100.000,00 (+100.000)
         $servico->handle([
-            'medida_id' => Medida::query()->where('nome','Investimento em Educação')->first()->id,
+            'medida_id' => Medida::query()->where('nome','Investir em Educação')->first()->id,
             'jogo_id' => $jogo->id,
         ]);
         //9° rodada - sem interferência
         $servico->handle($dataPadrao);
         //10° rodada - Aumentar Gastos Governamentais em $100.000,00 (+100.000)
         $servico->handle([
-            'medida_id' => Medida::query()->where('nome','Investimento em Saúde')->first()->id,
+            'medida_id' => Medida::query()->where('nome','Investir em Saúde')->first()->id,
             'jogo_id' => $jogo->id,
         ]);
         //11° rodada - sem interferência

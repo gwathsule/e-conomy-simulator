@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $gastos_governamentais
  * @property float $transferencias
  * @property float $taxa_de_juros_base
- * @property float $efmk
  * @property float $inflacao_de_demanda
  * @property float $inflacao_de_custo
  * @property float $inflacao_total
@@ -66,6 +65,10 @@ class Rodada extends Model
     private function juros_divida_interna($ultimoAno){
         return $this->titulos($ultimoAno) * $this->taxa_de_juros_base;
     }
+    private function efmk($ultimoAno) {
+        $efmk = (($ultimoAno->transferencias + $this->transferencias)/1000000000) + 0.075;
+        return number_format($efmk, 3, '.', '');
+    }
     private function caixa($ultimoAno, $ultimaRodada){
         if($this->rodada == 1){
             return $ultimoAno->caixa + $this->bs($ultimoAno);
@@ -80,13 +83,12 @@ class Rodada extends Model
         }
     }
     private function investimento_em_titulos(ResultadoAnual $ultimoAno){
-        if($this->taxa_de_juros_base - $this->efmk > 0) {
-            return 5 * ($this->taxa_de_juros_base - $this->efmk);
+        if($this->taxa_de_juros_base - $this->efmk($ultimoAno) > 0) {
+            return 5 * ($this->taxa_de_juros_base - $this->efmk($ultimoAno));
         } else {
             return 0;
         }
     }
-
     private function desemprego(ResultadoAnual $ultimoAno){
         return $ultimoAno->desemprego * (($ultimoAno->pib/12)/$this->pib($ultimoAno));
     }
@@ -113,6 +115,7 @@ class Rodada extends Model
         $valores['pib_investimento_realizado'] = number_format($this->pib_investimento_realizado($ultimoAno), 2, '.', '');
         $valores['impostos'] = number_format($this->impostos($ultimoAno), 2, '.', '');
         $valores['bs'] = number_format($this->bs($ultimoAno), 2, '.', '');
+        $valores['efmk'] = number_format($this->efmk($ultimoAno), 2, '.', '');
         $valores['titulos'] = number_format($this->titulos($ultimoAno), 2, '.', '');
         $valores['juros_divida_interna'] = number_format($this->juros_divida_interna($ultimoAno), 2, '.', '');
         $valores['caixa'] = number_format($this->caixa($ultimoAno, $ultimaRodada), 2, '.', '');
