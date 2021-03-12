@@ -11,4 +11,3 @@ O sistema faz parte do trabalho de Conclusão de curso dos alunos [Rafael](https
 <p align="left">"./bin up -d" - levanta os conteiners</p>
 <p align="left">"./bin php artisan migrate" - monta o banco de dados</p>
 <p align="left">"./bin php artisan db:seed" - cadastra dois usuários: admin e normal</p>
-<p align="left">"./bin artisan jwt:secret" 

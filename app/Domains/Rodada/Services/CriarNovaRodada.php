@@ -4,6 +4,7 @@ namespace App\Domains\Rodada\Services;
 
 use App\Domains\Evento\Evento;
 use App\Domains\Evento\EventoRepository;
+use App\Domains\Evento\Eventos\AlterarTransferencia;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
 use App\Domains\Medida\Medida;
@@ -14,7 +15,6 @@ use App\Domains\Rodada\Rodada;
 use App\Domains\Rodada\RodadaRepository;
 use App\Domains\User\User;
 use App\Support\Exceptions\UserException;
-use App\Support\Noticia;
 use App\Support\Service;
 use App\Support\Validator;
 use Exception;
@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\DB;
 
 class CriarNovaRodada extends Service
 {
+    use NoticiasCondicionais;
     /**
      * @var JogoRepository
      */
@@ -87,29 +88,34 @@ class CriarNovaRodada extends Service
             }
             /** @var Rodada $ultimaRodada */
             $ultimaRodada = $jogo->rodadas->last();
+            /** @var ResultadoAnual $ultimoAno */
+            $ultimoAno = $jogo->resultados_anuais->last();
             if($ultimaRodada != null && $ultimaRodada->rodada == 12){
                 $this->criarResultadoAnual->handle([
                     'jogo_id' => $jogo->id,
                     'ano' => 1
                 ]);
             }
-            $novaRodada = $this->criarNovaRodada($jogo, $ultimaRodada);
-            $noticias = collect();
+            $novaRodada = $this->criarNovaRodada($jogo, $ultimaRodada, $ultimoAno);
             $medida = null;
+            $nomeUltimaMedida = "";
+            $codeEventoUltimaMedida = "";
             if(! is_null($data['medida_id'])) {
                 /** @var Medida $medida */
                 $medida = (new MedidaRepository())->getById($data['medida_id']);
-                $noticia = $this->executarMedida($novaRodada, $medida);
-                if (!is_null($noticia)) {
-                    $noticias->add($noticia);
-                }
+                $nomeUltimaMedida = $medida->nome;
+                $codeEventoUltimaMedida = $medida->codigo_evento;
+                $novaRodada->medida_id = $data['medida_id'];
+                $this->executarMedida($novaRodada, $medida);
             }
             /** @var Evento $evento */
             foreach ($jogo->eventos as $evento) {
                 $this->executarEvento($evento, $novaRodada);
             }
             $novaRodada->refresh();
-            $novaRodada->noticias = $noticias->toArray();
+            $calculador = new CalcularResultantes($novaRodada, $ultimoAno, $codeEventoUltimaMedida, $ultimaRodada);
+            $novaRodada = $calculador->perform();
+            $novaRodada->noticias = $this->obterNoticiasCondicionais($novaRodada, $ultimaRodada, $nomeUltimaMedida, $jogo);
             if(! is_null($medida))
                 $novaRodada->medida_id = $medida->id;
             if($novaRodada->popularidade_empresarios < 0)
@@ -136,10 +142,12 @@ class CriarNovaRodada extends Service
     /**
      * Cria uma nova rodada com os valores iniciais (pode ser modificada durante o processo desse servico)
      */
-    private function criarNovaRodada(Jogo $jogo, $ultimaRodada) : Rodada
+    private function criarNovaRodada(
+        Jogo $jogo,
+        Rodada $ultimaRodada = null,
+        ResultadoAnual $ultimoAno = null
+    ) : Rodada
     {
-        /** @var ResultadoAnual $ultimoAno */
-        $ultimoAno = $jogo->resultados_anuais->last();
         if(is_null($ultimaRodada)) {
             return $this->iniciarPrimeiraRodada($ultimoAno, $jogo);
         }
@@ -152,12 +160,7 @@ class CriarNovaRodada extends Service
         $novaRodada->gastos_governamentais = $ultimoAno->gastos_governamentais / 12;
         $novaRodada->transferencias = number_format($ultimoAno->transferencias / 12, 2, '.', '');
         $novaRodada->taxa_de_juros_base = $ultimaRodada->taxa_de_juros_base;
-        $novaRodada->pmgc = $ultimaRodada->pmgc;
         $novaRodada->imposto_de_renda = $ultimaRodada->imposto_de_renda;
-        $novaRodada->inflacao_de_demanda = $ultimoAno->inflacao_de_demanda;
-        $novaRodada->inflacao_de_custo = $ultimoAno->inflacao_de_custo;
-        $novaRodada->inflacao_total = $novaRodada->inflacao_de_custo + $novaRodada->inflacao_de_demanda;
-        $novaRodada->efmk = ($ultimoAno->transferencias/1000000000) + 0.075;
 
         $novaRodada->medida_id = null;
         $novaRodada->noticias = [];
@@ -186,12 +189,7 @@ class CriarNovaRodada extends Service
         $rodada->gastos_governamentais = $ultimoAno->gastos_governamentais / 12;
         $rodada->transferencias = $ultimoAno->transferencias / 12;;
         $rodada->taxa_de_juros_base = $ultimoAno->taxa_de_juros_base;
-        $rodada->pmgc = $ultimoAno->pmgc;
         $rodada->imposto_de_renda = $ultimoAno->imposto_de_renda;
-        $rodada->inflacao_de_demanda = $ultimoAno->inflacao_de_demanda;
-        $rodada->inflacao_de_custo = $ultimoAno->inflacao_de_custo;
-        $rodada->inflacao_total = $ultimoAno->inflacao_total;
-        $rodada->efmk = ($ultimoAno->transferencias/1000000000) + 0.075;
         $rodada->noticias = [];
         $rodada->save();
         return $rodada;
@@ -222,9 +220,6 @@ class CriarNovaRodada extends Service
         $novaRodada->popularidade_trabalhadores += $medida->diferenca_popularidade_trabalhadores;
         $novaRodada->popularidade_estado += $medida->diferenca_popularidade_estado;
         $novaRodada->update();
-
-        $noticia = new Noticia($medida);
-        return $noticia->buidDataNoticia();
     }
 
     private function getNumerosDeRodadasFaltantes(Rodada $novaRodada)

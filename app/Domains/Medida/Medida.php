@@ -3,8 +3,9 @@
 namespace App\Domains\Medida;
 
 use App\Domains\Jogo\Jogo;
+use App\Support\NoticiaBuilder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @property int $id
@@ -23,45 +24,39 @@ use Illuminate\Support\Str;
  */
 class Medida extends Model
 {
-    public const TIPO_NOTICIA_LIBERAL = 'liberal';
-    public const TIPO_NOTICIA_ESTATAL = 'estatal';
-
-    public const TIPOS_NOTICIA = [
-        self::TIPO_NOTICIA_LIBERAL => 'Liberal',
-        self::TIPO_NOTICIA_ESTATAL => 'Estatal',
-    ];
 
     protected $table = 'medida';
 
     public function getAvatarNoticia()
     {
-        if($this->tipo_noticia == self::TIPO_NOTICIA_LIBERAL) return asset('img/resources/jn-liberal.png');
-        if($this->tipo_noticia == self::TIPO_NOTICIA_ESTATAL) return asset('img/resources/jn-estatal.png');
+        return NoticiaBuilder::getAvatarNoticia($this->tipo_noticia);
     }
 
     public function getNomeJornal()
     {
-        if($this->tipo_noticia == self::TIPO_NOTICIA_LIBERAL) return 'Jornal Liberal';
-        if($this->tipo_noticia == self::TIPO_NOTICIA_ESTATAL) return 'Jornal Estatal';
+        return NoticiaBuilder::getNomeJornal($this->tipo_noticia);
     }
 
     public function buildTituloNoticia(Jogo $jogo)
     {
-        return $this->buildText($this->titulo_noticia, $jogo);
+        return NoticiaBuilder::buildText($this->titulo_noticia, $jogo);
     }
 
     public function buildTextoNoticia(Jogo $jogo)
     {
-        return $this->buildText($this->texto_noticia, $jogo);
+        return NoticiaBuilder::buildText($this->texto_noticia, $jogo);
     }
 
-    private function buildText(string $texto, Jogo $jogo) : string
+    public function getImagem(Jogo $jogo)
     {
-        $texto = Str::replaceFirst('{a/o}', $jogo->genero == 'M' ? 'o' : 'a', $texto);
-        $texto = Str::replaceFirst('{ministro/a}', $jogo->genero == 'M' ? 'ministro' : 'ministra', $texto);
-        $texto = Str::replaceFirst('{nomeMinistro}', $jogo->ministro, $texto);
-        $texto = Str::replaceFirst('{moeda}', $jogo->moeda, $texto);
-        $texto = Str::replaceFirst('{pais}', $jogo->pais, $texto);
-        return $texto;
+        if(! is_null($this->url_imagem)) {
+           return Storage::url($this->url_imagem);
+        } else {
+           if($jogo->genero == 'F') {
+               return asset('img/medidas_exemplos/medida_padrao_m.jpg');
+           } else {
+               return asset('img/medidas_exemplos/medida_padrao_h.jpeg');
+           }
+        }
     }
 }
