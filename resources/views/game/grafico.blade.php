@@ -10,70 +10,38 @@
 <script>
     Highcharts.chart('container', {
         chart: {
-            type: 'area',
-            height: 250,
+            type: 'line',
+            height: 230,
         },
         title: {
-            text: 'Rodadas'
+            text: 'Monthly Average Temperature'
         },
         subtitle: {
-            text: 'Clique numa variável para ocultá-la das demais.'
+            text: 'Source: WorldClimate.com'
         },
         xAxis: {
             categories: [
                 @for($i=0; $i< $jogo->rodadas->count(); $i++)
                 {{$i}},
                 @endfor
-            ],
-            tickmarkPlacement: 'on',
-            title: {
-                enabled: false
-            }
+            ]
         },
         yAxis: {
             title: {
-                text: 'Billions'
-            },
-            labels: {
-                formatter: function () {
-                    return this.value / 1000;
-                }
+                text: '{{$jogo->moeda}}'
             }
         },
-        tooltip: {
-            split: true,
-            valueSuffix: ' millions'
-        },
         plotOptions: {
-            area: {
-                stacking: 'normal',
-                lineColor: '#666666',
-                lineWidth: 1,
-                marker: {
-                    lineWidth: 1,
-                    lineColor: '#666666'
-                }
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
             }
         },
         series: [
             {
-                name: 'PIB',
-                data: [
-                    @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['pib'])}},
-                    @endforeach
-                ]
-            },
-            {
-                name: 'Investimento',
-                data: [
-                    @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['pib_investimento_realizado'])}},
-                    @endforeach
-                ]
-            },
-            {
-                name: 'Gast. Gov.',
+                name: 'Gastos Governamentais',
                 data: [
                     @foreach($jogo->rodadas as $rodada)
                     {{round($rodada->toInformation()['gastos_governamentais'])}},
@@ -89,26 +57,26 @@
                 ]
             },
             {
-                name: 'Títulos Comprados',
+                name: 'Deficit/Superavit',
                 data: [
                     @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['titulos'])}},
+                    {{round($rodada->toInformation()['bs'])}},
                     @endforeach
                 ]
             },
             {
-                name: 'Dívida Governo',
+                name: 'Caixa',
+                data: [
+                    @foreach($jogo->rodadas as $rodada)
+                    {{round($rodada->toInformation()['caixa'])}},
+                    @endforeach
+                ]
+            },
+            {
+                name: 'Dívida Total',
                 data: [
                     @foreach($jogo->rodadas as $rodada)
                     {{round($rodada->toInformation()['divida_total'])}},
-                    @endforeach
-                ]
-            },
-            {
-                name: 'Títulos Comprados',
-                data: [
-                    @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['investimento_em_titulos'])}},
                     @endforeach
                 ]
             },
@@ -117,8 +85,10 @@
 </script>
 
 <style>
-    #container {
-        height: 250px;
+    .highcharts-figure, .highcharts-data-table table {
+        min-width: 360px;
+        max-width: 800px;
+        margin: 1em auto;
     }
 
     .highcharts-data-table table {
@@ -129,7 +99,6 @@
         text-align: center;
         width: 100%;
         max-width: 500px;
-        height: 300px;
     }
     .highcharts-data-table caption {
         padding: 1em 0;
