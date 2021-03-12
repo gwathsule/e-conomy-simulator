@@ -49,6 +49,15 @@ class Jogo extends Model
         return $this->rodadas->where('rodada', $rodada)->first();
     }
 
+    /**
+     * @param int $ano
+     * @return mixed
+     */
+    public function getAno(int $ano)
+    {
+        return $this->resultados_anuais->where('ano', $ano)->first();
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
