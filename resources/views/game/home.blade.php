@@ -1,5 +1,5 @@
 @php
-    $ultimaRodada = $jogo->rodadas->last()->toInformation();
+    $ultimaRodada = $jogo->rodadas->last();
 
     function corPorcentagem(float $cor)
     {

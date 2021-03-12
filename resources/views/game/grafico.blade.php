@@ -21,7 +21,7 @@
         },
         xAxis: {
             categories: [
-                @for($i=0; $i< $jogo->rodadas->count(); $i++)
+                @for($i=1; $i< $jogo->rodadas->count(); $i++)
                 {{$i}},
                 @endfor
             ]
@@ -44,7 +44,7 @@
                 name: 'Gastos Governamentais',
                 data: [
                     @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['gastos_governamentais'])}},
+                    {{$rodada->gastos_governamentais}},
                     @endforeach
                 ]
             },
@@ -52,7 +52,7 @@
                 name: 'Transferências',
                 data: [
                     @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['transferencias'])}},
+                    {{$rodada->transferencias}},
                     @endforeach
                 ]
             },
@@ -60,7 +60,7 @@
                 name: 'Deficit/Superavit',
                 data: [
                     @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['bs'])}},
+                    {{$rodada->bs}},
                     @endforeach
                 ]
             },
@@ -68,7 +68,7 @@
                 name: 'Caixa',
                 data: [
                     @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['caixa'])}},
+                    {{$rodada->caixa}},
                     @endforeach
                 ]
             },
@@ -76,7 +76,7 @@
                 name: 'Dívida Total',
                 data: [
                     @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['divida_total'])}},
+                    {{$rodada->divida_total}},
                     @endforeach
                 ]
             },

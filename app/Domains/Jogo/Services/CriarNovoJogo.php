@@ -75,6 +75,7 @@ class CriarNovoJogo extends Service
         $novoJogo->genero = $data['genero'];
         $novoJogo->personagem = $data['personagem'];
         $novoJogo->ativo = true;
+        $novoJogo->status = Jogo::STATUS_EM_ANDAMENTO;
         $novoJogo->qtd_rodadas = 24;
 
         DB::transaction(function () use ($data, $novoJogo) {
