@@ -24,44 +24,19 @@ class RodadaTest extends TestCase
             'medida_id' => null,
             'jogo_id' => $jogo->id,
         ];
-        for($i = 1; $i<13; $i++){
+        for($i = 1; $i<12; $i++){
             $servico->handle($dataPadrao);
         }
         $jogo->refresh();
-        $this->assertCount(13, $jogo->rodadas);
+        $this->assertCount(12, $jogo->rodadas);
         $this->assertCount(2, $jogo->resultados_anuais);
         /** @var ResultadoAnual $resultado */
         $resultado = $jogo->resultados_anuais->last();
-
         $this->assertEquals(1, $resultado->ano);
-        $this->assertEquals(59224000, round($resultado->pib));
-        $this->assertEquals(2000000, round($resultado->transferencias));
-        $this->assertEquals(6732000, round($resultado->impostos));
-        $this->assertEquals(54492000, round($resultado->yd));
-        $this->assertEquals(39034000, round($resultado->pib_consumo));
-        $this->assertEquals(18000000, round($resultado->pib_investimento_potencial));
-        $this->assertEquals(16830000, round($resultado->pib_investimento_realizado));
-        $this->assertEquals(3360000, round($resultado->gastos_governamentais));
-        $this->assertEquals(1372000, round($resultado->bs));
-        $this->assertEquals(1170000, round($resultado->titulos));
-        $this->assertEquals(105300, round($resultado->juros_divida_interna));
-        $this->assertEquals(193400, round($resultado->caixa));
-        $this->assertEquals(1275300, round($resultado->divida_total));
-        $this->assertEquals(0.090, $resultado->taxa_de_juros_base);
-        $this->assertEquals(0.077, $resultado->efmk);
-        $this->assertEquals(0.065, $resultado->investimento_em_titulos);
-        $this->assertEquals(0.030, $resultado->inflacao_total);
-        $this->assertEquals(0.015, $resultado->inflacao_de_custo);
-        $this->assertEquals(0.015, $resultado->inflacao_de_demanda);
-        $this->assertEquals(0.070, $resultado->desemprego);
-        $this->assertEquals(0.700, $resultado->pmgc);
-        $this->assertEquals(3.333, $resultado->k);
-        $this->assertEquals(0.120, $resultado->imposto_de_renda);
-        $this->assertEquals(2.933, $resultado->k_com_imposto);
     }
 
     //criar um teste igual ao da planilha
-    public function testProgressoDe2AnosComIntervencaoDoUsuario()
+    public function testProgressoDe2AnosSemIntervencaoDoUsuario()
     {
         $user = factory(User::class)->create();
         $jogo = $this->iniciarjogo($user);
@@ -71,11 +46,15 @@ class RodadaTest extends TestCase
             'medida_id' => null,
             'jogo_id' => $jogo->id,
         ];
-        for($i = 0; $i<=22; $i++){
+        for($i = 1; $i<24; $i++){
             $servico->handle($dataPadrao);
         }
         $jogo->refresh();
         $this->assertNotNull($jogo->id);
+        $this->assertTrue($jogo->finalizado());
+        $this->assertCount(24, $jogo->rodadas);
+        $this->assertCount(3, $jogo->resultados_anuais);
+        $this->assertTrue($jogo->finalizado());
     }
 
 
@@ -134,34 +113,8 @@ class RodadaTest extends TestCase
         $jogo->refresh();
         $this->assertNotNull($jogo->id);
 
-        /** @var ResultadoAnual $resultado */
-        $resultado = $jogo->resultados_anuais->last();
-
-        $this->assertEquals(1, $resultado->ano);
         $this->assertCount(2, $jogo->resultados_anuais);
-        $this->assertEquals(62027795, round($resultado->pib));
-        $this->assertEquals(2180000, round($resultado->transferencias));
-        $this->assertEquals(6414705, round($resultado->impostos));
-        $this->assertEquals(57793090, round($resultado->yd));
-        $this->assertEquals(41100645, round($resultado->pib_consumo));
-        $this->assertEquals(18000000, round($resultado->pib_investimento_potencial));
-        $this->assertEquals(17367150, round($resultado->pib_investimento_realizado));
-        $this->assertEquals(3560000, round($resultado->gastos_governamentais));
-        $this->assertEquals(674705, round($resultado->bs));
-        $this->assertEquals(632850, round($resultado->titulos));
-        $this->assertEquals(55476, round($resultado->juros_divida_interna));
-        $this->assertEquals(83079, round($resultado->caixa));
-        $this->assertEquals(688326, round($resultado->divida_total));
-        $this->assertEquals(0.080, $resultado->taxa_de_juros_base);
-        $this->assertEquals(0.077, $resultado->efmk);
-        $this->assertEquals(0.014, $resultado->investimento_em_titulos);
-        $this->assertEquals(0.026, $resultado->inflacao_total);
-        $this->assertEquals(0.014, $resultado->inflacao_de_custo);
-        $this->assertEquals(0.012, $resultado->inflacao_de_demanda);
-        $this->assertEquals(0.064, $resultado->desemprego);
-        $this->assertEquals(0.700, $resultado->pmgc);
-        $this->assertEquals(3.333, $resultado->k);
-        $this->assertEquals(0.110, $resultado->imposto_de_renda);
-        $this->assertEquals(2.967, $resultado->k_com_imposto);
+        $this->assertCount(13, $jogo->rodadas);
+        //TODO verificar os valores do primeiro ano se batem com a da planilha
     }
 }

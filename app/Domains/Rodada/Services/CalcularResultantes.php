@@ -130,7 +130,7 @@ class CalcularResultantes
     }
 
     private function previsao_anual(){
-        if(is_null($this->rodadaAtual->pib_investimento_realizado))
+        if(is_null($this->ultimoAno->previsao_anual))
             throw new Exception('impossivel calcular previsao_anual: ultimoAno->previsao_anual nulo');
         return $this->formatarPorcentagem($this->ultimoAno->previsao_anual);
     }

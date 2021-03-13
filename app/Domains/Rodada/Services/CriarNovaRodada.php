@@ -4,7 +4,6 @@ namespace App\Domains\Rodada\Services;
 
 use App\Domains\Evento\Evento;
 use App\Domains\Evento\EventoRepository;
-use App\Domains\Evento\Eventos\AlterarTransferencia;
 use App\Domains\Jogo\Jogo;
 use App\Domains\Jogo\JogoRepository;
 use App\Domains\Medida\Medida;
@@ -37,10 +36,6 @@ class CriarNovaRodada extends Service
      * @var RodadaRepository
      */
     private $rodadaRepository;
-    /**
-     * @var CriarResultadoAnual
-     */
-    private $criarResultadoAnual;
 
     public function __construct(
         JogoRepository $jogoRepository,
@@ -81,6 +76,9 @@ class CriarNovaRodada extends Service
         try {
             /** @var Jogo $jogo */
             $jogo = $this->jogoRepository->getById($data['jogo_id']);
+            if($jogo->finalizado()) {
+                throw new UserException('O jogo atual conta como finalizado, inicie um novo');
+            }
             /** @var User $user */
             $user = Auth::user();
             if((int)$data['jogo_id'] != $user->getJogoAtivo()->id) {
@@ -90,12 +88,6 @@ class CriarNovaRodada extends Service
             $ultimaRodada = $jogo->rodadas->last();
             /** @var ResultadoAnual $ultimoAno */
             $ultimoAno = $jogo->resultados_anuais->last();
-            if($ultimaRodada != null && $ultimaRodada->rodada == 12){
-                $this->criarResultadoAnual->handle([
-                    'jogo_id' => $jogo->id,
-                    'ano' => 1
-                ]);
-            }
             $novaRodada = $this->criarNovaRodada($jogo, $ultimaRodada, $ultimoAno);
             $medida = null;
             $nomeUltimaMedida = "";
@@ -115,28 +107,45 @@ class CriarNovaRodada extends Service
             $novaRodada->refresh();
             $calculador = new CalcularResultantes($novaRodada, $ultimoAno, $codeEventoUltimaMedida, $ultimaRodada);
             $novaRodada = $calculador->perform();
+            $novaRodada = $this->verificarPopularidade($novaRodada, $jogo);
             $novaRodada->noticias = $this->obterNoticiasCondicionais($novaRodada, $ultimaRodada, $nomeUltimaMedida, $jogo);
-            if(! is_null($medida))
-                $novaRodada->medida_id = $medida->id;
-            if($novaRodada->popularidade_empresarios < 0)
-                $novaRodada->popularidade_empresarios = 0;
-            if($novaRodada->popularidade_trabalhadores < 0)
-                $novaRodada->popularidade_trabalhadores = 0;
-            if($novaRodada->popularidade_estado < 0)
-                $novaRodada->popularidade_estado = 0;
-            if($novaRodada->popularidade_empresarios > 1)
-               $novaRodada->popularidade_empresarios = 1;
-            if($novaRodada->popularidade_trabalhadores > 1)
-               $novaRodada->popularidade_trabalhadores = 1;
-            if($novaRodada->popularidade_estado > 1)
-               $novaRodada->popularidade_estado = 1;
             $novaRodada->update();
+            $jogo->refresh();
+            if($ultimaRodada != null && ($novaRodada->rodada == 12 || $novaRodada->rodada == 24)){
+                $criadorDeResultado = new CriarResultadoAnual($jogo);
+                $criadorDeResultado->perform();
+                if($novaRodada->rodada == 24){
+                    $jogo->status = Jogo::STATUS_VENCIDO;
+                    $jogo->save();
+                }
+            }
         } catch (Exception $exception) {
             DB::rollBack();
             throw $exception;
         }
         DB::commit();
         return $jogo;
+    }
+
+    private function verificarPopularidade(Rodada $novaRodada, Jogo $jogo)
+    {
+        if(
+            $novaRodada->popularidade_empresarios <= 0 ||
+            $novaRodada->popularidade_trabalhadores <= 0 ||
+            $novaRodada->popularidade_estado <= 0
+        ) {
+            $jogo->status = Jogo::STATUS_PERDIDO;
+            $jogo->save();
+        }
+
+        if($novaRodada->popularidade_empresarios > 1)
+            $novaRodada->popularidade_empresarios = 1;
+        if($novaRodada->popularidade_trabalhadores > 1)
+            $novaRodada->popularidade_trabalhadores = 1;
+        if($novaRodada->popularidade_estado > 1)
+            $novaRodada->popularidade_estado = 1;
+
+        return $novaRodada;
     }
 
     /**

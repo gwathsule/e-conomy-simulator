@@ -21,6 +21,7 @@ class CreateJogoTable extends Migration
             $table->tinyInteger('personagem')->nullable();
             $table->string('moeda')->nullable();
             $table->boolean('ativo')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->integer('qtd_rodadas')->nullable();
             // user relation
             $table->unsignedBigInteger('user_id');

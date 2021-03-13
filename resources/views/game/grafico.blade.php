@@ -11,17 +11,17 @@
     Highcharts.chart('container', {
         chart: {
             type: 'line',
-            height: 230,
+            height: 306,
         },
         title: {
-            text: 'Monthly Average Temperature'
+            text: 'Rodadas'
         },
         subtitle: {
-            text: 'Source: WorldClimate.com'
+            text: 'Clique em uma variável para ocultá-la'
         },
         xAxis: {
             categories: [
-                @for($i=0; $i< $jogo->rodadas->count(); $i++)
+                @for($i=1; $i<= $jogo->rodadas->count(); $i++)
                 {{$i}},
                 @endfor
             ]
@@ -44,7 +44,7 @@
                 name: 'Gastos Governamentais',
                 data: [
                     @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['gastos_governamentais'])}},
+                    {{$rodada->gastos_governamentais}},
                     @endforeach
                 ]
             },
@@ -52,7 +52,7 @@
                 name: 'Transferências',
                 data: [
                     @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['transferencias'])}},
+                    {{$rodada->transferencias}},
                     @endforeach
                 ]
             },
@@ -60,7 +60,7 @@
                 name: 'Deficit/Superavit',
                 data: [
                     @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['bs'])}},
+                    {{$rodada->bs}},
                     @endforeach
                 ]
             },
@@ -68,7 +68,7 @@
                 name: 'Caixa',
                 data: [
                     @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['caixa'])}},
+                    {{$rodada->caixa}},
                     @endforeach
                 ]
             },
@@ -76,7 +76,7 @@
                 name: 'Dívida Total',
                 data: [
                     @foreach($jogo->rodadas as $rodada)
-                    {{round($rodada->toInformation()['divida_total'])}},
+                    {{$rodada->divida_total}},
                     @endforeach
                 ]
             },
@@ -85,7 +85,7 @@
 </script>
 
 <style>
-    .highcharts-figure, .highcharts-data-table table {
+    .highcharts-data-table table {
         min-width: 360px;
         max-width: 800px;
         margin: 1em auto;

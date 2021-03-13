@@ -54,10 +54,4 @@ class Rodada extends Model
     public function jogo(){
         return $this->belongsTo(Jogo::class);
     }
-
-    public function toInformation()
-    {
-        $valores = parent::attributesToArray();
-        return $valores;
-    }
 }

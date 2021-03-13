@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 /**
  * @property int $id
+ * @property int $status
  * @property string $pais
  * @property string $genero
  * @property int $personagem
@@ -30,6 +31,10 @@ class Jogo extends Model
 {
     protected $table = 'jogo';
 
+    public const STATUS_PERDIDO = -1;
+    public const STATUS_EM_ANDAMENTO = 0;
+    public const STATUS_VENCIDO = 1;
+
     protected $casts = [
         'active' => 'boolean',
         'resultado_anual' => 'array',
@@ -42,6 +47,15 @@ class Jogo extends Model
     public function getRodada(int $rodada)
     {
         return $this->rodadas->where('rodada', $rodada)->first();
+    }
+
+    /**
+     * @param int $ano
+     * @return mixed
+     */
+    public function getAno(int $ano)
+    {
+        return $this->resultados_anuais->where('ano', $ano)->first();
     }
 
     public function user()
@@ -67,6 +81,14 @@ class Jogo extends Model
     public function getImagemPersonagem()
     {
         return Personagem::getPersonagem($this->personagem);
+    }
+
+    public function finalizado()
+    {
+        if($this->status == self::STATUS_VENCIDO || $this->status == self::STATUS_PERDIDO) {
+            return true;
+        }
+        return false;
     }
 
     public function toArray()

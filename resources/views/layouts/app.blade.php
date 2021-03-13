@@ -11,13 +11,10 @@
 </head>
 <body>
 <div class="btn_up"><a href="#"><img src="{{asset('img/resources/up-chevron.svg')}}"></a></div>
-<div class="container">
+<div class="container-economy">
     <div class="page-inner no-page-title main-page">
         <!-- start page main wrapper -->
-        <div id="main-wrapper">
-            @yield('conteudo')
-            <!-- Row -->
-        </div>
+        @yield('conteudo')
         <!-- end page main wrapper -->
         <div class="page-footer">
             <p>E-conomy Simulator © 2020.</p>
