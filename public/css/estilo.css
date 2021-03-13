@@ -1,21 +1,8 @@
 body {
 	background-color: #29abe2;
-	margin-top: 20px;
 }
 .page-footer{
 	color: white;
-	text-align: center;
-}
-.btn_up{
-	position: fixed;
-	bottom: 65px;
-	right: 50px;
-	z-index: 999;
-	background: white;
-	border-radius: 50%;
-	box-shadow: 0 0 black;
-	width: 28px;
-	height: 28px;
 	text-align: center;
 }
 .btn_up img{
@@ -43,7 +30,6 @@ body {
 	margin-bottom: 2rem;
 }
 .profile-timeline ul li .timeline-item-header {
-	width: 100%;
 	overflow: hidden;
 }
 .profile-timeline ul li .timeline-item-header img {
@@ -110,92 +96,19 @@ body {
 	float: left;
 	margin-right: 10px;
 }
-.timeline-comment .timeline-comment-header p {
-	color: #000;
-	float: left;
-	margin: 0;
-	font-weight: 500;
-}
-.timeline-comment .timeline-comment-header small {
-	font-weight: normal;
-	color: #8e8e8e;
-}
-.timeline-comment p.timeline-comment-text {
-	display: block;
-	color: #2b2b2b;
-	font-size: 14px;
-	padding-left: 40px;
-}
+
 .post-options {
 	overflow: hidden;
 	margin-top: 15px;
 	margin-left: 15px;
 }
-.post-options a {
-	display: block;
-	margin-top: 5px;
-	margin-right: 20px;
-	float: left;
-	color: #2b2b2b;
-	text-decoration: none;
-	font-size: 16px !important;
-}
-.post-options a:hover {
-	color: #5369f8;
-}
-.online {
-	position: absolute;
-	top: 2px;
-	right: 2px;
-	display: block;
-	width: 9px;
-	height: 9px;
-	border-radius: 50%;
-	background: #ccc;
-}
-.online.on {
-	background: #2ec5d3;
-}
-.online.off {
-	background: #ec5e69;
-}
-#cd-timeline::before {
-	border: 0;
-	background: #f1f1f1;
-}
-.cd-timeline-content p,
-.cd-timeline-content .cd-read-more,
-.cd-timeline-content .cd-date {
-	font-size: 14px;
-}
-.cd-timeline-img.cd-success {
-	background: #2ec5d3;
-}
-.cd-timeline-img.cd-danger {
-	background: #ec5e69;
-}
-.cd-timeline-img.cd-info {
-	background: #5893df;
-}
-.cd-timeline-img.cd-warning {
-	background: #f1c205;
-}
-.cd-timeline-img.cd-primary {
-	background: #9f7ce1;
-}
-.page-inner.full-page {
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-}
+
 .user-profile-card {
 	text-align: center;
 }
 .user-profile-image {
-	width: 100px;
-	height: 100px;
+	width: 142px;
+	height: 142px;
 	margin-bottom: 10px;
 }
 .team .team-member {
@@ -215,20 +128,7 @@ body {
 	border-radius: 50%;
 	margin: 0 5px 0 5px;
 }
-.label.label-success {
-	background: #43d39e;
-}
-.label {
-	font-weight: 400;
-	padding: 4px 8px;
-	font-size: 11px;
-	display: inline-block;
-	line-height: 1;
-	color: #fff;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: baseline;
-	border-radius: 0.25em;
-}
 
-page-
+.container-economy{
+	padding: 0 5% 3% 5%;
+}

@@ -20,24 +20,24 @@
 
 @section('conteudo')
     <div class="row">
-        <div class="col-lg-2 col-xl-2" >
+        <div class="col-xl-3" >
             @include('game.gabinete')
         </div>
-        <div class="col-lg-8 col-xl-8" >
+        <div class="col-xl-6" >
             @include('game.grafico')
         </div>
-        <div class="col-lg-2 col-xl-2" >
+        <div class="col-xl-3" >
             @include('game.popularidade')
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-5 col-xl-3">
+        <div class="col-xl-3">
             @include('game.ultimoMes')
         </div>
-        <div class="col-lg-7 col-xl-6">
+        <div class="col-xl-6">
             @include('game.timeline')
         </div>
-        <div class="col-lg-12 col-xl-3">
+        <div class="col-xl-3">
             @include('game.medidas')
         </div>
     </div>

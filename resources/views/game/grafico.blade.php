@@ -11,17 +11,17 @@
     Highcharts.chart('container', {
         chart: {
             type: 'line',
-            height: 230,
+            height: 306,
         },
         title: {
-            text: 'Monthly Average Temperature'
+            text: 'Rodadas'
         },
         subtitle: {
-            text: 'Source: WorldClimate.com'
+            text: 'Clique em uma variável para ocultá-la'
         },
         xAxis: {
             categories: [
-                @for($i=1; $i< $jogo->rodadas->count(); $i++)
+                @for($i=1; $i<= $jogo->rodadas->count(); $i++)
                 {{$i}},
                 @endfor
             ]
@@ -85,7 +85,7 @@
 </script>
 
 <style>
-    .highcharts-figure, .highcharts-data-table table {
+    .highcharts-data-table table {
         min-width: 360px;
         max-width: 800px;
         margin: 1em auto;
