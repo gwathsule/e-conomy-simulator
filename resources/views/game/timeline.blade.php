@@ -29,7 +29,9 @@
     }
     .news-popup-content{
         text-align: justify;
-        text-transform: capitalize;
+    }
+    .news-popup-content:first-letter{
+        text-transform: uppercase;
     }
 </style>
 <div class="profile-timeline">
