@@ -9,6 +9,11 @@
         if($cor > 0.9) return 'blue';
         return 'black';
     }
+
+    function formatarDinheiro(float $valor)
+    {
+        return '$' . number_format($valor, 2, ',', '.');
+    }
 @endphp
 @extends('layouts.app')
 @section('title') E-Conomy Simulator @endsection
@@ -21,13 +26,13 @@
 @section('conteudo')
     <div class="row">
         <div class="col-xl-3" >
-            @include('game.gabinete')
+            @include('game.popularidade')
         </div>
         <div class="col-xl-6" >
             @include('game.grafico')
         </div>
         <div class="col-xl-3" >
-            @include('game.popularidade')
+            @include('game.gabinete')
         </div>
     </div>
     <div class="row">

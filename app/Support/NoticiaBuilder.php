@@ -19,11 +19,12 @@ class NoticiaBuilder
     public static function buildNoticiaCondicional($tipo, $titulo, $texto, $urlImagem, $medida, Jogo $jogo) : array
     {
         return [
+            'tipo' => $tipo,
             'nome_jornal' => self::getNomeJornal($tipo),
             'avatar_jornal' => self::getAvatarNoticia($tipo),
             'titulo' => self::buildText($titulo, $jogo, $medida),
             'texto' => self::buildText($texto, $jogo, $medida),
-            'imagem' => $urlImagem
+            'imagem' => $urlImagem,
         ];
     }
 
