@@ -73,45 +73,46 @@
         </li>
     </ul>
 </div>
+{{-- essa seção está quebrando os tooltips --}}
 @section('js_adicionais')
     <script>
         @if(count($ultimaRodada->noticias) > 0)
-            Swal.fire({
-                title: '{{$ultimaRodada->noticias[0]["titulo"]}}',
-                text: '{{$ultimaRodada->noticias[0]["texto"]}}',
-                imageUrl: '{{$ultimaRodada->noticias[0]["imagem"]}}',
-                imageWidth: 400,
-                imageHeight: 200,
-                customClass: {
-                    popup: 'news-popup-{{$ultimaRodada->noticias[0]['tipo'] == 'estatal' ? 'estatal' : 'liberal'}}',
-                    header: 'news-popup-header',
-                    title: 'news-popup-title',
-                    content: 'news-popup-content',
-                    confirmButton: 'news-button-{{$ultimaRodada->noticias[0]['tipo'] == 'estatal' ? 'estatal' : 'liberal'}}',
-                }
+        Swal.fire({
+            title: '{{$ultimaRodada->noticias[0]["titulo"]}}',
+            text: '{{$ultimaRodada->noticias[0]["texto"]}}',
+            imageUrl: '{{$ultimaRodada->noticias[0]["imagem"]}}',
+            imageWidth: 400,
+            imageHeight: 200,
+            customClass: {
+                popup: 'news-popup-{{$ultimaRodada->noticias[0]['tipo'] == 'estatal' ? 'estatal' : 'liberal'}}',
+                header: 'news-popup-header',
+                title: 'news-popup-title',
+                content: 'news-popup-content',
+                confirmButton: 'news-button-{{$ultimaRodada->noticias[0]['tipo'] == 'estatal' ? 'estatal' : 'liberal'}}',
+            }
         })
-            @if(count($ultimaRodada->noticias) > 1)
-                @for($i=1; $i < count($ultimaRodada->noticias); $i++)
-                    .then(() => {
-                        Swal.fire({
-                            title: '{{$ultimaRodada->noticias[$i]["titulo"]}}',
-                            text: '{{$ultimaRodada->noticias[$i]["texto"]}}',
-                            imageUrl: '{{$ultimaRodada->noticias[$i]["imagem"]}}',
-                            imageWidth: 400,
-                            imageHeight: 200,
-                            customClass: {
-                                popup: 'news-popup-{{$ultimaRodada->noticias[$i]['tipo'] ? 'estatal' : 'liberal'}}',
-                                header: 'news-popup-header',
-                                title: 'news-popup-title',
-                                content: 'news-popup-content',
-                                confirmButton: 'news-button-{{$ultimaRodada->noticias[$i]['tipo'] ? 'estatal' : 'liberal'}}',
-                            }
-                        })
+        @if(count($ultimaRodada->noticias) > 1)
+        @for($i=1; $i < count($ultimaRodada->noticias); $i++)
+            .then(() => {
+                Swal.fire({
+                    title: '{{$ultimaRodada->noticias[$i]["titulo"]}}',
+                    text: '{{$ultimaRodada->noticias[$i]["texto"]}}',
+                    imageUrl: '{{$ultimaRodada->noticias[$i]["imagem"]}}',
+                    imageWidth: 400,
+                    imageHeight: 200,
+                    customClass: {
+                        popup: 'news-popup-{{$ultimaRodada->noticias[$i]['tipo'] ? 'estatal' : 'liberal'}}',
+                        header: 'news-popup-header',
+                        title: 'news-popup-title',
+                        content: 'news-popup-content',
+                        confirmButton: 'news-button-{{$ultimaRodada->noticias[$i]['tipo'] ? 'estatal' : 'liberal'}}',
+                    }
+                })
                 @endfor
                 @for($i=1; $i< count($ultimaRodada->noticias); $i++)
-                    });
-                @endfor
-            @endif
+            });
+        @endfor
+        @endif
         @endif
     </script>
 @endsection
