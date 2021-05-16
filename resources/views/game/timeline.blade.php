@@ -73,7 +73,7 @@
         </li>
     </ul>
 </div>
-{{-- essa seção está quebrando os tooltips --}}
+
 @section('js_adicionais')
     <script>
         @if(count($ultimaRodada->noticias) > 0)

@@ -28,7 +28,6 @@ class RodadaController extends Controller
         }catch (UserException $ex){
             return $this->returnWithException($ex)->withInput();
         }catch (\Exception $ex){
-            dd($ex);
             return $this->returnWithException(new InternalErrorException(__('user-messages.internal-error')))->withInput();
         }
     }

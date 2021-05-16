@@ -1,5 +1,6 @@
 @php
     $ultimaRodada = $jogo->rodadas->last();
+    $rodadaAnterior = $jogo->rodadas->get($jogo->rodadas->count() - 2);
 
     function corPorcentagem(float $cor)
     {
@@ -13,6 +14,19 @@
     function formatarDinheiro(float $valor)
     {
         return '$' . number_format($valor, 2, ',', '.');
+    }
+
+    function retornarAlteracao(string $valor, \App\Domains\Rodada\Rodada $atual, \App\Domains\Rodada\Rodada $anterior)
+    {
+        if($atual->$valor > $anterior->$valor) {
+            return '<td><img src="' . asset('img/resources/up-arrow.svg') . '" width="20" height="20"></td>';
+        }
+
+        if($atual->$valor < $anterior->$valor) {
+            return '<td><img src="' . asset('img/resources/down-arrow.svg') . '" width="20" height="20"></td>';
+        }
+
+        return '<td><img src="' . asset('img/resources/not-arrow.svg') . '" width="20" height="20"></td>';
     }
 @endphp
 @extends('layouts.app')
