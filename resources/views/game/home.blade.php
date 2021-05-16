@@ -16,8 +16,11 @@
         return '$' . number_format($valor, 2, ',', '.');
     }
 
-    function retornarAlteracao(string $valor, \App\Domains\Rodada\Rodada $atual, \App\Domains\Rodada\Rodada $anterior)
+    function retornarAlteracao(string $valor, \App\Domains\Rodada\Rodada $atual, $anterior)
     {
+        if($anterior == null) {
+            return '<td><img src="' . asset('img/resources/not-arrow.svg') . '" width="20" height="20"></td>';
+        }
         if($atual->$valor > $anterior->$valor) {
             return '<td><img src="' . asset('img/resources/up-arrow.svg') . '" width="20" height="20"></td>';
         }
