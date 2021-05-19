@@ -43,7 +43,7 @@
 @section('conteudo')
     <div class="row">
         <div class="col-xl-3" >
-            @include('game.popularidade')
+            @include('game.indices')
         </div>
         <div class="col-xl-6" >
             @include('game.grafico')
@@ -54,7 +54,7 @@
     </div>
     <div class="row">
         <div class="col-xl-3">
-            @include('game.ultimoMes')
+            @include('game.financas')
         </div>
         <div class="col-xl-6">
             @include('game.timeline')
