@@ -63,4 +63,17 @@
             @include('game.medidas')
         </div>
     </div>
+    <script>
+        function displayInfo(variavel) {
+            $.getJSON( "{{asset('js/descricao_variaveis.json')}}", function( data ) {
+                Swal.fire({
+                    title: data[variavel]['nome'],
+                    html: `<p style="text-align: justify">${data[variavel]['descricao']}</p>`,
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    focusConfirm: false,
+                })
+            });
+        }
+    </script>
 @endsection

@@ -8,7 +8,9 @@
                 <tr>
                     <td>
                         <span>
-                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            <a onclick="displayInfo('pib')" style="cursor: pointer">
+                                <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            </a>
                         </span>
                         PIB
                     </td>
@@ -18,7 +20,9 @@
                 <tr>
                     <td>
                         <span>
-                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            <a onclick="displayInfo('yd')" style="cursor: pointer">
+                                <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            </a>
                         </span>
                         Renda Disponível
                     </td>
@@ -28,7 +32,9 @@
                 <tr>
                     <td>
                         <span>
-                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            <a onclick="displayInfo('pib_consumo')" style="cursor: pointer">
+                                <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            </a>
                         </span>
                         Consumo
                     </td>
@@ -38,7 +44,9 @@
                 <tr>
                     <td>
                         <span>
-                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            <a onclick="displayInfo('pib_investimento_potencial')" style="cursor: pointer">
+                                <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            </a>
                         </span>
                         Investimento (potencial)
                     </td>
@@ -48,7 +56,9 @@
                 <tr>
                     <td>
                         <span>
-                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            <a onclick="displayInfo('pib_investimento_realizado')" style="cursor: pointer">
+                                <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            </a>
                         </span>
                         Investimento (realizado)
                     </td>
@@ -58,7 +68,9 @@
                 <tr>
                     <td>
                         <span>
-                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            <a onclick="displayInfo('impostos')" style="cursor: pointer">
+                                <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            </a>
                         </span>
                         Arrecadação em Impostos
                     </td>
@@ -68,7 +80,9 @@
                 <tr>
                     <td>
                         <span>
-                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            <a onclick="displayInfo('titulos')" style="cursor: pointer">
+                                <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            </a>
                         </span>
                         Arrecadação em títulos
                     </td>
@@ -78,7 +92,9 @@
                 <tr>
                     <td>
                         <span>
-                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            <a onclick="displayInfo('juros_divida_interna')" style="cursor: pointer">
+                                <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            </a>
                         </span>
                         Dívida Interna
                     </td>
@@ -88,7 +104,9 @@
                 <tr>
                     <td>
                         <span>
-                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            <a onclick="displayInfo('caixa')" style="cursor: pointer">
+                                <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            </a>
                         </span>
                         Caixa do Governo
                     </td>
@@ -98,7 +116,9 @@
                 <tr>
                     <td>
                         <span>
-                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            <a onclick="displayInfo('gastos_governamentais')" style="cursor: pointer">
+                                <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            </a>
                         </span>
                         Gastos Governamentais
                     </td>
@@ -108,7 +128,9 @@
                 <tr>
                     <td>
                         <span>
-                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            <a onclick="displayInfo('transferencias')" style="cursor: pointer">
+                                <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            </a>
                         </span>
                         Transferências
                     </td>
@@ -118,7 +140,9 @@
                 <tr>
                     <td>
                         <span>
-                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            <a onclick="displayInfo('bs')" style="cursor: pointer">
+                                <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            </a>
                         </span>
                         Deficit/Superavit
                     </td>
@@ -128,7 +152,9 @@
                 <tr>
                     <td>
                         <span>
-                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            <a onclick="displayInfo('divida_total')" style="cursor: pointer">
+                                <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                            </a>
                         </span>
                         Dívida Total
                     </td>

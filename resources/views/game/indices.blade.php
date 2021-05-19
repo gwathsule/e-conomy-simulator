@@ -12,7 +12,9 @@
             <tr>
                 <td>
                     <span>
-                        <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                        <a onclick="displayInfo('popularidade_empresarios')" style="cursor: pointer">
+                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                        </a>
                     </span>
                     <span>Aprovação de empresarios:</span>
                 </td>
@@ -22,7 +24,9 @@
             <tr>
                 <td>
                     <span>
-                        <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  {{-- style="filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);" --}}>
+                        <a onclick="displayInfo('popularidade_trabalhadores')" style="cursor: pointer">
+                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                        </a>
                     </span>
                     <span>Aprovação de trabalhadores:</span>
                 </td>
@@ -32,7 +36,9 @@
             <tr>
                 <td>
                     <span>
-                        <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  {{-- style="filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);" --}}>
+                        <a onclick="displayInfo('popularidade_estado')" style="cursor: pointer">
+                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                        </a>
                     </span>
                     <span>Aprovação de estado:</span>
                 </td>
@@ -42,7 +48,9 @@
             <tr>
                 <td>
                     <span>
-                        <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  {{-- style="filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);" --}}>
+                        <a onclick="displayInfo('desemprego')" style="cursor: pointer">
+                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                        </a>
                     </span>
                     <span>Desemprego:</span>
                 </td>
@@ -52,7 +60,9 @@
             <tr>
                 <td>
                     <span>
-                        <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  {{-- style="filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);" --}}>
+                        <a onclick="displayInfo('investimento_em_titulos')" style="cursor: pointer">
+                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                        </a>
                     </span>
                     <span>Investimento em títulos:</span>
                 </td>
@@ -62,7 +72,9 @@
             <tr>
                 <td>
                     <span>
-                        <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  {{-- style="filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);" --}}>
+                        <a onclick="displayInfo('taxa_de_juros_base')" style="cursor: pointer">
+                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                        </a>
                     </span>
                     <span>Taxa de Juros:</span>
                 </td>
@@ -72,7 +84,9 @@
             <tr>
                 <td>
                     <span>
-                        <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  {{-- style="filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);" --}}>
+                        <a onclick="displayInfo('efmk')" style="cursor: pointer">
+                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                        </a>
                     </span>
                     <span>EFMK:</span>
                 </td>
@@ -82,7 +96,9 @@
             <tr>
                 <td>
                     <span>
-                        <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  {{-- style="filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);" --}}>
+                        <a onclick="displayInfo('inflacao_de_demanda')" style="cursor: pointer">
+                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                        </a>
                     </span>
                     <span>Inflação de demanda:</span>
                 </td>
@@ -92,7 +108,9 @@
             <tr>
                 <td>
                     <span>
-                        <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  {{-- style="filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);" --}}>
+                        <a onclick="displayInfo('inflacao_de_custo')" style="cursor: pointer">
+                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                        </a>
                     </span>
                     <span>Inflação de custo:</span>
                 </td>
@@ -102,7 +120,9 @@
             <tr>
                 <td>
                     <span>
-                        <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  {{-- style="filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);" --}}>
+                        <a onclick="displayInfo('inflacao_total')" style="cursor: pointer">
+                            <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                        </a>
                     </span>
                     <span>Inflação Total:</span>
                 </td>

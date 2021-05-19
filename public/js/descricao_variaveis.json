@@ -1,0 +1,94 @@
+{
+  "popularidade_empresarios" : {
+    "nome": "Aprovação dos empresários",
+    "descricao" : "Esse índice mede o quanto os <strong>empresários</strong> de todos os setores da economia estão satisfeitos com a sua gestão. Medidas liberais costumam agradá-los, enquanto que aumento de <strong>Impostos</strong> e <strong>Gastos Governamentais</strong> podem desagradá-los. A percepção geral desse grupo indica que ter o Estado como concorrente não configura um ambiente bom para os negócios, mesmo que seja para um serviço essencial, porém o investimento em <strong>Infraestrutura</strong> ajuda no crescimento de diversos serviços."
+  },
+  "popularidade_trabalhadores" : {
+    "nome": "Aprovação dos trabalhadores",
+    "descricao" : "Esse índice mede o quanto a <strong>classe trabalhadora</strong> está satisfeita com a sua gestão. <strong>Transferências (Investimento Social)</strong> e medidas que melhoram a qualidade de vida da população costumam agradá-los, enquanto que aumento de <strong>Impostos</strong> e <strong>Inflação</strong> pode desagradá-los. Em geral, a percepção da população é definida pelo seu poder de compra e qualidade de serviços prestados pelo governo, sendo que o último aumenta na proporção dos investimentos realizados pelo governo."
+  },
+  "popularidade_estado" : {
+    "nome": "Aprovação do estado",
+    "descricao" : "Esse índice mede o quanto os <strong>agentes públicos</strong> estão satisfeitos com a sua gestão. Aumento de <strong>Gastos Governamentais</strong> e arrecadação costumam agradá-los, enquanto que o corte de investimento governamental e arrecadação pode desagradá-los. Em geral, esse grupo entende que o Estado deve prestar serviços para melhorar a qualidade da população e os agentes do estado precisam ser bem remunerados para atrair interesse dos mais capacitados para a categoria."
+  },
+  "desemprego" : {
+    "nome": "Desemprego",
+    "descricao" : "A <strong>Taxa de Desemprego</strong> possui uma taxa base (7%) e uma variação inversamente proporcional a variação do <strong>PIB</strong>, ou seja, quanto maior a produção, menor o <strong>Desemprego</strong> e vice-versa. Essa variação será apresentada mensalmente para análise e ao fim do ano será feita uma comparação. A simulação padrão explica como o PIB está relacionado ao aumento ou redução de postos de trabalho, entretanto alterações nos cálculos de variação e na base do ano anterior podem ser feitas para simular situações de crises extremas.<br/><br/>Fórmula: N = NB * (YB / 12) / YM<br/><br/>N = Taxa de desemprego atual<br/>NB = Taxa de desemprego base do ano anterior<br/>YB = PIB total do ano anterior<br/>YM = PIB do mês atual"
+  },
+  "investimento_em_titulos" : {
+    "nome": "Investimento em títulos",
+    "descricao" : "Representa o percentual de alocação de recursos da população e empesas investida em <strong>Títulos Públicos</strong>. O governo utiliza esse mecanismo como uma forma de financiamento (ver <strong>Arrecadação Mensal em Títulos</strong>) e, às vezes, controle de dinheiro na economia. Quanto maior o a <strong>Taxa de Juros</strong>, maior o investimento em títulos e menos dinheiro está disponível para investimento privado (ver <strong>Investimento (realizado)</strong> e <strong>Investimento (potencial)</strong>). O cálculo é simplificado para representar o interesse do setor privado em alocar recursos em títulos, porém é possível utiliza parâmetros diferentes para representar momentos distintos nesse investimento. A <strong>Eficácia Marginal do Capital (EMgK)</strong> também é considerada para o cálculo.<br/><br/>Fórmula: IT = r – EFMK<br/><br/>IT = Investimento em Títulos<br/>r = Taxa de Juros<br/>EFMK = Eficácia Marginal do Capital<br/><br/>Obs: Caso IT seja negativo, o valor assumido é 0."
+  },
+  "taxa_de_juros_base" : {
+    "nome": "Taxa de juros",
+    "descricao" : "Representa o percentual de juros pago pelo governo no <strong>Investimento em Títulos</strong>. Esse é índice é controlado pelo próprio Ministro da Economia (você mesmo). Quanto maior for esse valor, mais atrativo vai ficar o investimento em títulos públicos e o <strong>Investimento (realizado)</strong> cai. A <strong>Dívida Interna</strong> também depende desse valor para ser calculada"
+  },
+  "efmk" : {
+    "nome": "Eficácia marginal do capital (EMgK)",
+    "descricao" : "Representa o percentual de lucro médio de todas as empresas. Na prática, esse índice faz oposição a <strong>Taxa de Juros</strong> no cálculo do <strong>Investimento em Títulos</strong>, ou seja, quanto maior ele, menor será o investimento em títulos públicos. O índice possui um valor-base de (0,075) 7,5% como um cenário de médio poder de compra da população. <strong>Transferências</strong> influenciam esse valor, pois podem aquecer a economia aumentando o poder de compra médio da população num curto prazo. Ou seja, quanto maiores as <strong>Transferências</strong>, maior o potencial lucro médio dos empreendimentos.<br/><br/>Fórmula: EMgK = (TAB / 1000000000) + 0,075<br/><br/>EMgK = Eficácia Marginal do Capital<br/>TAB = Transferências Totais do Ano Anterior<br/><br/>Obs: o valor dividindo TAB é definido a partir da escala monetária da simulação."
+  },
+  "inflacao_de_demanda" : {
+    "nome": "Inflação de demanda",
+    "descricao" : "Representa a diferença entre a média percentual de transferências mensais do ano anterior e a média percentual de investimento realizado do ano anterior, somando ao final pela constante base 0,015 (1,5%). Ou seja, aqui é calculado e comparado o aumento de <strong>Investimentos (realizados)</strong> e <strong>Transferências</strong>, se investimentos aumentaram mais, então a produção cresceu e temos uma redução do custo por produto comprado, mas se as transferências aumentaram mais temos uma oferta de moeda maior, logo os preços do produto sobe.<br/>A lei de oferta e demanda é representada nesse cálculo, porém simplificada a existência de apenas 1 produto. O valor apresentado aqui é a média de <strong>Inflação de Demanda</strong> do ano corrente.<br/><br/>Fórmula: IfD = ((((ILB - (IL * 12)) / IL) / 12) - (((TAB - (TA * 12)) / TA) / 12)) + 0,015<br/><br/>IfD = Inflação de Demanda<br/>ILB = Investimento realizado base<br/>IL = Investimento realizado<br/>TAB = Transferências Totais do Ano Anterior<br/>TA = Transferências"
+  },
+  "inflacao_de_custo" : {
+    "nome": "Inflação de custo",
+    "descricao" : "Representa a diferença entre o <strong>Imposto de Renda</strong> atual (IR) e o do mês anterior, somando pela constante base 0,015 (1,5%). Ou seja, o aumento do IR provoca uma <strong>Inflação de Custo</strong>, tornando o produto mais caro ao consumidor e o contrário também é válido, caso o IR seja reduzido o preço do produto também recua."
+  },
+  "inflacao_total" : {
+    "nome" : "Inflação total",
+    "descricao" : "Representa o percentual de Inflação Total, ou seja, a soma da <strong>Inflação de Custo</strong> e <strong>Inflação de Demanda</strong>.<br/><br/>Fórmula: IfT = IfC + IfD<br/><br/>IfT = Inflação Total<br/>IfC = Inflação de Custo<br/>IfD = Inflação de Demanda"
+  },
+  "pib" : {
+    "nome" : "",
+    "descricao" : ""
+  },
+  "yd" : {
+    "nome" : "",
+    "descricao" : ""
+  },
+  "pib_consumo" : {
+    "nome" : "",
+    "descricao" : ""
+  },
+  "pib_investimento_potencial" : {
+    "nome" : "",
+    "descricao" : ""
+  },
+  "pib_investimento_realizado" : {
+    "nome" : "",
+    "descricao" : ""
+  },
+  "impostos" : {
+    "nome" : "",
+    "descricao" : ""
+  },
+  "titulos" : {
+    "nome" : "",
+    "descricao" : ""
+  },
+  "juros_divida_interna" : {
+    "nome" : "",
+    "descricao" : ""
+  },
+  "caixa" : {
+    "nome" : "",
+    "descricao" : ""
+  },
+  "gastos_governamentais" : {
+    "nome" : "",
+    "descricao" : ""
+  },
+  "transferencias" : {
+    "nome" : "",
+    "descricao" : ""
+  },
+  "bs" : {
+    "nome" : "",
+    "descricao" : ""
+  },
+  "divida_total" : {
+    "nome" : "",
+    "descricao" : ""
+  }
+}
