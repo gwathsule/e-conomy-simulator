@@ -54,4 +54,9 @@ class Rodada extends Model
     public function jogo(){
         return $this->belongsTo(Jogo::class);
     }
+
+    public function medida()
+    {
+        return $this->belongsTo(Medida::class);
+    }
 }

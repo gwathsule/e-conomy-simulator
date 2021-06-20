@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-xl-12" >
-                <a href="#" class="btn btn-primary btn-sm btn-block">
+                <a href="{{route('relatorio-jogo')}}" target="_blank" class="btn btn-primary btn-sm btn-block">
                     Relatórios
                 </a>
                 <a href="{{route('novo-jogo')}}" class="btn btn-primary btn-sm btn-block">

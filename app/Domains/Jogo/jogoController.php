@@ -83,6 +83,7 @@ class jogoController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
+        $user->jogos->toArray();
         $jogo = $user->getJogoAtivo();
         if(is_null($jogo)) {
             return view('game.novoJogo');
@@ -97,5 +98,18 @@ class jogoController extends Controller
     public function novoJogoPage()
     {
         return view('game.novoJogo');
+    }
+
+    public function relatoriosPage()
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        if(is_null($user->getJogoAtivo())) {
+            return view('game.novoJogo');
+        } else {
+            return view('game.relatorio')->with([
+                'jogo' => $user->getJogoAtivo()
+            ]);
+        }
     }
 }

@@ -11,6 +11,8 @@ Route::prefix('jogo')->group(function () {
         Route::get('novo-jogo', jogoController::class . '@novoJogoPage')->name('novo-jogo');
         /** @see jogoController::alterarJogo() */
         Route::post('alterar-jogo', jogoController::class . '@alterarJogo')->name('alterar-jogo');
+        /** @see jogoController::relatoriosPage() */
+        Route::get('relatorio-jogo', jogoController::class . '@relatoriosPage')->name('relatorio-jogo');
         /** @see jogoController::perfilJogoPage() */
         Route::get('jogo-perfil', jogoController::class . '@perfilJogoPage')->name('jogo-perfil');
         /** @see jogoController::alterarJogoPage() */
