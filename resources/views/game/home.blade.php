@@ -43,24 +43,42 @@
 @section('conteudo')
     <div class="row">
         <div class="col-xl-3" >
-            @include('game.indices')
+            <div class="card card-white grid-margin" style="height: 485px">
+                @include('game.indices')
+            </div>
         </div>
-        <div class="col-xl-6" >
-            @include('game.grafico')
+        <div class="col-xl-6">
+            <div class="card card-white grid-margin" style="height: 485px">
+                @include('game.grafico')
+            </div>
         </div>
         <div class="col-xl-3" >
-            @include('game.gabinete')
+            <div class="card card-white grid-margin" style="height: 485px">
+                @include('game.gabinete')
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xl-3">
-            @include('game.financas')
+            <div class="card card-white grid-margin" style="height: 660px">
+                @include('game.financas')
+            </div>
         </div>
         <div class="col-xl-6">
-            @include('game.timeline')
+            <div class="profile-timeline">
+                <ul class="list-unstyled">
+                    <li class="timeline-item">
+                        <div class="card card-white grid-margin timeline" style="height: 660px !important;">
+                            @include('game.timeline')
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="col-xl-3">
-            @include('game.medidas')
+        <div class="col-xl-3" style="height: 660px">
+            <div class="card card-white grid-margin">
+                @include('game.medidas')
+            </div>
         </div>
     </div>
     <script>
