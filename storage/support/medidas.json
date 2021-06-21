@@ -1,7 +1,7 @@
 [
   {
     "codigo_evento": "alterar_imposto_de_renda",
-    "nome": "Aumentar imposto",
+    "nome": "Aumentar imposto de renda",
     "resumo": "Imposto de Renda +1%",
     "titulo_noticia": "{nomeMinistro} anuncia aumento no IR.",
     "medida_imediata": true,
@@ -15,7 +15,7 @@
   },
   {
     "codigo_evento": "alterar_imposto_de_renda",
-    "nome": "Diminuir imposto",
+    "nome": "Diminuir imposto de renda",
     "resumo": "Imposto de Renda -1%",
     "titulo_noticia": "{nomeMinistro} de bom humor, anuncia redução no IR.",
     "medida_imediata": true,
@@ -30,7 +30,7 @@
   {
     "codigo_evento": "alterar_transferencias",
     "nome": "Aumentar investimento social",
-    "resumo": "Transferências +R$180.000,00",
+    "resumo": "Transferências +R$180.000,00 - distribuídos mensalmente até o final do ano corrente.",
     "titulo_noticia": "{nomeMinistro} anuncia aumento do Bolsa {moeda} {pais}.",
     "medida_imediata": false,
     "tipo_noticia": "estatal",
@@ -44,7 +44,7 @@
   {
     "codigo_evento": "alterar_transferencias",
     "nome": "Diminuir investimento social",
-    "resumo": "Transferências -R$180.000,00",
+    "resumo": "Transferências -R$180.000,00 - subtraídos mensalmente até o final do ano corrente.",
     "titulo_noticia": "{nomeMinistro} anuncia redução do Bolsa {moeda} {pais}.",
     "medida_imediata": false,
     "tipo_noticia": "estatal",
@@ -86,7 +86,7 @@
   {
     "codigo_evento": "alterar_gastos_governamentais",
     "nome": "Investir em Educação",
-    "resumo": "Gastos Governamentais +R$100.000,00",
+    "resumo": "Gastos Governamentais +R$100.000,00 - distribuídos mensalmente até o final do ano corrente.",
     "titulo_noticia": "{nomeMinistro} anuncia aumento de gastos em Educação.",
     "medida_imediata": false,
     "tipo_noticia": "liberal",
@@ -100,7 +100,7 @@
   {
     "codigo_evento": "alterar_gastos_governamentais",
     "nome": "Cortar gastos em Educação",
-    "resumo": "Gastos Governamentais -R$100.000,00",
+    "resumo": "Gastos Governamentais -R$100.000,00 - subtraídos mensalmente até o final do ano corrente.",
     "titulo_noticia": "{nomeMinistro} anuncia corte do investimento em Educação.",
     "medida_imediata": false,
     "tipo_noticia": "estatal",
@@ -114,7 +114,7 @@
   {
     "codigo_evento": "alterar_gastos_governamentais",
     "nome": "Investir em Saúde",
-    "resumo": "Gastos Governamentais +R$100.000,00",
+    "resumo": "Gastos Governamentais +R$100.000,00 - distribuídos mensalmente até o final do ano corrente.",
     "titulo_noticia": "{nomeMinistro} anuncia aumento do investimento em Saúde.",
     "medida_imediata": false,
     "tipo_noticia": "estatal",
@@ -128,7 +128,7 @@
   {
     "codigo_evento": "alterar_gastos_governamentais",
     "nome": "Cortar gastos em Saúde",
-    "resumo": "Gastos Governamentais -R$100.000,00",
+    "resumo": "Gastos Governamentais -R$100.000,00 - subtraídos mensalmente até o final do ano corrente.",
     "titulo_noticia": "{nomeMinistro} anuncia redução do gasto estatal em Saúde.",
     "medida_imediata": false,
     "tipo_noticia": "liberal",
@@ -142,7 +142,7 @@
   {
     "codigo_evento": "alterar_gastos_governamentais",
     "nome": "Investir em Infraestrutura",
-    "resumo": "Gastos Governamentais +R$100.000,00",
+    "resumo": "Gastos Governamentais +R$100.000,00 - distribuídos mensalmente até o final do ano corrente",
     "titulo_noticia": "{nomeMinistro} anuncia aumento do investimento em Infraestrutura.",
     "medida_imediata": false,
     "tipo_noticia": "liberal",
@@ -156,7 +156,7 @@
   {
     "codigo_evento": "alterar_gastos_governamentais",
     "nome": "Cortar gastos em Infraestrutura",
-    "resumo": "Gastos Governamentais -R$100.000,00",
+    "resumo": "Gastos Governamentais -R$100.000,00 - subtraídos mensalmente até o final do ano corrente",
     "titulo_noticia": "{nomeMinistro} anuncia redução do investimento em Infraestrutura",
     "medida_imediata": false,
     "tipo_noticia": "estatal",

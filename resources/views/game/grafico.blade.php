@@ -3,15 +3,13 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-<div class="card card-white grid-margin">
-    <div id="container"></div>
-</div>
+<div id="container"></div>
 
 <script>
     Highcharts.chart('container', {
         chart: {
             type: 'line',
-            height: 306,
+            height: 450,
         },
         title: {
             text: 'Rodadas'
