@@ -57,6 +57,9 @@ class CriarResultadoAnual
         $resultado->imposto_de_renda = $ultimaRodada->imposto_de_renda;
         $resultado->k_com_imposto = 1/(1-$resultado->pmgc) * (1 - $resultado->imposto_de_renda);
         $resultado->previsao_anual = $ultimaRodada->previsao_anual;
+        $resultado->popularidade_empresarios = $ultimaRodada->popularidade_empresarios;
+        $resultado->popularidade_trabalhadores = $ultimaRodada->popularidade_trabalhadores;
+        $resultado->popularidade_estado = $ultimaRodada->popularidade_estado;
         $resultado->save();
         return $resultado;
     }
