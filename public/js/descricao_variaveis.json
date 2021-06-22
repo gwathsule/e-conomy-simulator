@@ -33,7 +33,7 @@
   },
   "inflacao_de_custo" : {
     "nome": "Inflação de custo",
-    "descricao" : "Representa a diferença entre o <strong>Imposto de Renda</strong> atual (IR) e o do mês anterior, somando pela constante base 0,015 (1,5%). <br/>Ou seja, o aumento do IR provoca uma <strong>Inflação de Custo</strong>, tornando o produto mais caro ao consumidor e o contrário também é válido, caso o IR seja reduzido o preço do produto também recua."
+    "descricao" : "Representa a diferença entre o <strong>Imposto de Renda</strong> atual (IR) e o do mês anterior, somando pela constante base 0,015 (1,5%). Ou seja, o aumento do IR provoca uma <strong>Inflação de Custo</strong>, tornando o produto mais caro ao consumidor e o contrário também é válido, caso o IR seja reduzido o preço do produto também recua. Esse valor trata-se de uma estimativa para o fim do ano corrente.<br/><br/>Fórmula: IfC = (IR - IRB) + 0,015<br/><br/>IfC = Inflação de Custo<br/>IR = Imposto de Renda<br/>IRB = Imposto de Renda Base (mês anterior)"
   },
   "inflacao_total" : {
     "nome" : "Inflação total",
@@ -49,46 +49,46 @@
   },
   "pib_consumo" : {
     "nome" : "Consumo",
-    "descricao" : ""
+    "descricao" : "Representa a soma entre o <strong>Investimento (realizado)</strong> e <strong>Gastos Governamentais</strong>, ambos multiplicados por (<strong>KCI – 1</strong>). Tornando-se o resultado no aumento da renda geral (Y) a partir do investimento privado e gasto público.<br/><br/>Fórmula: C = (IL * (KCI - 1)) + (G * (KCI – 1))<br/><br/>C = Consumo<br/>IL = Investimento (realizado)<br/>KCI = Multiplicador com Imposto de Renda<br/>G = Gastos Governamentais<br/><br/>Obs: o <strong>-1</strong> na fórmula é para o cálculo do PIB não considerar os investimentos e gastos públicos mais de uma vez e simplificar a resultante."
   },
   "pib_investimento_potencial" : {
-    "nome" : "",
-    "descricao" : ""
+    "nome" : "Investimento (potencial)",
+    "descricao" : "Representa o valor potencial de alocação de renda em investimentos. <br/>O <strong>Investimento Potencial (IP)</strong> é definido a partir do tamanho da economia e alterado na proporção do aumento da renda total (<strong>PIB</strong>) ao fim do ano, representando o crescimento econômico do ponto de vista de investimentos."
   },
   "pib_investimento_realizado" : {
-    "nome" : "",
-    "descricao" : ""
+    "nome" : "Investimento (realizado)",
+    "descricao" : "Representa o valor de alocação de renda em investimentos concretizados em determinado período. <br/>O <strong>Investimento Realizado (IL)</strong> é obtido multiplicando o <strong>Investimento Potencial (IP)</strong> por <strong>(1 – IT)</strong>, sendo <strong>IT</strong> o percentual de <strong>Investimento em Títulos</strong>, ou seja, quanto mais investimento em títulos menos investimento privado gerando renda.<br/><br/>Fórmula: IL = IP * (1 – IT)<br/><br/>IL = Investimento Realizado<br/>IP = Investimento Potencial<br/>IT = Investimento em Títulos"
   },
   "impostos" : {
-    "nome" : "",
-    "descricao" : ""
+    "nome" : "Arrecadação em Impostos",
+    "descricao" : "Representa a arrecadação de impostos do governo. É a diferença entre o <strong>Multiplicador com Imposto (KCI)</strong> e <strong>Multiplicador sem Impostos</strong> sendo multiplicada pelo <strong>Investimento Realizado (IL)</strong>.<br/><br/>Fórmula: I = IL * (KSI – KCI)<br/><br/>I = Arrecadação em Impostos<br/>IL = Investimento Realizado<br/>KSI = Multiplicador sem Imposto de Renda<br/>KCI = Multiplicador com Imposto de Renda"
   },
   "titulos" : {
-    "nome" : "",
-    "descricao" : ""
+    "nome" : "Arrecadação em Títulos",
+    "descricao" : "Representa o percentual da renda que são deixa de se tornar novos <strong>Investimentos</strong> e vão para a compra de títulos. <br/>Quanto maior a <strong>Taxa de Juros</strong> e menor a <strong>Eficácia Marginal do Capital</strong> mais investidores comprarão títulos do governo devido ao valor atrativo e com o mínimo de riscos (bem, ao menos é o que se espera rs).<br/><br/>Fórmula: TD = 5 * (r – EmgK)<br/><br/>TD = Arrecadação em Títulos<br/>r = Taxa de Juros<br/>Emgk = Eficácia Marginal do Capital<br/><br/>Obs: tanto a <strong>Arrecadação em Títulos</strong>, quanto os <strong>Juros da Dívida Interna</strong>, devem ser pagos ao fim do ano corrente com o dinheiro no <strong>Caixa do Governo</strong>. Se não for possível efetuar o pagamento, o estado então incorre em <strong>Calote</strong> da dívida pública."
   },
   "juros_divida_interna" : {
-    "nome" : "",
-    "descricao" : ""
+    "nome" : "Juros da Dívida Interna",
+    "descricao" : "Representam os juros do endividamento interno mensal do governo na venda de títulos. <br/>Esse valor é calculado multiplicando a <strong>Arrecadação em Títulos</strong> pela <strong>Taxa de Juros</strong>.<br/><br/>Fórmula: JTD = TD * r<br/><br/>JTD = Juros da Dívida Interna<br/>TD = Títulos da Dívida<br/>r = Taxa de Juros"
   },
   "caixa" : {
-    "nome" : "",
-    "descricao" : ""
+    "nome" : "Caixa do Governo",
+    "descricao" : "Representa o somatório do balanço mensalmente entre despesas e receita do governo (<strong>Deficit/Superavit</strong>) ao longo do ano corrente.<br/>Ao fim do ano é debitado do <strong>Caixa do Governo</strong> o valor da <strong>Dívida Total</strong> para pagamento dos títulos e juros da arrecadação. <br/>Se não for possível efetuar o pagamento, o estado então incorre em <strong>Calote</strong> da dívida pública."
   },
   "gastos_governamentais" : {
-    "nome" : "",
-    "descricao" : ""
+    "nome" : "Gastos Governamentais",
+    "descricao" : "Representa os gastos mensais do governo com <strong>Infraestrutura</strong>, <strong>Saúde</strong> e <strong>Educação</strong>. Os <strong>Gastos Governamentais</strong> também são considerados no cálculo do <strong>PIB</strong>."
   },
   "transferencias" : {
-    "nome" : "",
-    "descricao" : ""
+    "nome" : "Transferências (investimento social)",
+    "descricao" : "Representa as transferências mensais pagas pelo governo a população. O usuário do simulador pode alterar esse valor e observar os resultados."
   },
   "bs" : {
-    "nome" : "",
-    "descricao" : ""
+    "nome" : "Deficit/Superavit (BS)",
+    "descricao" : "Representa o balanço mensal entre os gastos e receitas do governo, podendo ser negativa (<strong>Deficit</strong>) ou positiva (<strong>Superavit</strong>).<br/><br/>Fórmula: BS = I - (G + TA)<br/><br/>BS = Deficit/Superavit<br/>I = Arrecadação em Impostos<br/>G = Gastos Governamentais<br/>TA = Transferências"
   },
   "divida_total" : {
-    "nome" : "",
-    "descricao" : ""
+    "nome" : "Dívida Total",
+    "descricao" : "Representa o somatório da <strong>Arrecadação em Títulos</strong> e <strong>Juros da Dívida</strong> mensais ao longo do ano corrente.<br/>Ao fim do ano é debitado do <strong>Caixa do Governo</strong> o valor da <strong>Dívida Total</strong>. <br/>Se não for possível efetuar o pagamento, o estado então incorre em <strong>Calote</strong> da dívida pública."
   }
 }
