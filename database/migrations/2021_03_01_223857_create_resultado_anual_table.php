@@ -41,6 +41,9 @@ class CreateResultadoAnualTable extends Migration
             $table->decimal('k', 4, 3)->nullable();
             $table->decimal('imposto_de_renda', 4, 3)->nullable();
             $table->decimal('k_com_imposto', 4, 3)->nullable();
+            $table->decimal('popularidade_empresarios', 4, 3)->nullable();
+            $table->decimal('popularidade_trabalhadores', 4, 3)->nullable();
+            $table->decimal('popularidade_estado', 4, 3)->nullable();
             $table->unsignedBigInteger('jogo_id');
             $table->foreign('jogo_id')
                 ->references('id')

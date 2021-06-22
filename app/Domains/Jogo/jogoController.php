@@ -100,14 +100,27 @@ class jogoController extends Controller
         return view('game.novoJogo');
     }
 
-    public function relatoriosPage()
+    public function relatoriosMensaisPage()
     {
         /** @var User $user */
         $user = Auth::user();
         if(is_null($user->getJogoAtivo())) {
             return view('game.novoJogo');
         } else {
-            return view('game.relatorio')->with([
+            return view('game.relatorios-mensais')->with([
+                'jogo' => $user->getJogoAtivo()
+            ]);
+        }
+    }
+
+    public function relatoriosAnuaisPage()
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        if(is_null($user->getJogoAtivo())) {
+            return view('game.novoJogo');
+        } else {
+            return view('game.relatorios-anuais')->with([
                 'jogo' => $user->getJogoAtivo()
             ]);
         }

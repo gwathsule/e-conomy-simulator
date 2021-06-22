@@ -9,8 +9,11 @@
     </div>
     <div class="row">
         <div class="col-xl-12" >
-            <a href="{{route('relatorio-jogo')}}" target="_blank" class="btn btn-primary btn-sm btn-block">
-                Relatórios
+            <a href="{{route('relatorios-anuais')}}" target="_blank" class="btn btn-primary btn-sm btn-block">
+                Relatórios Anuais
+            </a>
+            <a href="{{route('relatorios-mensais')}}" target="_blank" class="btn btn-primary btn-sm btn-block">
+                Relatórios Mensais
             </a>
             <a href="{{route('novo-jogo')}}" class="btn btn-primary btn-sm btn-block">
                 Novo Jogo

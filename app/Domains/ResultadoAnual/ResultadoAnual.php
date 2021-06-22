@@ -34,6 +34,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $k
  * @property float $imposto_de_renda
  * @property float $k_com_imposto
+ * @property float $popularidade_empresarios
+ * @property float $popularidade_trabalhadores
+ * @property float $popularidade_estado
  * @property Jogo $jogo
  */
 class ResultadoAnual extends Model
@@ -74,6 +77,9 @@ class ResultadoAnual extends Model
             'k' => $this->k - $anterior->k,
             'imposto_de_renda' => $this->imposto_de_renda - $anterior->imposto_de_renda,
             'k_com_imposto' => $this->k_com_imposto - $anterior->k_com_imposto,
+            'popularidade_empresarios' => $this->popularidade_empresarios - $anterior->popularidade_empresarios,
+            'popularidade_trabalhadores' => $this->popularidade_trabalhadores - $anterior->popularidade_trabalhadores,
+            'popularidade_estado' => $this->popularidade_estado - $anterior->popularidade_estado,
         ];
     }
 }
