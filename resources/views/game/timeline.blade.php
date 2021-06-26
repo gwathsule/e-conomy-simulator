@@ -39,7 +39,7 @@
     @php
         $medida = \App\Domains\Medida\Medida::query()->find($rodada->medida_id)
     @endphp
-    @if(! is_null($medida))
+    @if(! is_null($medida) && $jogo->status != \App\Domains\Jogo\Jogo::STATUS_VENCIDO && $jogo->status != \App\Domains\Jogo\Jogo::STATUS_PERDIDO)
         <div class="card-body post">
             <div class="timeline-item-header">
                 <img src="{{$medida->getAvatarNoticia()}}" alt="" />

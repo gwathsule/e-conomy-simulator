@@ -55,6 +55,9 @@ trait NoticiasCondicionais
 
     private function inflacaoTotal($novaRodada, $ultimaRodada, string $medida, Jogo $jogo)
     {
+        if ($medida == null) {
+            return null;
+        }
         if($novaRodada->inflacao_total - $ultimaRodada->inflacao_total >= 0.005 ) {//subiu 0.05%
             $titulo = "{nomeMinistro} parece não priorizar a saúde fiscal do {pais}.";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;

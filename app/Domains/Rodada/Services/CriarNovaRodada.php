@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\DB;
 
 class CriarNovaRodada extends Service
 {
-    use NoticiasCondicionais;
+    use NoticiasCondicionais, NoticiasEndGame;
     /**
      * @var JogoRepository
      */
@@ -114,11 +114,23 @@ class CriarNovaRodada extends Service
             if($ultimaRodada != null && ($novaRodada->rodada == 12 || $novaRodada->rodada == 24)){
                 $criadorDeResultado = new CriarResultadoAnual($jogo);
                 $criadorDeResultado->perform();
+                $novaRodada->caixa = $ultimaRodada->caixa - $ultimaRodada->divida_total;
+                $novaRodada->divida_total = 0;
                 if($novaRodada->rodada == 24){
                     $jogo->status = Jogo::STATUS_VENCIDO;
-                    $jogo->save();
                 }
+                if($novaRodada->caixa <= 0) {
+                    $jogo->status = Jogo::STATUS_PERDIDO;
+                }
+                $jogo->save();
             }
+            if($jogo->status === Jogo::STATUS_PERDIDO) {
+                $novaRodada->noticias = $this->obterNoticiasDerrota($novaRodada, $jogo);
+            }
+            if($jogo->status === Jogo::STATUS_VENCIDO) {
+                $novaRodada->noticias = $this->obterNoticiasVitoria($novaRodada, $jogo);
+            }
+            $novaRodada->save();
         } catch (Exception $exception) {
             DB::rollBack();
             throw $exception;
@@ -190,9 +202,9 @@ class CriarNovaRodada extends Service
     {
         $rodada = new Rodada();
         $rodada->jogo_id = $jogo->id;
-        $rodada->popularidade_empresarios = 0.5;
-        $rodada->popularidade_trabalhadores = 0.5;
-        $rodada->popularidade_estado = 0.5;
+        $rodada->popularidade_empresarios = 0.3;
+        $rodada->popularidade_trabalhadores = 0.3;
+        $rodada->popularidade_estado = 0.3;
         $rodada->rodada = 1;
         $rodada->pib_investimento_potencial = $ultimoAno->pib_investimento_potencial / 12;
         $rodada->gastos_governamentais = $ultimoAno->gastos_governamentais / 12;
