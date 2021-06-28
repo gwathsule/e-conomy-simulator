@@ -63,6 +63,9 @@ class CriarResultadoAnualPrimario extends Service
         $resultado->k = 3.333;
         $resultado->imposto_de_renda = 0.120;
         $resultado->k_com_imposto = 2.933;
+        $resultado->popularidade_estado = 0.30;
+        $resultado->popularidade_trabalhadores = 0.30;
+        $resultado->popularidade_empresarios = 0.30;
         $resultado->save();
         return $resultado;
     }
