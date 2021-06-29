@@ -60,6 +60,7 @@ class CriarNovoJogo extends Service
                     'ministro' => ['required', 'string', 'max:30'],
                     'genero' => ['required', 'string', 'max:1', Rule::in(['M', 'F'])],
                     'personagem' => ['required', 'int'],
+                    'dificuldade' => ['required', 'int', 'between:1,3'],
                 ];
             }
         })->validate($data);
@@ -100,6 +101,7 @@ class CriarNovoJogo extends Service
                 $ultimoJogo->delete();
             }
             $novoJogo->user_id = $user->id;
+            $novoJogo->dificuldade = $data['dificuldade'];
             $novoJogo->save();
             $this->resulAnualPrimarioService->handle([
                 'jogo_id' => $novoJogo->id,

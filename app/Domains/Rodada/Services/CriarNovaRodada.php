@@ -202,9 +202,16 @@ class CriarNovaRodada extends Service
     {
         $rodada = new Rodada();
         $rodada->jogo_id = $jogo->id;
-        $rodada->popularidade_empresarios = 0.3;
-        $rodada->popularidade_trabalhadores = 0.3;
-        $rodada->popularidade_estado = 0.3;
+        $popularidadePrimaria = 0.5;
+        if($jogo->dificuldade === Jogo::DIFICULDADE_FACIL)
+            $popularidadePrimaria = 1;
+        if($jogo->dificuldade === Jogo::DIFICULDADE_NORMAL)
+            $popularidadePrimaria = 0.5;
+        if($jogo->dificuldade === Jogo::DIFICULDADE_DIFICIL)
+            $popularidadePrimaria = 0.30;
+        $rodada->popularidade_empresarios = $popularidadePrimaria;
+        $rodada->popularidade_trabalhadores = $popularidadePrimaria;
+        $rodada->popularidade_estado = $popularidadePrimaria;
         $rodada->rodada = 1;
         $rodada->pib_investimento_potencial = $ultimoAno->pib_investimento_potencial / 12;
         $rodada->gastos_governamentais = $ultimoAno->gastos_governamentais / 12;

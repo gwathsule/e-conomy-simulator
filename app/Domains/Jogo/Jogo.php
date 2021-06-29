@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 /**
  * @property int $id
  * @property int $status
+ * @property int $dificuldade
  * @property string $pais
  * @property string $genero
  * @property int $personagem
@@ -34,6 +35,10 @@ class Jogo extends Model
     public const STATUS_PERDIDO = -1;
     public const STATUS_EM_ANDAMENTO = 0;
     public const STATUS_VENCIDO = 1;
+
+    public const DIFICULDADE_FACIL = 1;
+    public const DIFICULDADE_NORMAL = 2;
+    public const DIFICULDADE_DIFICIL = 3;
 
     protected $casts = [
         'active' => 'boolean',
