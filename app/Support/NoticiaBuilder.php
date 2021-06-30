@@ -42,6 +42,7 @@ class NoticiaBuilder
     public static function buildText(string $texto, Jogo $jogo, $medida = null) : string
     {
         $texto = str_replace('{a/o}', $jogo->genero == 'M' ? 'o' : 'a', $texto);
+        $texto = str_replace('{a/e}', $jogo->genero == 'M' ? 'e' : 'a', $texto);
         $texto = str_replace('{ministro/a}', $jogo->genero == 'M' ? 'ministro' : 'ministra', $texto);
         $texto = str_replace('{nomeMinistro}', $jogo->ministro, $texto);
         $texto = str_replace('{moeda}', $jogo->moeda, $texto);

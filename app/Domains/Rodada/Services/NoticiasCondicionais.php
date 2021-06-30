@@ -64,23 +64,23 @@ trait NoticiasCondicionais
             return null;
         }
         if($jogo->dificuldade === Jogo::DIFICULDADE_FACIL) {
-            $titulo = "{nomeMinistro} estreia sua jornada no Ministério da Economia do {pais}.";
+            $titulo = "{nomeMinistro} estreia sua jornada no Ministério da Economia de {pais}.";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
-            $texto = "{nomeMinistro} foi anunciado no Ministério da Economia depois do antigo ministro deixar a casa em ordem e achar melhor seguir seu caminho na iniciativa privada. Todos estão se perguntando se {a/o} nov{a/o} {ministro/a} da economia será tão bom quanto o seu antecessor, o queridinho do {pais}. Falta dois anos de madanto e uma grande pressão em cima del{a/o} para continuar o ótimo trabalho.";
+            $texto = "{nomeMinistro} foi anunciad{a/o} no Ministério da Economia depois do antigo ministro deixar a casa em ordem e achar melhor seguir seu caminho na iniciativa privada. Todos estão se perguntando se {a/o} nov{a/o} {ministro/a} da economia será tão bom quanto o seu antecessor, o queridinho de {pais}. Falta dois anos de mandato e uma grande pressão em cima del{a/o} para continuar o ótimo trabalho.";
             $urlImagem = asset('img/noticias/inflacao_total.jpg');
             return NoticiaBuilder::buildNoticiaCondicional($tipo, $titulo, $texto, $urlImagem, '', $jogo);
         }
         if($jogo->dificuldade === Jogo::DIFICULDADE_NORMAL) {
-            $titulo = "{nomeMinistro} estreia sua jornada no Ministério da Economia do {pais}.";
+            $titulo = "{nomeMinistro} estreia sua jornada no Ministério da Economia de {pais}.";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
-            $texto = "{nomeMinistro} foi anunciado no Ministério da Economia, assumirá após seu antecessor gerir mal a economia do país por 2 anos. Como se sairá nesses 2 ultimos anos restantes de mandato? Será que haverá outra demissão ou {a/o} {ministro/a} irá terminar o mandato?";
+            $texto = "{nomeMinistro} foi anunciad{a/o} no Ministério da Economia, assumirá após seu antecessor gerir mal a economia do país por 2 anos. Como se sairá nesses 2 ultimos anos restantes de mandato? Será que haverá outra demissão ou {a/o} {ministro/a} irá terminar o mandato?";
             $urlImagem = asset('img/noticias/inflacao_total.jpg');
             return NoticiaBuilder::buildNoticiaCondicional($tipo, $titulo, $texto, $urlImagem, '', $jogo);
         }
         if($jogo->dificuldade === Jogo::DIFICULDADE_DIFICIL) {
-            $titulo = "{nomeMinistro} estreia sua jornada no Ministério da Economia do {pais}.";
+            $titulo = "{nomeMinistro} estréia sua jornada no Ministério da Economia de {pais}.";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
-            $texto = "Indo contra o que todos acreditavam, {nomeMinistro} aceita ser nomeado para o Ministário da Economia, sim, amigos el{a/o} resolveu colocar o del{a/o} na reta! El{a/o} é patrota, louc{a/o} ou quer tirar provaito da frágil situação em que se encontra o {pais}? Não sabemos ainda, o que sabemos é que será um tortuoso caminho nesses 2 anos que faltam para completar o mandato. Conseguirá {nomeMinistro} salvar a economia do {pais}?";
+            $texto = "Indo contra o que todos acreditavam, {nomeMinistro} aceita ser nomead{a/o} para o Ministário da Economia, sim, amigos el{a/e} resolveu colocar o del{a/e} na reta! El{a/e} é patriota, louc{a/o} ou quer tirar proveito da frágil situação em que se encontra {pais}? Não sabemos ainda, o que sabemos é que será um tortuoso caminho nesses 2 anos que faltam para completar o mandato. Conseguirá {nomeMinistro} salvar a economia de {pais}?";
             $urlImagem = asset('img/noticias/inflacao_total.jpg');
             return NoticiaBuilder::buildNoticiaCondicional($tipo, $titulo, $texto, $urlImagem, '', $jogo);
         }
