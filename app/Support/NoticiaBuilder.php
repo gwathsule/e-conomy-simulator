@@ -3,7 +3,6 @@
 namespace App\Support;
 
 use App\Domains\Jogo\Jogo;
-use Illuminate\Support\Str;
 
 class NoticiaBuilder
 {
@@ -42,13 +41,13 @@ class NoticiaBuilder
 
     public static function buildText(string $texto, Jogo $jogo, $medida = null) : string
     {
-        $texto = Str::replaceFirst('{a/o}', $jogo->genero == 'M' ? 'o' : 'a', $texto);
-        $texto = Str::replaceFirst('{ministro/a}', $jogo->genero == 'M' ? 'ministro' : 'ministra', $texto);
-        $texto = Str::replaceFirst('{nomeMinistro}', $jogo->ministro, $texto);
-        $texto = Str::replaceFirst('{moeda}', $jogo->moeda, $texto);
-        $texto = Str::replaceFirst('{pais}', $jogo->pais, $texto);
+        $texto = str_replace('{a/o}', $jogo->genero == 'M' ? 'o' : 'a', $texto);
+        $texto = str_replace('{ministro/a}', $jogo->genero == 'M' ? 'ministro' : 'ministra', $texto);
+        $texto = str_replace('{nomeMinistro}', $jogo->ministro, $texto);
+        $texto = str_replace('{moeda}', $jogo->moeda, $texto);
+        $texto = str_replace('{pais}', $jogo->pais, $texto);
         if(! is_null($medida)) {
-            $texto = Str::replaceFirst('{ultima_medida}', $medida, $texto);
+            $texto = str_replace('{ultima_medida}', $medida, $texto);
         }
         return $texto;
     }
