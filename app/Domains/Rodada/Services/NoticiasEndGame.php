@@ -11,7 +11,7 @@ trait NoticiasEndGame
     private function obterNoticiasVitoria(Rodada $novaRodada, Jogo $jogo) : array
     {
         $noticias = collect();
-        $noticia = $this->caixaNegativo($novaRodada, $jogo);
+        $noticia = $this->vitoria($novaRodada, $jogo);
         $noticias->add($noticia);
         return $noticias->toArray();
     }
@@ -48,10 +48,10 @@ trait NoticiasEndGame
     }
 
     private function vitoria(Rodada $rodada, Jogo $jogo){
-        if($rodada->caixa < 0) {
+        if($rodada->caixa >= 0) {
             $titulo = "O mandato acabou, e quem diria, {nomeMinistro} segurous as pontas";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
-            $texto = "O mandato acabou de {nomeMinistro} chegou ao fim, e mesmo sob olhares de desconfiança {o/a} ministr{o/a} se mostrou forte perante as adversidades e conseguiu finalizar o mandato.";
+            $texto = "O mandato de {nomeMinistro} chegou ao fim, e mesmo sob olhares de desconfiança {o/a} ministr{o/a} se mostrou forte perante as adversidades e conseguiu finalizar o mandato mantendo as finanças em ordem. Clique em Relatórios Anuais para saber a avaliação do mandato";
             $urlImagem = asset('img/noticias/aplausos.jpg');
             return NoticiaBuilder::buildNoticiaCondicional($tipo, $titulo, $texto, $urlImagem, '', $jogo);
         }

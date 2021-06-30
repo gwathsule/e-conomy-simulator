@@ -242,22 +242,30 @@ trait AnalisesResultados
                 $diferenca,
                 "Parabéns! A dívida pública interna reduziu consideravelmente! Certamente a sua ação de baixar a Taxa de Juros foi bem eficaz, pois seu mais liquidez ao mercado e elevou os investimentos."
             );
-        } else if ($diferenca < 0) {
+        }
+        if ($diferenca < 0) {
             return $this->buildResporta(
                 $diferenca,
                 "Você reduziu a dívida pública interna, isso é importante para a saúde financeira do país e dar mais liquidez ao mercado."
             );
-        } else if ($diferenca > 0) {
+        }
+        if ($diferenca > 0) {
             return $this->buildResporta(
                 $diferenca,
                 "A dívida pública interna aumentou. Se esse dinheiro for bem utilizado pode ser que vala a pena, mas seja cauteloso"
             );
-        } else if ($diferenca > 25) {
+        }
+        if ($diferenca > 25) {
             return $this->buildResporta(
                 $diferenca,
                 "Você aumentou a dívida pública consideravelmente! Talvez se torne quase irreversível e apenas a taxa de juros pode não ser o suficiente solucionar!"
             );
         }
+
+        return $this->buildResporta(
+            $diferenca,
+            "Não houve alteração na dívida pública, tente jogar sem apertar apenas em Não Fazer Nada"
+        );
     }
 
     public function analiseInflacaoTotal(int $ano, ResultadoAnual $atual, ResultadoAnual $ultimo) {
@@ -269,10 +277,10 @@ trait AnalisesResultados
                 "Fantástico! Você controlou bem a inflação!"
             );
         }
-        if ($diferenca < 0) {
+        if ($diferenca <= 0) {
             return $this->buildResporta(
                 $diferenca,
-                "Você controlou a inflação!"
+                "Você controlou a inflação... Na medida do possível"
             );
         }
         if ($diferenca < 0.5) {

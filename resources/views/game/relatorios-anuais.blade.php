@@ -19,7 +19,7 @@
             return 'valor-aumento';
         }
 
-        return 'valor-aumento';
+        return '';
     }
 
     function aumentoRuim($valor)
@@ -92,7 +92,7 @@
                     <tr class="{{is_null($analise) ? '' : aumentoBom($analise['pib']['diferenca'])}}">
                         <td>PIB</td>
                         <td>{{formatarDinheiro($resultado->pib)}}</td>
-                        <td>{{is_null($analise) ? '' : $analise['pib']['diferenca']}}</td>
+                        <td>{{is_null($analise) ? '' : porcentagem($analise['pib']['diferenca'])}}</td>
                         <td>{{is_null($analise) ? '' : $analise['pib']['analise']}}</td>
                     </tr>
                     <tr class="{{is_null($analise) ? '' : aumentoBom($analise['pib_investimento_realizado']['diferenca'])}}">
@@ -131,6 +131,8 @@
                         <td>{{is_null($analise) ? '' : porcentagem($analise['caixa']['diferenca'])}}</td>
                         <td>{{is_null($analise) ? '' : $analise['caixa']['analise']}}</td>
                     </tr>
+                    @php
+                    @endphp
                     <tr class="{{is_null($analise) ? '' : aumentoBom($analise['divida_total']['diferenca'])}}">
                         <td>Dívida Total</td>
                         <td>{{formatarDinheiro($resultado->divida_total)}}</td>
