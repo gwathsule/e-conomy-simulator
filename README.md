@@ -7,7 +7,7 @@ O **E-Conomy Simulator** é um jogo de simulação, que irá representar a econo
 
 [link da demonstração][1]
 
-O sistema faz parte do trabalho de Conclusão de curso dos alunos [Rafael](https://github.com/gwathsule "Rafael") e [Kassio](https://github.com/kassioschaider "Kassio"), o front foi desenhado e desenvolvido por Lynn (Por achar que o front anterior era considerado feio esteticamente).
+O sistema faz parte do trabalho de Conclusão de curso dos alunos [Rafael](https://github.com/gwathsule "Rafael") e [Kassio](https://github.com/kassioschaider "Kassio").
 
 
 [1]: ec2-3-138-138-227.us-east-2.compute.amazonaws.com "Demonstração ao vivo"
