@@ -17,6 +17,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $inflacao_de_demanda
  * @property float $inflacao_de_custo
  * @property float $inflacao_total
+ * @property float $media_inflacao_de_demanda
+ * @property float $media_inflacao_de_custo
+ * @property float $media_inflacao_total
  * @property float $pmgc
  * @property float $imposto_de_renda
  * @property float $pib
@@ -58,5 +61,10 @@ class Rodada extends Model
     public function medida()
     {
         return $this->belongsTo(Medida::class);
+    }
+
+    public function mediaInflacaoAtual()
+    {
+
     }
 }

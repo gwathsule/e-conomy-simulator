@@ -62,8 +62,8 @@ trait NoticiasEndGame
         if($rodada->caixa < 0) {
             $titulo = "Extra: O país foi a falência, {o/a} culpad{o/a} de tudo isso: {nomeMinistro}.";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
-            $texto = "O país faliu e todos estão procurando pel{o/a} culpad{o/a}: {nomeMinistro}! Caos social, bancos roubando dinheiro e fugindo para o exterior, as pessoas estão pegando em armas para tomar o controle das instituições e o presidente está se protegendo com o exército ao seu lado! Não há mais estado para gerir e salve-se quem puder!";
-            $urlImagem = asset('img/noticias/caos_social.jpg');
+            $texto = "Inconsequente, {nomeMinistro} gasta com o que não pode e o governo fecha o ano com caixa negativo! {nomeMinistro} foi demitid{o/a} nessa manhã após o governo divulgar as contas públicas. {nomeMinistro} deixou um legado ruim no governo e será realiazada uma CPI para averiguar possíveis irregularidades em seu mandato. O governo deverá recorrer ao FMI, aumentando impostos e tornando mais ruim a vida do já, tão sofrido, cidadão de {pais}.";
+            $urlImagem = asset('img/noticias/contas_vermelho.jpg');
             return NoticiaBuilder::buildNoticiaCondicional($tipo, $titulo, $texto, $urlImagem, '', $jogo);
         }
         return null;

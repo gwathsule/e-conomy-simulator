@@ -8,6 +8,7 @@ use App\Domains\Medida\MedidaRepository;
 use App\Domains\ResultadoAnual\ResultadoAnual;
 use App\Domains\Rodada\Rodada;
 use Exception;
+use phpDocumentor\Reflection\Types\This;
 
 class CalcularResultantes
 {
@@ -69,7 +70,49 @@ class CalcularResultantes
         $this->rodadaAtual->inflacao_de_demanda = $this->inflacao_de_demanda();
         $this->rodadaAtual->inflacao_de_custo = $this->inflacao_de_custo();
         $this->rodadaAtual->inflacao_total = $this->inflacao_total();
+        $this->rodadaAtual->media_inflacao_de_demanda = $this->media_inflacao_de_demanda();
+        $this->rodadaAtual->media_inflacao_de_custo = $this->media_inflacao_de_custo();
+        $this->rodadaAtual->media_inflacao_total = $this->media_inflacao_total();
         return $this->rodadaAtual;
+    }
+
+    public function media_inflacao_de_demanda() {
+        $jogo = $this->rodadaAtual->jogo;
+        if($this->ultimaRodada == null) {
+            return $this->inflacao_de_demanda();
+        }
+        if(count($jogo->resultados_anuais) === 1) {
+            return $jogo->rodadas->where('rodada', '<=', 12)->avg('inflacao_de_demanda');
+        } else {
+            return $jogo->rodadas->where('rodada', '>', 12)->avg('inflacao_de_demanda');
+        }
+    }
+
+    public function media_inflacao_de_custo() {
+        $jogo = $this->rodadaAtual->jogo;
+        if($this->ultimaRodada == null) {
+            return $this->inflacao_de_custo();
+        }
+        $rodadas = $jogo->rodadas;
+        $rodadas->add($this->rodadaAtual);
+        if(count($jogo->resultados_anuais) === 1) {
+            return $rodadas->where('rodada', '<=', 12)->avg('inflacao_de_custo');
+        } else {
+            return $rodadas->where('rodada', '>', 12)->avg('inflacao_de_custo');
+        }
+    }
+
+    public function media_inflacao_total() {
+        $jogo = $this->rodadaAtual->jogo;
+        if($this->ultimaRodada == null) {
+            return $this->inflacao_total();
+        }
+        $rodadas = $jogo->rodadas;
+        if(count($jogo->resultados_anuais) === 1) {
+            return $rodadas->where('rodada', '<=', 12)->avg('inflacao_total');
+        } else {
+            return $rodadas->where('rodada', '>', 12)->avg('inflacao_total');
+        }
     }
 
     private function inflacao_de_demanda()

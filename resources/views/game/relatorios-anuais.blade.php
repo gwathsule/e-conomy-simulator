@@ -133,19 +133,19 @@
                     </tr>
                     @php
                     @endphp
-                    <tr class="{{is_null($analise) ? '' : aumentoBom($analise['divida_total']['diferenca'])}}">
+                    <tr class="{{is_null($analise) ? '' : aumentoRuim($analise['divida_total']['diferenca'])}}">
                         <td>Dívida Total</td>
                         <td>{{formatarDinheiro($resultado->divida_total)}}</td>
                         <td>{{is_null($analise) ? '' : porcentagem($analise['divida_total']['diferenca'])}}</td>
                         <td>{{is_null($analise) ? '' : $analise['divida_total']['analise']}}</td>
                     </tr>
-                    <tr class="{{is_null($analise) ? '' : aumentoBom($analise['inflacao_total']['diferenca'])}}">
+                    <tr class="{{is_null($analise) ? '' : aumentoRuim($analise['inflacao_total']['diferenca'])}}">
                         <td>Inflação Total</td>
                         <td>{{$resultado->inflacao_total * 100}}%</td>
                         <td>{{is_null($analise) ? '' : porcentagem($analise['inflacao_total']['diferenca'])}}</td>
                         <td>{{is_null($analise) ? '' : $analise['inflacao_total']['analise']}}</td>
                     </tr>
-                    <tr class="{{is_null($analise) ? '' : aumentoBom($analise['desemprego']['diferenca'])}}">
+                    <tr class="{{is_null($analise) ? '' : aumentoRuim($analise['desemprego']['diferenca'])}}">
                         <td>Desemprego</td>
                         <td>{{$resultado->desemprego * 100}}%</td>
                         <td>{{is_null($analise) ? '' : porcentagem($analise['desemprego']['diferenca'])}}</td>

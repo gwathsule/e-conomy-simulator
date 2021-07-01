@@ -24,8 +24,11 @@ class CreateRodadaTable extends Migration
             $table->decimal('transferencias', 13, 2)->nullable();
             $table->decimal('taxa_de_juros_base', 5, 4)->nullable();
             $table->decimal('inflacao_de_demanda', 5, 4)->nullable();
+            $table->decimal('media_inflacao_de_demanda', 5, 4)->nullable();
             $table->decimal('inflacao_de_custo', 5, 4)->nullable();
+            $table->decimal('media_inflacao_de_custo', 5, 4)->nullable();
             $table->decimal('inflacao_total', 5, 4)->nullable();
+            $table->decimal('media_inflacao_total', 5, 4)->nullable();
             $table->decimal('pmgc', 5, 4)->nullable();
             $table->decimal('imposto_de_renda', 5, 4)->nullable();
             $table->decimal('pib', 13, 2)->nullable();

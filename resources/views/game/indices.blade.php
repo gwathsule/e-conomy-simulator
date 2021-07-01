@@ -103,18 +103,6 @@
         <tr>
             <td>
                 <span>
-                    <a onclick="displayInfo('inflacao_de_demanda')" style="cursor: pointer">
-                        <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
-                    </a>
-                </span>
-                <span>Inflação de demanda:</span>
-            </td>
-            <td><span>{{$ultimaRodada->inflacao_de_demanda * 100}}%</span></td>
-            {!! retornarAlteracao("inflacao_de_demanda", $ultimaRodada, $rodadaAnterior)!!}
-        </tr>
-        <tr>
-            <td>
-                <span>
                     <a onclick="displayInfo('imposto_de_renda')" style="cursor: pointer">
                         <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
                     </a>
@@ -127,14 +115,26 @@
         <tr>
             <td>
                 <span>
+                    <a onclick="displayInfo('inflacao_de_demanda')" style="cursor: pointer">
+                        <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
+                    </a>
+                </span>
+                <span>Inflação de demanda:</span>
+            </td>
+            <td><span>{{$ultimaRodada->media_inflacao_de_demanda * 100}}%</span></td>
+            {!! retornarAlteracao("media_inflacao_de_demanda", $ultimaRodada, $rodadaAnterior)!!}
+        </tr>
+        <tr>
+            <td>
+                <span>
                     <a onclick="displayInfo('inflacao_de_custo')" style="cursor: pointer">
                         <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
                     </a>
                 </span>
                 <span>Inflação de custo:</span>
             </td>
-            <td><span>{{$ultimaRodada->inflacao_de_custo * 100}}%</span></td>
-            {!! retornarAlteracao("inflacao_de_custo", $ultimaRodada, $rodadaAnterior)!!}
+            <td><span>{{$ultimaRodada->media_inflacao_de_custo * 100}}%</span></td>
+            {!! retornarAlteracao("media_inflacao_de_custo", $ultimaRodada, $rodadaAnterior)!!}
         </tr>
         <tr>
             <td>
@@ -145,8 +145,8 @@
                 </span>
                 <span>Inflação Total:</span>
             </td>
-            <td><span>{{$ultimaRodada->inflacao_total * 100}}%</span></td>
-            {!! retornarAlteracao("inflacao_total", $ultimaRodada, $rodadaAnterior)!!}
+            <td><span>{{$ultimaRodada->media_inflacao_total * 100}}%</span></td>
+            {!! retornarAlteracao("media_inflacao_total", $ultimaRodada, $rodadaAnterior)!!}
         </tr>
     </table>
 </div>
