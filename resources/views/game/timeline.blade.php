@@ -72,7 +72,7 @@
         @if(count($ultimaRodada->noticias) > 0)
         Swal.fire({
             title: '{{$ultimaRodada->noticias[0]["titulo"]}}',
-            text: '{{$ultimaRodada->noticias[0]["texto"]}}',
+            html: '{!! $ultimaRodada->noticias[0]["texto"] !!}',
             imageUrl: '{{$ultimaRodada->noticias[0]["imagem"]}}',
             imageWidth: 400,
             imageHeight: 200,
@@ -89,7 +89,7 @@
             .then(() => {
                 Swal.fire({
                     title: '{{$ultimaRodada->noticias[$i]["titulo"]}}',
-                    text: '{{$ultimaRodada->noticias[$i]["texto"]}}',
+                    html: '{!!$ultimaRodada->noticias[$i]["texto"]!!}',
                     imageUrl: '{{$ultimaRodada->noticias[$i]["imagem"]}}',
                     imageWidth: 400,
                     imageHeight: 200,
