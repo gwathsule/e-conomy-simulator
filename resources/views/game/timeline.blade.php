@@ -94,11 +94,11 @@
                     imageWidth: 400,
                     imageHeight: 200,
                     customClass: {
-                        popup: 'news-popup-{{$ultimaRodada->noticias[$i]['tipo'] ? 'estatal' : 'liberal'}}',
+                        popup: 'news-popup-{{$ultimaRodada->noticias[$i]['tipo'] == 'estatal' ? 'estatal' : 'liberal'}}',
                         header: 'news-popup-header',
                         title: 'news-popup-title',
                         content: 'news-popup-content',
-                        confirmButton: 'news-button-{{$ultimaRodada->noticias[$i]['tipo'] ? 'estatal' : 'liberal'}}',
+                        confirmButton: 'news-button-{{$ultimaRodada->noticias[$i]['tipo'] == 'estatal' ? 'estatal' : 'liberal'}}',
                     }
                 })
                 @endfor
