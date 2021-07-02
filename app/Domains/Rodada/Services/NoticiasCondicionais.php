@@ -52,7 +52,7 @@ trait NoticiasCondicionais
         if($rodada->rodada == 12) {
             $titulo = "O mandato acabou, e quem diria, {nomeMinistro} segurous as pontas";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
-            $texto = "O mandato de {nomeMinistro} chegou ao fim de seu primeiro ano e se mostrou muito responsável, conseguindo quitar todas as dívidas do governo. Será que no ano que vem el{o/a} terá controle também? Clique em Relatórios Anuais para saber a avaliação do primeiro ano";
+            $texto = "O mandato de {nomeMinistro} chegou ao fim de seu primeiro ano e se mostrou muito responsável, conseguindo quitar todas as dívidas do governo. Será que no ano que vem el{a/o} terá controle também? Clique em Relatórios Anuais para saber a avaliação do primeiro ano";
             $urlImagem = asset('img/noticias/aplausos.jpg');
             return NoticiaBuilder::buildNoticiaCondicional($tipo, $titulo, $texto, $urlImagem, '', $jogo);
         }

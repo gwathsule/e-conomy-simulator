@@ -51,7 +51,7 @@ trait NoticiasEndGame
         if($rodada->caixa >= 0) {
             $titulo = "O mandato acabou, e quem diria, {nomeMinistro} segurous as pontas";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
-            $texto = "O mandato de {nomeMinistro} chegou ao fim, e mesmo sob olhares de desconfiança {o/a} ministr{o/a} se mostrou forte perante as adversidades e conseguiu finalizar o mandato mantendo as finanças em ordem. Clique em Relatórios Anuais para saber a avaliação do mandato";
+            $texto = "O mandato de {nomeMinistro} chegou ao fim, e mesmo sob olhares de desconfiança {a/o} ministr{a/o} se mostrou forte perante as adversidades e conseguiu finalizar o mandato mantendo as finanças em ordem. Clique em Relatórios Anuais para saber a avaliação do mandato";
             $urlImagem = asset('img/noticias/aplausos.jpg');
             return NoticiaBuilder::buildNoticiaCondicional($tipo, $titulo, $texto, $urlImagem, '', $jogo);
         }
@@ -60,9 +60,9 @@ trait NoticiasEndGame
 
     private function caixaNegativo(Rodada $rodada, Jogo $jogo){
         if($rodada->caixa < 0) {
-            $titulo = "Extra: O país foi a falência, {o/a} culpad{o/a} de tudo isso: {nomeMinistro}.";
+            $titulo = "Extra: O país foi a falência, {a/o} culpad{a/o} de tudo isso: {nomeMinistro}.";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
-            $texto = "Inconsequente, {nomeMinistro} gasta com o que não pode e o governo fecha o ano com caixa negativo! {nomeMinistro} foi demitid{o/a} nessa manhã após o governo divulgar as contas públicas. {nomeMinistro} deixou um legado ruim no governo e será realiazada uma CPI para averiguar possíveis irregularidades em seu mandato. O governo deverá recorrer ao FMI, aumentando impostos e tornando mais ruim a vida do já, tão sofrido, cidadão de {pais}.";
+            $texto = "Inconsequente, {nomeMinistro} gasta com o que não pode e o governo fecha o ano com caixa negativo! {nomeMinistro} foi demitid{a/o} nessa manhã após o governo divulgar as contas públicas. {nomeMinistro} deixou um legado ruim no governo e será realiazada uma CPI para averiguar possíveis irregularidades em seu mandato. O governo deverá recorrer ao FMI, aumentando impostos e tornando mais ruim a vida do já, tão sofrido, cidadão de {pais}.";
             $urlImagem = asset('img/noticias/contas_vermelho.jpg');
             return NoticiaBuilder::buildNoticiaCondicional($tipo, $titulo, $texto, $urlImagem, '', $jogo);
         }
@@ -71,7 +71,7 @@ trait NoticiasEndGame
 
     private function popularidadeBaixaComSetorPrivado(Rodada $rodada, Jogo $jogo){
         if($rodada->popularidade_empresarios <= 0) {
-            $titulo = "Por pressão do setor privado, {nomeMinistro} é demitid{o/a} do Ministério da Economia.";
+            $titulo = "Por pressão do setor privado, {nomeMinistro} é demitid{a/o} do Ministério da Economia.";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
             $texto = "A tensão com os grandes empresários cresceu muito! \"Empresas morrem!\": é o grito de guerra que mais se ouve. No último domingo uma grande manifestação foi realizada com a liderança do MLN e com um ganso de borracha gigante em cada capital, além pessoas vestindo a camisa da seleção do país, foi ridículo, mas o suficiente para o presidente decidir pela sua demissão…";
             $urlImagem = asset('img/noticias/prejuizo_empresa.jpg');
@@ -82,7 +82,7 @@ trait NoticiasEndGame
 
     private function popularidadeBaixaComEstado(Rodada $rodada, Jogo $jogo){
         if($rodada->popularidade_trabalhadores <= 0) {
-            $titulo = "Presidente perde a cabeça com {nomeMinistro} e {o/a} demite.";
+            $titulo = "Presidente perde a cabeça com {nomeMinistro} e {a/o} demite.";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_ESTATAL;
             $texto = "A tensão com os sindicalistas e movimentos sociais cresceu muito! “O Estado morre!”: é o grito que mais se ouve. As mudanças estruturais fizeram o Estado enfraquecer e ruir, os direitos mais básicos não estão sendo garantidos, os burocratas e carteleiros descaradamente pedem a sua cabeça do alto de seus montes de dólar, terrível, mas o suficiente para o presidente decidir pela sua demissão…";
             $urlImagem = asset('img/noticias/demissao.jpg');
@@ -93,7 +93,7 @@ trait NoticiasEndGame
 
     private function popularidadeBaixaComClasseTrabalhadora(Rodada $rodada, Jogo $jogo){
         if($rodada->popularidade_trabalhadores <= 0) {
-            $titulo = "A voz do povo se provou maior que {nomeMinistro}, que agora é ex-ministr{o/a}.";
+            $titulo = "A voz do povo se provou maior que {nomeMinistro}, que agora é ex-ministr{a/o}.";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_ESTATAL;
             $texto = "A tensão com povo cresceu muito! “Pobres morrem!”: é o grito de guerras que mais se ouve. Manifestações estouraram por todo o país devido ao sucatamento dos serviços públicos e crescimento da pobreza, incluindo os grandes movimentos nas capitais liderados pelos jovens Cabeças Raspadas, bizarro, mas o suficiente para o presidente decidir pela sua demissão…";
             $urlImagem = asset('img/noticias/greve_trabalhadores.png');
