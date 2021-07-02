@@ -99,6 +99,13 @@ class CriarNovaRodada extends Service
                 $codeEventoUltimaMedida = $medida->codigo_evento;
                 $novaRodada->medida_id = $data['medida_id'];
                 $this->executarMedida($novaRodada, $medida);
+            } else {
+                if($ultimaRodada != null) {
+                    $novaRodada->popularidade_empresarios -= 0.1;
+                    $novaRodada->popularidade_trabalhadores -= 0.1;
+                    $novaRodada->popularidade_estado -= 0.1;
+                    $novaRodada->update();
+                }
             }
             /** @var Evento $evento */
             foreach ($jogo->eventos as $evento) {

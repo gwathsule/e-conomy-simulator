@@ -17,6 +17,12 @@ trait NoticiasCondicionais
             return $noticias->toArray();
         }
 
+        $noticia = $this->naoFezNada($medida, $jogo);
+        if (!is_null($noticia)) {
+            $noticias->add($noticia);
+            return $noticias->toArray();
+        }
+
         $noticia = $this->inflacaoTotal($novaRodada, $ultimaRodada, $medida, $jogo);
         if (!is_null($noticia)) {
             $noticias->add($noticia);
@@ -46,6 +52,19 @@ trait NoticiasCondicionais
         }  else {
             return $noticias->toArray();
         }
+    }
+
+    private function naoFezNada(string $medida, Jogo $jogo)
+    {
+        if ($medida != null) {
+            return null;
+        }
+
+        $titulo = "Parece que {nomeMinistro} não gosta de trabalhar!.";
+        $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
+        $texto = "{a/o} {ministro/a} {nomeMinistro} parece não se importar com a situação que vive {pais}! Praticamente irá receber esse mês sem fazer nada, assim até eu posso ser ministro! Ninguém está feliz com isso!<br/><br/>Causa: Nenhuma medida tomada no mês.";
+        $urlImagem = asset('img/noticias/sleep.jpg');
+        return NoticiaBuilder::buildNoticiaCondicional($tipo, $titulo, $texto, $urlImagem, $medida, $jogo);
     }
 
     private function relatorioPrimeiroAno(Rodada $rodada, Jogo $jogo){
