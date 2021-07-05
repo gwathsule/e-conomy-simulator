@@ -51,7 +51,7 @@ trait NoticiasEndGame
         if($rodada->caixa >= 0) {
             $titulo = "O mandato acabou, e quem diria, {nomeMinistro} segurous as pontas";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
-            $texto = "O mandato de {nomeMinistro} chegou ao fim, e mesmo sob olhares de desconfiança {a/o} ministr{a/o} se mostrou forte perante as adversidades e conseguiu finalizar o mandato mantendo as finanças em ordem. Clique em Relatórios Anuais para saber a avaliação do mandato";
+            $texto = "O mandato de {nomeMinistro} chegou ao fim e mesmo sob olhares de desconfiança {a/o} ministr{a/o} se mostrou forte perante as adversidades e conseguiu finalizar o mandato mantendo as finanças em ordem. Clique em <a href=\"". route('relatorios-anuais') ."\" target='_blank'>Relatórios Anuais</a> para saber a avaliação do mandato";
             $urlImagem = asset('img/noticias/aplausos.jpg');
             return NoticiaBuilder::buildNoticiaCondicional($tipo, $titulo, $texto, $urlImagem, '', $jogo);
         }
