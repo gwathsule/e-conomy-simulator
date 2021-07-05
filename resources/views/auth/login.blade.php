@@ -99,6 +99,13 @@
                         <button class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px">Sign In</button>
                         <span class="pull-right"><a href="{{route('register')}}">Registrar</a></span><span><a target="_blank" href="https://github.com/gwathsule/e-conomy-simulator">Github</a></span>
                     </div>
+                    @php $response = session()->get('response'); @endphp
+                    @if($response != null && $response['type'] == \App\Http\Controllers\Controller::TYPE_ERROR_RETURN)
+                        <div class="form-group" style="text-align: center; color: orange">
+                            <span >{!! $response['message'] !!}</span>
+                        </div>
+                    @endif
+
                 </form>
             </div>
             <div class="modal-footer">

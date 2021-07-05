@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -38,25 +39,49 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $input = $request->all();
+        try {
+            $input = $request->all();
 
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+            $this->validate($request, [
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
 
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
-            /** @var User $userLogged */
-            $userLogged = auth()->user();
-            if ($userLogged->is_admin) {
-                return redirect()->route('admin.home');
-            }else{
-                return redirect()->route('user.home');
+            if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
+                /** @var User $userLogged */
+                $userLogged = auth()->user();
+                if ($userLogged->is_admin) {
+                    return redirect()->route('admin.home');
+                } else {
+                    return redirect()->route('user.home');
+                }
+            } else {
+                return back()->with([
+                    'response' => [
+                        'type' => self::TYPE_ERROR_RETURN,
+                        'message' => 'Login inválido',
+                    ],
+                ]);
             }
-        }else{
-            return redirect()->route('login')
-                ->withErrors(['Login inválido']);
+        } catch (ValidationException $ex) {
+            $message = '';
+
+            foreach ($ex->errors() as $error) {
+                $message .= $error[0] . '<br/>';
+            }
+            return back()->with([
+                'response' => [
+                    'type' => self::TYPE_ERROR_RETURN,
+                    'message' => $message,
+                ],
+            ]);
+        } catch (\Exception $exception) {
+            return back()->with([
+                'response' => [
+                    'type' => self::TYPE_ERROR_RETURN,
+                    'message' => $exception->getMessage(),
+                ],
+            ]);
         }
     }
 }

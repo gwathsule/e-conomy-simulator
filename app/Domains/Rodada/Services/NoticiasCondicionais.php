@@ -20,7 +20,7 @@ trait NoticiasCondicionais
         $noticia = $this->naoFezNada($medida, $jogo, $ultimaRodada);
         if (!is_null($noticia)) {
             $noticias->add($noticia);
-            return $noticias->toArray();
+            $noticias->toArray();
         }
 
         $noticia = $this->inflacaoTotal($novaRodada, $ultimaRodada, $medida, $jogo);
@@ -69,9 +69,9 @@ trait NoticiasCondicionais
 
     private function relatorioPrimeiroAno(Rodada $rodada, Jogo $jogo){
         if($rodada->rodada == 12) {
-            $titulo = "O mandato acabou, e quem diria, {nomeMinistro} segurous as pontas";
+            $titulo = "O primeiro ano de mandato acabou e quem diria, {nomeMinistro} segurou as pontas";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
-            $texto = "O mandato de {nomeMinistro} chegou ao fim de seu primeiro ano e se mostrou muito responsável, conseguindo quitar todas as dívidas do governo. Será que no ano que vem el{a/o} terá controle também? Clique em Relatórios Anuais para saber a avaliação do primeiro ano";
+            $texto = "O mandato de {nomeMinistro} chegou ao fim de seu primeiro ano e se mostrou muito responsável, conseguindo quitar todas as dívidas do governo. Será que no ano que vem el{a/o} terá controle também? Clique em <a href=\"". route('relatorios-anuais') ."\" target='_blank'>Relatórios Anuais</a> para saber a avaliação do primeiro ano";
             $urlImagem = asset('img/noticias/aplausos.jpg');
             return NoticiaBuilder::buildNoticiaCondicional($tipo, $titulo, $texto, $urlImagem, '', $jogo);
         }
@@ -130,6 +130,10 @@ trait NoticiasCondicionais
 
     private function desemprego($novaRodada, $ultimaRodada, string $medida, Jogo $jogo)
     {
+        if($medida == null) {
+            return null;
+        }
+
         if( $novaRodada->desemprego - $ultimaRodada->desemprego >= 0.002 ) { //aumentou 0,02%
             $titulo = "{nomeMinistro} está perdido? Só a inciativa privada pode ajudar!";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
@@ -150,6 +154,10 @@ trait NoticiasCondicionais
 
     private function bs($novaRodada, $ultimaRodada, string $medida, Jogo $jogo)
     {
+        if($medida == null) {
+            return null;
+        }
+
         if( $novaRodada->bs - $ultimaRodada->bs >= 15000 ) { //aumentou
             $titulo = "{nomeMinistro} fazendo o que sempre dissemos";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
@@ -170,6 +178,10 @@ trait NoticiasCondicionais
 
     private function titulos($novaRodada, $ultimaRodada, string $medida, Jogo $jogo)
     {
+        if($medida == null) {
+            return null;
+        }
+
         if( $novaRodada->titulos - $ultimaRodada->titulos >= 15000 ) { //aumentou
             $titulo = "{nomeMinistro} conhece o nosso endividamento interno?";
             $tipo = NoticiaBuilder::TIPO_NOTICIA_ESTATAL;
