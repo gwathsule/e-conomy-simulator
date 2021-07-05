@@ -46,7 +46,7 @@ trait AnalisesResultados
             } else {
                 return $this->buildResporta(
                     $diferenca,
-                    "Os investimentos pioraram, talvez seja necessário compensar com alguma medida para aquecer mercado, prover liquidez ou gerar gastos governamentais para não reduzir o PIB!"
+                    "Os investimentos pioraram, talvez seja necessário compensar com alguma medida para aquecer mercado, provendo liquidez ou gerando gastos governamentais para não reduzir o PIB!"
                 );
             }
         }
@@ -76,7 +76,7 @@ trait AnalisesResultados
             } else {
                 return $this->buildResporta(
                     $diferenca,
-                    "Você reduziu os gastos governamentais, isso pode ser efetivo para economizar, mas não se esqueça das políticas sociais efetivas e o decréscimo do PIB gerado."
+                    "Você reduziu os gastos governamentais, isso pode ser bom para economizar, mas não se esqueça das políticas sociais efetivas e o decréscimo do PIB gerado."
                 );
             }
         }
@@ -84,12 +84,12 @@ trait AnalisesResultados
             if ($diferenca > 0) {
                 return $this->buildResporta(
                     $diferenca,
-                    "Os investimentos melhoraram, provavelmente seu aumento de liquidez deu certo."
+                    "Você aumentou os gastos governamentais, isso pode gerar mais consumo e impactar no PIB, mas tome cuidado pra não exceder o seu orçamento."
                 );
             } else {
                 return $this->buildResporta(
                     $diferenca,
-                    "Os investimentos pioraram, o mercado não foi muito movimentado no seu mandato."
+                    "Você reduziu os gastos governamentais, isso pode ser bom para economizar, mas não se esqueça das políticas sociais efetivas e o decréscimo do PIB gerado."
                 );
             }
         }
@@ -106,7 +106,7 @@ trait AnalisesResultados
             } else {
                 return $this->buildResporta(
                     $diferenca,
-                    "Você abaixou as transferências, pode ser que tenha economizado caixa com isso, mas a população pode não estar satisfeita e o mercado menos aquecido."
+                    "Você reduziu as transferências, pode ser que tenha economizado caixa com isso, mas a população pode não estar satisfeita e o mercado menos aquecido."
                 );
             }
         }
@@ -119,7 +119,7 @@ trait AnalisesResultados
             } else {
                 return $this->buildResporta(
                     $diferenca,
-                    "Você abaixou as transferências, pode ser que tenha economizado caixa com isso, mas a população pode não estar satisfeita e o mercado menos aquecido."
+                    "Você reduziu as transferências, pode ser que tenha economizado caixa com isso, mas a população pode não estar satisfeita e o mercado menos aquecido."
                 );
             }
         }
@@ -136,7 +136,7 @@ trait AnalisesResultados
             } else {
                 return $this->buildResporta(
                     $diferenca,
-                    "Você reduziu os impostos, isso pode trazer mais produtividade para os investimentos, mas cuidado para ficar sem caixa para as políticas públicas!"
+                    "Você reduziu os impostos, isso pode trazer mais produtividade aos investimentos, mas cuidado para não ficar sem caixa para as políticas públicas!"
                 );
             }
         }
@@ -149,7 +149,7 @@ trait AnalisesResultados
             } else {
                 return $this->buildResporta(
                     $diferenca,
-                    "Você reduziu os impostos, isso pode trazer mais produtividade para os investimentos, mas cuidado para ficar sem caixa para as políticas públicas!"
+                    "Você reduziu os impostos, isso pode trazer mais produtividade aos investimentos, mas cuidado para não ficar sem caixa para as políticas públicas!"
                 );
             }
         }
@@ -166,7 +166,7 @@ trait AnalisesResultados
             } else {
                 return $this->buildResporta(
                     $diferenca,
-                    "É... O orçamento do país piorou, talvez você tenha que melhorar isso para ter sucesso ano que vem, apesar de talvez significar que tenham sido feitas boas políticas públicas."
+                    "É... O orçamento do país piorou, você precisa melhorar isso para ter sucesso ano que vem. Ao menos tivemos boas políticas públicas... Eu acho."
                 );
             }
         }
@@ -179,7 +179,7 @@ trait AnalisesResultados
             } else {
                 return $this->buildResporta(
                     $diferenca,
-                    "É... O orçamento do país piorou, apesar de talvez significar que tenham sido feitas boas políticas públicas."
+                    "É... O orçamento do país piorou, apesar de isso talvez significar que tenham sido feitas boas políticas públicas."
                 );
             }
         }
@@ -196,12 +196,12 @@ trait AnalisesResultados
             } else if ($diferenca > 0) {
                 return $this->buildResporta(
                     $diferenca,
-                    "Você conseguiu aumentar o caixa, isso é bom, pois permite o pagamento da dívida interna de forma mais confortável"
+                    "Você conseguiu aumentar o caixa, isso é bom, pois permite o pagamento da dívida interna de forma mais confortável."
                 );
             } else if($diferenca <= 20) {
                 return $this->buildResporta(
                     $diferenca,
-                    "Você reduziu muito o caixa, cuidado pra isso não representar a falência do governo, os juros e a dívida pública precisa ser paga!"
+                    "Você reduziu muito o caixa, cuidado pra isso não representar a falência do governo.A dívida pública precisa ser paga!"
                 );
             } else if($diferenca <= 0) {
                 return $this->buildResporta(
@@ -214,12 +214,12 @@ trait AnalisesResultados
             if ($diferenca > 20) {
                 return $this->buildResporta(
                     $diferenca,
-                    "Você conseguiu aumentar muito o caixa! Seu mandato foi ótimo para a saúde financeira do Governo."
+                    "Você conseguiu aumentar muito o caixa! Seu mandato foi ótimo para a saúde financeira do país."
                 );
             } else if ($diferenca > 0) {
                 return $this->buildResporta(
                     $diferenca,
-                    "Você conseguiu aumentar o caixa, isso é bom, pois permite o pagamento da dívida interna de forma mais confortável"
+                    "Você conseguiu aumentar o caixa, isso é bom, pois permite o pagamento da dívida interna de forma mais confortável."
                 );
             } else if($diferenca <= 20) {
                 return $this->buildResporta(
@@ -240,7 +240,7 @@ trait AnalisesResultados
         if ($diferenca < -30) {
             return $this->buildResporta(
                 $diferenca,
-                "Parabéns! A dívida pública interna reduziu consideravelmente! Certamente a sua ação de baixar a Taxa de Juros foi bem eficaz, pois seu mais liquidez ao mercado e elevou os investimentos."
+                "Parabéns! A dívida pública interna reduziu consideravelmente! Certamente a sua ação de baixar a Taxa de Juros foi bem eficaz, pois deu mais liquidez ao mercado e elevou os investimentos."
             );
         }
         if ($diferenca < 0) {
@@ -252,19 +252,19 @@ trait AnalisesResultados
         if ($diferenca > 0) {
             return $this->buildResporta(
                 $diferenca,
-                "A dívida pública interna aumentou. Se esse dinheiro for bem utilizado pode ser que vala a pena, mas seja cauteloso"
+                "A dívida pública interna aumentou. Se esse dinheiro for bem utilizado pode ser que vala a pena, mas seja cauteloso..."
             );
         }
         if ($diferenca > 25) {
             return $this->buildResporta(
                 $diferenca,
-                "Você aumentou a dívida pública consideravelmente! Talvez se torne quase irreversível e apenas a taxa de juros pode não ser o suficiente solucionar!"
+                "Você aumentou a dívida pública consideravelmente! Talvez se torne quase irreversível e apenas a taxa de juros pode não ser o suficiente para resolver!"
             );
         }
 
         return $this->buildResporta(
             $diferenca,
-            "Não houve alteração na dívida pública, tente jogar sem apertar apenas em Não Fazer Nada"
+            "Não houve alteração na dívida pública, tente jogar sem apertar apenas em Não Fazer Nada."
         );
     }
 
@@ -326,7 +326,7 @@ trait AnalisesResultados
         if ($diferenca >= 10 && $diferenca <= 20) {
             return $this->buildResporta(
                 $diferenca,
-                "Os empresários te veem com bons olhos!"
+                "O empresiado te vê com bons olhos!"
             );
         }
         if ($diferenca > 20) {
