@@ -47,7 +47,7 @@
                 <small>{{$medida->getNomeJornal()}} | Mês {{$rodada->rodada}}</small>
             </div>
             <div class="timeline-item-post">
-                <p>{{$medida->buildTextoNoticia($jogo)}}</p>
+                <p>{!!$medida->buildTextoNoticia($jogo)!!}</p>
                 <img src="{{$medida->getImagem($jogo)}}" alt="" />
             </div>
         </div>
@@ -60,7 +60,7 @@
                 <small>{{$noticia["nome_jornal"]}} | Mês {{$rodada->rodada}}</small>
             </div>
             <div class="timeline-item-post">
-                <p>{{$noticia["texto"]}}</p>
+                <p>{!!$noticia["texto"]!!}</p>
                 <img src="{{$noticia["imagem"]}}" alt="" />
             </div>
         </div>

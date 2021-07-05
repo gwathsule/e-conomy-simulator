@@ -100,7 +100,7 @@ class CriarNovaRodada extends Service
                 $novaRodada->medida_id = $data['medida_id'];
                 $this->executarMedida($novaRodada, $medida);
             } else {
-                if($ultimaRodada != null) {
+                if($ultimaRodada != null && $ultimaRodada->medida == null) {
                     $novaRodada->popularidade_empresarios -= 0.1;
                     $novaRodada->popularidade_trabalhadores -= 0.1;
                     $novaRodada->popularidade_estado -= 0.1;

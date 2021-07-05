@@ -17,7 +17,7 @@ trait NoticiasCondicionais
             return $noticias->toArray();
         }
 
-        $noticia = $this->naoFezNada($medida, $jogo);
+        $noticia = $this->naoFezNada($medida, $jogo, $ultimaRodada);
         if (!is_null($noticia)) {
             $noticias->add($noticia);
             return $noticias->toArray();
@@ -54,15 +54,15 @@ trait NoticiasCondicionais
         }
     }
 
-    private function naoFezNada(string $medida, Jogo $jogo)
+    private function naoFezNada(string $medida, Jogo $jogo, Rodada $ultimaRodada)
     {
-        if ($medida != null) {
+        if ($medida != null || $ultimaRodada->medida != null) {
             return null;
         }
 
         $titulo = "Parece que {nomeMinistro} não gosta de trabalhar!.";
         $tipo = NoticiaBuilder::TIPO_NOTICIA_LIBERAL;
-        $texto = "{a/o} {ministro/a} {nomeMinistro} parece não se importar com a situação que vive {pais}! Praticamente irá receber esse mês sem fazer nada, assim até eu posso ser ministro! Ninguém está feliz com isso!<br/><br/>Causa: Nenhuma medida tomada no mês.";
+        $texto = "{a/o} {ministro/a} {nomeMinistro} parece não se importar com a situação que vive {pais}! Praticamente está a receber dois meses sem fazer nada, assim até eu posso ser ministro! Ninguém está feliz com isso!<br/><br/>Causa: Duas rodadas sem nenhuma medida tomada.";
         $urlImagem = asset('img/noticias/sleep.jpg');
         return NoticiaBuilder::buildNoticiaCondicional($tipo, $titulo, $texto, $urlImagem, $medida, $jogo);
     }
