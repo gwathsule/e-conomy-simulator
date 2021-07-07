@@ -91,7 +91,7 @@
                     @php
                         $ultima = $jogo->getRodada($rodada->rodada - 1);
                     @endphp
-                    <div class="col-xl-2">
+                    <div class="col-xl-3">
                         <table class="table table-sm tabela-economy">
                             <tbody>
                             <tr><td>{{$rodada->rodada}}</td></tr>
