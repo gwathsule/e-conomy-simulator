@@ -90,5 +90,9 @@
   "divida_total" : {
     "nome" : "Dívida Total",
     "descricao" : "Representa o somatório da <strong>Arrecadação em Títulos</strong> e <strong>Juros da Dívida</strong> mensais ao longo do ano corrente.<br/>Ao fim do ano é debitado do <strong>Caixa do Governo</strong> o valor da <strong>Dívida Total</strong>. <br/>Se não for possível efetuar o pagamento, o estado então incorre em <strong>Calote</strong> da dívida pública."
+  },
+  "k" : {
+    "nome" : "Multiplicador K",
+    "descricao" : "Representam o multiplicador dos <strong>Investimentos (realizados)</strong> e <strong>Gastos Governamentais</strong> no PIB na forma de <strong>Consumo</strong>.<br/>São definidos a partir do inverso da propensão marginal a consumir (<strong>PMgC</strong>), ou seja, quanto maior a <strong>PMgC</strong> maior o multiplicador. Porém, no caso do <strong>KCI</strong>, o imposto de renda (IR) está reduzindo o multiplicador, representando o efeito de diminuição do consumo.<br/>Foram utilizadas duas representações para facilitar a compreensão da diferença entre o consumo sem imposto de renda (<strong>KSI</strong>) e com imposto de renda (<strong>KCI</strong>).<br/><br/>Fórmula 1: KSI = 1 / (1 - PMgC)<br/>Fórmula 2: KCI = 1 / (1 - PMgC) * (1 – IR)<br/><br/>KSI = Multiplicador sem Imposto de Renda<br/>KCI = Multiplicador com Imposto de Renda<br/>PMgC = Propensão Marginal a Consumir"
   }
 }
