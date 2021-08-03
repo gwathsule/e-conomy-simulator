@@ -5,7 +5,7 @@
     function corPorcentagem(float $cor)
     {
         if($cor < 0.1) return 'red';
-        if($cor < 0.3) return 'yellow';
+        if($cor < 0.3) return 'orange';
         if($cor > 0.7) return 'green';
         if($cor > 0.9) return 'blue';
         return 'black';
