@@ -48,26 +48,9 @@
             </div>
 
             <div class="form-row mb-4 justify-content-center">
-                <div class="col-3">
+                <div class="col-6">
                     <label for="ministro"><p class="text-form01 mb-0">MINISTRO(A) DA ECONOMIA</p></label>
                     <input type="text" name="ministro" value="{{old('ministro')}}" id="ministro" class="form-control text-form02" placeholder="Esse será você!">
-                </div>
-                <div class="col-3">
-                    <label for="dificuldade">
-                        <p class="text-form01 mb-0">
-                            DIFICULDADE
-                            <span>
-                                <a onclick="infoDificuldade()" style="cursor: pointer">
-                                    <img src="{{asset('img/resources/question.svg')}}" style="vertical-align: center" width="12" height="12"  >
-                                </a>
-                            </span>
-                        </p>
-                    </label>
-                    <select class="form-control text-form02" name="dificuldade" id="dificuldade">
-                        <option value="{{\App\Domains\Jogo\Jogo::DIFICULDADE_FACIL}}">Fácil</option>
-                        <option value="{{\App\Domains\Jogo\Jogo::DIFICULDADE_NORMAL}}" selected>Normal</option>
-                        <option value="{{\App\Domains\Jogo\Jogo::DIFICULDADE_DIFICIL}}">Difícil</option>
-                    </select>
                 </div>
             </div>
             <div class="form-row mb-4 justify-content-center">
@@ -75,22 +58,4 @@
             </div>
         </form>
     </div>
-    <script>
-        function infoDificuldade() {
-            var html =
-`<p style="text-align: justify">
-<p>A dificuldade escolhida seleciona um dos seguintes cenários:</p><br/>
-<p><strong>Fácil: </strong>Cenário ideal para testes. Você começa com total aprovação dos três setores (privado, público e população), além de um caixa alto para gastar com o que quiser!</p>
-<p><strong>Normal: </strong>Cenário nem fácil nem difícil. Você começa com 50% de aprovação nos três setores (privado, público e população) e um caixa que "dá para sobreviver", depende de você tornar o governo próspero ou pobre.</p>
-<p><strong>Difícil: </strong>Cenário desafiador, o governo está em clima de falência. Aqui a lei de austeridade predomina e os três setores (privado, público e população) já estão por um fio de explodir. Tem certeza que você quer pegar esse pepino? Tem que ser muito <s>troux</s> patriota! </p>
-</p>`;
-            Swal.fire({
-                title: 'Dificuldade',
-                html: html,
-                showCloseButton: false,
-                showCancelButton: false,
-                focusConfirm: false,
-            })
-        }
-    </script>
 @endsection

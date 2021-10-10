@@ -15,9 +15,6 @@
             <a href="{{route('relatorios-mensais')}}" target="_blank" class="btn btn-primary btn-sm btn-block">
                 Relatórios Mensais
             </a>
-            <a href="{{route('novo-jogo')}}" class="btn btn-primary btn-sm btn-block">
-                Novo Jogo
-            </a>
             <a href="{{url('logout')}}" class="btn btn-secondary btn-sm btn-block">
                 Logout
             </a>

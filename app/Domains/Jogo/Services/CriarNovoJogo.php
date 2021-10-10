@@ -60,7 +60,6 @@ class CriarNovoJogo extends Service
                     'ministro' => ['required', 'string', 'max:30'],
                     'genero' => ['required', 'string', 'max:1', Rule::in(['M', 'F'])],
                     'personagem' => ['required', 'int'],
-                    'dificuldade' => ['required', 'int', 'between:1,3'],
                 ];
             }
         })->validate($data);
@@ -68,6 +67,13 @@ class CriarNovoJogo extends Service
 
     protected function perform(array $data, array $columns = ['*'], array $relations = [])
     {
+        /** @var User $user */
+        $user = Auth::user();
+        /** @var Jogo $ultimoJogo */
+        $ultimoJogo = $user->getJogoAtivo();
+        if(! is_null($ultimoJogo)) {
+           return $ultimoJogo;
+        }
         //create a new game
         $novoJogo = new Jogo();
         $novoJogo->pais = $data['pais'];
@@ -78,30 +84,10 @@ class CriarNovoJogo extends Service
         $novoJogo->ativo = true;
         $novoJogo->status = Jogo::STATUS_EM_ANDAMENTO;
         $novoJogo->qtd_rodadas = 24;
+        $novoJogo->dificuldade = Jogo::DIFICULDADE_NORMAL;
 
-        DB::transaction(function () use ($data, $novoJogo) {
-            /** @var User $user */
-            $user = Auth::user();
-            /** @var Jogo $ultimoJogo */
-            $ultimoJogo = $user->getJogoAtivo();
-            if(! is_null($ultimoJogo)) {
-                /** @var Rodada $rodada */
-                foreach ($ultimoJogo->rodadas as $rodada) {
-                    $rodada->delete();
-                }
-
-                /** @var Evento $evento */
-                foreach ($ultimoJogo->eventos as $evento) {
-                    $evento->delete();
-                }
-                /** @var ResultadoAnual $resultado */
-                foreach ($ultimoJogo->resultados_anuais as $resultado) {
-                    $resultado->delete();
-                }
-                $ultimoJogo->delete();
-            }
+        DB::transaction(function () use ($data, $novoJogo, $ultimoJogo, $user) {
             $novoJogo->user_id = $user->id;
-            $novoJogo->dificuldade = $data['dificuldade'];
             $novoJogo->save();
             $this->resulAnualPrimarioService->handle([
                 'jogo_id' => $novoJogo->id,
