@@ -11,6 +11,11 @@ then
     docker-compose exec ${SERVICE_NAME} php $@; exit;
 fi
 
+if [[ $1 = "fresh" ]]
+then
+    docker-compose exec ${SERVICE_NAME} php artisan migrate:fresh && docker-compose exec ${SERVICE_NAME} php artisan db:seed; exit;
+fi
+
 if [[ $1 = "composer" ]]
 then
     docker-compose exec ${SERVICE_NAME} $@; exit;
